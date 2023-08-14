@@ -1,9 +1,20 @@
-import './App.css';
+import './css/App.css';
+import Router from './router/Router';
+import { QueryClientProvider, QueryClient } from 'react-query';
+import Nav from './components/common/Nav';
+import Footer from './components/common/Footer';
 
 function App() {
+  const queryClient = new QueryClient();
   return (
     <>
-      <div className="w-3.5"></div>
+      <QueryClientProvider client={queryClient}>
+        <Nav />
+        <section>
+          <Router />
+        </section>
+        <Footer />
+      </QueryClientProvider>
     </>
   );
 }
