@@ -1,8 +1,6 @@
 import { AiFillStar } from 'react-icons/ai';
 
-
-
-const AllOfficeList = (): JSX.Element => {
+export const AllOfficeList = (): JSX.Element => {
   return (
     <>
       <div className="grid justify-center grid-cols-4 gap-6">
@@ -12,7 +10,7 @@ const AllOfficeList = (): JSX.Element => {
             <div className="flex justify-between items-center">
               <p className="font-bold text-base tracking-tight">선릉 더 공간A</p>
               <div className="flex gap-1 items-center">
-                <AiFillStar className="flex " />
+                <AiFillStar className="flex" />
                 <p className="font-bold text-sm tracking-tight">4.91(21)</p>
               </div>
             </div>
@@ -25,5 +23,3 @@ const AllOfficeList = (): JSX.Element => {
     </>
   );
 };
-
-export default AllOfficeList;
