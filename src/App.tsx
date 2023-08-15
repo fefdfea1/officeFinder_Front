@@ -10,7 +10,7 @@ function App() {
     <>
       <QueryClientProvider client={queryClient}>
         <Nav />
-        <section>
+        <section id="container">
           <Router />
         </section>
         <Footer />
