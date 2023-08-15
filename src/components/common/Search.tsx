@@ -5,7 +5,8 @@ import { DayPicker } from 'react-day-picker';
 import { startDayPicker, endDayPicker } from './search_calendarState';
 import { setCalendarDay } from './search_calendarSetDay';
 import { AiOutlineSearch } from 'react-icons/ai';
-import { windowClickEvnetHandler } from './search_windowClickEvnet';
+import { OptionsCheckbox } from './OptionsCheckbox';
+import { MaxCapacityDropDown } from './MaxCapacityDropDown';
 import 'react-day-picker/dist/style.css';
 
 type calenderProps = {
@@ -23,9 +24,26 @@ export const Search = () => {
   const endDayDom = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    window.addEventListener('click', () => {
-      windowClickEvnetHandler(setStartDayCalendarState, setEndDayCalendarState);
-    });
+    // 클린업 함수 작성을 위해 이 함수만 따로 파일로 빼지 않았습니다
+    const handleClickOutside = (event: globalThis.MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (!target.classList.contains('startSelect') && !target.classList.contains('endSelect')) {
+        if (startDayDom.current?.classList.contains('active') || endDayDom.current?.classList.contains('active')) {
+          setStartDayCalendarState(false);
+          setEndDayCalendarState(false);
+          if (startDayDom.current && endDayDom.current) {
+            startDayDom.current.classList.remove('active');
+            endDayDom.current.classList.remove('active');
+          }
+        }
+      }
+    };
+
+    window.addEventListener('click', handleClickOutside);
+
+    return () => {
+      window.removeEventListener('click', handleClickOutside);
+    };
   }, []);
 
   useEffect(() => {
@@ -53,7 +71,7 @@ export const Search = () => {
   return (
     <SearchBoxContainer className="p-4 shadow-md">
       <div className="top flex justify-center items-center border-b border-solid border-accent pb-2">
-        <ContourBox className="text-black">
+        <ContourBox className="text-black mr-4">
           <input
             type="text"
             placeholder="찾고싶은 지역을 검색해주세요"
@@ -64,20 +82,20 @@ export const Search = () => {
           <input
             type="text"
             placeholder="계약 시작일"
-            className="placeholder:text-sm w-1/2 text-sm input  mr-1"
+            className="placeholder:text-sm w-1/2 text-sm input  mr-1 startSelect"
             readOnly
             onClick={() => {
-              startDayPicker(setStartDayCalendarState, setEndDayCalendarState);
+              startDayPicker(setStartDayCalendarState, setEndDayCalendarState, startDayDom, endDayDom);
             }}
             ref={startDayDom}
           />
           <input
             type="text"
             placeholder="계약 종료일"
-            className="placeholder:text-sm w-1/2 text-sm input mr-3"
+            className="placeholder:text-sm w-1/2 text-sm input mr-3 endSelect"
             readOnly
             onClick={() => {
-              endDayPicker(setEndDayCalendarState, setStartDayCalendarState);
+              endDayPicker(setEndDayCalendarState, setStartDayCalendarState, startDayDom, endDayDom);
             }}
             ref={endDayDom}
           />
@@ -103,14 +121,18 @@ export const Search = () => {
             />
           )}
         </ContourBox>
-        <ContourBox className="border-r text-black text-base">인원수 components 추가</ContourBox>
+        <ContourBox className="border-r text-black text-base mr-4">
+          <MaxCapacityCopy width="w-44" />
+        </ContourBox>
         <ContourBox className="text-base">
           <button className="btn btn-primary rounded-full bg-primary text-base flex items-center">
             <span>검색</span> <SearchSvg />
           </button>
         </ContourBox>
       </div>
-      <div className="bottom"></div>
+      <div className="bottom">
+        <OptionsCheckbox />
+      </div>
     </SearchBoxContainer>
   );
 };
@@ -168,11 +190,11 @@ const ContourBox = styled.div`
   }
 
   &:nth-of-type(1)::after {
-    right: 1%;
+    right: -4%;
   }
 
   &:nth-of-type(2)::after {
-    right: 6%;
+    right: 1%;
   }
 
   &:nth-of-type(3)::after {
@@ -199,4 +221,10 @@ const SearchSvg = styled(AiOutlineSearch)`
   width: 18px;
   height: 18px;
   color: #fff;
+`;
+
+const MaxCapacityCopy = styled(MaxCapacityDropDown)`
+  & .form-control {
+    position: absolute;
+  }
 `;
