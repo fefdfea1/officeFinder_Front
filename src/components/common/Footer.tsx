@@ -1,3 +1,4 @@
+
 import React from "react";
 import { AiFillGithub } from 'react-icons/ai'
 import { RxNotionLogo } from 'react-icons/rx'
@@ -21,6 +22,7 @@ export const Footer = ()  => {
       </div>
     </footer>  
 </>);
+
 }
 
 
