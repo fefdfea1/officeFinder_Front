@@ -1,14 +1,7 @@
 import { useState } from 'react';
 import { RiArrowDropDownLine } from 'react-icons/ri';
-import styled from '@emotion/styled';
 
-type StyledProps = {
-  position?: string;
-  top?: string;
-  left?: string;
-};
-// labeldl 크기를 가지고 있어서 디자인상으로 이상해지는 문제가 생겨 position값을 넣어서 absolute로
-//만들 수 있도록 하였습니다.
+
 export const MaxCapacityDropDown = (props: { width: string }): JSX.Element => {
   // width로 넓이를 지정할 수 있습니다. ex) w-52, w-full
   const [selectedItem, setSelectedItem] = useState('');
@@ -27,23 +20,22 @@ export const MaxCapacityDropDown = (props: { width: string }): JSX.Element => {
   return (
     <>
       <div className={`form-control  ${props.width}`}>
-        <Position className="label" position="absolute" top="-30px" left="0">
-          <span className="label-text">최대 인원 수를 선택하세요.</span>
-        </Position>
+
         <div className="dropdown">
           <label
             tabIndex={0}
-            className="group btn btn-primary btn-outline justify-between w-full hover:"
+            className="group btn btn-primary btn-outline justify-between w-full"
             onClick={toggleDropDown}
           >
-            <span className="label-text group-hover:text-white">{selectedItem}</span>
+            <span className="label-text font-medium group-hover:text-white">
+              {selectedItem || <span className="text-sm font-medium text-accent">최대인원 수</span>}
+            </span>
             <RiArrowDropDownLine className="text-2xl" />
           </label>
           <ul
             tabIndex={0}
-            className={`dropdown-content w-full z-[1] menu p-2 shadow bg-base-100 rounded-box ${
-              isOpen ? '' : 'hidden'
-            }`}
+            className={`dropdown-content w-full h-52 z-[1] menu p-2 shadow bg-base-100 rounded-box flex flex-nowrap overflow-y-auto 
+            ${isOpen ? '' : 'hidden'}`}
           >
             <li>
               <a onClick={() => handleItemClick('1인')}>1인</a>
@@ -61,7 +53,16 @@ export const MaxCapacityDropDown = (props: { width: string }): JSX.Element => {
               <a onClick={() => handleItemClick('5인')}>5인</a>
             </li>
             <li>
-              <a onClick={() => handleItemClick('6인~10인')}>6인~10인</a>
+              <a onClick={() => handleItemClick('6인~10인')}>6인</a>
+            </li>
+            <li>
+              <a onClick={() => handleItemClick('6인~10인')}>7인</a>
+            </li>
+            <li>
+              <a onClick={() => handleItemClick('6인~10인')}>8인</a>
+            </li>
+            <li>
+              <a onClick={() => handleItemClick('6인~10인')}>9인</a>
             </li>
             <li>
               <a onClick={() => handleItemClick('10인 이상')}>10인 이상</a>
@@ -72,9 +73,3 @@ export const MaxCapacityDropDown = (props: { width: string }): JSX.Element => {
     </>
   );
 };
-
-const Position = styled.label<StyledProps>`
-  position: ${props => (props.position ? props.position : 'static')};
-  top: ${props => props.top};
-  left: ${props => props.left};
-`;
