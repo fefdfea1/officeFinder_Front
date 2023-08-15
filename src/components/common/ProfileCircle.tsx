@@ -1,4 +1,4 @@
-export default function ProfileCircle() {
+export const ProfileCircle = () => {
   return (
     <>
       <div className="avatar flex">
@@ -15,4 +15,4 @@ export default function ProfileCircle() {
       </div>
     </>
   );
-}
+};

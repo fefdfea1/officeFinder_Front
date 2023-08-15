@@ -6,13 +6,14 @@ import { startDayPicker, endDayPicker } from './search_calendarState';
 import { setCalendarDay } from './search_calendarSetDay';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { windowClickEvnetHandler } from './search_windowClickEvnet';
+import 'react-day-picker/dist/style.css';
 
 type calenderProps = {
   left: string;
   top: string;
 };
 
-export default function Search() {
+export const Search = () => {
   const today = new Date();
   const [selectedStartDay, setSelectedStartDay] = useState<Date | undefined>(today);
   const [selectEndDay, setSelectEndDay] = useState<Date | undefined>(today);
@@ -50,20 +51,20 @@ export default function Search() {
   }, [selectEndDay]);
 
   return (
-    <SearchBoxContainer className="p-4">
+    <SearchBoxContainer className="p-4 shadow-md">
       <div className="top flex justify-center items-center border-b border-solid border-accent pb-2">
         <ContourBox className="text-black">
           <input
             type="text"
             placeholder="찾고싶은 지역을 검색해주세요"
-            className="placeholder:text-sm mr-4 text-base"
+            className="placeholder:text-sm text-base input"
           />
         </ContourBox>
-        <ContourBox className="relative flex border-r w-40 text-black">
+        <ContourBox className="relative flex border-r w-52 text-black">
           <input
             type="text"
             placeholder="계약 시작일"
-            className="placeholder:text-sm w-1/2 text-base"
+            className="placeholder:text-sm w-1/2 text-sm input  mr-1"
             readOnly
             onClick={() => {
               startDayPicker(setStartDayCalendarState, setEndDayCalendarState);
@@ -73,7 +74,7 @@ export default function Search() {
           <input
             type="text"
             placeholder="계약 종료일"
-            className="placeholder:text-sm w-1/2 text-base"
+            className="placeholder:text-sm w-1/2 text-sm input mr-3"
             readOnly
             onClick={() => {
               endDayPicker(setEndDayCalendarState, setStartDayCalendarState);
@@ -88,6 +89,7 @@ export default function Search() {
               onSelect={setSelectedStartDay}
               top="30px"
               left="-110%"
+              className="shadow-md"
             />
           )}
           {endDayCalendarState && (
@@ -101,7 +103,7 @@ export default function Search() {
             />
           )}
         </ContourBox>
-        <ContourBox className="border-r text-black mr-4 text-base">인원수 components 추가</ContourBox>
+        <ContourBox className="border-r text-black text-base">인원수 components 추가</ContourBox>
         <ContourBox className="text-base">
           <button className="btn btn-primary rounded-full bg-primary text-base flex items-center">
             <span>검색</span> <SearchSvg />
@@ -111,18 +113,15 @@ export default function Search() {
       <div className="bottom"></div>
     </SearchBoxContainer>
   );
-}
+};
 /* 기존의 스타일변경으로는 크기와 위치를 세부적으로 조정하기 힘들어 커스텀했습니다 */
 const SearchBoxContainer = styled.form`
   display: inline-block;
   background-color: #fff;
   border-radius: 12px;
-  box-shadow: 0 0 3px black;
 `;
 
 const DayPickerCustom = styled(DayPicker)<calenderProps>`
-  width: 250px;
-  height: 300px;
   position: absolute;
   top: ${props => props.top};
   left: ${props => props.left};
@@ -168,12 +167,16 @@ const ContourBox = styled.div`
     color: #ccc;
   }
 
+  &:nth-of-type(1)::after {
+    right: 1%;
+  }
+
   &:nth-of-type(2)::after {
-    right: 3%;
+    right: 6%;
   }
 
   &:nth-of-type(3)::after {
-    right: -5%;
+    display: none;
   }
 
   &:nth-of-type(4)::after {
@@ -183,10 +186,10 @@ const ContourBox = styled.div`
   ::after {
     content: '';
     position: absolute;
-    top: 0;
+    top: 30%;
     right: 5%;
     width: 1px;
-    height: 60%;
+    height: 30%;
     margin: 5px 0;
     background-color: #dde1eb;
   }

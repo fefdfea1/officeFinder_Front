@@ -7,16 +7,16 @@ type WrapperProps = {
   buttonString: string;
 };
 
-export default function Modal({ children, spanString, PTagString, buttonString }: WrapperProps) {
+export const Modal = ({ children, spanString, PTagString, buttonString }: WrapperProps) => {
   return (
-    <div className="w-96 h-60 p-8 shadow-lg">
+    <div className="w-96 h-60 p-8 shadow-lg box-content rounded-md">
       <h2 className="text-center mb-4 text-lg font-black text-black">{children}</h2>
       <div>
         <p className="text-base text-black mb-4 font-medium">{PTagString}</p>
         <div className="relative flex items-center mb-8">
           <input
             type="text"
-            className="w-full border-2 px-4 rounded-lg py-2 placeholder:text-accent placeholder:text-base text-base"
+            className="w-full input input-bordered input-primary rounded-md placeholder:text-accent placeholder:text-base text-base box-border pr-10"
             placeholder="금액을 입력해주세요"
           />
           <SapnTag className="absolute">{spanString}</SapnTag>
@@ -25,7 +25,7 @@ export default function Modal({ children, spanString, PTagString, buttonString }
       <button className="btn btn-primary w-full p-2.5 bg-primary rounded-lg text-base">{buttonString}</button>
     </div>
   );
-}
+};
 // transform translate가 tailwind에서 -50% -50%로 정해진 틀이 없어서 직접
 // 스타일링 했습니다
 const SapnTag = styled.span`
