@@ -19,8 +19,9 @@ export const MyOffice = () => {
             {/* review */}
             <div className="w-full shadow-md rounded-xl p-4">
               <p className="text-primary pb-4">Reviews</p>
-              <div className="flex gap-2 text-sm">
+              <div className="flex text-sm">
                 <ProfileCircle />
+
                 <div> 리뷰 내용입니다.</div>
               </div>
 
