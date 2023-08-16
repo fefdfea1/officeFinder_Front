@@ -8,7 +8,7 @@ export const Footer = () => {
   <>
     <footer className="footer footer-center p-10 bg-base-200 text-base-content rounded">
       <div className="grid grid-flow-col gap-4">
-        <a className="link link-hover normal-case text-xl">Office-Finder</a> 
+        <a className="link link-hover normal-case text-xl">officeFinder</a> 
       </div> 
       <div>
         <div className="grid grid-flow-col gap-4">
