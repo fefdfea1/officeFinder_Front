@@ -5,13 +5,15 @@ import Nav from './components/common/Nav';
 import { Footer } from './components/common/Footer';
 import Join from './pages/Join';
 
+
 function App() {
   const queryClient = new QueryClient();
   return (
     <>
       <QueryClientProvider client={queryClient}>
         <Nav />
-        <section>
+        <section id="container">
+          <MyOffice />
           <Router />
           <Join />
         </section>

@@ -1,8 +1,8 @@
 import { Routes, Route } from 'react-router-dom';
-import Main from '../pages/Main';
+import { Main } from '../pages/Main';
 import AddOffice from '../pages/agent/AddOffice';
 import AllReviews from '../pages/agent/AllReviews';
-import MyOffice from '../pages/agent/MyOffice';
+import { MyOffice } from '../pages/agent/MyOffice';
 import SalesAnalysis from '../pages/agent/SalesAnalysis';
 import BookMark from '../pages/customer/BookMark';
 import MyBookings from '../pages/customer/MyBookings';
