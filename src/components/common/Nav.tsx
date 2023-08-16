@@ -1,19 +1,20 @@
 
 import React from 'react';
 import { CgProfile } from 'react-icons/cg';
+import { PiBellRingingBold } from 'react-icons/pi';
 
 export default function Nav() {
   return (
   <>
-  <div className="navbar bg-base-100 p-5">
+  <div className="navbar bg-base-100 p-5 border-b-2 border-gray-200">
   <div className="flex-1">
-    <a className="btn btn-ghost normal-case text-2xl">Office-Finder</a>
+    <a className="btn bg-white border-none hover:bg-white normal-case text-2xl text-primary">officeFinder</a>
   </div>
   <div className="flex-none">
     <div className="dropdown dropdown-end" >
       <label tabIndex={0} className="btn bg-white border-none">
         <div className="indicator">
-          <span className="mt-1 text-sm" style={{width: 50}}>10,000원</span>
+          <span className="mt-1 text-sm w-13">10,000원</span>
           {/* <span className="badge badge-sm indicator-item">8</span> */}
         </div>
       </label>
@@ -30,10 +31,10 @@ export default function Nav() {
     <div className="dropdown dropdown-end">
       <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
         <div className="rounded-full">
-        <CgProfile style={{width: 28, height:28}} />        
+        <CgProfile className="w-7 h-7" />        
         </div>
       </label>
-      <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+      <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 py-3 text-ms shadow bg-base-100 rounded-box w-52">
         <li>
           <a className="justify-between">
             프로필
@@ -43,6 +44,22 @@ export default function Nav() {
         <li><a>예약내역</a></li>
         <li><a>로그아웃</a></li>
       </ul>
+    </div>
+    <div className="dropdown dropdown-end">
+    <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+        <div className="rounded-full">
+        <PiBellRingingBold className="w-7 h-7" />        
+        </div>
+      </label>
+      <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 py-3 text-ms shadow bg-base-100 rounded-box w-52">
+        <li>
+          <a className="justify-between">
+            3일 후 예약한 오피스 이용이 만료됩니다. 
+          </a>
+        </li>
+        <li><a>결제완료</a></li>
+      </ul>
+
     </div>
   </div>
 </div>
