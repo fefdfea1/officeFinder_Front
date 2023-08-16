@@ -21,7 +21,7 @@ export const MyOffice = () => {
           <figure className="flex flex-col w-[560px] gap-1">
             <img className="rounded-xl" src="https://picsum.photos/350" alt="sample" />
           </figure>
-          <div className="flex flex-col gap-2 border-black w-full">
+          <div className="reviews flex flex-col gap-2 border-black w-full">
             <OfficeName name="이름" address="주소" />
             <Link to="/SalesAnalysis"><button className="btn btn-primary w-full">매출 자세히보기</button></Link>
             {/* review */}
@@ -42,6 +42,7 @@ export const MyOffice = () => {
               </div>
 
             </div>
+
 
           </div>
         </div>
