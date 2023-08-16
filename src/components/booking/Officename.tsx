@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { MdContentCopy } from 'react-icons/md';
 
 const copyToClipboard = (text: string) => {
@@ -10,11 +10,11 @@ const copyToClipboard = (text: string) => {
 };
 
 type OfficenameProps = {
-  officename: string;
+  name: string;
   address: string;
 };
 
-export const Officename: React.FC<OfficenameProps> = ({ officename, address }) => {
+export const OfficeName = ({ name, address }: OfficenameProps) => {
   const [copied, setCopied] = useState(false);
 
   const handleCopyClick = (text: string) => {
@@ -26,7 +26,7 @@ export const Officename: React.FC<OfficenameProps> = ({ officename, address }) =
   return (
     <>
       <div className="flex flex-col gap-1 p-2">
-        <p className="text-base font-bold">{officename}</p>
+        <p className="text-base font-bold">{name}</p>
         <div
           className="copy flex gap-2 group hover:cursor-pointer"
           onClick={() => handleCopyClick(address)}

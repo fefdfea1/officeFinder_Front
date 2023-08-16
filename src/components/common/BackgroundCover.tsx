@@ -8,7 +8,7 @@ type BackgroundCoverProps = {
 export const BackgroundCover = (props: BackgroundCoverProps) => {
     return (
 
-        <div className="w-full shadow-md rounded-xl p-8">
+        <div className="w-full shadow-md rounded-xl p-8 mt-10">
             {props.children}
         </div>
     );
