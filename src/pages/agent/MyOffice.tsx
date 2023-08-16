@@ -12,7 +12,7 @@ export const MyOffice = () => {
     <>
       <div className="flex justify-end relative">
         <div className="absolute top-6">
-          <Link to="/AddOffice"><Button style="btn btn-primary btn-outline " text="새 지점 등록하기" /></Link>
+          <Link to="/AddOffice"><Button style="btn btn-primary btn-outline w-32" text="새 지점 등록하기" /></Link>
         </div>
       </div>
       <BackgroundCover>
