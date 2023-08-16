@@ -2,7 +2,8 @@ import './css/App.css';
 import Router from './router/Router';
 import { QueryClientProvider, QueryClient } from 'react-query';
 import Nav from './components/common/Nav';
-import Footer from './components/common/Footer';
+import { Footer } from './components/common/Footer';
+import Join from './pages/Join';
 
 function App() {
   const queryClient = new QueryClient();
@@ -12,6 +13,7 @@ function App() {
         <Nav />
         <section>
           <Router />
+          <Join />
         </section>
         <Footer />
       </QueryClientProvider>
