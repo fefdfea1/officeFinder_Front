@@ -9,7 +9,7 @@ export const ProfileCircle = () => {
             className="block"
           />
         </div>
-        <div className="flex flex-col ml-3">
+        <div className="flex flex-col ml-2">
           <p className="font-bold text-base text-black">김창규</p>
         </div>
       </div>
