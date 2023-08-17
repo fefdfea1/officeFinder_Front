@@ -3,6 +3,7 @@ import Router from './router/Router';
 import { QueryClientProvider, QueryClient } from 'react-query';
 import Nav from './components/common/Nav';
 import { Footer } from './components/common/Footer';
+import { AddOffice } from './pages/agent/AddOffice';
 
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <Nav />
         <section id="container">
+          <AddOffice />
           <Router />
         </section>
         <Footer />
