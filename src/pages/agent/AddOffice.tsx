@@ -11,8 +11,7 @@ export const AddOffice = () => {
       <div className="flex justify-end relative">
         <div className="absolute top-6">
           <Link to="/MyOffice">
-
-            <Button style="btn btn-primary btn-outline w-32" text="등록취소" />
+            <Button style="btn btn-primary btn-outline w-40" text="등록취소" />
           </Link>
         </div>
       </div>
