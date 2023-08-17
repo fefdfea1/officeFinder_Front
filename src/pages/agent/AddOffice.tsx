@@ -21,7 +21,10 @@ export const AddOffice = () => {
         <div className="flex flex-col items-center py-8">
           <Input inputTitle="공간의 이름을 입력해주세요." placeholder="" warning="" />
           <Input inputTitle="오피스 주소를 입력해주세요." placeholder="도로명으로 입력해주세요." warning="" />
-          <OptionsCheckbox />
+          <div>
+            <p></p>
+            <OptionsCheckbox />
+          </div>
         </div>
       </BackgroundCover>
     </>

@@ -25,7 +25,8 @@ export const MyOffice = () => {
             <OfficeName name="이름" address="주소" />
             <Link to="/SalesAnalysis"><button className="btn btn-primary w-full">매출 자세히보기</button></Link>
             {/* review */}
-            <div className="w-full shadow-md rounded-xl p-4">
+            <BackgroundCover margin="mt-0" padding="p-4">
+
               <p className="text-primary pb-4">Reviews</p>
               <div className="reviews">
 
@@ -39,9 +40,10 @@ export const MyOffice = () => {
 
                   <div> 두 번째 리뷰 내용입니다.</div>
                 </div>
-              </div>
 
-            </div>
+              </div>
+            </BackgroundCover>
+
 
           </div>
         </div>
