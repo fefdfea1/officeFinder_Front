@@ -1,4 +1,3 @@
-import { Nav } from '../components/common/Nav';
 import { Title } from '../components/common/Title';
 import { BackgroundCover } from '../components/common/BackgroundCover';
 import { format } from 'date-fns';
@@ -25,7 +24,6 @@ export default function Booking() {
 
   return (
     <>
-      <Nav />
       <div className="w-5/6 mx-auto">
         <div className="mb-8">
           <Title>예약하기</Title>
