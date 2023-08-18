@@ -6,6 +6,7 @@ import { Input } from "../../components/common/Input";
 import { OptionsCheckbox } from "../../components/common/OptionsCheckbox";
 import { MaxCapacityDropDown } from "../../components/common/MaxCapacityDropDown";
 import { AddOfficePhoto } from "../../components/agent/AddOfficePhoto"
+import { AddOfficeAddress } from "../../components/agent/AddOfficeAddress"
 
 export const AddOffice = () => {
   return (
@@ -21,10 +22,7 @@ export const AddOffice = () => {
         <Title>새 지점 등록하기</Title>
         <div className="flex flex-col items-center py-8 gap-4">
           <Input inputTitle="공간의 이름을 입력해주세요." placeholder="" warning="" />
-          <div className="flex relative">
-            <Input inputTitle="오피스 주소를 입력해주세요." placeholder="도로명으로 입력해주세요." warning="" />
-            <Button text="검색" style="btn btn-primary mt-2 w-16 absolute left-64" />
-          </div>
+          <AddOfficeAddress />
           <div className="">
             <p className="text-center text-base">필요한 옵션을 선택하세요.</p>
             <OptionsCheckbox />
