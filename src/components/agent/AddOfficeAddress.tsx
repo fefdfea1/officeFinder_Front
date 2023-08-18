@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 declare global {
     interface Window {
@@ -12,6 +12,11 @@ type data = {
     userSelectedType: string;
     roadAddress: string;
     jibunAddress: string;
+    bname: string;
+    zonecode: string;
+    buildingName: string;
+    apartment: string;
+
 }
 
 export const AddOfficeAddress = () => {
@@ -42,6 +47,7 @@ export const AddOfficeAddress = () => {
     const handleAddressComplete = (data: data) => {
         let addr = '';
         let extraAddr = '';
+        console.log(data)
 
         if (data.userSelectedType === 'R') {
             addr = data.roadAddress;
@@ -77,21 +83,32 @@ export const AddOfficeAddress = () => {
         if (detailAddressRef.current) {
             detailAddressRef.current.focus();
         }
+
     };
 
     const handlePostcodeButtonClick = () => {
         if (daumPostcodeRef.current) {
             daumPostcodeRef.current.open();
+
         }
+
     };
 
     return (
-        <div>
-            <input type="text" ref={postcodeRef} placeholder="우편번호" />
-            <input type="button" onClick={handlePostcodeButtonClick} value="우편번호 찾기" /><br />
-            <input type="text" ref={addressRef} placeholder="주소" /><br />
-            <input type="text" ref={detailAddressRef} placeholder="상세주소" />
-            <input type="text" ref={extraAddressRef} placeholder="참고항목" />
+        <div className="w-96">
+            <p className="flex justify-center text-base mb-4">오피스의 주소를 입력해주세요.</p>
+            <div className="flex flex-col gap-2">
+                <div className="flex gap-2">
+                    <input type="text" ref={postcodeRef} placeholder="우편번호" className="input input-primary" readOnly />
+                    <input type="button" onClick={handlePostcodeButtonClick} value="주소 입력" className="btn btn-primary " readOnly />
+                </div>
+                <input type="text" ref={addressRef} placeholder="주소" className="input input-primary" readOnly />
+                <div className="flex gap-2">
+
+                    <input type="text" ref={detailAddressRef} placeholder="상세주소" className="input input-primary w-2/3" />
+                    <input type="text" ref={extraAddressRef} placeholder="참고항목" className="input input-primary w-1/3" readOnly />
+                </div>
+            </div>
         </div>
     );
 };
