@@ -1,5 +1,4 @@
-import React from 'react';
 
-export default function SalesAnalysis() {
+export const SalesAnalysis = () => {
   return <div>SalesAnalysis</div>;
 }
