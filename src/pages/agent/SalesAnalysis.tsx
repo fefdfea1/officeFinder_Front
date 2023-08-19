@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import { BackgroundCover } from '../../components/common/BackgroundCover';
 import { Title } from '../../components/common/Title';
 import { Button } from '../../components/common/Button';
-import { Input } from '../../components/common/Input';
 import { MyOfficeListDropDown } from '../../components/common/MyOfficeListDropDown';
 import { OfficeName } from '../../components/booking/Officename';
 import { OfficeOptions } from '../../components/booking/OfficeOptions';
+import { ReservationAttendeesList } from './ReservationAttendeesList';
 
 
 
@@ -33,9 +33,13 @@ export const SalesAnalysis = () => {
       <BackgroundCover>
         <Title>{officeName} 매출 상세</Title>
         {/* 본문 */}
-        <OfficeName name="오피스A" address="주소" />
-        <OfficeOptions width="" needReviewCount={false} />
-
+        <div className="flex flex-col gap-4">
+          <div className="p-3">
+            <OfficeName name="오피스A" address="주소" />
+          </div>
+          <OfficeOptions width="" needReviewCount={false} />
+          <ReservationAttendeesList />
+        </div>
       </BackgroundCover>
     </>
   );
