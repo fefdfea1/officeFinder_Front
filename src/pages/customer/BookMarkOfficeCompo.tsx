@@ -2,7 +2,6 @@ import { OfficeName } from '../../components/booking/Officename';
 import { AiFillStar } from 'react-icons/ai';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
-import { BookMarkClickHandler } from './BookMarkOfficeCompo_clickHandler';
 
 type propsType = {
   imgSrc: string;
@@ -10,11 +9,13 @@ type propsType = {
 
 export const BookMarkOfficeCompo = (props: propsType) => {
   return (
-    //데이터를 받아올때 오피스 id를 받아와 이동
-    <Link className="flex flex-col relative" to={'ㅁㄴㅇㅁㄴㅇ'} onClick={BookMarkClickHandler}>
-      <figure className="overflow-hidden rounded-xl w-72 h-60">
-        <img src={props.imgSrc} alt="즐겨찾기한 오피스 목록입니다" className="w-full h-full" />
-      </figure>
+    <div className="flex flex-col relative">
+      {/* 데이터를 받아올때 오피스 id를 받아와 이동 */}
+      <Link to={'#'}>
+        <figure className="overflow-hidden rounded-xl w-72 h-60">
+          <img src={props.imgSrc} alt="즐겨찾기한 오피스 목록입니다" className="w-full h-full" />
+        </figure>
+      </Link>
       <div className="flex justify-between relative">
         <OfficeName name="오피스 이름입니다" address="주소" />
         <div className="flex items-center absolute top-2 right-2 font-bold text-sm tracking-tight">
@@ -27,6 +28,6 @@ export const BookMarkOfficeCompo = (props: propsType) => {
       <button className="absolute right-2 top-2" type="button">
         <AiOutlineHeart className="w-6 h-6 fill-white " />
       </button>
-    </Link>
+    </div>
   );
 };

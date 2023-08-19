@@ -2,7 +2,6 @@ import { BackgroundCover } from '../../components/common/BackgroundCover';
 import { Title } from '../../components/common/Title';
 import { BookMarkOfficeCompo } from './BookMarkOfficeCompo';
 import styled from '@emotion/styled';
-import { useRef } from 'react';
 export default function BookMark() {
   const arr = Array.from({ length: 20 });
 
