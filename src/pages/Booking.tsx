@@ -4,16 +4,34 @@ import { format } from 'date-fns';
 import { DayPicker } from 'react-day-picker';
 import { useState, useEffect, useRef } from 'react';
 import { MaxCapacityDropDown } from '../components/common/MaxCapacityDropDown';
+import { OfficeName } from '../components/booking/Officename';
+import { OfficeOptions } from '../components/booking/OfficeOptions';
 import styled from '@emotion/styled';
 import 'react-day-picker/dist/style.css';
 
 //추후 Option에서 선택한 정보들을 가
 
+declare global {
+  interface Window {
+    kakao: any;
+  }
+}
+
 export default function Booking() {
   const [selectedDay, setSelectedDay] = useState<Date>();
+
   const PrintDayDom = useRef<HTMLParagraphElement>(null);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    let container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+    let options = {
+      //지도를 생성할 때 필요한 기본 옵션
+      center: new window.kakao.maps.LatLng(35.450701, 126.570667), //지도의 중심좌표.
+      level: 3, //지도의 레벨(확대, 축소 정도)
+    };
+
+    let map = new window.kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+  }, []);
 
   useEffect(() => {
     const target = PrintDayDom.current as HTMLParagraphElement;
@@ -24,11 +42,11 @@ export default function Booking() {
 
   return (
     <>
-      <div className="w-5/6 mx-auto">
+      <div className="w-5/6 mx-auto py-8">
         <div className="mb-8">
           <Title>예약하기</Title>
         </div>
-        <div className="flex">
+        <div className="flex mb-8">
           <ImgAreaWidht className="left-area mr-8">
             <figure>
               <div className="w-full h-96 rounded-xl overflow-hidden mb-4">
@@ -38,18 +56,22 @@ export default function Booking() {
                   className="block w-full h-full"
                 />
               </div>
+              {/* 데이터 받아오면 넣어야함 */}
               <h3 className="mb-4">선릉 공유오피스 더공간 A</h3>
-              <p className="mb-8">서울시 강남구 테헤란로70길 14-10번</p>
-              <div className="w-full flex">
-                <button className="btn btn-outline btn-primary mr-4 w-2/4">다른 오피스 둘러보기</button>
-                <button className="btn btn-outline btn-primary w-2/4">문의하기</button>
+              <div className="mb-8">
+                {/* 데이터 받아오면 주소에 넣어야함 */}
+                <OfficeName name="" address="주소"></OfficeName>
+              </div>
+              <div className="flex">
+                <button className="btn btn-outline btn-primary w-5/12">다른 오피스 둘러보기</button>
+                <button className="btn btn-outline btn-primary w-5/12 ml-auto">문의하기</button>
               </div>
             </figure>
           </ImgAreaWidht>
           <CaledarAndOPtionWidth className="w-3/5">
             {/* flex와 div로 영역을 나누기 위해 div를 많이 쓰더라도 사용했습니다 */}
             <BackgroundCover>
-              <div className="flex">
+              <div className="flex mb-4">
                 <BackgroundCoverLeftAreaRightContour>
                   <BackgroundCoverLeftAreaTopContour className="text-center text-primary">
                     <span ref={PrintDayDom} className="text-base">
@@ -72,7 +94,7 @@ export default function Booking() {
                       <MaxCapacityDropDown width="w-full" />
                     </div>
                     {/* 월 정기 결제 버튼  */}
-                    <div className="flex">
+                    <div className="flex ml-4">
                       <div className="form-control">
                         <label className="label cursor-pointer">
                           <input type="checkbox" className="checkbox checkbox-primary" />
@@ -82,28 +104,31 @@ export default function Booking() {
                     </div>
                     <div className="ml-12 text-base">
                       <p className="text-primary">다음 월 정기 결제일은 0000입니다</p>
-                      <p>(마지막 날짜 + 1이 들어가야함)</p>
                     </div>
                   </div>
                 </div>
               </div>
-              버튼자리
+              <button className="btn btn-primary w-full"> 예약하기</button>
               {/* 컴포넌트 제작 완료대로 추가 */}
             </BackgroundCover>
           </CaledarAndOPtionWidth>
         </div>
+        <div id="map" style={{ width: '100%', height: '500px' }} className="mx-auto mb-8"></div>
+        {/* width : w-full or 숫자입력으로 width값 조절 */}
+        <div>
+          <OfficeOptions width="w-full" needReviewCount={true} />
+        </div>
       </div>
-      <div id="map" style={{ width: '800px', height: '400px' }} className="mx-auto"></div>
     </>
   );
 }
 
 const ImgAreaWidht = styled.div`
-  width: 30%;
+  width: 40%;
 `;
 
 const CaledarAndOPtionWidth = styled.div`
-  width: 70%;
+  width: 60%;
 `;
 
 //캘린더 커스텀을 위한 styled
@@ -146,11 +171,11 @@ const BackgroundCoverLeftAreaRightContour = styled.div`
     content: '';
     position: absolute;
     top: -5px;
-    right: 0;
+    right: -15px;
     width: 1px;
     height: 335px;
-    background-color: red;
     border-radius: 12px;
+    background-color: var(--primary);
   }
 `;
 
@@ -167,6 +192,6 @@ const BackgroundCoverLeftAreaTopContour = styled.p`
     width: 97%;
     height: 1px;
     border-radius: 12px;
-    background-color: red;
+    background-color: var(--primary);
   }
 `;
