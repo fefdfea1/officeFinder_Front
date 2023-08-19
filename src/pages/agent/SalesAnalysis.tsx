@@ -4,10 +4,9 @@ import { BackgroundCover } from '../../components/common/BackgroundCover';
 import { Title } from '../../components/common/Title';
 import { Button } from '../../components/common/Button';
 import { Input } from '../../components/common/Input';
-import { MaxCapacityDropDown } from '../../components/common/MaxCapacityDropDown';
-import { AddOfficePhoto } from '../../components/agent/AddOfficePhoto';
-import { AddOfficeAddress } from '../../components/agent/AddOfficeAddress';
 import { MyOfficeListDropDown } from '../../components/common/MyOfficeListDropDown';
+import { OfficeName } from '../../components/booking/Officename';
+import { OfficeOptions } from '../../components/booking/OfficeOptions';
 
 
 
@@ -33,6 +32,9 @@ export const SalesAnalysis = () => {
       </div>
       <BackgroundCover>
         <Title>{officeName} 매출 상세</Title>
+        {/* 본문 */}
+        <OfficeName name="오피스A" address="주소" />
+        <OfficeOptions width="" needReviewCount={false} />
 
       </BackgroundCover>
     </>
