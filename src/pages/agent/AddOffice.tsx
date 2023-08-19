@@ -19,7 +19,6 @@ export const AddOffice = () => {
   const handleOptionsChange = (options: Options) => {
     setSelectedOptions(options);
   };
-  console.log(selectedOptions)
 
   return (
     <>
