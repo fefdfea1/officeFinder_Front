@@ -24,7 +24,7 @@ export const BookMarkOfficeCompo = (props: propsType) => {
           <span>484</span>
         </div>
       </div>
-      <p className="text-sm pl-2 ">현제 위치와의 거리 200m</p>
+      <p className="text-sm pl-2 ">현재 위치와의 거리 200m</p>
       <button className="absolute right-2 top-2" type="button">
         <AiOutlineHeart className="w-6 h-6 fill-white " />
       </button>
