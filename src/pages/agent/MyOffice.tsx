@@ -12,7 +12,7 @@ export const MyOffice = () => {
     <>
       <div className="flex justify-end relative">
         <div className="absolute top-6">
-          <Link to="/AddOffice"><Button style="btn btn-primary btn-outline w-40" text="새 지점 등록하기" /></Link>
+          <Link to="/AddOffice"><Button style="btn btn-primary btn-outline " text="새 지점 등록하기" /></Link>
         </div>
       </div>
       <BackgroundCover>
@@ -21,12 +21,11 @@ export const MyOffice = () => {
           <figure className="flex flex-col w-[560px] gap-1">
             <img className="rounded-xl" src="https://picsum.photos/350" alt="sample" />
           </figure>
-          <div className="flex flex-col gap-2 border-black w-full">
+          <div className="reviews flex flex-col gap-2 border-black w-full">
             <OfficeName name="이름" address="주소" />
             <Link to="/SalesAnalysis"><button className="btn btn-primary w-full">매출 자세히보기</button></Link>
             {/* review */}
-            <BackgroundCover margin="mt-0" padding="p-4">
-
+            <div className="w-full shadow-md rounded-xl p-4">
               <p className="text-primary pb-4">Reviews</p>
               <div className="reviews">
 
@@ -40,9 +39,9 @@ export const MyOffice = () => {
 
                   <div> 두 번째 리뷰 내용입니다.</div>
                 </div>
-
               </div>
-            </BackgroundCover>
+
+            </div>
 
 
           </div>
