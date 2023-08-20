@@ -7,6 +7,7 @@ import { MyOfficeListDropDown } from '../../components/common/MyOfficeListDropDo
 import { OfficeName } from '../../components/booking/Officename';
 import { OfficeOptions } from '../../components/booking/OfficeOptions';
 import { ReservationAttendeesList } from './ReservationAttendeesList';
+import { SalesCharts } from './SalesCharts';
 
 
 
@@ -38,6 +39,7 @@ export const SalesAnalysis = () => {
             <OfficeName name="오피스A" address="주소" />
           </div>
           <OfficeOptions width="" needReviewCount={false} />
+          <SalesCharts />
           <ReservationAttendeesList />
         </div>
       </BackgroundCover>
