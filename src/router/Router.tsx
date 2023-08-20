@@ -10,6 +10,7 @@ import Booking from '../pages/Booking';
 import Join from '../pages/Join';
 import Login from '../pages/Login';
 import Profile from '../pages/Profile';
+import { Reviews } from '../components/booking/Reviews';
 
 export const Router = () => {
   return (
@@ -25,6 +26,7 @@ export const Router = () => {
       <Route path="/Join" element={<Join />}></Route>
       <Route path="/Login" element={<Login />}></Route>
       <Route path="/Profile" element={<Profile />}></Route>
+      <Route path="/Reviews" element={<Reviews />}></Route>
     </Routes>
   );
 };
