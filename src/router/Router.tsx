@@ -10,8 +10,9 @@ import Booking from '../pages/Booking';
 import Join from '../pages/Join';
 import Login from '../pages/Login';
 import Profile from '../pages/Profile';
+import { AddOfficeReviews } from '../pages/customer/AddOfficeReviews';
 
-export default function Router() {
+export const Router = () => {
   return (
     <Routes>
       <Route path="/" element={<Main />}></Route>
@@ -25,6 +26,7 @@ export default function Router() {
       <Route path="/Join" element={<Join />}></Route>
       <Route path="/Login" element={<Login />}></Route>
       <Route path="/Profile" element={<Profile />}></Route>
+      <Route path="/Reviews" element={<AddOfficeReviews />}></Route>
     </Routes>
   );
-}
+};

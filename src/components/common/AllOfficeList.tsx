@@ -16,7 +16,7 @@ export const AllOfficeList = (): JSX.Element => {
             </div>
             <p className="font-medium text-sm">서울시 강남구 테헤란로70번길 14-10</p>
             <p className="font-medium text-sm">200m</p>
-            <p className="font-medium text-sm">월 500,000</p>
+            <p className="font-medium text-sm price">월 500,000</p>
           </div>
         </figure>
         <figure>
