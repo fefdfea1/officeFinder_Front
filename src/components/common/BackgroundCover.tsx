@@ -2,15 +2,17 @@ import { ReactNode } from 'react';
 
 type BackgroundCoverProps = {
     children: ReactNode;
-    // 다른 속성들도 추가할 수 있음
+    margin?: string;
+    padding?: string;
 };
 
 export const BackgroundCover = (props: BackgroundCoverProps) => {
-    return (
+    const margin = props.margin || "mt-10"; // margin 속성에 기본값 할당
+    const padding = props.padding || "p-8"; // padding 속성에 기본값 할당
 
-        <div className="w-full shadow-md rounded-xl p-8 mt-10">
+    return (
+        <div className={`w-full shadow-md rounded-xl ${padding} ${margin}`}>
             {props.children}
         </div>
     );
 }
-
