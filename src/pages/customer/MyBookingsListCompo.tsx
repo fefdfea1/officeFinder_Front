@@ -1,12 +1,14 @@
 import { Title } from '../../components/common/Title';
 import { OfficeName } from '../../components/booking/Officename';
 import { AiOutlineHeart } from 'react-icons/ai';
+import { useState } from 'react';
 
 type propsType = {
   type?: string;
 };
 
 export const MyBookingsListCompo = (props: propsType) => {
+  const [writeReviewState, setReviewState] = useState<boolean>(false);
   return (
     <>
       <div className="mb-8">{props.type === 'MyBooking' ? <Title>나의 예약</Title> : <Title>지난 예약</Title>}</div>
@@ -34,11 +36,21 @@ export const MyBookingsListCompo = (props: propsType) => {
             <p className="text-base mb-1">2023년 8월 7일 결제 완료</p>
             {props.type === 'MyBooking' && <p className="text-primary">다음 월 정기 결제일은 0000입니다</p>}
             {props.type === 'last_reservation' && (
-              <button className="btn btn-primary">리뷰작성하기(리뷰 작성 후 안 보임)</button>
+              <button
+                className="btn btn-primary"
+                onClick={() => {
+                  setReviewState(!writeReviewState);
+                }}
+              >
+                리뷰작성하기(리뷰 작성 후 안 보임)
+              </button>
             )}
           </div>
         </div>
       </div>
+      {props.type === 'last_reservation' && writeReviewState ? (
+        <input type="text" placeholder="리뷰를 작성해주세요" className="w-7/12 input block ml-auto input-bordered" />
+      ) : null}
     </>
   );
 };
