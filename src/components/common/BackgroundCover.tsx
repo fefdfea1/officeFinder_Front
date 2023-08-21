@@ -4,15 +4,20 @@ type BackgroundCoverProps = {
     children: ReactNode;
     margin?: string;
     padding?: string;
+    width?: string;
 };
 
 export const BackgroundCover = (props: BackgroundCoverProps) => {
-    const margin = props.margin || "mt-10"; // margin 속성에 기본값 할당
-    const padding = props.padding || "p-8"; // padding 속성에 기본값 할당
+    const {
+        children,
+        margin = 'mt-10',
+        padding = 'p-8',
+        width = 'w-full'
+    } = props;
 
     return (
-        <div className={`w-full shadow-md rounded-xl ${padding} ${margin}`}>
-            {props.children}
+        <div className={`${width} shadow-md rounded-xl ${margin} ${padding}`}>
+            {children}
         </div>
     );
-}
+};
