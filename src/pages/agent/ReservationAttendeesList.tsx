@@ -9,7 +9,7 @@ export const ReservationAttendeesList = () => {
                     <table className="table">
                         {/* head */}
                         <thead>
-                            <tr className="">
+                            <tr className="border-b border-accent boreder">
                                 <th>예약일</th>
                                 <th>예약자</th>
                                 <th>예약 기간</th>
