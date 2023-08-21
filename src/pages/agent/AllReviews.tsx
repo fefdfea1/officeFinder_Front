@@ -30,7 +30,7 @@ export const AllReviews = () => {
         </div>
       </div>
       <BackgroundCover>
-        <Title>{officeName} 전체 리뷰</Title>
+        <Title>{officeName}전체 리뷰</Title>
         {/* 본문 */}
         <div className="flex flex-col gap-4">
           <div className="p-3 flex justify-between">
