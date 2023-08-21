@@ -166,17 +166,6 @@ const BackgroundCoverLeftAreaRightContour = styled.div`
   width: 50%;
   display: flex;
   flex-direction: column;
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: -5px;
-    right: -15px;
-    width: 1px;
-    height: 335px;
-    border-radius: 12px;
-    background-color: var(--primary);
-  }
 `;
 
 // 가상 요소를 사용하기 위해 따로 제작
