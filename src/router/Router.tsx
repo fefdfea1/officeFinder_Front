@@ -11,7 +11,7 @@ import Join from '../pages/Join';
 import Login from '../pages/Login';
 import Profile from '../pages/Profile';
 
-export default function Router() {
+export const Router = () => {
   return (
     <Routes>
       <Route path="/" element={<Main />}></Route>
@@ -27,4 +27,4 @@ export default function Router() {
       <Route path="/Profile" element={<Profile />}></Route>
     </Routes>
   );
-}
+};

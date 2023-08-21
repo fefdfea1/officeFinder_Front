@@ -10,9 +10,9 @@ type WrapperProps = {
 export const Modal = ({ children, spanString, PTagString, buttonString }: WrapperProps) => {
   return (
     <div className="w-96 h-60 p-8 shadow-lg box-content rounded-md">
-      <h2 className="text-center mb-4 text-lg font-black text-black">{children}</h2>
+      <h2 className="text-center mb-4 text-lg font-black">{children}</h2>
       <div>
-        <p className="text-base text-black mb-4 font-medium">{PTagString}</p>
+        <p className="text-base mb-4 font-medium">{PTagString}</p>
         <div className="relative flex items-center mb-8">
           <input
             type="text"
