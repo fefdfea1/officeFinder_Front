@@ -17,7 +17,7 @@ declare global {
   }
 }
 
-export default function Booking() {
+export const Booking = () => {
   const [selectedDay, setSelectedDay] = useState<Date>();
 
   const PrintDayDom = useRef<HTMLParagraphElement>(null);
@@ -121,7 +121,7 @@ export default function Booking() {
       </div>
     </>
   );
-}
+};
 
 const ImgAreaWidht = styled.div`
   width: 40%;

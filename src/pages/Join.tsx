@@ -2,7 +2,7 @@ import { Input } from '../components/common/Input';
 import { Button } from '../components/common/Button';
 import { AiOutlineEyeInvisible } from 'react-icons/ai';
 
-export default function Join() {
+export const Join = () => {
   return (
     <>
       <div className="w-80 mx-auto">
@@ -14,4 +14,4 @@ export default function Join() {
       </div>
     </>
   );
-}
+};
