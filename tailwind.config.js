@@ -30,7 +30,7 @@ module.exports = {
           accent: '#DDE1EB',
           neutral: '#2a323c',
           'base-100': '#ffffff',
-          info: '#3abff8',
+          info: '#adadad',
           success: '#36d399',
           warning: '#fbbd23',
           error: '#f87272',

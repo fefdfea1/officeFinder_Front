@@ -1,6 +1,6 @@
 import { MyBookingsListCompo } from './MyBookingsListCompo';
 import { BackgroundCover } from '../../components/common/BackgroundCover';
-export default function MyBookings() {
+export const MyBookings = () => {
   return (
     <div className="w-11/12 mx-auto">
       {/* 각각 데이터의 갯수만큼 반복하여 제작 */}
@@ -12,4 +12,4 @@ export default function MyBookings() {
       </BackgroundCover>
     </div>
   );
-}
+};
