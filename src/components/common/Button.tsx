@@ -3,14 +3,15 @@ import React from 'react';
 interface ButtonProps {
   text: string,
   style: string,
+  clickHandler: () => void,
 }
 
-export const Button = (props: ButtonProps) => {
+export const Button = (props: any) => {
   return (
   <>
   <div className='p-4'>
-    <button className={props.style}>{props.text}</button>
-    {/* <button className="btn btn-primary w-72 m-2 text-sm">{props.text}</button> */}
+    <button onClick={props.clickHandler} className={props.style}>{props.text}</button>
+    {/*className="btn btn-outline btn-primary w-72 m-2 text-base" 기본 스타일 입니다. */}
   </div>
   </>
   )

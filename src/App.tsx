@@ -1,24 +1,28 @@
 import './css/App.css';
-import Router from './router/Router';
 import { QueryClientProvider, QueryClient } from 'react-query';
+import Router from './router/Router';
 import Nav from './components/common/Nav';
 import { Footer } from './components/common/Footer';
-import Join from './pages/Join';
+import { Join } from './pages/Join';
+import { Login } from './pages/Login';
+import { Main } from './pages/Main';
+import { useState } from 'react';
 
 
-function App() {
+const App = () => {
   const queryClient = new QueryClient();
+
   return (
     <>
-      <QueryClientProvider client={queryClient}>
+     <QueryClientProvider client={queryClient}>
+
         <Nav />
         <section id="container">
-          <MyOffice />
-          <Router />
           <Join />
         </section>
         <Footer />
-      </QueryClientProvider>
+     </QueryClientProvider>
+
     </>
   );
 }

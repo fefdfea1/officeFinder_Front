@@ -1,19 +1,40 @@
-import React from 'react';
-import { Input } from '../components/common/Input'
+// import React from 'react';
 import { Button } from '../components/common/Button';
-import { AiOutlineEyeInvisible } from 'react-icons/ai'
+import { useState } from 'react';
+import { AgencyCard } from '../components/singup/AgencyCard';
+import { CustomerCard } from '../components/singup/CustomerCard';
 
-export default function Join() {
+
+
+export const Join =() => {  
+  const [step, setStep]= useState(0)
+  const [agency, setAgency] = useState(false)
+  const [customer, setCustomer] = useState(false)
+
+  const clickCard = (key:string) => {
+    if (key === 'customer') {
+    setCustomer(true)
+    setStep(1);
+    } else if (key === 'agency') {
+      setAgency(true)
+      setStep(1);
+    }
+    console.log(agency, customer);
+  }
   return (
-  <>
-  <div className='w-80 mx-auto'>
-    <Input inputTitle={'이메일'} placeholder={'Email'} warning={'이미 존재하는 계정입니다.'}/>
-    <Input inputTitle={'비밀번호'} placeholder={'Password'} warning={'대문자, 소문자, 숫자를 포함해야합니다.'}/>
-      <AiOutlineEyeInvisible className="absolute top-[225px] right-[300px] text-xl mx-4" />
-    <Input inputTitle={'비밀번호 확인'} placeholder={'Password'} warning={'비밀번호가 일치하지 않습니다.'}/>
-    <Button style={'btn btn-outline btn-primary w-72 m-2 text-sm'} text={'회원가입하기'}/>
+    <>
+      {step === 0 &&
+        <div className="shadow-md rounded-xl p-8 w-[400px] h-[400px] mx-auto my-4 flex items-center justify-content-center">
+          <div className="flex-col items-center">
+            <Button clickHandler={()=>clickCard('customer')} text="일반 회원 회원가입" style={"btn btn-outline btn-primary w-72 m-2 text-base"}></Button>
+            <Button clickHandler={()=>clickCard('agency')}  text="임대인 회원가입" style={"btn btn-outline btn-primary w-72 m-2 text-base"}></Button>
+          </div>
+        </div> }   
+        {step === 1 && agency && <AgencyCard/>}
+        {step === 1 && customer && <CustomerCard/>}
 
-  </div>
-
-  </>);
+    </>
+  );
 }
+
+export default Join;
