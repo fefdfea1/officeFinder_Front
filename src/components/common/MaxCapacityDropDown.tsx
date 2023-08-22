@@ -28,7 +28,7 @@ export const MaxCapacityDropDown = (props: { width: string }): JSX.Element => {
             onClick={toggleDropDown}
           >
             <span className="label-text font-medium group-hover:text-white">
-              {selectedItem || <span className="text-sm font-medium text-accent">최대인원 수</span>}
+              {selectedItem || <span className="text-sm font-medium text-info">최대인원 수</span>}
             </span>
             <RiArrowDropDownLine className="text-2xl" />
           </label>
