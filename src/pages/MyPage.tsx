@@ -7,6 +7,7 @@ import { cacheChargeModalStateFn } from './MyPageModalState';
 import { pullCacheModalStateFn } from './MyPageModalState';
 import { useEffect, useRef } from 'react';
 import { changeProfile, removeProfile } from './MyPageChangeProfile';
+import { Link } from 'react-router-dom';
 import styled from '@emotion/styled';
 
 const arr = Array.from({ length: 10 });
@@ -15,6 +16,7 @@ const arr = Array.from({ length: 10 });
 export const MyPage = () => {
   const [cacheChargeModalState, setcacheChargeModalState] = useState<boolean>(false);
   const [pullCacheModalState, setpullCacheModalState] = useState<boolean>(false);
+  const [OwnerState, setOwnerState] = useState<boolean>(false);
   const cacheChargeButtonDom = useRef<HTMLButtonElement>(null);
   const pullCacheButtonDom = useRef<HTMLButtonElement>(null);
   const imageDom = useRef<HTMLImageElement>(null);
@@ -22,15 +24,19 @@ export const MyPage = () => {
   // .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 
   useEffect(() => {
+    //클린업 함수를 위해 해당 부분에 작성
     const windowEventHandler = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
+
       if (!target.classList.contains('charge')) {
-        if (
-          cacheChargeButtonDom.current?.classList.contains('active') ||
-          pullCacheButtonDom.current?.classList.contains('active')
-        ) {
-          setpullCacheModalState(false);
-          setcacheChargeModalState(false);
+        if (target.closest('.Modal') === null) {
+          if (
+            cacheChargeButtonDom.current?.classList.contains('active') ||
+            pullCacheButtonDom.current?.classList.contains('active')
+          ) {
+            setpullCacheModalState(false);
+            setcacheChargeModalState(false);
+          }
         }
       }
     };
@@ -45,8 +51,17 @@ export const MyPage = () => {
   return (
     <div className="relative mb-10">
       <BackgroundCover>
-        <div className="mb-12">
+        <div className="mb-12 relative">
           <Title>마이페이지</Title>
+          {OwnerState && (
+            <ShowMyOfficeButotn>
+              <button className="w-52 btn btn-outline btn-primary">
+                <Link to={'/MyOffice'} className="w-52 btn btn-outline btn-primary absolute right-0 top-0">
+                  나의 지점 보기
+                </Link>
+              </button>
+            </ShowMyOfficeButotn>
+          )}
         </div>
         <div className="flex justify-between items-center border-b border-solid border-accent mb-8 px-8 pb-8 ">
           <div className="w-4/12">
@@ -208,4 +223,10 @@ const ChargeList = styled.div`
     background-color: var(--secondary);
     transform: translateY(-50%);
   }
+`;
+
+const ShowMyOfficeButotn = styled.div`
+  position: absolute;
+  top: -40%;
+  right: 1%;
 `;
