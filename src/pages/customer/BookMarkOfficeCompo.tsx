@@ -1,6 +1,7 @@
 import { OfficeName } from '../../components/booking/Officename';
 import { AiFillStar } from 'react-icons/ai';
 import { AiOutlineHeart } from 'react-icons/ai';
+import { Heart } from '../../components/common/Heart';
 import { Link } from 'react-router-dom';
 
 type propsType = {
@@ -26,7 +27,7 @@ export const BookMarkOfficeCompo = (props: propsType) => {
       </div>
       <p className="text-sm pl-2 ">현재 위치와의 거리 200m</p>
       <button className="absolute right-2 top-2" type="button">
-        <AiOutlineHeart className="w-6 h-6 fill-white " />
+        <Heart />
       </button>
     </div>
   );
