@@ -6,6 +6,8 @@ import { useState, useEffect, useRef } from 'react';
 import { MaxCapacityDropDown } from '../components/common/MaxCapacityDropDown';
 import { OfficeName } from '../components/booking/Officename';
 import { OfficeOptions } from '../components/booking/OfficeOptions';
+import { BlindBooking } from './BlindBooking';
+import { SelectDateDropDown } from '../components/agent/SelectDateDropDown';
 import styled from '@emotion/styled';
 import 'react-day-picker/dist/style.css';
 
@@ -19,6 +21,7 @@ declare global {
 
 export const Booking = () => {
   const [selectedDay, setSelectedDay] = useState<Date>();
+  const [reservationComplete, setReservationComplete] = useState<boolean>(false);
 
   const PrintDayDom = useRef<HTMLParagraphElement>(null);
 
@@ -68,49 +71,56 @@ export const Booking = () => {
               </div>
             </figure>
           </ImgAreaWidht>
-          <CaledarAndOPtionWidth className="w-3/5">
+          <CaledarAndOPtionWidth>
             {/* flex와 div로 영역을 나누기 위해 div를 많이 쓰더라도 사용했습니다 */}
-            <BackgroundCover>
-              <div className="flex mb-4">
-                <BackgroundCoverLeftAreaRightContour>
-                  <BackgroundCoverLeftAreaTopContour className="text-center text-primary">
-                    <span ref={PrintDayDom} className="text-base">
-                      시작 날짜를 알려주세요
-                    </span>
-                  </BackgroundCoverLeftAreaTopContour>
-                  <InheritanceDayPickr mode="single" selected={selectedDay} onSelect={setSelectedDay} />
-                </BackgroundCoverLeftAreaRightContour>
-                <div className="w-1/2 ml-4">
-                  <div className="inline-block flex flex-col justify-center">
-                    <div className="ml-4 text-base">
-                      <p>몇 개월 사용할지 알려주세요</p>
-                      <p className="mb-4">년 이상 장기 예약은 문의가 필요합니다</p>
-                    </div>
-                    <div className="mb-4">
-                      <MaxCapacityDropDown width="w-full" />
-                    </div>
-                    <div className="mb-4">
-                      <p className="ml-4 mb-1 text-base">사용할 인원을 선택해주세요</p>
-                      <MaxCapacityDropDown width="w-full" />
-                    </div>
-                    {/* 월 정기 결제 버튼  */}
-                    <div className="flex ml-4">
-                      <div className="form-control">
-                        <label className="label cursor-pointer">
-                          <input type="checkbox" className="checkbox checkbox-primary" />
-                          <span className="label-text ml-4 text-base">월 정기 결제</span>
-                        </label>
+            <div className="relative">
+              <BackgroundCover>
+                <div className="flex mb-4">
+                  <BackgroundCoverLeftAreaRightContour>
+                    <BackgroundCoverLeftAreaTopContour className="text-center text-primary">
+                      <span ref={PrintDayDom} className="text-base">
+                        시작 날짜를 알려주세요
+                      </span>
+                    </BackgroundCoverLeftAreaTopContour>
+                    <InheritanceDayPickr mode="single" selected={selectedDay} onSelect={setSelectedDay} />
+                  </BackgroundCoverLeftAreaRightContour>
+                  <div className="w-1/2 ml-4">
+                    <div className="inline-block flex flex-col justify-center">
+                      <div className="ml-4 text-base">
+                        <p>몇 개월 사용할지 알려주세요</p>
+                        <p className="mb-4">1년 이상 장기 예약은 문의가 필요합니다</p>
                       </div>
-                    </div>
-                    <div className="ml-12 text-base">
-                      <p className="text-primary">다음 월 정기 결제일은 0000입니다</p>
+                      <div className="mb-4">
+                        <SelectDateDropDown width="w-full" />
+                      </div>
+                      <div className="mb-4">
+                        <p className="ml-4 mb-1 text-base">사용할 인원을 선택해주세요</p>
+                        <MaxCapacityDropDown width="w-full" />
+                      </div>
+                      {/* 월 정기 결제 버튼  */}
+                      <div className="flex ml-4">
+                        <div className="form-control">
+                          <label className="label cursor-pointer">
+                            <input type="checkbox" className="checkbox checkbox-primary" />
+                            <span className="label-text ml-4 text-base">월 정기 결제</span>
+                          </label>
+                        </div>
+                      </div>
+                      <div className="ml-12 text-base">
+                        <p className="text-primary">다음 월 정기 결제일은 0000입니다</p>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <button className="btn btn-primary w-full"> 예약하기</button>
-              {/* 컴포넌트 제작 완료대로 추가 */}
-            </BackgroundCover>
+                {/* 컴포넌트 제작 완료대로 추가 */}
+                <button className="btn btn-primary w-full"> 예약하기</button>
+                {reservationComplete && (
+                  <div className="w-full h-full absolute top-0 left-0  z-50">
+                    <BlindBooking />
+                  </div>
+                )}
+              </BackgroundCover>
+            </div>
           </CaledarAndOPtionWidth>
         </div>
         <div id="map" style={{ width: '100%', height: '500px' }} className="mx-auto mb-8"></div>
