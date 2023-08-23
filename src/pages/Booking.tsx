@@ -6,6 +6,8 @@ import { useState, useEffect, useRef } from 'react';
 import { MaxCapacityDropDown } from '../components/common/MaxCapacityDropDown';
 import { OfficeName } from '../components/booking/Officename';
 import { OfficeOptions } from '../components/booking/OfficeOptions';
+import { SelectDateDropDown } from '../components/agent/SelectDateDropDown';
+import { ReservationComplete } from '../components/agent/ReservationComplete';
 import styled from '@emotion/styled';
 import 'react-day-picker/dist/style.css';
 
@@ -19,7 +21,8 @@ declare global {
 
 export default function Booking() {
   const [selectedDay, setSelectedDay] = useState<Date>();
-
+  // 받아오는 api의
+  const [reservationComplete, setReservationComplete] = useState<boolean>(false);
   const PrintDayDom = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
@@ -84,10 +87,10 @@ export default function Booking() {
                   <div className="inline-block flex flex-col justify-center">
                     <div className="ml-4 text-base">
                       <p>몇 개월 사용할지 알려주세요</p>
-                      <p className="mb-4">년 이상 장기 예약은 문의가 필요합니다</p>
+                      <p className="mb-4">1년 이상 장기 예약은 문의가 필요합니다</p>
                     </div>
                     <div className="mb-4">
-                      <MaxCapacityDropDown width="w-full" />
+                      <SelectDateDropDown width="w-full" />
                     </div>
                     <div className="mb-4">
                       <p className="ml-4 mb-1 text-base">사용할 인원을 선택해주세요</p>
@@ -110,6 +113,11 @@ export default function Booking() {
               </div>
               <button className="btn btn-primary w-full"> 예약하기</button>
               {/* 컴포넌트 제작 완료대로 추가 */}
+              {reservationComplete && (
+                <div className="w-full h-full absolute top-0 left-0 z-50 rounded-xl">
+                  <ReservationComplete />
+                </div>
+              )}
             </BackgroundCover>
           </CaledarAndOPtionWidth>
         </div>
