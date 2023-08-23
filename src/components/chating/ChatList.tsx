@@ -4,19 +4,17 @@ import { FaChevronLeft } from 'react-icons/fa'
 import { BackgroundCover } from '../common/BackgroundCover';
 import { ProfileCircle } from '../common/ProfileCircle';
 import styled from '@emotion/styled';
-import { ShowChat } from './showChat';
+import { ShowChat } from './ShowChat';
 
 type ChatingProps = {
     onIsOpenChange: (isOpen: boolean) => void;
 };
 
 export const ChatList = ({ onIsOpenChange }: ChatingProps) => {
-    const [isOpen, setIsOpen] = useState(true);
     const [showChatDetail, setShowChatDetail] = useState(0);
 
 
     const handleChatClose = () => {
-        setIsOpen(false);
         onIsOpenChange(false);
         setShowChatDetail(0);
     };
