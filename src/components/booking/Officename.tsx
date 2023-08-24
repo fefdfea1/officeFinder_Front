@@ -2,11 +2,14 @@ import { useState } from 'react';
 import { MdContentCopy } from 'react-icons/md';
 
 const copyToClipboard = (text: string) => {
-  navigator.clipboard.writeText(text).then(() => {
-    console.log('Text copied to clipboard:', text);
-  }).catch((error) => {
-    console.error('Error copying text to clipboard:', error);
-  });
+  navigator.clipboard
+    .writeText(text)
+    .then(() => {
+      console.log('Text copied to clipboard:', text);
+    })
+    .catch(error => {
+      console.error('Error copying text to clipboard:', error);
+    });
 };
 
 type OfficenameProps = {
@@ -27,11 +30,8 @@ export const OfficeName = ({ name, address }: OfficenameProps) => {
     <>
       <div className="flex flex-col gap-1 p-2">
         <p className="text-base font-bold">{name}</p>
-        <div
-          className="copy flex gap-2 group hover:cursor-pointer"
-          onClick={() => handleCopyClick(address)}
-        >
-          <p className="text-sm">{address}</p>
+        <div className="copy flex gap-2 group hover:cursor-pointer" onClick={() => handleCopyClick(address)}>
+          <p className="text-sm address">{address}</p>
           <MdContentCopy className="hidden group-hover:block" />
           {copied ? <p className="text-sm text-primary">복사되었습니다!</p> : null}
         </div>

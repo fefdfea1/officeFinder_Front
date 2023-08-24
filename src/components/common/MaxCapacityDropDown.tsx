@@ -28,7 +28,7 @@ export const MaxCapacityDropDown = (props: { width: string }): JSX.Element => {
             onClick={toggleDropDown}
           >
             <span className="label-text font-medium group-hover:text-white">
-              {selectedItem || <span className="text-sm font-medium text-accent">최대인원 수</span>}
+              {selectedItem || <span className="text-sm font-medium text-info">최대인원 수</span>}
             </span>
             <RiArrowDropDownLine className="text-2xl" />
           </label>
@@ -53,16 +53,16 @@ export const MaxCapacityDropDown = (props: { width: string }): JSX.Element => {
               <a onClick={() => handleItemClick('5인')}>5인</a>
             </li>
             <li>
-              <a onClick={() => handleItemClick('6인~10인')}>6인</a>
+              <a onClick={() => handleItemClick('6인')}>6인</a>
             </li>
             <li>
-              <a onClick={() => handleItemClick('6인~10인')}>7인</a>
+              <a onClick={() => handleItemClick('7인')}>7인</a>
             </li>
             <li>
-              <a onClick={() => handleItemClick('6인~10인')}>8인</a>
+              <a onClick={() => handleItemClick('8인')}>8인</a>
             </li>
             <li>
-              <a onClick={() => handleItemClick('6인~10인')}>9인</a>
+              <a onClick={() => handleItemClick('9인')}>9인</a>
             </li>
             <li>
               <a onClick={() => handleItemClick('10인 이상')}>10인 이상</a>

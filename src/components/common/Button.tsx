@@ -1,13 +1,13 @@
-import React from 'react';
-
 interface ButtonProps {
+
   text: string,
   style: string,
   clickHandler?: () => void,
-}
+
 
 export const Button = (props: ButtonProps) => {
   return (
+
   <>
   <div className='p-4'>
     <button onClick={props.clickHandler} className={props.style}>{props.text}</button>
@@ -17,3 +17,4 @@ export const Button = (props: ButtonProps) => {
   )
 
 }
+

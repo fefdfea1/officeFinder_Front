@@ -1,4 +1,3 @@
-import React from 'react';
 
 interface InputProps {
   width: string,
@@ -11,6 +10,7 @@ interface InputProps {
 export const Input = (props: InputProps) => {
 
   return (
+
   <>
   <div className='px-4'>
     <label className='text-base pl-2 mt-4'>{props.inputLabel}</label>
@@ -18,5 +18,6 @@ export const Input = (props: InputProps) => {
     {/* <p className='text-sm pl-2 mt-0 text-error'>{props.warning}</p> */}
   </div>
   </>
+
   );
 }
