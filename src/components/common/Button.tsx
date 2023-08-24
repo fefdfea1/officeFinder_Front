@@ -1,5 +1,6 @@
 interface ButtonProps {
 
+
   text: string,
   style: string,
   clickHandler?: () => void,
@@ -17,4 +18,5 @@ export const Button = (props: ButtonProps) => {
   )
 
 }
+
 
