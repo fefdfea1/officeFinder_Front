@@ -13,25 +13,26 @@ export const AgencyCard = () => {
 
   return (
     <>
+    <h3>임대인 회원가입</h3>
     <div className="shadow-md rounded-xl p-8 w-[400px] h-[500px] mx-auto my-4 flex items-center">
       <div className=''>
       <Input width=''
-        inputTitle={'이메일'} 
+        inputLabel={'이메일'} 
         placeholder={'이메일을 입력해 주세요'} 
         warning={''} type={'email'} />
       <Input 
         width=''
-        inputTitle={'비밀번호'} 
+        inputLabel={'비밀번호'} 
         placeholder={'10~20자리의 비밀번호를 입력해주세요'}
         warning={''} type={'password'}  />
       <Input 
         width=''
-        inputTitle={'비밀번호'} 
+        inputLabel={'비밀번호'} 
         placeholder={'한 번 더 입력해주세요'}
         warning={''} type={'password'}  />
       <Input 
         width=''
-        inputTitle={'사업자 등록 번호'} 
+        inputLabel={'사업자 등록 번호'} 
         placeholder={'사업자 등록번호 10자리를 입력해주세요'}
         warning={''} type={'password'}  />
 

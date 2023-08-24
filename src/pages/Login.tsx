@@ -16,12 +16,12 @@ export const Login = () => {
     <div className="shadow-md rounded-xl p-8 w-[400px] h-[500px] mx-auto my-4 flex items-center">
       <div className=''>
       <Input width=''
-          inputTitle={'이메일'} placeholder={'Email'} warning={''} type={'email'} />
+          inputLabel={'이메일'} placeholder={'Email'} warning={''} type={'email'} />
         <Input 
             width=''
-            inputTitle={'비밀번호'} placeholder={'Password'} warning={''} type={'password'}  />
+            inputLabel={'비밀번호'} placeholder={'Password'} warning={''} type={'password'}  />
           <AiOutlineEyeInvisible className="absolute left-10 text-xl mx-4" />
-        <Button onClick={clickLoginButton} style={"btn btn-outline btn-primary w-80 m-2 text-base"} text={'로그인'}/>
+        <Button clickHandler={clickLoginButton} style={"btn btn-outline btn-primary w-80 m-2 text-base"} text={'로그인'}/>
 
       </div>
 

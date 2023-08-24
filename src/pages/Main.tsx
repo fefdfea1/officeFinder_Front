@@ -17,7 +17,7 @@ export const Main = () => {
   return (
   <>
     {step === 0 &&
-    <div onClick={()=>clickDiv('search')} className=" mx-auto flex justify-center mt-4">
+    <div onClick={()=>clickDiv('search')} className=" mx-auto flex justify-center mt-4 h-20">
       <SearchBoxContainer className="p-4 shadow-md">
         <div className="top flex justify-center items-center border-b border-solid border-accent pb-2">
           <ContourBox className="text-info text-base p-4">
@@ -36,9 +36,9 @@ export const Main = () => {
           </ContourBox>
         </div>
         </SearchBoxContainer>
-      </div>}
+    </div>}
       {step === 1 && <Search />}
-    <div className="p-4 mt-5">
+    <div className="p-4 mt-5 ">
       <AllOfficeList />
     </div>
   </>

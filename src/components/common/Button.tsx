@@ -3,10 +3,10 @@ import React from 'react';
 interface ButtonProps {
   text: string,
   style: string,
-  clickHandler: () => void,
+  clickHandler?: () => void,
 }
 
-export const Button = (props: any) => {
+export const Button = (props: ButtonProps) => {
   return (
   <>
   <div className='p-4'>

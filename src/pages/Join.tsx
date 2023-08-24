@@ -24,14 +24,14 @@ export const Join =() => {
   return (
     <>
       {step === 0 &&
-        <div className="shadow-md rounded-xl p-8 w-[400px] h-[400px] mx-auto my-4 flex items-center justify-content-center">
-          <div className="flex-col items-center">
+        <div className="shadow-md rounded-xl p-8 w-[400px] h-[400px] mx-auto my-4 flex items-center justify-center">
+          <div className="flex-col items-center justify-center">
             <Button clickHandler={()=>clickCard('customer')} text="일반 회원 회원가입" style={"btn btn-outline btn-primary w-72 m-2 text-base"}></Button>
             <Button clickHandler={()=>clickCard('agency')}  text="임대인 회원가입" style={"btn btn-outline btn-primary w-72 m-2 text-base"}></Button>
           </div>
         </div> }   
-        {step === 1 && agency && <AgencyCard/>}
-        {step === 1 && customer && <CustomerCard/>}
+        {agency && <AgencyCard/>}
+        {customer && <CustomerCard/>}
 
     </>
   );

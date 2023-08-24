@@ -3,13 +3,20 @@ import React from 'react';
 import { CgProfile } from 'react-icons/cg';
 import { PiBellRingingBold } from 'react-icons/pi';
 import { Title } from './Title';
+import { useNavigate } from 'react-router-dom';
 
 export default function Nav() {
+  const navigate = useNavigate()
+
+  const clickLogo = () => {
+    navigate('/');
+  };
+
   return (
   <>
   <div className="navbar bg-base-100 p-5 border-solid border-b-2 border-gray-200">
   <div className="flex-1">
-    <a className="btn bg-white border-none hover:bg-white normal-case text-2xl text-primary">officeFinder</a>
+    <a onClick={clickLogo} className="btn bg-white border-none hover:bg-white normal-case text-2xl text-primary">officeFinder</a>
   </div>
   <div className="flex-none">
     <div>
