@@ -1,11 +1,8 @@
-
-import React from 'react';
 import { CgProfile } from 'react-icons/cg';
 import { PiBellRingingBold } from 'react-icons/pi';
-import { Title } from './Title';
 import { useNavigate } from 'react-router-dom';
 
-export default function Nav() {
+export const Nav = () => {
   const navigate = useNavigate()
 
   const clickLogo = () => {
