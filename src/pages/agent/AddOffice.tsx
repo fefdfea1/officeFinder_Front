@@ -31,7 +31,7 @@ export const AddOffice = () => {
       <BackgroundCover>
         <Title>새 지점 등록하기</Title>
         <form className="flex flex-col items-center py-8 gap-6" onSubmit={handleSubmit}>
-          <Input inputTitle="공간의 이름을 입력해주세요." placeholder="" warning="" />
+          <Input type="text" width="" inputLabel="공간의 이름을 입력해주세요." placeholder="" warning="" />
           <AddOfficeAddress onAddressHandler={useAddOfficeHandel} />
           <div className="">
             <p className="text-center text-base">필요한 옵션을 선택하세요.</p>
@@ -40,9 +40,9 @@ export const AddOffice = () => {
           <div className="">
             <p className="text-center text-base pb-4">최대 인원수와 오피스의 개수, 가격을 입력하세요.</p>
             <div className="flex">
-              <Input placeholder="숫자로 입력하세요" inputTitle="최대 인원수" warning="" />
-              <Input placeholder="숫자로 입력하세요." inputTitle="개수" warning="" />
-              <Input placeholder="숫자로 입력하세요." inputTitle="가격" warning="" />
+              <Input type="text" width="" placeholder="숫자로 입력하세요" inputLabel="최대 인원수" warning="" />
+              <Input type="text" width="" placeholder="숫자로 입력하세요." inputLabel="개수" warning="" />
+              <Input type="text" width="" placeholder="숫자로 입력하세요." inputLabel="가격" warning="" />
             </div>
           </div>
           <AddOfficePhoto />
