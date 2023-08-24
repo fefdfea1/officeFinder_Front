@@ -4,7 +4,7 @@ type Options = {
   [key: string]: boolean;
 };
 type OptionsCheckboxProps = {
-  onOptionChange: (options: Options) => void;
+  onOptionChange?: (options: Options) => void;
 };
 
 export const OptionsCheckbox: React.FC<OptionsCheckboxProps> = ({ onOptionChange }) => {
