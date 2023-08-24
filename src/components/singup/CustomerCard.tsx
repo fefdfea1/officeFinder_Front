@@ -16,7 +16,7 @@ export const CustomerCard = () => {
 
     <div className="shadow-md rounded-xl p-8 w-[400px] h-[500px] mx-auto my-4 flex-col items-center">
       <h3 className="font-black">일반회원 회원가입</h3>
-      <div className=''>
+      <div className='pt-10'>
       <Input width=''
         inputLabel={'이메일'} 
         placeholder={'이메일을 입력해 주세요'} 

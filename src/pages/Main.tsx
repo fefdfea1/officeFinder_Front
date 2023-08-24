@@ -6,18 +6,17 @@ import { AiOutlineSearch } from 'react-icons/ai';
 
 
 export const Main = () => {
-  const [step, setStep]= useState(0)
-
- const clickDiv = (key:string) => {
-  if(key === 'search') {
-    setStep(1);
-  }
- }
+  const [isHovering, setIsHovering] = useState(0);
 
   return (
   <>
-    {step === 0 &&
-    <div onClick={()=>clickDiv('search')} className=" mx-auto flex justify-center mt-4 h-20">
+    <div 
+    onMouseOver={() => setIsHovering(1)}
+    onMouseOut={() => setIsHovering(0)}
+    className=" mx-auto flex justify-center mt-4 h-20">
+    {isHovering ? (
+        <Search />
+       ) : (
       <SearchBoxContainer className="p-4 shadow-md">
         <div className="top flex justify-center items-center border-b border-solid border-accent pb-2">
           <ContourBox className="text-info text-base p-4">
@@ -36,8 +35,8 @@ export const Main = () => {
           </ContourBox>
         </div>
         </SearchBoxContainer>
-    </div>}
-      {step === 1 && <Search />}
+       )}
+    </div>
     <div className="p-4 mt-5 ">
       <AllOfficeList />
     </div>

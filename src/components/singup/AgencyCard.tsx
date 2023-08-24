@@ -13,9 +13,9 @@ export const AgencyCard = () => {
 
   return (
     <>
-    <h3>임대인 회원가입</h3>
-    <div className="shadow-md rounded-xl p-8 w-[400px] h-[500px] mx-auto my-4 flex items-center">
-      <div className=''>
+    <div className="shadow-md rounded-xl p-8 w-[400px] h-[520px] mx-auto my-4 flex-col items-center">
+    <h3 className="font-black">임대인 회원가입</h3>
+      <div className='pt-6'>
       <Input width=''
         inputLabel={'이메일'} 
         placeholder={'이메일을 입력해 주세요'} 
