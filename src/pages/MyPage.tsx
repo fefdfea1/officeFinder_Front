@@ -169,14 +169,14 @@ export const MyPage = () => {
       {/* absolute를 이용하여 자유롭게 위치를 조정 할 수 있도록 제작 */}
       {cacheChargeModalState && (
         <ModalPosition>
-          <Modal spanString="원" PTagString="얼마를 충전할까요?" buttonString="충전">
+          <Modal spanString="원" Pstring="얼마를 충전할까요?" buttonString="충전">
             충전(모달)
           </Modal>
         </ModalPosition>
       )}
       {pullCacheModalState && (
         <ModalPosition>
-          <Modal spanString="P" PTagString="얼마를 가져올까요?" buttonString="가져오기">
+          <Modal spanString="P" Pstring="얼마를 가져올까요?" buttonString="가져오기">
             내 계좌로 가져오기
           </Modal>
         </ModalPosition>
