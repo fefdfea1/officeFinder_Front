@@ -7,7 +7,7 @@ type MyOfficeListDropDownProps = {
 };
 
 export const MyOfficeListDropDown: React.FC<MyOfficeListDropDownProps> = ({ width, onOfficeChange }) => {
-  const [selectedItem, setSelectedItem] = useState('');
+  const [selectedItem, setSelectedItem] = useState('전체');
   const [isOpen, setIsOpen] = useState(false);
 
   const handleOfficeNameChange = (office: string) => {

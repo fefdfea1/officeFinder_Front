@@ -1,24 +1,23 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BackgroundCover } from '../../components/common/BackgroundCover';
 import { Title } from '../../components/common/Title';
 import { Button } from '../../components/common/Button';
 import { Input } from '../../components/common/Input';
 import { OptionsCheckbox } from '../../components/common/OptionsCheckbox';
-import { MaxCapacityDropDown } from '../../components/common/MaxCapacityDropDown';
 import { AddOfficePhoto } from '../../components/agent/AddOfficePhoto';
 import { AddOfficeAddress } from '../../components/agent/AddOfficeAddress';
+import { useAddOfficeHandel } from '../../components/agent/addOfficeHandel'
 
-type Options = {
-  [key: string]: boolean;
-};
 
 export const AddOffice = () => {
-  const [selectedOptions, setSelectedOptions] = useState<Options>({});
+  //selectedOptions를 true만 넘길 수 있도록 filter사용 예정
+  const { selectedOptions, handleOptionsChange, address, } = useAddOfficeHandel();
 
-  const handleOptionsChange = (options: Options) => {
-    setSelectedOptions(options);
-  };
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+  }
+  console.log(selectedOptions)
+  console.log(address)
 
   return (
     <>
@@ -31,9 +30,9 @@ export const AddOffice = () => {
       </div>
       <BackgroundCover>
         <Title>새 지점 등록하기</Title>
-        <form className="flex flex-col items-center py-8 gap-6">
+        <form className="flex flex-col items-center py-8 gap-6" onSubmit={handleSubmit}>
           <Input inputTitle="공간의 이름을 입력해주세요." placeholder="" warning="" />
-          <AddOfficeAddress />
+          <AddOfficeAddress onAddressHandler={useAddOfficeHandel} />
           <div className="">
             <p className="text-center text-base">필요한 옵션을 선택하세요.</p>
             <OptionsCheckbox onOptionChange={handleOptionsChange} />
@@ -41,18 +40,13 @@ export const AddOffice = () => {
           <div className="">
             <p className="text-center text-base pb-4">최대 인원수와 오피스의 개수, 가격을 입력하세요.</p>
             <div className="flex">
-              <div className="maxCapacity">
-                <p className="text-sm pl-2 mt-0">최대 인원수</p>
-                <div className="group relative">
-                  <MaxCapacityDropDown width="w-52 my-2" />
-                  <hr className="group-hover:border-transparent border-1 border-primary w-full absolute top-[58px]" />
-                </div>
-              </div>
+              <Input placeholder="숫자로 입력하세요" inputTitle="최대 인원수" warning="" />
               <Input placeholder="숫자로 입력하세요." inputTitle="개수" warning="" />
               <Input placeholder="숫자로 입력하세요." inputTitle="가격" warning="" />
             </div>
           </div>
           <AddOfficePhoto />
+          <Button text="등록하기" style="btn btn-primary w-64 mt-4" />
         </form>
       </BackgroundCover>
     </>

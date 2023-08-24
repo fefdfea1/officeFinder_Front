@@ -25,7 +25,7 @@ export const AddOfficePhoto = () => {
 
     return (
         <>
-            <p className="text-center text-base pb-4">오피스 사진을 추가해주세요. 1:1비율 사진을 권장합니다.</p>
+            <p className="text-center text-base">오피스 사진을 추가해주세요. 1:1비율 사진을 권장합니다.</p>
             <div className="flex gap-4 justify-center">
                 <div>
                     <label htmlFor="photo" className="btn w-16 h-16 flex content-center">

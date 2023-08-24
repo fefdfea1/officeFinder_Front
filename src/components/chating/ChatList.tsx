@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { GrClose } from 'react-icons/gr';
 import { FaChevronLeft } from 'react-icons/fa';
 import { BackgroundCover } from '../common/BackgroundCover';
@@ -12,53 +12,61 @@ type ChatingProps = {
 
 export const ChatList = ({ onIsOpenChange }: ChatingProps) => {
 
-  const [isOpen, setIsOpen] = useState(true);
-  const [showChatDetail, setShowChatDetail] = useState(0);
+    const [showChatDetail, setShowChatDetail] = useState(0);
 
-  const handleChatClose = () => {
-    setIsOpen(false);
-    onIsOpenChange(false);
-    setShowChatDetail(0);
-  };
-  const handleGoToList = () => {
-    setShowChatDetail(0);
-  };
+    useEffect(() => {
+        const storedShowChatDetail = localStorage.getItem('showChatDetail');
+        setShowChatDetail(Number(storedShowChatDetail));
+    }, []);
 
-  return (
-    <div className="relative z-10 ">
-      <div className="indicator fixed bottom-10 right-10">
-        <BackgroundCover
-          width="h-[600px] w-[350px] min-h-full relative"
-          margin="m-0 p-0"
-          padding={`${showChatDetail === 0 ? 'bg-base-100' : 'bg-accent'}`}
-        >
-          <div className="flex flex-col items-center shadow-sm">
-            {!showChatDetail ? null : (
-              <button onClick={handleGoToList} className="btn btn-ghost btn-sm p-2 absolute left-0 top-0">
-                <FaChevronLeft className="text-sm" />
-              </button>
-            )}
-            <button onClick={handleChatClose} className="btn btn-ghost btn-sm p-2 absolute right-0 top-0">
-              <GrClose className="text-sm" />
-            </button>
+    useEffect(() => {
+        localStorage.setItem('showChatDetail', String(showChatDetail));
+    }, [showChatDetail]);
 
-            <div className="font-bold text-base p-2">{!showChatDetail ? '채팅목록' : 'zb-FE'}</div>
-          </div>
+    const handleChatClose = () => {
+        onIsOpenChange(false);
+        setShowChatDetail(0);
+    };
 
-          {showChatDetail === 0 ? (
-            <div className="flex flex-col w-full overflow-y-auto">
-              {/* 첫번째 채팅창 */}
-              <button className="flex p-2 bg-base-100 justify-between gap-2" onClick={() => setShowChatDetail(1)}>
-                <div className="flex">
-                  <ProfileCircle />
-                  <Span className="text-sm">오피스에 주차공간이 얼마나 있나요?</Span>
-                </div>
-                <div className="flex flex-col justify-between h-full">
-                  <span className="text-primary text-sm font-bold text-left">N</span>
-                  <div className="text-sm text-info w-11 text-left">8:21 AM</div>
-                </div>
-              </button>
-              {/* -- 첫번째 채팅 -- */}
+    const handleGoToList = () => {
+        setShowChatDetail(0);
+    };
+
+    return (
+        <div className="relative z-10 ">
+            <div className="indicator fixed bottom-10 right-10">
+                <BackgroundCover width="h-[600px] w-[350px] min-h-full relative" margin="m-0 p-0" padding={`${showChatDetail === 0 ? 'bg-base-100' : 'bg-accent'}`}>
+                    <div className="flex flex-col items-center shadow-sm">
+                        {!showChatDetail ? null : <button onClick={handleGoToList} className="btn btn-ghost btn-sm p-2 absolute left-0 top-0">
+                            <FaChevronLeft className="text-sm" />
+                        </button>}
+                        <button onClick={handleChatClose} className="btn btn-ghost btn-sm p-2 absolute right-0 top-0">
+                            <GrClose className="text-sm" />
+                        </button>
+                        <div className="font-bold text-base p-2">{!showChatDetail ? "채팅목록" : "zb-FE"}</div>
+                    </div>
+                    {showChatDetail === 0 ? (
+                        <div className="flex flex-col w-full overflow-y-auto">
+                            {/* 첫번째 채팅창 */}
+                            <button className="flex p-2 bg-base-100 justify-between gap-2" onClick={() => setShowChatDetail(1)}>
+                                <div className="flex">
+                                    <ProfileCircle />
+                                    <Span className="text-sm">
+                                        오피스에 주차공간이 얼마나 있나요?
+                                    </Span>
+                                </div>
+                                <div className="flex flex-col justify-between h-full">
+                                    <span className="text-primary text-sm font-bold text-left">N</span>
+                                    <div className="text-sm text-info w-11 text-left">8:21 AM</div>
+                                </div>
+                            </button>
+                            {/* -- 첫번째 채팅 -- */}
+                        </div>
+                    ) : (
+                        <ShowChat />
+                    )}
+                </BackgroundCover>
+
             </div>
           ) : (
             <>

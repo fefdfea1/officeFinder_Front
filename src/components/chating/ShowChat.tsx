@@ -39,12 +39,11 @@ export const ShowChat = () => {
 
         scrollToBottom();
     }, [messages]);
-    console.log(messages)
-    console.log(inputText)
+
     return (
         <div className="flex flex-col h-[555px] w-full">
             <div className="overflow-y-scroll h-2/3" ref={chatContainerRef}>
-                <div className="chat chat-start">
+                <div className="chat chat-start pl-3">
                     <div className="chat-image avatar">
                         <div className="w-10 rounded-full">
                             <img src="https://picsum.photos/320" />
