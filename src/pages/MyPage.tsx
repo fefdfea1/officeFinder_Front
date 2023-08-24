@@ -20,9 +20,10 @@ export const MyPage = () => {
   const cacheChargeButtonDom = useRef<HTMLButtonElement>(null);
   const pullCacheButtonDom = useRef<HTMLButtonElement>(null);
   const imageDom = useRef<HTMLImageElement>(null);
+  console.log(setOwnerState);
   // const cn1 = n1.toString()
   // .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
-
+  
   useEffect(() => {
     //클린업 함수를 위해 해당 부분에 작성
     const windowEventHandler = (event: MouseEvent) => {
