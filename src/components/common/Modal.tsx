@@ -5,18 +5,18 @@ import { modalCheckValue } from './ModalValueCheck';
 type WrapperProps = {
   children: React.ReactNode;
   spanString: string;
-  PTagString: string;
+  Pstring: string;
   buttonString: string;
 };
 
-export const Modal = ({ children, spanString, PTagString, buttonString }: WrapperProps) => {
+export const Modal = ({ children, spanString, Pstring, buttonString }: WrapperProps) => {
   const [inputValue, setInputValue] = useState<string>('');
 
   return (
     <div className="w-96 h-60 p-8 shadow-xl box-content rounded-xl bg-secondary Modal">
       <h2 className="text-center mb-4 text-lg font-black">{children}</h2>
       <div>
-        <p className="text-base mb-4 font-medium">{PTagString}</p>
+        <p className="text-base mb-4 font-medium">{Pstring}</p>
         <div className="relative flex items-center mb-8">
           <input
             type="text"
