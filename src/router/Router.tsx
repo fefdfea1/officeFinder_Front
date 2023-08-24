@@ -18,7 +18,6 @@ export const Router = () => {
     <Routes>
       <Route path="/" element={<Main />}></Route>
       <Route path="/BookMark" element={<BookMark />}></Route>
-      <Route path="/BookMark:id" element={<BookMark />}></Route>
       <Route path="/AddOffice" element={<AddOffice />}></Route>
       <Route path="/AllReviews" element={<AllReviews />}></Route>
       <Route path="/MyOffice" element={<MyOffice />}></Route>
