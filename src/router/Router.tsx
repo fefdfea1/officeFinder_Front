@@ -9,7 +9,7 @@ import { BookMark } from '../pages/customer/BookMark';
 import { MyBookings } from '../pages/customer/MyBookings';
 import { Booking } from '../pages/Booking';
 import { Join } from '../pages/Join';
-import Login from '../pages/Login';
+import { Login } from '../pages/Login';
 
 import Profile from '../pages/Profile';
 import { AddOfficeReviews } from '../pages/customer/AddOfficeReviews';
