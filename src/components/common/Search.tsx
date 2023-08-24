@@ -131,7 +131,7 @@ export const Search = () => {
         </ContourBox>
       </div>
       <div className="bottom">
-        <OptionsCheckbox />
+        <OptionsCheckbox onOptionChange={()=> {}}/>
       </div>
     </SearchBoxContainer>
   );
