@@ -24,9 +24,6 @@ const HeartFillStyle = styled.div`
     bottom: 0;
   }
 
-  &.deActive .fillUp {
-    bottom: 100;
-  }
 `;
 
 const HeartStyle = styled.div`

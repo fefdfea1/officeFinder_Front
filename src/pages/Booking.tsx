@@ -6,8 +6,10 @@ import { useState, useEffect, useRef } from 'react';
 import { MaxCapacityDropDown } from '../components/common/MaxCapacityDropDown';
 import { OfficeName } from '../components/booking/Officename';
 import { OfficeOptions } from '../components/booking/OfficeOptions';
+
 import { BlindBooking } from './BlindBooking';
 import { SelectDateDropDown } from '../components/agent/SelectDateDropDown';
+
 import styled from '@emotion/styled';
 import 'react-day-picker/dist/style.css';
 
@@ -21,7 +23,9 @@ declare global {
 
 export const Booking = () => {
   const [selectedDay, setSelectedDay] = useState<Date>();
+
   const [reservationComplete, setReservationComplete] = useState<boolean>(false);
+
 
   const PrintDayDom = useRef<HTMLParagraphElement>(null);
 
@@ -73,6 +77,7 @@ export const Booking = () => {
           </ImgAreaWidht>
           <CaledarAndOPtionWidth>
             {/* flex와 div로 영역을 나누기 위해 div를 많이 쓰더라도 사용했습니다 */}
+
             <div className="relative">
               <BackgroundCover>
                 <div className="flex mb-4">
@@ -108,10 +113,12 @@ export const Booking = () => {
                       </div>
                       <div className="ml-12 text-base">
                         <p className="text-primary">다음 월 정기 결제일은 0000입니다</p>
+
                       </div>
                     </div>
                   </div>
                 </div>
+
                 {/* 컴포넌트 제작 완료대로 추가 */}
                 <button className="btn btn-primary w-full"> 예약하기</button>
                 {reservationComplete && (
@@ -121,6 +128,7 @@ export const Booking = () => {
                 )}
               </BackgroundCover>
             </div>
+
           </CaledarAndOPtionWidth>
         </div>
         <div id="map" style={{ width: '100%', height: '500px' }} className="mx-auto mb-8"></div>
