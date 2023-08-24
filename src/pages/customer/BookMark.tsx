@@ -2,7 +2,7 @@ import { BackgroundCover } from '../../components/common/BackgroundCover';
 import { Title } from '../../components/common/Title';
 import { BookMarkOfficeCompo } from './BookMarkOfficeCompo';
 import styled from '@emotion/styled';
-export default function BookMark() {
+export const BookMark = () => {
   const arr = Array.from({ length: 20 });
 
   return (
@@ -24,7 +24,7 @@ export default function BookMark() {
       </BackgroundCover>
     </div>
   );
-}
+};
 
 const AllremovePosition = styled.button`
   position: absolute;

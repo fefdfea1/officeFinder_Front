@@ -1,10 +1,11 @@
 import { BsChatFill, BsFillCircleFill } from 'react-icons/bs';
 
 type ChatIconProps = {
-    onIsOpenChange: (isOpen: boolean) => void;
+  onIsOpenChange: (isOpen: boolean) => void;
 };
 
 export const ChatIcon = ({ onIsOpenChange }: ChatIconProps) => {
+
 
     const handleChatOpen = () => {
         onIsOpenChange(true);
@@ -20,4 +21,5 @@ export const ChatIcon = ({ onIsOpenChange }: ChatIconProps) => {
             </div>
         </div>
     );
+
 };

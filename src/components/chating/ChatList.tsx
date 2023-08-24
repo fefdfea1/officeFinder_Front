@@ -7,10 +7,11 @@ import styled from '@emotion/styled';
 import { ShowChat } from './ShowChat';
 
 type ChatingProps = {
-    onIsOpenChange: (isOpen: boolean) => void;
+  onIsOpenChange: (isOpen: boolean) => void;
 };
 
 export const ChatList = ({ onIsOpenChange }: ChatingProps) => {
+
     const [showChatDetail, setShowChatDetail] = useState(0);
 
     useEffect(() => {
@@ -65,20 +66,28 @@ export const ChatList = ({ onIsOpenChange }: ChatingProps) => {
                         <ShowChat />
                     )}
                 </BackgroundCover>
+
             </div>
-        </div>
-    );
+          ) : (
+            <>
+              <ShowChat />
+            </>
+          )}
+        </BackgroundCover>
+      </div>
+    </div>
+  );
 };
 
 const Span = styled.span`
-    padding-left: 4px;
-    text-align:left;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 3; /* 라인수 */
-    -webkit-box-orient: vertical;
-    word-wrap:break-word; 
-    line-height: 1.2em;
-    height: 3.6em;
+  padding-left: 4px;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* 라인수 */
+  -webkit-box-orient: vertical;
+  word-wrap: break-word;
+  line-height: 1.2em;
+  height: 3.6em;
 `;
