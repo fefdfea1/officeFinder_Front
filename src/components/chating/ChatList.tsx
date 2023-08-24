@@ -11,7 +11,7 @@ type ChatingProps = {
 };
 
 export const ChatList = ({ onIsOpenChange }: ChatingProps) => {
-  //불필요해 보이는 useState 왜 만든건지
+
   const [isOpen, setIsOpen] = useState(true);
   const [showChatDetail, setShowChatDetail] = useState(0);
 
