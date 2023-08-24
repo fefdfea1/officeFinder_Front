@@ -1,13 +1,37 @@
 import React from 'react';
 import { CgProfile } from 'react-icons/cg';
 import { PiBellRingingBold } from 'react-icons/pi';
+import { Title } from './Title';
+import { useNavigate } from 'react-router-dom';
 
-export const Nav = () => {
+export default function Nav() {
+  const navigate = useNavigate()
+
+  const clickLogo = () => {
+    navigate('/');
+  };
+
   return (
-    <>
-      <div className="navbar bg-base-100 p-5 border-b-2 border-gray-200">
-        <div className="flex-1">
-          <a className="btn bg-white border-none hover:bg-white normal-case text-2xl text-primary">officeFinder</a>
+  <>
+  <div className="navbar bg-base-100 p-5 border-solid border-b-2 border-gray-200">
+  <div className="flex-1">
+    <a onClick={clickLogo} className="btn bg-white border-none hover:bg-white normal-case text-2xl text-primary">officeFinder</a>
+  </div>
+  <div className="flex-none">
+    <div>
+      <span className="text-base font-bold text-primary">customer</span>
+      {/* <Title children={'일반사용자'}  /> */}
+    </div>
+    <div className='ml-4'>
+      <span className="text-sm font-bold">닉네임자리</span>
+      {/* <Title  children={'일반사용자'}  /> */}
+    </div>
+    <div className="dropdown dropdown-end" >
+      <label tabIndex={0} className="btn bg-white border-none">
+        <div className="indicator">
+          <span className="mt-1 text-sm w-13">10,000원</span>
+          {/* <span className="badge badge-sm indicator-item">8</span> */}
+
         </div>
         <div className="flex-none">
           <div className="dropdown dropdown-end">
