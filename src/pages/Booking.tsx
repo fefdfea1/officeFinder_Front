@@ -38,6 +38,7 @@ export const Booking = () => {
     };
 
     let map = new window.kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+    console.log(map);
   }, []);
 
   useEffect(() => {
@@ -120,7 +121,9 @@ export const Booking = () => {
                 </div>
 
                 {/* 컴포넌트 제작 완료대로 추가 */}
-                <button className="btn btn-primary w-full"> 예약하기</button>
+                <button className="btn btn-primary w-full" onClick={() => {
+                  setReservationComplete(true);
+                }}> 예약하기</button>
                 {reservationComplete && (
                   <div className="w-full h-full absolute top-0 left-0  z-50">
                     <BlindBooking />
