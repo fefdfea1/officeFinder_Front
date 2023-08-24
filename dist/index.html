@@ -1,0 +1,14 @@
+<!doctype html><html lang="ko"><head><meta charset="UTF-8"/><link rel="icon" type="image/svg+xml" href="/vite.svg"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>OfficeFinder</title><script type="module" crossorigin src="/assets/index-8659aa63.js"></script><link rel="stylesheet" href="/assets/index-b60b9b50.css"></head><body><div id="root"></div><script>if ('serviceWorker' in navigator) {
+        // Register a service worker hosted at the root of the
+        // site using the default scope.
+        navigator.serviceWorker
+          .register('/sw.js')
+          .then(registration => {
+            console.log('Service worker registration succeeded:', registration);
+          })
+          .catch(err => {
+            console.log('Service worker registration failed:', error);
+          });
+      } else {
+        console.log('Service workers are not supported.');
+      }</script><script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0decb1795578d85247bbeb35cec9e728"></script></body></html>
