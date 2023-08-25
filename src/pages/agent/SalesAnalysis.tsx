@@ -21,7 +21,7 @@ export const SalesAnalysis = () => {
   return (
     <>
       <div className="flex justify-end relative">
-        <div className="absolute top-6 flex right-11">
+        <div className="absolute top-6 right-10 flex z-10">
           <div className="group py-4">
             <MyOfficeListDropDown width="w-52" onOfficeChange={handleOfficeChange} />
             <hr className="border-primary group-hover:border-transparent" />

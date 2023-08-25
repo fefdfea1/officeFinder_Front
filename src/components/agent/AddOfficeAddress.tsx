@@ -76,15 +76,15 @@ export const AddOfficeAddress = ({ onAddressHandler }: { onAddressHandler: OnAdd
             <p className="flex justify-center text-base mb-4">오피스의 주소를 입력해주세요.</p>
             <div className="flex flex-col gap-2">
                 <div className="flex gap-2">
-                    <input type="text" ref={postcodeRef} placeholder="우편번호" className="input input-primary" readOnly />
+                    <input type="text" ref={postcodeRef} placeholder="우편번호" className="input input-primary placeholder:text-base" readOnly />
                     <button type='button' className="btn btn-primary" onClick={handleClick}>
                         주소검색
                     </button>
                 </div>
-                <input type="text" ref={addressRef} placeholder="주소" className="input input-primary" readOnly />
+                <input type="text" ref={addressRef} placeholder="주소" className="input input-primary placeholder:text-base" readOnly />
                 <div className="flex gap-2">
-                    <input type="text" ref={detailAddressRef} onChange={detailHandler} className="input input-primary w-2/3" />
-                    <input type="text" ref={extraAddressRef} placeholder="참고항목" className="input input-primary w-1/3" readOnly />
+                    <input type="text" ref={detailAddressRef} placeholder="상세 주소를 입력해주세요." onChange={detailHandler} className="placeholder:text-base input input-primary w-2/3" />
+                    <input type="text" ref={extraAddressRef} placeholder="참고항목" className="input input-primary w-1/3 placeholder:text-base" readOnly />
                 </div>
             </div>
         </div>
