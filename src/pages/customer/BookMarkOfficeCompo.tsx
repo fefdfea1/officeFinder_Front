@@ -12,7 +12,7 @@ export const BookMarkOfficeCompo = (props: propsType) => {
     <div className="flex flex-col relative">
       {/* 데이터를 받아올때 오피스 id를 받아와 이동 */}
       <Link to={'#'}>
-        <figure className="overflow-hidden rounded-xl w-72 h-60">
+        <figure className="overflow-hidden rounded-xl w-full md:h-44 ">
           <img src={props.imgSrc} alt="즐겨찾기한 오피스 목록입니다" className="w-full h-full" />
         </figure>
       </Link>

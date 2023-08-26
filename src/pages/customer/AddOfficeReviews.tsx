@@ -1,13 +1,21 @@
-import { MyBookingsListCompo } from '../../pages/customer/MyBookingsListCompo';
 import { useState } from 'react';
 import { changeCommentHandler } from '../../components/booking/ReviewsChangeComment';
+import { OfficeProfile } from './AddOfficeReviewsOfficeCompo';
+
 export const AddOfficeReviews = () => {
   const [textAreaCount, setCount] = useState<string>('');
+
   return (
-    <div>
-      <MyBookingsListCompo />
-      <form name="myform" id="myform" method="post" action="./save" className="flex justify-end flex-col mt-8 mb-8">
-        <div className="w-44 p-4 rating rating-md rating-half shadow-xl rounded-full ml-auto mb-4 relative">
+    <div className="pt-20 sm:px-6">
+      <OfficeProfile />
+      <form
+        name="myform"
+        id="myform"
+        method="post"
+        action="./save"
+        className="flex justify-end flex-col mt-8 mb-8 sm:mt-0"
+      >
+        <div className="w-44 p-4 rating rating-md rating-half shadow-xl rounded-full ml-auto mb-4 relative sm:ml-0 lg:mt-8">
           <input type="radio" name="rating-10" className="rating-hidden" />
           <input type="radio" name="rating-10" className="bg-primary mask mask-star-2 mask-half-1" />
           <input type="radio" name="rating-10" className="bg-primary mask mask-star-2 mask-half-2" />
