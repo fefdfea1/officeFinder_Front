@@ -1,15 +1,16 @@
-
-interface ButtonProps {
+import React from 'react';
+import type { ButtonHTMLAttributes } from 'react';
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   text: string,
-  style: string,
+  style: any,
   clickHandler?: () => void,
 }
 
-export const Button = (props: ButtonProps) => {
+export const Button = ({text, style, clickHandler, ...rest} : ButtonProps) => {
   return (
   <>
   <div className='p-4'>
-    <button onClick={props.clickHandler} className={props.style}>{props.text}</button>
+    <button onClick={clickHandler} className={style} {...rest}>{text}</button>
     {/*className="btn btn-outline btn-primary w-72 m-2 text-base" 기본 스타일 입니다. */}
   </div>
   </>

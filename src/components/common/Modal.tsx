@@ -1,23 +1,31 @@
 import styled from '@emotion/styled';
+import { useState } from 'react';
+import { modalCheckValue } from './ModalValueCheck';
 
 type WrapperProps = {
   children: React.ReactNode;
   spanString: string;
-  PTagString: string;
+  Pstring: string;
   buttonString: string;
 };
 
-export const Modal = ({ children, spanString, PTagString, buttonString }: WrapperProps) => {
+export const Modal = ({ children, spanString, Pstring, buttonString }: WrapperProps) => {
+  const [inputValue, setInputValue] = useState<string>('');
+
   return (
-    <div className="w-96 h-60 p-8 shadow-lg box-content rounded-md">
-      <h2 className="text-center mb-4 text-lg font-black text-black">{children}</h2>
+    <div className="w-96 h-60 p-8 shadow-xl box-content rounded-xl bg-secondary Modal">
+      <h2 className="text-center mb-4 text-lg font-black">{children}</h2>
       <div>
-        <p className="text-base text-black mb-4 font-medium">{PTagString}</p>
+        <p className="text-base mb-4 font-medium">{Pstring}</p>
         <div className="relative flex items-center mb-8">
           <input
             type="text"
             className="w-full input input-bordered input-primary rounded-md placeholder:text-accent placeholder:text-base text-base box-border pr-10"
             placeholder="금액을 입력해주세요"
+            onChange={event => {
+              modalCheckValue(event, setInputValue);
+            }}
+            value={inputValue}
           />
           <SapnTag className="absolute">{spanString}</SapnTag>
         </div>

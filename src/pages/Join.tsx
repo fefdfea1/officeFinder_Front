@@ -1,9 +1,10 @@
-// import React from 'react';
+
+import React from 'react';
 import { Button } from '../components/common/Button';
+
 import { useState } from 'react';
 import { AgencyCard } from '../components/singup/AgencyCard';
-import { CustomerCard } from '../components/singup/CustomerCard';
-
+import { CustomerCard } from '../components/singup/CustomerCard'
 
 
 export const Join =() => {  
@@ -38,3 +39,5 @@ export const Join =() => {
 }
 
 export default Join;
+
+

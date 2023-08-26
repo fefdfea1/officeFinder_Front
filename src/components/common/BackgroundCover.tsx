@@ -1,16 +1,14 @@
 import { ReactNode } from 'react';
 
 type BackgroundCoverProps = {
-    children: ReactNode;
-    // 다른 속성들도 추가할 수 있음
+  children: ReactNode;
+  margin?: string;
+  padding?: string;
+  width?: string;
 };
 
 export const BackgroundCover = (props: BackgroundCoverProps) => {
-    return (
+  const { children, margin = 'mt-10', padding = 'p-8', width = 'w-full' } = props;
 
-        <div className="w-full shadow-md rounded-xl p-8 mt-10">
-            {props.children}
-        </div>
-    );
-}
-
+  return <div className={`${width} shadow-md rounded-xl ${margin} ${padding} relative`}>{children}</div>;
+};

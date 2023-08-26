@@ -1,3 +1,5 @@
+import React from 'react';
+import { VscCircleFilled } from 'react-icons/vsc';
 import { CgProfile } from 'react-icons/cg';
 import { PiBellRingingBold } from 'react-icons/pi';
 import { useNavigate } from 'react-router-dom';
@@ -17,12 +19,10 @@ export const Nav = () => {
   </div>
   <div className="flex-none">
     <div>
-      <span className="text-base font-bold text-primary">customer</span>
-      {/* <Title children={'일반사용자'}  /> */}
+      <span className="text-base font-bold text-primary">c/a</span>
     </div>
     <div className='ml-4'>
-      <span className="text-sm font-bold">닉네임자리</span>
-      {/* <Title  children={'일반사용자'}  /> */}
+      <span className="text-sm font-bold">닉네임</span>
     </div>
     <div className="dropdown dropdown-end" >
       <label tabIndex={0} className="btn bg-white border-none">
@@ -61,7 +61,8 @@ export const Nav = () => {
     <div className="dropdown dropdown-end">
     <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
         <div className="rounded-full">
-        <PiBellRingingBold className="w-7 h-7" />        
+        <PiBellRingingBold className="w-7 h-7" /> 
+        <VscCircleFilled className="absolute text-primary top-[0] right-[0] text-xl" />       
         </div>
       </label>
       <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 py-3 text-ms shadow bg-base-100 rounded-box w-52">

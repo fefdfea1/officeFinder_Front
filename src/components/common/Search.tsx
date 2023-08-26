@@ -1,4 +1,6 @@
+import React from 'react';
 import styled from '@emotion/styled';
+
 import { useRef } from 'react';
 import { useEffect, useState } from 'react';
 import { DayPicker } from 'react-day-picker';
@@ -71,14 +73,14 @@ export const Search = () => {
   return (
     <SearchBoxContainer className="p-4 shadow-md">
       <div className="top flex justify-center items-center border-b border-solid border-accent pb-2">
-        <ContourBox className="text-black mr-4">
+        <ContourBox className="mr-4">
           <input
             type="text"
             placeholder="찾고싶은 지역을 검색해주세요"
             className="placeholder:text-sm text-base input"
           />
         </ContourBox>
-        <ContourBox className="relative flex border-r w-52 text-black">
+        <ContourBox className="relative flex border-r w-52">
           <input
             type="text"
             placeholder="계약 시작일"
@@ -121,7 +123,7 @@ export const Search = () => {
             />
           )}
         </ContourBox>
-        <ContourBox className="border-r text-black text-base mr-4">
+        <ContourBox className="border-r text-base mr-4">
           <MaxCapacityCopy width="w-44" />
         </ContourBox>
         <ContourBox className="text-base">
@@ -131,7 +133,7 @@ export const Search = () => {
         </ContourBox>
       </div>
       <div className="bottom">
-        <OptionsCheckbox />
+        <OptionsCheckbox onOptionChange={()=> {}}/>
       </div>
     </SearchBoxContainer>
   );
