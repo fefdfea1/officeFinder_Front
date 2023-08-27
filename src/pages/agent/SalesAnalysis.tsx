@@ -6,9 +6,8 @@ import { Button } from '../../components/common/Button';
 import { MyOfficeListDropDown } from '../../components/common/MyOfficeListDropDown';
 import { OfficeName } from '../../components/booking/Officename';
 import { OfficeOptions } from '../../components/booking/OfficeOptions';
-import { ReservationAttendeesList } from './ReservationAttendeesList';
+import { ReservationAttendeesList } from '../../components/agent/ReservationAttendeesList'
 import { SalesCharts } from './SalesCharts';
-
 
 
 export const SalesAnalysis = () => {
