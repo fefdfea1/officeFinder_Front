@@ -8,6 +8,7 @@ import { AddOfficePhoto } from '../../components/agent/AddOfficePhoto';
 import { AddOfficeAddress } from '../../components/agent/AddOfficeAddress';
 import { useAddOfficeHandel } from '../../components/agent/HandelAddOffice'
 import { NumberToKoreanConverter } from '../../components/agent/NumberToKorean';
+import { OptionsReset } from '../../components/common/OptionsReset';
 
 
 export const AddOffice = () => {
@@ -36,7 +37,10 @@ export const AddOffice = () => {
           <Input type="text" width="w-80" inputLabel="공간의 이름을 입력해주세요." inputLabelPosition="text-center" />
           <AddOfficeAddress onAddressHandler={useAddOfficeHandel} />
           <div className="">
-            <p className="text-center text-base">필요한 옵션을 선택하세요.</p>
+            <div className="flex justify-center gap-2">
+              <p className="text-center text-base">필요한 옵션을 선택하세요.</p>
+              <OptionsReset />
+            </div>
             <OptionsCheckbox onOptionChange={handleOptionsChange} />
           </div>
           <div className="">
