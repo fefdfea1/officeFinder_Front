@@ -21,22 +21,23 @@ export const ReservationAttendeesList = () => {
                         <tbody className="border-b border-accent border-solid text-center">
                             {/* row 1 */}
                             <tr>
-                                <th>
-                                    <div className="text-sm">2023년 8월 19일</div>
+                                <th className="flex justify-center">
+                                    <div className="text-sm w-32">2023년 8월 19일</div>
 
                                 </th>
                                 <td>
                                     <ProfileCircle />
                                 </td>
-                                <td>
-                                    <div className="text-sm"> 2023년 8월 20일 - 2023년 10월 19일</div>
+                                <td className="flex flex-col items-center">
+                                    <div className="text-sm w-36"> 2023년 8월 20일 ~ </div>
+                                    <div className="text-sm w-36"> 2023년 10월 19일</div>
                                 </td>
                                 <td className="text-base font-bold">{'5,000,000'}P</td>
                                 <th>
-                                    <button className="btn btn-primary btn-xs">수락</button>
+                                    <button className="btn btn-primary btn-xs w-11">수락</button>
                                 </th>
                                 <th>
-                                    <button className="btn btn-primary btn-outline btn-xs">거절</button>
+                                    <button className="btn btn-primary btn-outline btn-xs w-11">거절</button>
                                 </th>
                             </tr>
                         </tbody>

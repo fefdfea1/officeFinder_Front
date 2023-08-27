@@ -74,7 +74,7 @@ export const SalesCharts = () => {
     }, []);
 
     return (
-        <div className="flex gap-2 p-8">
+        <div className="flex flex-col gap-2 p-8 lg:flex-row items-center">
             <div className="w-full">
                 <canvas id="acquisitions" ref={lineChart}></canvas>
             </div>
