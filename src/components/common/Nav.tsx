@@ -18,10 +18,10 @@ export const Nav = () => {
     <a onClick={clickLogo} className="btn bg-white border-none hover:bg-white normal-case text-2xl text-primary">officeFinder</a>
   </div>
   <div className="flex-none">
-    <div>
+    <div className='m-3'>
       <span className="text-base font-bold text-primary">c/a</span>
     </div>
-    <div className='ml-4'>
+    <div className='m-3'>
       <span className="text-sm font-bold">닉네임</span>
     </div>
     <div className="dropdown dropdown-end" >
