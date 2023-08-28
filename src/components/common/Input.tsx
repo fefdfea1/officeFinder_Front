@@ -6,7 +6,7 @@ interface InputProps {
   warning?: string,
   type?: string,
   onInputChange?: any,
-  // value?: string,
+  value?: string,
   name?: string,
 }
 
@@ -20,7 +20,7 @@ export const Input = (props: InputProps) => {
     inputLabelPosition = "",
     warning = "",
     type = "text",
-    // value = "",
+    value = "",
     name = ""
   } = props;
 
@@ -33,7 +33,7 @@ export const Input = (props: InputProps) => {
           onChange={onInputChange}
           placeholder={placeholder}
           className={`input input-bordered input-primary max-w-sm m-2 placeholder:text-base ${width}`}
-          // value={value}
+          value={value}
           name={name} />
         <p className='text-sm pl-2 mt-0 text-error'>{warning}</p>
       </div>
