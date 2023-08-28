@@ -1,7 +1,6 @@
 import { AllOfficeList } from "../components/common/AllOfficeList";
 import { Search } from "../components/common/Search";
-import styled from '@emotion/styled';
-import React from "react";
+import styled from '@emotion/styled'
 import { useState } from 'react';
 import { AiOutlineSearch } from 'react-icons/ai';
 
