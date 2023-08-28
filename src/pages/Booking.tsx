@@ -13,8 +13,6 @@ import { SelectDateDropDown } from '../components/agent/SelectDateDropDown';
 import styled from '@emotion/styled';
 import 'react-day-picker/dist/style.css';
 
-//추후 Option에서 선택한 정보들을 가
-
 declare global {
   interface Window {
     kakao: any;
@@ -49,7 +47,7 @@ export const Booking = () => {
 
   return (
     <>
-      <div className=" mx-auto py-8 sm:w-11/12 lg:w-11/12 xl:w-5/6">
+      <div className="mx-auto py-8 sm:w-11/12 lg:w-11/12 xl:w-5/6">
         <div className="mb-8">
           <Title>예약하기</Title>
         </div>
@@ -64,19 +62,19 @@ export const Booking = () => {
                 />
               </div>
               {/* 데이터 받아오면 넣어야함 */}
-              <div className="lg:w-8/12 lg:mx-auto xl:px-0 xl:w-full">
+              <div className="w-full flex flex-col  lg:w-8/12 lg:mx-auto xl:px-0 xl:w-full">
                 <h3 className="mb-4 sm:mb-1">선릉 공유오피스 더공간 A</h3>
                 <div className="mb-8 sm:mb-3">
                   {/* 데이터 받아오면 주소에 넣어야함 */}
                   <OfficeName name="" address="주소"></OfficeName>
                 </div>
-                <div className="flex">
-                  <button className="btn btn-outline btn-primary w-5/12">
-                    <Link to={'/'} className="whitespace-nowrap">
+                <div className="flex w-full gap-x-2">
+                  <button className="btn btn-outline btn-primary block p-0 grow basis-1/2">
+                    <Link to={'/'} className="whitespace-nowrap w-full h-full block flex justify-center items-center">
                       다른 오피스 둘러보기
                     </Link>
                   </button>
-                  <button className="btn btn-outline btn-primary w-5/12 ml-auto">문의하기</button>
+                  <button className="btn btn-outline btn-primary block p-0 grow basis-1/2">문의하기</button>
                 </div>
               </div>
             </figure>

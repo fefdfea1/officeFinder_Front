@@ -62,6 +62,7 @@ export const MyPage = () => {
   useLayoutEffect(() => {
     const fetchData = async () => {
       const response = await axios.get('http://localhost:3000/Mypage');
+      console.log(response);
       setUserData(response.data);
     };
     fetchData();
@@ -188,7 +189,7 @@ export const MyPage = () => {
             </div>
           </div>
         </div>
-        <div className="px-10 font-bold relative">
+        <div className="pr-10 pl-20 font-bold relative ">
           <div className="flex justify-end mt-5 sm:justify-center sm:w-full lg:justify-end">
             <ChargeList>
               <h4 className="mb-4">충전 내역</h4>
