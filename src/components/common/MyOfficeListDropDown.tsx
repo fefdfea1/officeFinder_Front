@@ -2,11 +2,10 @@ import { useState } from 'react';
 import { RiArrowDropDownLine } from 'react-icons/ri';
 
 type MyOfficeListDropDownProps = {
-  width: string;
   onOfficeChange: (office: string) => void;
 };
 
-export const MyOfficeListDropDown: React.FC<MyOfficeListDropDownProps> = ({ width, onOfficeChange }) => {
+export const MyOfficeListDropDown: React.FC<MyOfficeListDropDownProps> = ({ onOfficeChange }) => {
   const [selectedItem, setSelectedItem] = useState('전체');
   const [isOpen, setIsOpen] = useState(false);
 
