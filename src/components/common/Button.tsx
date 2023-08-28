@@ -1,4 +1,3 @@
-import React from 'react';
 import type { ButtonHTMLAttributes } from 'react';
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   text: string,
