@@ -69,12 +69,12 @@ export const Booking = () => {
                   <OfficeName name="" address="주소"></OfficeName>
                 </div>
                 <div className="flex w-full gap-x-2">
-                  <button className="btn btn-outline btn-primary block p-0 grow basis-1/2">
+                  <button className="btn btn-outline btn-primary block p-0 grow shrink basis-1/2">
                     <Link to={'/'} className="whitespace-nowrap w-full h-full block flex justify-center items-center">
                       다른 오피스 둘러보기
                     </Link>
                   </button>
-                  <button className="btn btn-outline btn-primary block p-0 grow basis-1/2">문의하기</button>
+                  <button className="btn btn-outline btn-primary block p-0 grow shrink basis-1/2">문의하기</button>
                 </div>
               </div>
             </figure>
