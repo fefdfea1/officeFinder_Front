@@ -2,36 +2,36 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../common/Button';
 import { Input } from '../common/Input';
-import { useQuery, useMutation } from 'react-query';
+// import { useQuery, useMutation } from 'react-query';
 // import { AiOutlineEyeInvisible } from "react-icons/ai";
 
 export const CustomerCard = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const clickBackButton = () => {
     window.location.replace('/Join');
   };
 
-  const postLogin = useMutation(
-    'signUP',
-    () =>
-      fetch('api/agents/signup', {
-        method: 'POST',
-        body:JSON.stringify({
-          email: signup?.email,
-          name: '이름이야',
-          password: signup?.password,
-          businessNumber: signup?.businessNumber,
-        })
-      }),
-    {
-      onSuccess: res => {
-        console.log('RES', res);
-      },
-      onError: error => {
-        console.log(error);
-      },
-    },
-  );
+  // const postLogin = useMutation(
+  //   'signUP',
+  //   () =>
+  //     fetch('api/agents/signup', {
+  //       method: 'POST',
+  //       body:JSON.stringify({
+  //         email: signup?.email,
+  //         name: '이름이야',
+  //         password: signup?.password,
+  //         businessNumber: signup?.businessNumber,
+  //       })
+  //     }),
+  //   {
+  //     onSuccess: res => {
+  //       console.log('RES', res);
+  //     },
+  //     onError: error => {
+  //       console.log(error);
+  //     },
+  //   },
+  // );
 
   const [signup, setSignup] = useState({
     email: '',
@@ -48,9 +48,9 @@ export const CustomerCard = () => {
     });
   };
 
-  const clickSignupButton = () => {
-    postLogin.mutate();
-  }
+  // const clickSignupButton = () => {
+  //   postLogin.mutate();
+  // }
   const validateEmail = email => {
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     return emailPattern.test(email);
@@ -63,15 +63,13 @@ export const CustomerCard = () => {
   console.log({ signup });
   return (
     <>
-      <div className="shadow-md rounded-xl p-8 w-[400px] h-[520px] mx-auto my-4 flex-col items-center">
+      <div className="shadow-md rounded-xl p-8 mx-auto my-4 flex-col items-center md:w-[400px] h-[520px] sm:w-[340px]">
         <h3 className="font-black">일반회원 회원가입</h3>
         <div className="pt-6">
           <Input
             inputLabel={'이메일'}
             placeholder={'이메일을 입력해 주세요'}
-            warning={
-              signup.email.trim() ? (validateEmail(signup.email) ? '맞습니다' : '이메일 형식이 아닙니다') : ''
-            }
+            warning={signup.email.trim() ? (validateEmail(signup.email) ? '' : '이메일 형식이 아닙니다') : ''}
             type={'email'}
             value={signup.email}
             name={'email'}
@@ -105,17 +103,20 @@ export const CustomerCard = () => {
           />
           {/* <AiOutlineEyeInvisible className="absolute left-10 text-xl mx-4" /> */}
           <Button
-            clickHandler={()=>clickSignupButton()}
-            style={'btn btn-outline btn-primary w-80 m-2 text-base'}
+            // clickHandler={() => clickSignupButton()}
+            style={'btn btn-outline btn-primary m-2 text-base md:w-80 sm:w-full'}
             text={'회원가입'}
             disabled={
               !validateEmail(signup.email) ||
               !validatePassword(signup.password) ||
-              signup.password !== signup.passwordConfirm 
+              signup.password !== signup.passwordConfirm
             }
           />
-          <Button clickHandler={clickBackButton} text={'다시 선택하기'} style={'btn btn-outline btn-primary w-80 m-2 text-base'} />
-
+          <Button
+            clickHandler={clickBackButton}
+            text={'다시 선택하기'}
+            style={'btn btn-outline btn-primary m-2 text-base md:w-80 sm:w-full'}
+          />
         </div>
       </div>
     </>

@@ -1,4 +1,6 @@
+import React from 'react';
 import { ReactNode } from 'react';
+
 
 type BackgroundCoverProps = {
   children: ReactNode;
