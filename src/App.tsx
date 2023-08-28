@@ -1,5 +1,4 @@
 import './css/App.css';
-import React from 'react';
 import { QueryClientProvider, QueryClient } from 'react-query';
 
 import { Router } from './router/Router';
