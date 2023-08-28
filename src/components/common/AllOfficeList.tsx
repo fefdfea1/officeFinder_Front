@@ -1,11 +1,10 @@
-import React from 'react';
 import { AiFillStar } from 'react-icons/ai';
 
 export const AllOfficeList = (): JSX.Element => {
   return (
     <>
       <div className="grid justify-center md:grid-cols-4 md:gap-6 sm:grid-cols-1 min-w-min">
-        <figure className='mx-auto'>
+        <figure className="mx-auto">
           <img className="rounded-xl" src="https://picsum.photos/320" alt="Shoes" />
           <div className="text-left">
             <div className="flex justify-between flex-row">

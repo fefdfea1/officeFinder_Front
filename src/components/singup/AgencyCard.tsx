@@ -1,46 +1,51 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import { Button } from '../common/Button';
 import { Input } from '../common/Input';
-// import { useQuery, useMutation } from 'react-query';
+import { useMutation } from 'react-query';
 // import { AiOutlineEyeInvisible } from "react-icons/ai";
 
+interface AgencyCardProps {
+  email: string;
+  password: string;
+  passwordConfirm: string;
+  businessNumber: string;
+}
+
 export const AgencyCard = () => {
-  // const navigate = useNavigate();
   const clickBackButton = () => {
     location.reload();
   };
 
-  // const postLogin = useMutation(
-  //   'signUP',
-  //   () =>
-  //     fetch('api/agents/signup', {
-  //       method: 'POST',
-  //       body:JSON.stringify({
-  //         email: signup?.email,
-  //         name: '이름이야',
-  //         password: signup?.password,
-  //         businessNumber: signup?.businessNumber,
-  //       })
-  //     }),
-  //   {
-  //     onSuccess: res => {
-  //       console.log('RES', res);
-  //     },
-  //     onError: error => {
-  //       console.log(error);
-  //     },
-  //   },
-  // );
+  const postLogin = useMutation(
+    'signUP',
+    () =>
+      fetch('api/agents/signup', {
+        method: 'POST',
+        body: JSON.stringify({
+          email: signup?.email,
+          name: '이름이야',
+          password: signup?.password,
+          businessNumber: signup?.businessNumber,
+        }),
+      }),
+    {
+      onSuccess: (res: any) => {
+        console.log('RES', res);
+      },
+      onError: (error: any) => {
+        console.log(error);
+      },
+    },
+  );
 
-  const [signup, setSignup] = useState({
+  const [signup, setSignup] = useState<AgencyCardProps>({
     email: '',
     password: '',
     passwordConfirm: '',
     businessNumber: '',
   });
 
-  const handleFormData = e => {
+  const handleFormData = (e: React.ChangeEvent<HTMLInputElement>) => {
     let { name, value } = e.target;
     console.log({ name, value });
     setSignup(prev => {
@@ -48,18 +53,18 @@ export const AgencyCard = () => {
     });
   };
 
-  // const clickSignupButton = () => {
-  //   postLogin.mutate();
-  // }
-  const validateEmail = email => {
+  const clickSignupButton = () => {
+    postLogin.mutate();
+  };
+  const validateEmail = (email: string) => {
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     return emailPattern.test(email);
   };
-  const validatePassword = password => {
+  const validatePassword = (password: string) => {
     const passwordRegex = /^\S{10,20}$/;
     return passwordRegex.test(password);
   };
-  const validateBusinessNumber = businessNumber => {
+  const validateBusinessNumber = (businessNumber: string) => {
     const businessNumberRegex = /^\d{10}$/;
     return businessNumberRegex.test(businessNumber);
   };
@@ -77,7 +82,7 @@ export const AgencyCard = () => {
             type={'email'}
             value={signup.email}
             name={'email'}
-            onChange={handleFormData}
+            onInputChange={handleFormData}
           />
           <Input
             inputLabel={'비밀번호'}
@@ -88,7 +93,7 @@ export const AgencyCard = () => {
             type={'password'}
             value={signup.password}
             name={'password'}
-            onChange={handleFormData}
+            onInputChange={handleFormData}
           />
           <Input
             value={signup.passwordConfirm}
@@ -103,7 +108,7 @@ export const AgencyCard = () => {
                 : ''
             }
             type={'password'}
-            onChange={handleFormData}
+            onInputChange={handleFormData}
           />
           <Input
             value={signup.businessNumber}
@@ -118,12 +123,12 @@ export const AgencyCard = () => {
                 : ''
             }
             type={'text'}
-            onChange={handleFormData}
+            onInputChange={handleFormData}
           />
 
           {/* <AiOutlineEyeInvisible className="absolute left-10 text-xl mx-4" /> */}
           <Button
-            // clickHandler={() => clickSignupButton()}
+            clickHandler={() => clickSignupButton()}
             style={'btn btn-outline btn-primary m-2 text-base md:w-80 sm:w-full'}
             text={'회원가입'}
             disabled={

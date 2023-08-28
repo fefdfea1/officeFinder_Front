@@ -1,11 +1,10 @@
-import React from 'react';
 import styled from '@emotion/styled';
 
-import { useRef } from 'react';
-import { useEffect, useState } from 'react';
+// import { useRef } from 'react';
+// import { useEffect, useState } from 'react';
 // import { DayPicker } from 'react-day-picker';
 // import { startDayPicker, endDayPicker } from './search_calendarState';
-import { setCalendarDay } from './search_calendarSetDay';
+// import { setCalendarDay } from './search_calendarSetDay';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { OptionsCheckbox } from './OptionsCheckbox';
 import { MaxCapacityDropDown } from './MaxCapacityDropDown';
@@ -17,58 +16,58 @@ import 'react-day-picker/dist/style.css';
 // };
 
 export const Search = () => {
-  const today = new Date();
-  const [selectedStartDay, setSelectedStartDay] = useState<Date | undefined>(today);
-  const [selectEndDay, setSelectEndDay] = useState<Date | undefined>(today);
-  const [startDayCalendarState, setStartDayCalendarState] = useState<boolean>(false);
-  const [endDayCalendarState, setEndDayCalendarState] = useState<boolean>(false);
-  const startDayDom = useRef<HTMLInputElement>(null);
-  const endDayDom = useRef<HTMLInputElement>(null);
+  // const today = new Date();
+  // const [selectedStartDay, setSelectedStartDay] = useState<Date | undefined>(today);
+  // const [selectEndDay, setSelectEndDay] = useState<Date | undefined>(today);
+  // const [startDayCalendarState, setStartDayCalendarState] = useState<boolean>(false);
+  // const [endDayCalendarState, setEndDayCalendarState] = useState<boolean>(false);
+  // const startDayDom = useRef<HTMLInputElement>(null);
+  // const endDayDom = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    // 클린업 함수 작성을 위해 이 함수만 따로 파일로 빼지 않았습니다
-    const handleClickOutside = (event: globalThis.MouseEvent) => {
-      const target = event.target as HTMLElement;
-      if (!target.classList.contains('startSelect') && !target.classList.contains('endSelect')) {
-        if (startDayDom.current?.classList.contains('active') || endDayDom.current?.classList.contains('active')) {
-          setStartDayCalendarState(false);
-          setEndDayCalendarState(false);
-          if (startDayDom.current && endDayDom.current) {
-            startDayDom.current.classList.remove('active');
-            endDayDom.current.classList.remove('active');
-          }
-        }
-      }
-    };
+  // useEffect(() => {
+  //   // 클린업 함수 작성을 위해 이 함수만 따로 파일로 빼지 않았습니다
+  //   const handleClickOutside = (event: globalThis.MouseEvent) => {
+  //     const target = event.target as HTMLElement;
+  //     if (!target.classList.contains('startSelect') && !target.classList.contains('endSelect')) {
+  //       if (startDayDom.current?.classList.contains('active') || endDayDom.current?.classList.contains('active')) {
+  //         setStartDayCalendarState(false);
+  //         setEndDayCalendarState(false);
+  //         if (startDayDom.current && endDayDom.current) {
+  //           startDayDom.current.classList.remove('active');
+  //           endDayDom.current.classList.remove('active');
+  //         }
+  //       }
+  //     }
+  //   };
 
-    window.addEventListener('click', handleClickOutside);
+  //   window.addEventListener('click', handleClickOutside);
 
-    return () => {
-      window.removeEventListener('click', handleClickOutside);
-    };
-  }, []);
+  //   return () => {
+  //     window.removeEventListener('click', handleClickOutside);
+  //   };
+  // }, []);
 
-  useEffect(() => {
-    if (selectedStartDay) {
-      const formatData = setCalendarDay(selectedStartDay);
-      if (startDayCalendarState) {
-        const target = startDayDom.current as HTMLInputElement;
-        target.value = formatData;
-        setStartDayCalendarState(false);
-      }
-    }
-  }, [selectedStartDay]);
+  // useEffect(() => {
+  //   if (selectedStartDay) {
+  //     const formatData = setCalendarDay(selectedStartDay);
+  //     if (startDayCalendarState) {
+  //       const target = startDayDom.current as HTMLInputElement;
+  //       target.value = formatData;
+  //       setStartDayCalendarState(false);
+  //     }
+  //   }
+  // }, [selectedStartDay]);
 
-  useEffect(() => {
-    if (selectEndDay) {
-      const formatData = setCalendarDay(selectEndDay);
-      if (endDayCalendarState) {
-        const target = endDayDom.current as HTMLInputElement;
-        target.value = formatData;
-        setEndDayCalendarState(false);
-      }
-    }
-  }, [selectEndDay]);
+  // useEffect(() => {
+  //   if (selectEndDay) {
+  //     const formatData = setCalendarDay(selectEndDay);
+  //     if (endDayCalendarState) {
+  //       const target = endDayDom.current as HTMLInputElement;
+  //       target.value = formatData;
+  //       setEndDayCalendarState(false);
+  //     }
+  //   }
+  // }, [selectEndDay]);
 
   return (
     <SearchBoxContainer className="p-4 shadow-md">
@@ -85,7 +84,8 @@ export const Search = () => {
         </ContourBox>
         <ContourBox className="text-base">
           <button className="btn btn-primary rounded-full bg-primary text-base flex items-center">
-            <span className="md:visible sm:hidden">검색</span> <SearchSvg />
+            <span className="md:visible sm:invisible">검색</span>
+            <SearchSvg />
           </button>
         </ContourBox>
       </div>

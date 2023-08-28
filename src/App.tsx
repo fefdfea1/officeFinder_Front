@@ -1,5 +1,4 @@
 import './css/App.css';
-import React from 'react';
 import { QueryClientProvider, QueryClient } from 'react-query';
 
 import { Router } from './router/Router';
@@ -12,18 +11,16 @@ const App = () => {
 
   return (
     <>
-     <QueryClientProvider client={queryClient}>
-
+      <QueryClientProvider client={queryClient}>
         <Nav />
         <Chat />
         <section id="container">
           <Router />
         </section>
         <Footer />
-     </QueryClientProvider>
-
+      </QueryClientProvider>
     </>
   );
-}
+};
 
 export default App;

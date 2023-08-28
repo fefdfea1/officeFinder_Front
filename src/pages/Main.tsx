@@ -1,57 +1,48 @@
-import { AllOfficeList } from "../components/common/AllOfficeList";
-import { Search } from "../components/common/Search";
+import { AllOfficeList } from '../components/common/AllOfficeList';
+import { Search } from '../components/common/Search';
 import styled from '@emotion/styled';
-import React from "react";
 import { useState } from 'react';
 import { AiOutlineSearch } from 'react-icons/ai';
-
 
 export const Main = () => {
   const [isHovering, setIsHovering] = useState(0);
 
   return (
-  <>
-    <div 
-    onMouseOver={() => setIsHovering(1)}
-    onMouseOut={() => setIsHovering(0)}
-    className=" mx-auto flex justify-center mt-4 h-20">
-    {isHovering ? (
-        <Search />
-       ) : (
-      <SearchBoxContainer className="p-4 shadow-md">
-        <div className="top flex justify-center items-center pb-2">
-          <ContourBox className="text-info text-base p-4">
-            장소
-          </ContourBox>
-          <ContourBox className="text-info text-base p-4">
-            최대인원 수
-          </ContourBox>
-          <ContourBox className="text-info text-base p-4">
-            옵션
-          </ContourBox>
-          <ContourBox className="text-base">
-            <button className="btn btn-primary rounded-full bg-primary text-base flex items-center">
-              <span className="">검색</span> <SearchSvg />
-            </button>
-          </ContourBox>
-        </div>
-        </SearchBoxContainer>
-       )}
-    </div>
-    <div className="p-4 mt-5 ">
-      <AllOfficeList />
-    </div>
-  </>
+    <>
+      <div
+        onMouseOver={() => setIsHovering(1)}
+        onMouseOut={() => setIsHovering(0)}
+        className=" mx-auto flex justify-center mt-4 h-20"
+      >
+        {isHovering ? (
+          <Search />
+        ) : (
+          <SearchBoxContainer className="p-4 shadow-md">
+            <div className="top flex justify-center items-center pb-2">
+              <ContourBox className="text-info text-base p-4">장소</ContourBox>
+              <ContourBox className="text-info text-base p-4">최대인원 수</ContourBox>
+              <ContourBox className="text-info text-base p-4">옵션</ContourBox>
+              <ContourBox className="text-base">
+                <button className="btn btn-primary rounded-full bg-primary text-base flex items-center">
+                  <span>검색</span> <SearchSvg />
+                </button>
+              </ContourBox>
+            </div>
+          </SearchBoxContainer>
+        )}
+      </div>
+      <div className="p-4 mt-5 ">
+        <AllOfficeList />
+      </div>
+    </>
   );
 };
-
 
 const SearchBoxContainer = styled.form`
   display: inline-block;
   background-color: #fff;
   border-radius: 20px;
 `;
-
 
 const ContourBox = styled.div`
   position: relative;

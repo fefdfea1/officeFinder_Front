@@ -1,4 +1,3 @@
-import React from 'react';
 import { AiFillGithub } from 'react-icons/ai'
 import { RxNotionLogo } from 'react-icons/rx'
 import { BsYoutube } from 'react-icons/bs'
