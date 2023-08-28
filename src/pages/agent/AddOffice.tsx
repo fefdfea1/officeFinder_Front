@@ -8,8 +8,6 @@ import { AddOfficePhoto } from '../../components/agent/AddOfficePhoto';
 import { AddOfficeAddress } from '../../components/agent/AddOfficeAddress';
 import { useAddOfficeHandel } from '../../components/agent/HandelAddOffice'
 import { NumberToKoreanConverter } from '../../components/agent/NumberToKorean';
-import { OptionsReset } from '../../components/common/OptionsReset';
-
 
 export const AddOffice = () => {
   //selectedOptions를 true만 넘길 수 있도록 filter사용 예정
@@ -18,9 +16,9 @@ export const AddOffice = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
   }
-  console.log(selectedOptions)
+
+  console.log(`Office: ${JSON.stringify(selectedOptions)}`);
   console.log(address)
-  console.log(monthlyPrice)
 
   return (
     <>
@@ -39,7 +37,6 @@ export const AddOffice = () => {
           <div className="">
             <div className="flex justify-center gap-2">
               <p className="text-center text-base">필요한 옵션을 선택하세요.</p>
-              <OptionsReset />
             </div>
             <OptionsCheckbox onOptionChange={handleOptionsChange} />
           </div>
