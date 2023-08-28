@@ -14,7 +14,6 @@ import { Login } from '../pages/Login';
 import Profile from '../pages/Profile';
 import { AddOfficeReviews } from '../pages/customer/AddOfficeReviews';
 import { MyPage } from '../pages/MyPage';
-import React from 'react';
 
 export const Router = () => {
   return (
