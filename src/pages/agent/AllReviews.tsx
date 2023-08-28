@@ -22,7 +22,7 @@ export const AllReviews = () => {
         <div className="absolute top-[-6px] lg:top-10 right-10 flex z-10">
           <div className="flex">
             <div className="group py-4 ">
-              <MyOfficeListDropDown width="md:w-52 w-32" onOfficeChange={handleOfficeChange} />
+              <MyOfficeListDropDown onOfficeChange={handleOfficeChange} />
               <hr className="border-primary group-hover:border-transparent" />
             </div>
             <Link to="/SalesAnalysis">
