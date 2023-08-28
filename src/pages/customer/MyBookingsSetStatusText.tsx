@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-
+// 데이터의 상태값에 따라 MyBookings에 표시하기 위해 제작
 export const useSetStatusText = (Progress: React.RefObject<HTMLParagraphElement>, status: string) => {
   useEffect(() => {
     if (Progress.current) {
