@@ -27,9 +27,7 @@ export const SelectDateDropDown = (props: { width: string }): JSX.Element => {
             onClick={toggleDropDown}
           >
             <span className="label-text font-medium group-hover:text-white">
-
               {selectedItem || <span className="text-sm font-medium text-info">1 ~ 11개월 까지 선택 가능</span>}
-
             </span>
             <RiArrowDropDownLine className="text-2xl" />
           </label>
@@ -41,9 +39,7 @@ export const SelectDateDropDown = (props: { width: string }): JSX.Element => {
             {MaxMonth.map((_, index) => {
               return (
                 <li>
-
                   <a onClick={() => handleItemClick(`${index + 1}인`)}>{`${index + 1} 개월`}</a>
-
                 </li>
               );
             })}

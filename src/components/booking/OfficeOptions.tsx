@@ -8,10 +8,10 @@ type propsType = {
 export const OfficeOptions = (props: propsType) => {
   return (
     <>
-      <div className={`shadow-lg ${props.width && props.width} px-12 py-4 rounded-lg`}>
+      <div className={`shadow-lg ${props.width && props.width}  py-4 rounded-lg sm:px-4 md:px-12 lg:px-16`}>
         <h3 className="text-lg text-primary mb-4">Price</h3>
         <div className="border-b border-solid border-accent pb-4 mb-4 rounded-sm">
-          <div className="w-3/6 text-base">
+          <div className=" text-base sm:w-11/12 lg:w-4/6">
             <p className="flex justify-between mb-3">
               <span>{`1인실 월 00 포인트`}</span>
               <span>{`1인실 월 00 포인트`}</span>
@@ -34,7 +34,7 @@ export const OfficeOptions = (props: propsType) => {
         </div>
         {props.needReviewCount && (
           <h3 className="text-lg text-primary mb-4">
-            <Link to={'#'}>
+            <Link to={'/AllReviews'}>
               <span className="mr-2">Reviews</span>
               {/* 데이터를 받으면 동적으로 추가 */}
               <span>({231})</span>
@@ -45,4 +45,3 @@ export const OfficeOptions = (props: propsType) => {
     </>
   );
 };
-

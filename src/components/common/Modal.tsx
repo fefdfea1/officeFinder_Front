@@ -13,7 +13,7 @@ export const Modal = ({ children, spanString, Pstring, buttonString }: WrapperPr
   const [inputValue, setInputValue] = useState<string>('');
 
   return (
-    <div className="w-96 h-60 p-8 shadow-xl box-content rounded-xl bg-secondary Modal">
+    <div className="w-96 h-60 p-8 shadow-xl box-content rounded-xl bg-secondary Modal  sm:w-64 sm:h-48  md:w-80 md:h-52  xl:w-96 xl:h-60">
       <h2 className="text-center mb-4 text-lg font-black">{children}</h2>
       <div>
         <p className="text-base mb-4 font-medium">{Pstring}</p>
