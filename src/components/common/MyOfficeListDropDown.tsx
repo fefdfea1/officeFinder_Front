@@ -5,7 +5,7 @@ type MyOfficeListDropDownProps = {
   onOfficeChange: (office: string) => void;
 };
 
-export const MyOfficeListDropDown: React.FC<MyOfficeListDropDownProps> = ({ onOfficeChange }) => {
+export const MyOfficeListDropDown: React.FC<MyOfficeListDropDownProps> = ({onOfficeChange }) => {
   const [selectedItem, setSelectedItem] = useState('전체');
   const [isOpen, setIsOpen] = useState(false);
 
