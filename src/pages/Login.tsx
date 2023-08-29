@@ -32,8 +32,8 @@ export const Login = () => {
     <>
       <div className="shadow-md rounded-xl p-8 w-[400px] h-[500px] mx-auto my-4 flex items-center">
         <div className="">
-          <Input width="" inputLabel={'이메일'} placeholder={'Email'} type={'email'} value={''} />
-          <Input width="" inputLabel={'비밀번호'} placeholder={'Password'} type={'password'} value={''} />
+          <Input width="" inputLabel={'이메일'} placeholder={'Email'} type={'email'}/>
+          <Input width="" inputLabel={'비밀번호'} placeholder={'Password'} type={'password'} />
           <AiOutlineEyeInvisible className="absolute left-10 text-xl mx-4" />
           <Button
             clickHandler={() => clickLoginButton()}
