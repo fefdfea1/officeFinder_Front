@@ -6,6 +6,8 @@ import { Button } from '../../components/common/Button';
 import { MyOfficeListDropDown } from '../../components/common/MyOfficeListDropDown';
 import { OfficeName } from '../../components/booking/Officename';
 import { Reviews } from '../../components/booking/Reviews';
+import { Pagination } from '../../components/common/Pagination';
+
 
 export const AllReviews = () => {
 
@@ -38,6 +40,9 @@ export const AllReviews = () => {
           </div>
           <BackgroundCover margin="m-0" padding="lg:p-8 md:p-4 p-2">
             <Reviews />
+            <div className="flex justify-center mt-4">
+              <Pagination itemsPerPage={10} totalItems={55} />
+            </div>
           </BackgroundCover>
         </div>
         {/* 본문 끝 */}

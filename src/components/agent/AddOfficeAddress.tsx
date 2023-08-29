@@ -64,7 +64,6 @@ export const AddOfficeAddress = ({ onAddressHandler }: { onAddressHandler: OnAdd
     const detailHandler = () => {
         setAddress({ ...address, detail: detailAddressRef.current?.value || "" })
     }
-    console.log(address);
 
     onAddressHandler(address)
     const handleClick = () => {
