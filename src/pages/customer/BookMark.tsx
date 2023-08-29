@@ -13,7 +13,7 @@ export const BookMark = () => {
           <AllremovePosition className="absolute">전체삭제</AllremovePosition>
         </div>
         {/* breakPoint별로 grid-cols를 변경해야함 */}
-        <div className="grid grid-cols-4 gap-8 mb-8">
+        <div className="grid grid-cols-4 gap-8 mb-8 sm:grid-cols-1 sm:gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ">
           {/* 데이터를 불러오면 map으로 처리해야하는 부분입니다 */}
           {arr.map(() => {
             return (

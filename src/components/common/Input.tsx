@@ -1,4 +1,5 @@
 interface InputProps {
+
   width?: string;
   placeholder?: string;
   inputLabel?: string;
@@ -8,19 +9,20 @@ interface InputProps {
   value?: string;
   name?: string;
   onInputChange?: any;
+
 }
+
 
 export const Input = (props: InputProps) => {
   const {
     onInputChange,
-    width = 'w-full',
-    placeholder = '',
-    inputLabel = '',
-    inputLabelPosition = '',
-    warning = '',
-    type = 'text',
-    value = '',
-    name = '',
+    width = "w-full",
+    placeholder = "",
+    inputLabel = "",
+    inputLabelPosition = "",
+    warning = "",
+    type = "text",
+    value = "",
   } = props;
 
   return (

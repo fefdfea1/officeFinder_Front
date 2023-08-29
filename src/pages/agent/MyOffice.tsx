@@ -11,21 +11,21 @@ export const MyOffice = () => {
   return (
     <>
       <div className="flex justify-end relative">
-        <div className="absolute top-6">
-          <Link to="/AddOffice"><Button style="btn btn-primary btn-outline " text="새 지점 등록하기" /></Link>
+        <div className="absolute top-10 right-10 flex z-10">
+          <Link to="/AddOffice"><Button style="btn btn-primary btn-outline w-[90px] md:w-40" text="새 지점 등록하기" /></Link>
         </div>
       </div>
       <BackgroundCover>
         <Title>나의 지점보기</Title>
-        <div className="flex gap-4 p-4">
-          <figure className="flex flex-col w-[560px] gap-1">
+        <div className="flex flex-col gap-4 p-4 lg:flex-row">
+          <figure className="flex flex-col w-full lg:w-1/3 gap-1">
             <img className="rounded-xl" src="https://picsum.photos/350" alt="sample" />
           </figure>
           <div className="reviews flex flex-col gap-2 border-black w-full">
             <OfficeName name="이름" address="주소" />
             <Link to="/SalesAnalysis"><button className="btn btn-primary w-full">매출 자세히보기</button></Link>
             {/* review */}
-            <div className="w-full shadow-md rounded-xl p-4">
+            <div className="w-full shadow-md rounded-xl p-4 h-full">
               <p className="text-primary pb-4">Reviews</p>
               <div className="reviews">
 
@@ -34,7 +34,7 @@ export const MyOffice = () => {
 
                   <div>  첫 번째 리뷰 내용입니다.</div>
                 </div>
-                <div className="flex text-sm">
+                <div className="flex text-sm pb-4">
                   <ProfileCircle />
 
                   <div> 두 번째 리뷰 내용입니다.</div>
