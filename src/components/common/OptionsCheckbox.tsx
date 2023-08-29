@@ -42,7 +42,7 @@ export const OptionsCheckbox: React.FC<OptionsCheckboxProps> = ({ onOptionChange
 
   return (
     <div className="options border rounded-xl p-4">
-      <div className="grid grid-cols-4">
+      <div className="grid grid-cols-2 md:grid-cols-4">
         {optionKeys.map((option, index) => (
           <div key={index} className="form-control">
             <label className="label cursor-pointer justify-start gap-2">
