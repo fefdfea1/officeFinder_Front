@@ -7,8 +7,6 @@ import { MyOfficeListDropDown } from '../../components/common/MyOfficeListDropDo
 import { OfficeName } from '../../components/booking/Officename';
 import { Reviews } from '../../components/booking/Reviews';
 
-
-
 export const AllReviews = () => {
 
   const [officeName, setOfficeName] = useState('전체')

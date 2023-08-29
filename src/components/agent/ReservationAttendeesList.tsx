@@ -1,4 +1,5 @@
 import { ProfileCircle } from "../common/ProfileCircle"
+import { DoubleCheckModal } from "./DoubleCheckModal"
 export const ReservationAttendeesList = () => {
 
     return (
@@ -34,10 +35,10 @@ export const ReservationAttendeesList = () => {
                                 </td>
                                 <td className="text-base font-bold">{'5,000,000'}P</td>
                                 <th>
-                                    <button className="btn btn-primary btn-xs w-11">수락</button>
+                                    <DoubleCheckModal buttonName="수락" title="정말 수락하시겠습니까?" content="수락하면 다시 거절할 수 없습니다." actionButtonName="수락" onConfirm={() => { }} />
                                 </th>
                                 <th>
-                                    <button className="btn btn-primary btn-outline btn-xs w-11">거절</button>
+                                    <DoubleCheckModal buttonName="거절" title="정말 거절하시겠습니까?" content="거절하면 다시 수락할 수 없습니다." actionButtonName="거절" onConfirm={() => { }} />
                                 </th>
                             </tr>
                         </tbody>
