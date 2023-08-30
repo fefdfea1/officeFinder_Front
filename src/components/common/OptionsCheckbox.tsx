@@ -35,7 +35,6 @@ export const OptionsCheckbox: React.FC<OptionsCheckboxProps> = ({ onOptionChange
     };
     onOptionChange(updatedOptions);
     setSelectedOptions(updatedOptions);
-
   };
 
   const optionKeys = Object.keys(initialOptions);
@@ -60,6 +59,3 @@ export const OptionsCheckbox: React.FC<OptionsCheckboxProps> = ({ onOptionChange
     </div>
   );
 };
-
-
-

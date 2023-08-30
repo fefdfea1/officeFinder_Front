@@ -1,28 +1,17 @@
 interface InputProps {
-  width?: string,
-  placeholder?: string,
-  inputLabel?: string,
-  inputLabelPosition?: string,
-  warning?: string,
-  type?: string,
-  onInputChange?: any,
-  value?: string,
-  name?: string,
+  width?: string;
+  placeholder?: string;
+  inputLabel?: string;
+  inputLabelPosition?: string;
+  warning?: string;
+  type?: string;
+  onInputChange?: any;
+  value?: string;
+  name?: string;
 }
 
-
 export const Input = (props: InputProps) => {
-  const {
-    onInputChange,
-    width = "w-full",
-    placeholder = "",
-    inputLabel = " ",
-    inputLabelPosition = "",
-    warning = "",
-    type = "text",
-    value = "",
-    name = ""
-  } = props;
+  const { onInputChange, width, placeholder, inputLabel, inputLabelPosition, warning, type, value, name } = props;
 
   return (
     <>
@@ -34,9 +23,10 @@ export const Input = (props: InputProps) => {
           placeholder={placeholder}
           className={`input input-bordered input-primary max-w-sm m-2 placeholder:text-base ${width}`}
           value={value}
-          name={name} />
-        <p className='text-sm pl-2 mt-0 text-error'>{warning}</p>
+          name={name}
+        />
+        <p className="text-sm pl-2 mt-0 text-error">{warning}</p>
       </div>
     </>
   );
-}
+};
