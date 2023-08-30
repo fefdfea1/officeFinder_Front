@@ -4,25 +4,7 @@ import { AiOutlineEyeInvisible } from 'react-icons/ai';
 import { useMutation } from 'react-query';
 import { useState } from 'react';
 
-// interface LoginProps {
-//   email: string;
-//   password: string;
-// }
-
 export const Login = () => {
-  // const [login, setLogin] = useState({
-  //   email: '',
-  //   password: '',
-  // });
-
-  // const handleLoginData = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   // let { name, value } = e.target;
-  //   // console.log({ name, value });
-  //   setLogin(e.target.value);
-  //   // setLogin(() => {
-  //   //   return { [name]: value };
-  //   // });
-  // };
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
