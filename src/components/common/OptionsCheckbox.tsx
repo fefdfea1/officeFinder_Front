@@ -1,5 +1,3 @@
-import React from 'react';
-
 type Options = {
   [key: string]: boolean;
 };
