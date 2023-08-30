@@ -1,31 +1,31 @@
 //에어컨
-import { TbAirConditioningDisabled } from 'react-icons/tb';
+// import { TbAirConditioningDisabled } from 'react-icons/tb';
 //도어락
-import { RiDoorLockBoxFill } from 'react-icons/ri';
+// import { RiDoorLockBoxFill } from 'react-icons/ri';
 //라운지
-import { GrLounge } from 'react-icons/gr';
+// import { GrLounge } from 'react-icons/gr';
 //화이트 보드
 import { FaChalkboardTeacher } from 'react-icons/fa';
 //카페
-import { IoIosCafe } from 'react-icons/io';
+// import { IoIosCafe } from 'react-icons/io';
 //팩스
-import { FaFax } from 'react-icons/fa';
+// import { FaFax } from 'react-icons/fa';
 //부엌
-import { FaKitchenSet } from 'react-icons/Fa6';
+// import { FaKitchenSet } from 'react-icons/Fa6';
 //인터넷
-import { MdOutlineSignalWifiStatusbarConnectedNoInternet4 } from 'react-icons/md';
+// import { MdOutlineSignalWifiStatusbarConnectedNoInternet4 } from 'react-icons/md';
 //복사기
-import { AiFillCopy } from 'react-icons/ai';
+// import { AiFillCopy } from 'react-icons/ai';
 //난방기
 import { GiFireplace } from 'react-icons/gi';
 //개인 라커
-import { PiLockersFill } from 'react-icons/pi';
+// import { PiLockersFill } from 'react-icons/pi';
 //샤워실
-import { FaShower, FaParking } from 'react-icons/fa';
+// import { FaShower, FaParking } from 'react-icons/fa';
 //택배 , 프로젝터
-import { BsFillBoxSeamFill, BsFillProjectorFill } from 'react-icons/bs';
+// import { BsFillBoxSeamFill, BsFillProjectorFill } from 'react-icons/bs';
 //창고
-import { TbBuildingWarehouse } from 'react-icons/tb';
+// import { TbBuildingWarehouse } from 'react-icons/tb';
 import { IconType } from 'react-icons';
 
 type OptionType = string[];
