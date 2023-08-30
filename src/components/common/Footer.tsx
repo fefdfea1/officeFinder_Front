@@ -1,6 +1,6 @@
-import { AiFillGithub } from 'react-icons/ai'
-import { RxNotionLogo } from 'react-icons/rx'
-import { BsYoutube } from 'react-icons/bs'
+import { AiFillGithub } from 'react-icons/ai';
+import { RxNotionLogo } from 'react-icons/rx';
+import { BsYoutube } from 'react-icons/bs';
 
 export const Footer = () => {
   return (
@@ -11,13 +11,13 @@ export const Footer = () => {
         </div>
         <div>
           <div className="grid grid-flow-col gap-4">
-            <a href='https://github.com/fefdfea1/officeFinder_Front'>
+            <a href="https://github.com/fefdfea1/officeFinder_Front">
               <AiFillGithub className="w-6 h-6" />
             </a>
-            <a>
+            <a href="https://www.youtube.com/">
               <BsYoutube className="w-6 h-6" />
             </a>
-            <a>
+            <a href="https://www.notion.so/1d1353b49cb5451792acf302fffe1685">
               <RxNotionLogo className="w-6 h-6" />
             </a>
           </div>
