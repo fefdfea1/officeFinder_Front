@@ -12,7 +12,6 @@ import { Link } from "react-router-dom";
 import { useQuery } from "react-query";
 import { fetchMyPageData } from "../fetch/api";
 import styled from "@emotion/styled";
-import { AxiosError } from "axios";
 
 type fetchDataType = {
   email: string;
