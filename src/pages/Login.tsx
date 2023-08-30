@@ -2,11 +2,38 @@ import { Input } from '../components/common/Input';
 import { Button } from '../components/common/Button';
 import { AiOutlineEyeInvisible } from 'react-icons/ai';
 import { useMutation } from 'react-query';
+import { useState } from 'react';
+
+// interface LoginProps {
+//   email: string;
+//   password: string;
+// }
 
 export const Login = () => {
-  // const clickLoginButton = () => {
-  //   navigate('/');
+  // const [login, setLogin] = useState({
+  //   email: '',
+  //   password: '',
+  // });
+
+  // const handleLoginData = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   // let { name, value } = e.target;
+  //   // console.log({ name, value });
+  //   setLogin(e.target.value);
+  //   // setLogin(() => {
+  //   //   return { [name]: value };
+  //   // });
   // };
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(event.target.value);
+  };
+
+  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(event.target.value);
+  };
+
   const postLogin = useMutation(
     'login',
     () =>
@@ -32,8 +59,20 @@ export const Login = () => {
     <>
       <div className="shadow-md rounded-xl p-8 w-[400px] h-[500px] mx-auto my-4 flex items-center">
         <div className="">
-          <Input width="" inputLabel={'이메일'} placeholder={'Email'} type={'email'} value={''} />
-          <Input width="" inputLabel={'비밀번호'} placeholder={'Password'} type={'password'} value={''} />
+          <Input
+            inputLabel={'이메일'}
+            placeholder={'Email'}
+            type={'email'}
+            value={email}
+            onInputChange={handleEmailChange}
+          />
+          <Input
+            inputLabel={'비밀번호'}
+            placeholder={'Password'}
+            type={'password'}
+            value={password}
+            onInputChange={handlePasswordChange}
+          />
           <AiOutlineEyeInvisible className="absolute left-10 text-xl mx-4" />
           <Button
             clickHandler={() => clickLoginButton()}

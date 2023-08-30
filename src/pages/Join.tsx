@@ -4,40 +4,37 @@ import { AgencyCard } from '../components/singup/AgencyCard';
 import { CustomerCard } from '../components/singup/CustomerCard';
 
 export const Join = () => {
-  const [step, setStep] = useState(0);
-  const [agency, setAgency] = useState(false);
-  const [customer, setCustomer] = useState(false);
+  const [process, setProcess] = useState({
+    step: 0,
+    selected: '',
+  });
 
-  const clickCard = (key: string) => {
-    if (key === 'customer') {
-      setCustomer(true);
-      setStep(1);
-    } else if (key === 'agency') {
-      setAgency(true);
-      setStep(1);
-    }
-    console.log(agency, customer);
+  const handleSetProcess = (step: number, key: string) => {
+    setProcess(() => {
+      return { step, selected: key };
+    });
   };
+
   return (
     <>
-      {step === 0 && (
+      {process?.step === 0 && (
         <div className="shadow-md rounded-xl p-8 mx-auto my-4 flex items-center justify-center md:w-[400px] h-[400px] sm:w-[340px]">
           <div className="flex-col items-center justify-center">
             <Button
-              clickHandler={() => clickCard('customer')}
+              clickHandler={() => handleSetProcess(1, 'customer')}
               text="일반 회원 회원가입"
               style={'btn btn-outline btn-primary w-72 m-2 text-base'}
             ></Button>
             <Button
-              clickHandler={() => clickCard('agency')}
+              clickHandler={() => handleSetProcess(1, 'agency')}
               text="임대인 회원가입"
               style={'btn btn-outline btn-primary w-72 m-2 text-base'}
             ></Button>
           </div>
         </div>
       )}
-      {agency && <AgencyCard />}
-      {customer && <CustomerCard />}
+      {process?.selected === 'agency' && <AgencyCard clickBack={handleSetProcess} />}
+      {process?.selected === 'customer' && <CustomerCard clickBack={handleSetProcess} />}
     </>
   );
 };
