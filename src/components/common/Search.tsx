@@ -101,7 +101,7 @@ const SearchBoxContainer = styled.form`
   height: 230px;
   background-color: #fff;
   border-radius: 12px;
-  z-index: 9999;
+  z-index: 10;
 `;
 
 const ContourBox = styled.div`

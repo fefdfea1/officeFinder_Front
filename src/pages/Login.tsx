@@ -57,7 +57,7 @@ export const Login = () => {
 
   return (
     <>
-      <div className="shadow-md rounded-xl p-8 w-[400px] h-[500px] mx-auto my-4 flex items-center">
+      <div className="shadow-md rounded-xl p-8 mx-auto my-4 flex-col items-center flex-col items-center md:w-[400px] min-h-[400px] sm:w-[340px]">
         <div className="">
           <Input
             inputLabel={'이메일'}
@@ -76,7 +76,7 @@ export const Login = () => {
           <AiOutlineEyeInvisible className="absolute left-10 text-xl mx-4" />
           <Button
             clickHandler={() => clickLoginButton()}
-            style={'btn btn-outline btn-primary w-80 m-2 text-base'}
+            style={'btn btn-outline btn-primary m-2 text-base w-full'}
             text={'로그인'}
           />
         </div>

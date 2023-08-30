@@ -125,7 +125,7 @@ export const AgencyCard = ({ clickBack }: { clickBack: (step: number, key: strin
           {/* <AiOutlineEyeInvisible className="absolute left-10 text-xl mx-4" /> */}
           <Button
             clickHandler={() => clickSignupButton()}
-            style={'btn btn-outline btn-primary m-2 text-base md:w-80 sm:w-full'}
+            style={'btn btn-outline btn-primary m-2 text-base w-full'}
             text={'회원가입'}
             disabled={
               !validateEmail(signup.email) ||
@@ -137,7 +137,7 @@ export const AgencyCard = ({ clickBack }: { clickBack: (step: number, key: strin
           <Button
             clickHandler={() => clickBack(0, '')}
             text={'다시 선택하기'}
-            style={'btn btn-outline btn-primary m-2 text-base md:w-80 sm:w-full'}
+            style={'btn btn-outline btn-primary m-2 text-base w-full'}
           />
         </div>
       </div>
