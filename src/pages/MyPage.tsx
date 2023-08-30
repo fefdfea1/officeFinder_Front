@@ -1,16 +1,18 @@
-import { Title } from '../components/common/Title';
-import { TitleAndDesc } from '../components/common/TitleAndDesc';
-import { BackgroundCover } from '../components/common/BackgroundCover';
-import { Modal } from '../components/common/Modal';
-import { useLayoutEffect, useState } from 'react';
-import { cacheChargeModalStateFn } from './MyPageModalState';
-import { pullCacheModalStateFn } from './MyPageModalState';
-import { useEffect, useRef } from 'react';
-import { changeProfile, removeProfile } from './MyPageChangeProfile';
-import { setEditClass, mypageBlueEventHandler } from './MypageFouseHandler';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
-import styled from '@emotion/styled';
+import { Title } from "../components/common/Title";
+import { TitleAndDesc } from "../components/common/TitleAndDesc";
+import { BackgroundCover } from "../components/common/BackgroundCover";
+import { Modal } from "../components/common/Modal";
+import { useState } from "react";
+import { cacheChargeModalStateFn } from "./MyPageModalState";
+import { pullCacheModalStateFn } from "./MyPageModalState";
+import { useEffect, useRef } from "react";
+import { changeProfile, removeProfile } from "./MyPageChangeProfile";
+import { setEditClass, mypageBlueEventHandler } from "./MypageFouseHandler";
+import { Link } from "react-router-dom";
+import { useQuery } from "react-query";
+import { fetchMyPageData } from "../fetch/api";
+import styled from "@emotion/styled";
+import { AxiosError } from "axios";
 
 type fetchDataType = {
   email: string;
@@ -20,6 +22,14 @@ type fetchDataType = {
   roles: string;
 };
 
+const defaultUserData = {
+  email: "",
+  id: "",
+  name: "",
+  point: 0,
+  roles: "",
+};
+
 const arr = Array.from({ length: 10 });
 
 //Search와 마찬가지로 클린업 함수 작성을 위해 따로 파일로 만들지 않았습니다
@@ -27,23 +37,24 @@ export const MyPage = () => {
   const [cacheChargeModalState, setcacheChargeModalState] = useState<boolean>(false);
   const [pullCacheModalState, setpullCacheModalState] = useState<boolean>(false);
   const [OwnerState, setOwnerState] = useState<boolean>(false);
-  const [fetchUserData, setUserData] = useState<fetchDataType>();
+  const [fetchUserData, setUserData] = useState<fetchDataType>(defaultUserData);
   const cacheChargeButtonDom = useRef<HTMLButtonElement>(null);
   const pullCacheButtonDom = useRef<HTMLButtonElement>(null);
   const imageDom = useRef<HTMLImageElement>(null);
   const nameInputDom = useRef<HTMLInputElement>(null);
   console.log(setOwnerState);
+  const { data } = useQuery("getData", fetchMyPageData);
 
   useEffect(() => {
     //클린업 함수를 위해 해당 부분에 작성
     const windowEventHandler = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
 
-      if (!target.classList.contains('charge')) {
-        if (target.closest('.Modal') === null) {
+      if (!target.classList.contains("charge")) {
+        if (target.closest(".Modal") === null) {
           if (
-            cacheChargeButtonDom.current?.classList.contains('active') ||
-            pullCacheButtonDom.current?.classList.contains('active')
+            cacheChargeButtonDom.current?.classList.contains("active") ||
+            pullCacheButtonDom.current?.classList.contains("active")
           ) {
             setpullCacheModalState(false);
             setcacheChargeModalState(false);
@@ -52,21 +63,18 @@ export const MyPage = () => {
       }
     };
 
-    window.addEventListener('click', windowEventHandler);
+    window.addEventListener("click", windowEventHandler);
 
     return () => {
-      window.removeEventListener('click', windowEventHandler);
+      window.removeEventListener("click", windowEventHandler);
     };
   }, []);
 
-  useLayoutEffect(() => {
-    const fetchData = async () => {
-      const response = await axios.get('http://localhost:3000/Mypage');
-      console.log(response);
-      setUserData(response.data);
-    };
-    fetchData();
-  }, []);
+  useEffect(() => {
+    if (data) {
+      setUserData(data.MyPage);
+    }
+  }, [data]);
 
   return (
     <div className="relative mb-10">
@@ -76,7 +84,7 @@ export const MyPage = () => {
           {OwnerState && (
             <ShowMyOfficeButotn>
               <button className="w-52 btn btn-outline btn-primary">
-                <Link to={'/MyOffice'} className="w-52 btn btn-outline btn-primary absolute right-0 top-0">
+                <Link to={"/MyOffice"} className="w-52 btn btn-outline btn-primary absolute right-0 top-0">
                   나의 지점 보기
                 </Link>
               </button>
@@ -120,7 +128,7 @@ export const MyPage = () => {
             <div className="mb-6 pb-4 border-b border-solid border-accent">
               <TitleAndDesc
                 title="아이디"
-                description={`${fetchUserData ? fetchUserData.email : '불러오기에 실패하였습니다'}`}
+                description={`${fetchUserData ? fetchUserData.email : "불러오기에 실패하였습니다"}`}
               />
             </div>
             <div className="mb-6 pb-4 border-b border-solid border-accent relative leading-loose">
@@ -131,7 +139,7 @@ export const MyPage = () => {
                   type="text"
                   id="EditIdInput"
                   className="text-base pl-4 mr font-bold bg-transparent"
-                  defaultValue={`${fetchUserData ? fetchUserData.name : ''}`}
+                  defaultValue={`${fetchUserData ? fetchUserData.name : ""}`}
                   readOnly
                   ref={nameInputDom}
                   onBlur={() => {
@@ -153,14 +161,14 @@ export const MyPage = () => {
             <div className="mb-6 pb-4 border-b border-solid border-accent">
               <TitleAndDesc
                 title="현재 포인트"
-                description={`${fetchUserData ? fetchUserData.point : '불러오기에 실패하였습니다'}`}
+                description={`${fetchUserData ? fetchUserData.point : "불러오기에 실패하였습니다"}`}
                 type="point"
               />
             </div>
             <div className="flex justify-between gap-x-9">
               <button
                 ref={cacheChargeButtonDom}
-                className={`btn btn-primary grow charge ${cacheChargeModalState && 'active'}`}
+                className={`btn btn-primary grow charge ${cacheChargeModalState && "active"}`}
                 onClick={() => {
                   cacheChargeModalStateFn(
                     cacheChargeModalState,
@@ -174,7 +182,7 @@ export const MyPage = () => {
               </button>
               <button
                 ref={pullCacheButtonDom}
-                className={`btn btn-primary grow charge ${pullCacheModalState && 'active'}`}
+                className={`btn btn-primary grow charge ${pullCacheModalState && "active"}`}
                 onClick={() => {
                   pullCacheModalStateFn(
                     pullCacheModalState,
@@ -246,7 +254,7 @@ const EditPosition = styled.label`
 
 const ProfilePseudoElements = styled.label`
   &::after {
-    content: '';
+    content: "";
     width: 1px;
     height: 20px;
     position: absolute;
@@ -280,7 +288,7 @@ const ModalPosition = styled.div`
 const ChargeList = styled.div`
   width: 50%;
   &::after {
-    content: '';
+    content: "";
     width: 1px;
     height: 100%;
     position: absolute;
