@@ -32,9 +32,9 @@ export const ChatList = ({ onIsOpenChange }: ChatingProps) => {
     };
 
     return (
-        <div className="relative z-10 ">
-            <div className="indicator fixed bottom-10 right-10">
-                <BackgroundCover width="h-[600px] w-[350px] min-h-full relative" margin="m-0 p-0" padding={`${showChatDetail === 0 ? 'bg-base-100' : 'bg-accent'}`}>
+        <div className="relative z-20 ">
+            <div className="indicator h-[600px] fixed md:bottom-10 md:right-10 bottom-2 right-2">
+                <BackgroundCover width="h-[35px] w-[320px] min-h-full relative" margin="m-0 p-0" padding={`${showChatDetail === 0 ? 'bg-base-100' : 'bg-accent'}`}>
                     <div className="flex flex-col items-center shadow-sm">
                         {!showChatDetail ? null : <button onClick={handleGoToList} className="btn btn-ghost btn-sm p-2 absolute left-0 top-0">
                             <FaChevronLeft className="text-sm" />

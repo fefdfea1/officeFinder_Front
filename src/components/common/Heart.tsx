@@ -3,7 +3,7 @@ import { heartActive } from './HeartActive';
 
 export const Heart = () => {
   return (
-    <div onClick={heartActive}>
+    <div onClick={heartActive} className="cursor-pointer">
       <HeartFillStyle className="relative deActive">
         <HeartStyle className="heart-2 absolute"></HeartStyle>
         <FillUpHeart className="w-full h-full bg-primary absolute fillUp"></FillUpHeart>
@@ -23,7 +23,6 @@ const HeartFillStyle = styled.div`
   &.active .fillUp {
     bottom: 0;
   }
-
 `;
 
 const HeartStyle = styled.div`

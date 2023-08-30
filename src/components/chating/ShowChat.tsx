@@ -41,7 +41,7 @@ export const ShowChat = () => {
     }, [messages]);
 
     return (
-        <div className="flex flex-col h-[555px] w-full">
+        <div className="flex flex-col h-[565px] w-full">
             <div className="overflow-y-scroll h-2/3" ref={chatContainerRef}>
                 <div className="chat chat-start pl-3">
                     <div className="chat-image avatar">
@@ -65,7 +65,7 @@ export const ShowChat = () => {
             </div>
             <div className="bg-secondary w-full h-1/3 p-3 rounded-b-xl">
                 <Textarea
-                    className="text-sm"
+                    className="text-base"
                     value={inputText}
                     onChange={handleInputChange}
                     onKeyDown={handleKeyDown}
