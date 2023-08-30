@@ -26,7 +26,6 @@ import { GiFireplace } from 'react-icons/gi';
 // import { BsFillBoxSeamFill, BsFillProjectorFill } from 'react-icons/bs';
 //창고
 // import { TbBuildingWarehouse } from 'react-icons/tb';
-import { IconType } from 'react-icons';
 
 type OptionType = string[];
 
