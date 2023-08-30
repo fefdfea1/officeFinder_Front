@@ -8,8 +8,7 @@ interface InputProps {
   type?: string;
   value?: string;
   name?: string;
-  onInputChange?: (event: React.ChangeEvent<HTMLInputElement>) => void | string | undefined,
-
+  onInputChange?: any;
 }
 
 
@@ -23,7 +22,7 @@ export const Input = (props: InputProps) => {
     warning = "",
     type = "text",
     name = "",
-    value = "",
+    value,
   } = props;
 
   return (
