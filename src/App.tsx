@@ -11,18 +11,16 @@ const App = () => {
 
   return (
     <>
-     <QueryClientProvider client={queryClient}>
-
+      <QueryClientProvider client={queryClient}>
         <Nav />
         <Chat />
         <section id="container">
           <Router />
         </section>
         <Footer />
-     </QueryClientProvider>
-
+      </QueryClientProvider>
     </>
   );
-}
+};
 
 export default App;
