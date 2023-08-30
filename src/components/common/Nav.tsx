@@ -12,7 +12,7 @@ export const Nav = () => {
 
   return (
     <>
-      <div className="navbar bg-base-100 p-5 border-solid border-b-2 border-gray-200">
+      <div className="navbar bg-base-100 border-solid border-b-2 border-gray-200 py-5">
         <div className="flex-1">
           <a onClick={clickLogo} className="btn bg-white border-none hover:bg-white normal-case text-2xl text-primary">
             officeFinder
@@ -20,15 +20,15 @@ export const Nav = () => {
         </div>
         <div className="flex-none">
           <div className="m-3">
-            <span className="text-base font-bold text-primary">c/a</span>
+            <span className="text-base font-bold text-primary lg:inline md:hidden sm:hidden">c/a</span>
           </div>
           <div className="m-3">
-            <span className="text-sm font-bold">닉네임</span>
+            <span className="text-sm font-bold md:inline sm:hidden">닉네임</span>
           </div>
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn bg-white border-none">
               <div className="indicator">
-                <span className="mt-1 text-sm w-13">10,000원</span>
+                <span className="mt-1 text-sm w-13 md:inline sm:hidden">10,000원</span>
                 {/* <span className="badge badge-sm indicator-item">8</span> */}
               </div>
             </label>

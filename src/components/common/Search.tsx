@@ -84,7 +84,7 @@ export const Search = () => {
         </ContourBox>
         <ContourBox className="text-base">
           <button className="btn btn-primary rounded-full bg-primary text-base flex items-center">
-            <span className="md:visible sm:invisible">검색</span>
+            <span className="lg:inline md:hidden sm:hidden">검색</span>
             <SearchSvg />
           </button>
         </ContourBox>
@@ -98,7 +98,7 @@ export const Search = () => {
 /* 기존의 스타일변경으로는 크기와 위치를 세부적으로 조정하기 힘들어 커스텀했습니다 */
 const SearchBoxContainer = styled.form`
   margin: 0 auto;
-  height: 230px;
+  min-height: 230px;
   background-color: #fff;
   border-radius: 12px;
   z-index: 10;
