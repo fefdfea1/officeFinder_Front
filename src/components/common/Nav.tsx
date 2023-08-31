@@ -10,6 +10,9 @@ export const Nav = () => {
   const clickLogo = () => {
     navigate("/");
   };
+  const clickMoreButton = () => {
+    navigate("/Noti");
+  };
 
   return (
     <>
@@ -85,7 +88,11 @@ export const Nav = () => {
                 <a>예약이 거절되었습니다. </a>
               </li>
               <li className="justify-center hover:bg-white">
-                <Button text={"더보기 +"} style={"btn btn-outline btn-accent w-full m-2 text-base "}></Button>
+                <Button
+                  text={"더보기 +"}
+                  style={"btn btn-outline btn-accent w-full m-2 text-base "}
+                  clickHandler={clickMoreButton}
+                ></Button>
               </li>
             </ul>
           </div>

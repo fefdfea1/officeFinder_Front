@@ -1,17 +1,18 @@
-import { Routes, Route } from 'react-router-dom';
-import { Main } from '../pages/Main';
-import { AddOffice } from '../pages/agent/AddOffice';
-import { AllReviews } from '../pages/agent/AllReviews';
-import { MyOffice } from '../pages/agent/MyOffice';
-import { SalesAnalysis } from '../pages/agent/SalesAnalysis';
-import { BookMark } from '../pages/customer/BookMark';
-import { MyBookings } from '../pages/customer/MyBookings';
-import { Booking } from '../pages/Booking';
-import { Join } from '../pages/Join';
-import { Login } from '../pages/Login';
-import Profile from '../pages/Profile';
-import { AddOfficeReviews } from '../pages/customer/AddOfficeReviews';
-import { MyPage } from '../pages/MyPage';
+import { Routes, Route } from "react-router-dom";
+import { Main } from "../pages/Main";
+import { AddOffice } from "../pages/agent/AddOffice";
+import { AllReviews } from "../pages/agent/AllReviews";
+import { MyOffice } from "../pages/agent/MyOffice";
+import { SalesAnalysis } from "../pages/agent/SalesAnalysis";
+import { BookMark } from "../pages/customer/BookMark";
+import { MyBookings } from "../pages/customer/MyBookings";
+import { Booking } from "../pages/Booking";
+import { Join } from "../pages/Join";
+import { Login } from "../pages/Login";
+import Profile from "../pages/Profile";
+import { AddOfficeReviews } from "../pages/customer/AddOfficeReviews";
+import { MyPage } from "../pages/MyPage";
+import { NotiMessage } from "../pages/NotiMessage";
 
 export const Router = () => {
   return (
@@ -29,6 +30,7 @@ export const Router = () => {
       <Route path="/Profile" element={<Profile />}></Route>
       <Route path="/AddOfficeReviews" element={<AddOfficeReviews />}></Route>
       <Route path="/MyPage" element={<MyPage />}></Route>
+      <Route path="/Noti" element={<NotiMessage />}></Route>
     </Routes>
   );
 };
