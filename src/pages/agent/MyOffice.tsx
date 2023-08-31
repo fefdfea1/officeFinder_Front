@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useQuery } from 'react-query';
+import { BsBuildingFillAdd } from 'react-icons/bs'
 import { BackgroundCover } from '../../components/common/BackgroundCover';
 import { Button } from '../../components/common/Button';
 import { Title } from '../../components/common/Title';
@@ -54,7 +55,7 @@ export const MyOffice = () => {
           ))
         ) : (
           <div className="text-center p-4">
-            <div className="p-4 text-center font-bold">아직 등록된 오피스가 없습니다. <br />먼저 오피스를 등록해주세요.</div>
+            <div className="p-4 text-center font-bold">아직 등록된 오피스가 없습니다. <br />먼저 오피스를 <Link to="/addOffice" className="link link-primary">등록</Link>해주세요.</div>
           </div>
         )}
       </BackgroundCover>
