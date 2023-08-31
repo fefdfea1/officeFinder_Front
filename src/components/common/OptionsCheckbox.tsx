@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 type Options = {
   [key: string]: boolean;
@@ -9,22 +9,22 @@ type OptionsCheckboxProps = {
 
 export const OptionsCheckbox: React.FC<OptionsCheckboxProps> = ({ onOptionChange }) => {
   const initialOptions: Options = {
-    에어컨: false,
-    카페: false,
-    복사기: false,
-    택배서비스: false,
-    도어락: false,
-    팩스: false,
-    난방기: false,
-    주차: false,
-    '공용 라운지': false,
-    '공용 주방': false,
-    '개인 락커': false,
-    프로젝터: false,
-    화이트보드: false,
-    인터넷: false,
-    샤워시설: false,
-    창고: false,
+    "에어컨": false,
+    "카페": false,
+    "복사기": false,
+    "택배서비스": false,
+    "도어락": false,
+    "팩스": false,
+    "난방기": false,
+    "주차": false,
+    "공용 라운지": false,
+    "공용 주방": false,
+    "개인 락커": false,
+    "프로젝터": false,
+    "화이트보드": false,
+    "인터넷": false,
+    "샤워시설": false,
+    "창고": false,
   };
 
   const [selectedOptions, setSelectedOptions] = React.useState<Options>(initialOptions);

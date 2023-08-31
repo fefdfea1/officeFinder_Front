@@ -1,14 +1,14 @@
-import { VscCircleFilled } from 'react-icons/vsc';
-import { CgProfile } from 'react-icons/cg';
-import { PiBellRingingBold } from 'react-icons/pi';
-import { useNavigate } from 'react-router-dom';
-import { Button } from './Button';
+import { VscCircleFilled } from "react-icons/vsc";
+import { CgProfile } from "react-icons/cg";
+import { PiBellRingingBold } from "react-icons/pi";
+import { useNavigate } from "react-router-dom";
+import { Button } from "./Button";
 
 export const Nav = () => {
   const navigate = useNavigate();
 
   const clickLogo = () => {
-    navigate('/');
+    navigate("/");
   };
 
   return (
@@ -26,24 +26,21 @@ export const Nav = () => {
           <div className="m-3">
             <span className="text-sm font-bold md:inline sm:hidden">닉네임</span>
           </div>
-          <div className="dropdown dropdown-end">
+          <div className="dropdown dropdown-end z-20">
             <label tabIndex={0} className="btn bg-white border-none">
               <div className="indicator">
                 <span className="mt-1 text-sm w-13 md:inline sm:hidden">10,000원</span>
-                {/* <span className="badge badge-sm indicator-item">8</span> */}
               </div>
             </label>
             <div tabIndex={0} className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow">
               <div className="card-body">
-                {/* <span className="font-bold text-lg">8 Items</span>
-            <span className="text-info">Subtotal: $999</span> */}
-                <div className="card-actions">
+                <div className="card-actions ">
                   <button className="btn btn-primary btn-block">충전하기</button>
                 </div>
               </div>
             </div>
           </div>
-          <div className="dropdown dropdown-end">
+          <div className="dropdown dropdown-end z-20">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="rounded-full">
                 <CgProfile className="w-7 h-7" />
@@ -67,7 +64,7 @@ export const Nav = () => {
               </li>
             </ul>
           </div>
-          <div className="dropdown dropdown-end mx-auto">
+          <div className="dropdown dropdown-end mx-auto z-20">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="rounded-full">
                 <PiBellRingingBold className="w-7 h-7" />
@@ -87,8 +84,8 @@ export const Nav = () => {
               <li>
                 <a>예약이 거절되었습니다. </a>
               </li>
-              <li className="justify-center">
-                <Button text={'더보기 +'} style={'btn btn-outline btn-accent w-full m-2 text-base'}></Button>
+              <li className="justify-center hover:bg-white">
+                <Button text={"더보기 +"} style={"btn btn-outline btn-accent w-full m-2 text-base "}></Button>
               </li>
             </ul>
           </div>

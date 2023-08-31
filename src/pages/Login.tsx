@@ -61,6 +61,9 @@ export const Login = () => {
             style={'btn btn-outline btn-primary m-2 text-base w-full'}
             text={'로그인'}
           />
+          <div>
+            <a className="text-base text-sm">아직 회원이 아니신가요? 회원가입하기</a>
+          </div>
         </div>
       </div>
     </>
