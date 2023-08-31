@@ -1,11 +1,18 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { RiArrowDropDownLine } from 'react-icons/ri';
 
-export const SelectDateDropDown = (props: { width: string }): JSX.Element => {
+export const SelectDateDropDown = (props: {
+  width: string;
+  setChangeState?: React.Dispatch<React.SetStateAction<boolean>>;
+}): JSX.Element => {
   // width로 넓이를 지정할 수 있습니다. ex) w-52, w-full
   const MaxMonth = Array.from({ length: 11 });
   const [selectedItem, setSelectedItem] = useState('');
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    if (props.setChangeState && selectedItem !== '') props.setChangeState(true);
+  }, [selectedItem]);
 
   const handleItemClick = (item: string) => {
     setSelectedItem(item);

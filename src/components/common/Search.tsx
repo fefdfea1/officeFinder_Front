@@ -3,8 +3,9 @@ import styled from '@emotion/styled';
 // import { useRef } from 'react';
 // import { useEffect, useState } from 'react';
 // import { DayPicker } from 'react-day-picker';
-// import { startDayPicker, endDayPicker } from './search_calendarState';
-// import { setCalendarDay } from './search_calendarSetDay';
+// import { startDayPicker, endDayPicker } from './searchCalendarState';
+// import { setCalendarDay } from './searchCalendarSetDay';
+
 import { AiOutlineSearch } from 'react-icons/ai';
 import { OptionsCheckbox } from './OptionsCheckbox';
 import { MaxCapacityDropDown } from './MaxCapacityDropDown';

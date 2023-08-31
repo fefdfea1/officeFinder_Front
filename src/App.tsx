@@ -13,7 +13,6 @@ export const App = () => {
 
   const queryClient = new QueryClient();
 
-
   return (
     <>
       <MyProvider >
