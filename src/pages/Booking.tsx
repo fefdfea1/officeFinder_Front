@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 import { BlindBooking } from "./BlindBooking";
 import { SelectDateDropDown } from "../components/agent/SelectDateDropDown";
 import { useQuery } from "react-query";
-import { fetchBookingData } from "../fetch/api";
+import { fetchBookingData } from "../fetch/get/agent";
 import { GiPositionMarker } from "react-icons/gi";
 import { changeLoadView } from "./customer/BookMarkLoadView";
 import { corrdinateType } from "./customer/BookMarkLoadView";
@@ -93,7 +93,7 @@ export const Booking = () => {
                 </div>
                 <div className="flex w-full gap-x-2">
                   <button className="btn btn-outline btn-primary block p-0 grow shrink basis-1/2">
-                    <Link to={"/"} className="whitespace-nowrap w-full h-full block flex justify-center items-center">
+                    <Link to={"/"} className="whitespace-nowrap w-full h-full flex justify-center items-center">
                       다른 오피스 둘러보기
                     </Link>
                   </button>
@@ -117,7 +117,7 @@ export const Booking = () => {
                     <InheritanceDayPickr mode="single" selected={selectedDay} onSelect={setSelectedDay} />
                   </BackgroundCoverLeftAreaRightContour>
                   <div className="sm:w-full">
-                    <div className="inline-block flex flex-col justify-center sm:w-full">
+                    <div className="flex flex-col justify-center sm:w-full">
                       <div className="ml-4 text-base">
                         <p>몇 개월 사용할지 알려주세요</p>
                         <p className="mb-4">1년 이상 장기 예약은 문의가 필요합니다</p>
@@ -171,7 +171,7 @@ export const Booking = () => {
         <div id="map" style={{ width: "100%", height: "500px" }} className="mx-auto mb-8 relative">
           {officePosition !== undefined && (
             <button
-              className="w-10 h-10 absolute top-5 left-2.5 icon z-50 bg-white"
+              className="w-12 h-12 absolute top-5 left-2.5 icon z-50 bg-white"
               onClick={() => {
                 changeLoadView(officePosition);
               }}
@@ -179,9 +179,9 @@ export const Booking = () => {
               <a
                 href={`https://map.kakao.com/link/roadview/${officePosition.Ma},${officePosition.La}`}
                 target="_blank"
-                className="w-full h-full  flex items-center justify-center"
+                className="w-full h-full  flex items-center justify-center bg-primary rounded-xl"
               >
-                <GiPositionMarker style={{ width: "30px", height: "30px" }} />
+                <GiPositionMarker style={{ width: "40px", height: "40px", fill: "white" }} />
               </a>
             </button>
           )}

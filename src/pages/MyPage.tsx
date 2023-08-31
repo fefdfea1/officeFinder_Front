@@ -10,9 +10,8 @@ import { changeProfile, removeProfile } from "./MyPageChangeProfile";
 import { setEditClass, mypageBlueEventHandler } from "./MypageFouseHandler";
 import { Link } from "react-router-dom";
 import { useQuery } from "react-query";
-import { fetchMyPageData } from "../fetch/api";
+import { fetchMyPageData } from "../fetch/get/agent";
 import styled from "@emotion/styled";
-import { AxiosError } from "axios";
 
 type fetchDataType = {
   email: string;

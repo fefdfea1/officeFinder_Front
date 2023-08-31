@@ -1,7 +1,7 @@
-import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { changeOptionName } from '../../pages/BookingOptionIcon';
-import { ObjectType } from '../../pages/BookingOptionIcon';
+import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { changeOptionName } from "../../pages/BookingOptionIcon";
+import { ObjectType } from "../../pages/BookingOptionIcon";
 
 type PropsOptionType = {
   [key: string]: boolean;
@@ -14,7 +14,6 @@ type propsType = {
 };
 
 export const OfficeOptions = (props: propsType) => {
-  console.log(props);
   const [optionData, setOptionData] = useState<ObjectType[]>([]);
   useEffect(() => {
     if (props.OptionData) {
@@ -44,7 +43,7 @@ export const OfficeOptions = (props: propsType) => {
           </div>
         </div>
         <h3 className="text-lg text-primary mb-4">Options</h3>
-        <div className={`${props.needReviewCount && 'border-b border-solid border-accent pb-4 mb-4'}`}>
+        <div className={`${props.needReviewCount && "border-b border-solid border-accent pb-4 mb-4"}`}>
           <div className="w-3/6 text-base">
             {/* p태그로 서버에서 받아오는 옵션을 반복문으로 넣어야함 */}
             {optionData.length >= 1 &&
@@ -62,7 +61,7 @@ export const OfficeOptions = (props: propsType) => {
         </div>
         {props.needReviewCount && (
           <h3 className="text-lg text-primary mb-4">
-            <Link to={'/AllReviews'}>
+            <Link to={"/AllReviews"}>
               <span className="mr-2">Reviews</span>
               {/* 데이터를 받으면 동적으로 추가 */}
               <span>({231})</span>
