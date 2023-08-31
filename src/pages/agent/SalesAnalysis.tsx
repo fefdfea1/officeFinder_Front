@@ -42,7 +42,7 @@ export const SalesAnalysis = () => {
               <Button style="btn btn-primary w-[90px] md:w-40" text="전체 리뷰보기" />
             </Link>
           </div>
-          <OfficeOptions width="" needReviewCount={false} />
+          <OfficeOptions needReviewCount={false} OptionData={{ haveTvProjector: true }} />
           <SalesCharts />
           <ReservationAttendeesList />
         </div>
