@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { changeOptionName } from "../../pages/BookingOptionIcon";
-import { ObjectType } from "../../pages/BookingOptionIcon";
+import { changeOptionName } from "../../Business/Booking/BookingOptionIcon";
+import { ObjectType } from "../../Business/Booking/BookingOptionIcon";
 
 type PropsOptionType = {
   [key: string]: boolean;

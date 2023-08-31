@@ -1,11 +1,11 @@
-import { BookingDataType } from '../Booking';
-import { corrdinateType } from './BookMarkLoadView';
+import { BookingDataType } from "../../pages/Booking";
+import { corrdinateType } from "../../pages/Booking";
 
 export const DrawMap = (
   BookingData: BookingDataType,
   setOfficePosition: React.Dispatch<React.SetStateAction<corrdinateType | undefined>>,
 ) => {
-  let container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+  let container = document.getElementById("map"); //지도를 담을 영역의 DOM 레퍼런스
   let options = {
     //지도를 생성할 때 필요한 기본 옵션
     center: new window.kakao.maps.LatLng(35.450701, 126.570667), //지도의 중심좌표.

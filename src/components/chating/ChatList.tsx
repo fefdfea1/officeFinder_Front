@@ -1,33 +1,31 @@
-import { GrClose } from 'react-icons/gr';
-import { FaChevronLeft } from 'react-icons/fa';
-import { BackgroundCover } from '../common/BackgroundCover';
-import { ProfileCircle } from '../common/ProfileCircle';
-import styled from '@emotion/styled';
-import { ShowChat } from './ShowChat';
-import { useMyContext } from '../../contexts/MyContext';
+import { useState, useEffect } from "react";
+import { GrClose } from "react-icons/gr";
+import { FaChevronLeft } from "react-icons/fa";
+import { BackgroundCover } from "../common/BackgroundCover";
+import { ProfileCircle } from "../common/ProfileCircle";
+import styled from "@emotion/styled";
+import { ShowChat } from "./ShowChat";
 
 type ChatingProps = {
-    onIsOpenChange: (isOpen: boolean) => void;
+  onIsOpenChange: (isOpen: boolean) => void;
 };
 
 export const ChatList = ({ onIsOpenChange }: ChatingProps) => {
-
   const [showChatDetail, setShowChatDetail] = useState(0);
 
   useEffect(() => {
-    const storedShowChatDetail = localStorage.getItem('showChatDetail');
+    const storedShowChatDetail = localStorage.getItem("showChatDetail");
     setShowChatDetail(Number(storedShowChatDetail));
   }, []);
 
+  useEffect(() => {
+    localStorage.setItem("showChatDetail", String(showChatDetail));
+  }, [showChatDetail]);
 
-    const handleChatClose = () => {
-        onIsOpenChange(false);
-        setIsChatRoom(false);
-    };
-
-    const handleGoToList = () => {
-        setIsChatRoom(false);
-    };
+  const handleChatClose = () => {
+    onIsOpenChange(false);
+    setShowChatDetail(0);
+  };
 
   const handleGoToList = () => {
     setShowChatDetail(0);
@@ -39,7 +37,7 @@ export const ChatList = ({ onIsOpenChange }: ChatingProps) => {
         <BackgroundCover
           width="h-[35px] w-[320px] min-h-full relative"
           margin="m-0 p-0"
-          padding={`${showChatDetail === 0 ? 'bg-base-100' : 'bg-accent'}`}
+          padding={`${showChatDetail === 0 ? "bg-base-100" : "bg-accent"}`}
         >
           <div className="flex flex-col items-center shadow-sm">
             {!showChatDetail ? null : (
@@ -50,7 +48,7 @@ export const ChatList = ({ onIsOpenChange }: ChatingProps) => {
             <button onClick={handleChatClose} className="btn btn-ghost btn-sm p-2 absolute right-0 top-0">
               <GrClose className="text-sm" />
             </button>
-            <div className="font-bold text-base p-2">{!showChatDetail ? '채팅목록' : 'zb-FE'}</div>
+            <div className="font-bold text-base p-2">{!showChatDetail ? "채팅목록" : "zb-FE"}</div>
           </div>
           {showChatDetail === 0 ? (
             <div className="flex flex-col w-full overflow-y-auto">
@@ -66,11 +64,14 @@ export const ChatList = ({ onIsOpenChange }: ChatingProps) => {
                 </div>
               </button>
               {/* -- 첫번째 채팅 -- */}
-
-
             </div>
-        </div>
-    );
+          ) : (
+            <ShowChat />
+          )}
+        </BackgroundCover>
+      </div>
+    </div>
+  );
 };
 
 const Span = styled.span`
@@ -85,4 +86,3 @@ const Span = styled.span`
   line-height: 1.2em;
   height: 3.6em;
 `;
-

@@ -1,11 +1,11 @@
-@import url('./theme.module.css');
-@import url('./reset.module.css');
+@import url("./theme.module.css");
+@import url("./reset.module.css");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 #root {
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
   color: #4a494e;
   letter-spacing: -0.02rem;
 }
