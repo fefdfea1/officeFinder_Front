@@ -1,17 +1,22 @@
-import { Title } from '../components/common/Title';
-import { BackgroundCover } from '../components/common/BackgroundCover';
-import { format } from 'date-fns';
-import { DayPicker } from 'react-day-picker';
-import { useState, useEffect, useRef } from 'react';
-import { MaxCapacityDropDown } from '../components/common/MaxCapacityDropDown';
-import { OfficeName } from '../components/booking/Officename';
-import { OfficeOptions } from '../components/booking/OfficeOptions';
-import { Link } from 'react-router-dom';
-import { BlindBooking } from './BlindBooking';
-import { SelectDateDropDown } from '../components/agent/SelectDateDropDown';
-
-import styled from '@emotion/styled';
-import 'react-day-picker/dist/style.css';
+import { Title } from "../components/common/Title";
+import { BackgroundCover } from "../components/common/BackgroundCover";
+import { format } from "date-fns";
+import { DayPicker } from "react-day-picker";
+import { useState, useEffect, useRef } from "react";
+import { MaxCapacityDropDown } from "../components/common/MaxCapacityDropDown";
+import { OfficeName } from "../components/booking/Officename";
+import { OfficeOptions } from "../components/booking/OfficeOptions";
+import { Link } from "react-router-dom";
+import { BlindBooking } from "./BlindBooking";
+import { SelectDateDropDown } from "../components/agent/SelectDateDropDown";
+import { useQuery } from "react-query";
+import { fetchBookingData } from "../fetch/api";
+import { GiPositionMarker } from "react-icons/gi";
+import { changeLoadView } from "./customer/BookMarkLoadView";
+import { corrdinateType } from "./customer/BookMarkLoadView";
+import { DrawMap } from "./customer/BookMarkPrintMap";
+import styled from "@emotion/styled";
+import "react-day-picker/dist/style.css";
 
 declare global {
   interface Window {
@@ -19,32 +24,51 @@ declare global {
   }
 }
 
+export type BookingDataType = {
+  address: string;
+  name: string;
+  id: number;
+  option: {
+    haveHeater?: boolean;
+  };
+  price: number;
+};
+
+const defaultValue = {
+  address: "",
+  name: "",
+  id: 0,
+  option: {},
+  price: 0,
+};
+
 export const Booking = () => {
   const [selectedDay, setSelectedDay] = useState<Date>();
-
+  const [selectMonth, setMonth] = useState<boolean>(false);
+  const [selectMaxPeople, setMaxPeople] = useState<boolean>(false);
   const [reservationComplete, setReservationComplete] = useState<boolean>(false);
-
+  const [BookingData, setBookingData] = useState<BookingDataType>(defaultValue);
+  const [officePosition, setOfficePosition] = useState<corrdinateType>();
   const PrintDayDom = useRef<HTMLParagraphElement>(null);
+  const { data } = useQuery(["BookingPageData"], fetchBookingData);
 
   useEffect(() => {
-    let container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-    let options = {
-      //지도를 생성할 때 필요한 기본 옵션
-      center: new window.kakao.maps.LatLng(35.450701, 126.570667), //지도의 중심좌표.
-      level: 3, //지도의 레벨(확대, 축소 정도)
-    };
+    if (data) {
+      setBookingData(data.Booking);
+    }
+  }, [data]);
 
-    let map = new window.kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
-    console.log(map);
-  }, []);
+  useEffect(() => {
+    DrawMap(BookingData, setOfficePosition);
+  }, [BookingData]);
 
   useEffect(() => {
     const target = PrintDayDom.current as HTMLParagraphElement;
     if (selectedDay !== undefined) {
-      target.innerText = format(selectedDay, 'yyyy-MM-dd');
+      target.innerText = format(selectedDay, "yyyy-MM-dd");
     }
   }, [selectedDay]);
-
+  console.log(officePosition);
   return (
     <>
       <div className="mx-auto py-8 sm:w-11/12 lg:w-11/12 xl:w-5/6">
@@ -63,14 +87,13 @@ export const Booking = () => {
               </div>
               {/* 데이터 받아오면 넣어야함 */}
               <div className="w-full flex flex-col  lg:w-8/12 lg:mx-auto xl:px-0 xl:w-full">
-                <h3 className="mb-4 sm:mb-1">선릉 공유오피스 더공간 A</h3>
                 <div className="mb-8 sm:mb-3">
                   {/* 데이터 받아오면 주소에 넣어야함 */}
-                  <OfficeName name="" address="주소"></OfficeName>
+                  <OfficeName name={BookingData.name} address={BookingData.address}></OfficeName>
                 </div>
                 <div className="flex w-full gap-x-2">
                   <button className="btn btn-outline btn-primary block p-0 grow shrink basis-1/2">
-                    <Link to={'/'} className="whitespace-nowrap w-full h-full block flex justify-center items-center">
+                    <Link to={"/"} className="whitespace-nowrap w-full h-full block flex justify-center items-center">
                       다른 오피스 둘러보기
                     </Link>
                   </button>
@@ -84,7 +107,7 @@ export const Booking = () => {
 
             <div className="relative sm:mt-8 xl:mt-0">
               <BackgroundCover margin="mt-0">
-                <div className="flex mb-4 sm:flex-col lg:flex-row">
+                <div className="flex sm:mb-16 md:mb-16 sm:flex-col lg:flex-row">
                   <BackgroundCoverLeftAreaRightContour>
                     <BackgroundCoverLeftAreaTopContour className="text-center text-primary sm:w-full">
                       <span ref={PrintDayDom} className="text-base">
@@ -100,11 +123,11 @@ export const Booking = () => {
                         <p className="mb-4">1년 이상 장기 예약은 문의가 필요합니다</p>
                       </div>
                       <div className="mb-4">
-                        <SelectDateDropDown width="w-full" />
+                        <SelectDateDropDown width="w-full" setChangeState={setMonth} />
                       </div>
                       <div className="mb-4">
                         <p className="ml-4 mb-1 text-base">사용할 인원을 선택해주세요</p>
-                        <MaxCapacityDropDown width="w-full" />
+                        <MaxCapacityDropDown width="w-full" setMaxPeople={setMaxPeople} />
                       </div>
                       {/* 월 정기 결제 버튼  */}
                       <div className="flex ml-4">
@@ -124,13 +147,17 @@ export const Booking = () => {
 
                 {/* 컴포넌트 제작 완료대로 추가 */}
                 <button
-                  className="btn btn-primary w-full"
+                  className="btn btn-primary w-full relative"
                   onClick={() => {
                     setReservationComplete(true);
                   }}
                 >
-                  {' '}
                   예약하기
+                  {selectedDay && selectMonth && selectMaxPeople ? (
+                    <TotalPriceAreaPosition className="rounded-full bg-secondary">
+                      <span>총 결제 금액은 {BookingData.price}원입니다</span>
+                    </TotalPriceAreaPosition>
+                  ) : null}
                 </button>
                 {reservationComplete && (
                   <div className="w-full h-full absolute top-0 left-0  z-50">
@@ -141,10 +168,30 @@ export const Booking = () => {
             </div>
           </CaledarAndOPtionWidth>
         </div>
-        <div id="map" style={{ width: '100%', height: '500px' }} className="mx-auto mb-8"></div>
+        <div id="map" style={{ width: "100%", height: "500px" }} className="mx-auto mb-8 relative">
+          {officePosition !== undefined && (
+            <button
+              className="w-10 h-10 absolute top-5 left-2.5 icon z-50 bg-white"
+              onClick={() => {
+                changeLoadView(officePosition);
+              }}
+            >
+              <a
+                href={`https://map.kakao.com/link/roadview/${officePosition.Ma},${officePosition.La}`}
+                target="_blank"
+                className="w-full h-full  flex items-center justify-center"
+              >
+                <GiPositionMarker style={{ width: "30px", height: "30px" }} />
+              </a>
+            </button>
+          )}
+        </div>
+
         {/* width : w-full or 숫자입력으로 width값 조절 */}
         <div>
-          <OfficeOptions width="w-full" needReviewCount={true} />
+          {BookingData.address !== "" && (
+            <OfficeOptions width="w-full" needReviewCount={true} OptionData={BookingData.option} />
+          )}
         </div>
       </div>
     </>
@@ -219,7 +266,7 @@ const BackgroundCoverLeftAreaTopContour = styled.p`
   position: relative;
   text-align: center;
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 120%;
     left: 0%;
@@ -227,5 +274,39 @@ const BackgroundCoverLeftAreaTopContour = styled.p`
     height: 1px;
     border-radius: 12px;
     background-color: var(--primary);
+  }
+`;
+
+const TotalPriceAreaPosition = styled.div`
+  position: absolute;
+  top: -60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 8px;
+  color: black;
+
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: -50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0px;
+    height: 0px;
+    border-top: 10px solid var(--secondary);
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+  }
+
+  @media (min-width: 360px) {
+    &::before {
+      bottom: -32%;
+    }
+  }
+
+  @media (min-width: 480px) {
+    &::before {
+      bottom: -50%;
+    }
   }
 `;

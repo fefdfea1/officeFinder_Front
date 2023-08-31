@@ -18,10 +18,12 @@ export const Main = () => {
           <Search />
         ) : (
           <SearchBoxContainer className="p-4 shadow-md">
+
             <div className="top flex justify-center items-center pb-2">
               <ContourBox className="text-info text-base p-4">장소</ContourBox>
               <ContourBox className="text-info text-base p-4">최대인원 수</ContourBox>
               <ContourBox className="text-info text-base p-4">옵션</ContourBox>
+
               <ContourBox className="text-base">
                 <button className="btn btn-primary rounded-full bg-primary text-base flex items-center">
                   <span>검색</span> <SearchSvg />

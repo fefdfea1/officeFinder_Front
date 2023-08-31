@@ -3,26 +3,30 @@ import { ChatList } from './ChatList';
 import { ChatIcon } from './ChatIcon';
 
 export const Chat = () => {
-    const storedChatState = sessionStorage.getItem('chatState');
-    const initialIsOpen = storedChatState === 'true';
+  const storedChatState = sessionStorage.getItem('chatState');
+  const initialIsOpen = storedChatState === 'true';
 
-    const [isOpen, setIsOpen] = useState(initialIsOpen);
+  const [isOpen, setIsOpen] = useState(initialIsOpen);
 
-    const handleIsOpenChange = (prev: boolean) => {
-        setIsOpen(prev);
-    };
+  const handleIsOpenChange = (prev: boolean) => {
+    setIsOpen(prev);
+  };
 
-    useEffect(() => {
-        sessionStorage.setItem('chatState', String(isOpen));
-    }, [isOpen]);
+  useEffect(() => {
+    sessionStorage.setItem('chatState', JSON.stringify(isOpen));
+  }, [isOpen]);
 
-    return (
-        <div>
-            {isOpen ? (
-                <ChatList onIsOpenChange={handleIsOpenChange} />
-            ) : (
-                <ChatIcon onIsOpenChange={handleIsOpenChange} />
-            )}
-        </div>
-    );
+  useEffect(() => {
+    if (sessionStorage.getItem('chatState') !== null) {
+      const getItemValue = sessionStorage.getItem('chatState');
+      if (getItemValue === 'true') setIsOpen(true);
+      else setIsOpen(false);
+    }
+  }, [sessionStorage.getItem('chatState')]);
+
+  return (
+    <div>
+      {isOpen ? <ChatList onIsOpenChange={handleIsOpenChange} /> : <ChatIcon onIsOpenChange={handleIsOpenChange} />}
+    </div>
+  );
 };

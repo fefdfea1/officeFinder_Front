@@ -1,19 +1,18 @@
 interface InputProps {
-
   width?: string;
   placeholder?: string;
   inputLabel?: string;
   inputLabelPosition?: string;
   warning?: string;
   type?: string;
+
   value?: string;
   name?: string;
   onInputChange?: (event: React.ChangeEvent<HTMLInputElement>) => void | string | undefined,
-
 }
 
-
 export const Input = (props: InputProps) => {
+
   const {
     onInputChange,
     width = "w-full",
