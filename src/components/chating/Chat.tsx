@@ -1,32 +1,24 @@
-import { useState, useEffect } from 'react';
 import { ChatList } from './ChatList';
 import { ChatIcon } from './ChatIcon';
+import { useMyContext } from '../../contexts/MyContext'; // 실제 파일 경로로 바꾸세요
 
 export const Chat = () => {
-  const storedChatState = sessionStorage.getItem('chatState');
-  const initialIsOpen = storedChatState === 'true';
+    const { isChatListOpen, setIsChatListOpen } = useMyContext();
 
-  const [isOpen, setIsOpen] = useState(initialIsOpen);
 
-  const handleIsOpenChange = (prev: boolean) => {
-    setIsOpen(prev);
-  };
+    const handleIsOpenChange = (prev: boolean) => {
+        setIsChatListOpen(prev);
+    };
 
-  useEffect(() => {
-    sessionStorage.setItem('chatState', JSON.stringify(isOpen));
-  }, [isOpen]);
 
-  useEffect(() => {
-    if (sessionStorage.getItem('chatState') !== null) {
-      const getItemValue = sessionStorage.getItem('chatState');
-      if (getItemValue === 'true') setIsOpen(true);
-      else setIsOpen(false);
-    }
-  }, [sessionStorage.getItem('chatState')]);
+    return (
+        <div>
+            {isChatListOpen ? (
+                <ChatList onIsOpenChange={handleIsOpenChange} />
+            ) : (
+                <ChatIcon onIsOpenChange={handleIsOpenChange} />
+            )}
+        </div>
+    );
 
-  return (
-    <div>
-      {isOpen ? <ChatList onIsOpenChange={handleIsOpenChange} /> : <ChatIcon onIsOpenChange={handleIsOpenChange} />}
-    </div>
-  );
 };

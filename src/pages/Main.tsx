@@ -18,10 +18,12 @@ export const Main = () => {
           <Search />
         ) : (
           <SearchBoxContainer className="p-4 shadow-md">
-            <div className="top flex justify-center items-center border-b border-solid border-accent pb-2">
+
+            <div className="top flex justify-center items-center pb-2">
               <ContourBox className="text-info text-base p-4">장소</ContourBox>
-              <ContourBox className="border-r text-info text-base p-4">최대인원 수</ContourBox>
-              <ContourBox className="border-l text-info text-base p-4">옵션</ContourBox>
+              <ContourBox className="text-info text-base p-4">최대인원 수</ContourBox>
+              <ContourBox className="text-info text-base p-4">옵션</ContourBox>
+
               <ContourBox className="text-base">
                 <button className="btn btn-primary rounded-full bg-primary text-base flex items-center">
                   <span>검색</span> <SearchSvg />
@@ -41,7 +43,7 @@ export const Main = () => {
 const SearchBoxContainer = styled.form`
   display: inline-block;
   background-color: #fff;
-  border-radius: 12px;
+  border-radius: 20px;
 `;
 
 const ContourBox = styled.div`

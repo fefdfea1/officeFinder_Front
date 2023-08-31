@@ -1,13 +1,47 @@
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { OfficeName } from '../../components/booking/Officename';
 import { BackgroundCover } from '../../components/common/BackgroundCover';
 import { Button } from '../../components/common/Button';
-import { ProfileCircle } from '../../components/common/ProfileCircle';
 import { Title } from '../../components/common/Title';
+import { RecentReviews } from "../../components/agent/RecentReviews"
 
+interface OfficeData {
+  id: number;
+  name: string;
+  locaion: string;
+  picture: string[];
+}
+
+interface MyOfficeResponse {
+  myOffice: {
+    data: OfficeData[];
+  };
+}
 
 export const MyOffice = () => {
-  //내가 가진 officeList를 Map을 사용해 반복할 수 있도록 합니다.
+  const [myOfficeData, setMyOfficeData] = useState<OfficeData[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get<MyOfficeResponse>("https://my-json-server.typicode.com/kjewt/json-server/db");
+        setMyOfficeData(response.data.myOffice.data);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return <div className="p-4 text-center font-bold">Loading...</div>;
+  }
+
   return (
     <>
       <div className="flex justify-end relative">
@@ -17,38 +51,27 @@ export const MyOffice = () => {
       </div>
       <BackgroundCover>
         <Title>나의 지점보기</Title>
-        <div className="flex flex-col gap-4 p-4 lg:flex-row">
-          <figure className="flex flex-col w-full lg:w-1/3 gap-1">
-            <img className="rounded-xl" src="https://picsum.photos/350" alt="sample" />
-          </figure>
-          <div className="reviews flex flex-col gap-2 border-black w-full">
-            <OfficeName name="이름" address="주소" />
-            <Link to="/SalesAnalysis"><button className="btn btn-primary w-full">매출 자세히보기</button></Link>
-            {/* review */}
-            <div className="w-full shadow-md rounded-xl p-4 h-full">
-              <p className="text-primary pb-4">Reviews</p>
+        {myOfficeData.map((office, index) => (
+          <div key={office.id} className={`flex flex-col gap-4 p-4 lg:flex-row ${index !== myOfficeData.length - 1 ? 'border-b border-accent border-solid' : ''}`}>
+            <figure className="flex flex-col w-full lg:w-1/3 gap-1">
+              <img className="rounded-xl" src={office.picture[0]} alt={office.name} />
+            </figure>
+            <div className="reviews flex flex-col gap-2 border-black w-full">
+              <OfficeName name={office.name} address={office.locaion} />
+              <Link to="/SalesAnalysis"><button className="btn btn-primary w-full">매출 자세히보기</button></Link>
+
               <div className="reviews">
+                <div className="w-full shadow-md rounded-xl p-4 h-full">
+                  <p className="text-primary pb-4">Reviews</p>
+                  <RecentReviews />
 
-                <div className="flex text-sm pb-4">
-                  <ProfileCircle />
-
-                  <div>  첫 번째 리뷰 내용입니다.</div>
-                </div>
-                <div className="flex text-sm pb-4">
-                  <ProfileCircle />
-
-                  <div> 두 번째 리뷰 내용입니다.</div>
                 </div>
               </div>
-
             </div>
-
-
-
           </div>
-        </div>
+        ))}
 
-      </BackgroundCover >
+      </BackgroundCover>
     </>
   );
 };

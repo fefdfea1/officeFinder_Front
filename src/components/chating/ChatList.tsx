@@ -1,16 +1,17 @@
-import { useState, useEffect } from 'react';
 import { GrClose } from 'react-icons/gr';
 import { FaChevronLeft } from 'react-icons/fa';
 import { BackgroundCover } from '../common/BackgroundCover';
 import { ProfileCircle } from '../common/ProfileCircle';
 import styled from '@emotion/styled';
 import { ShowChat } from './ShowChat';
+import { useMyContext } from '../../contexts/MyContext';
 
 type ChatingProps = {
-  onIsOpenChange: (isOpen: boolean) => void;
+    onIsOpenChange: (isOpen: boolean) => void;
 };
 
 export const ChatList = ({ onIsOpenChange }: ChatingProps) => {
+
   const [showChatDetail, setShowChatDetail] = useState(0);
 
   useEffect(() => {
@@ -18,14 +19,15 @@ export const ChatList = ({ onIsOpenChange }: ChatingProps) => {
     setShowChatDetail(Number(storedShowChatDetail));
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem('showChatDetail', String(showChatDetail));
-  }, [showChatDetail]);
 
-  const handleChatClose = () => {
-    onIsOpenChange(false);
-    setShowChatDetail(0);
-  };
+    const handleChatClose = () => {
+        onIsOpenChange(false);
+        setIsChatRoom(false);
+    };
+
+    const handleGoToList = () => {
+        setIsChatRoom(false);
+    };
 
   const handleGoToList = () => {
     setShowChatDetail(0);
@@ -64,14 +66,11 @@ export const ChatList = ({ onIsOpenChange }: ChatingProps) => {
                 </div>
               </button>
               {/* -- 첫번째 채팅 -- */}
+
+
             </div>
-          ) : (
-            <ShowChat />
-          )}
-        </BackgroundCover>
-      </div>
-    </div>
-  );
+        </div>
+    );
 };
 
 const Span = styled.span`
@@ -86,3 +85,4 @@ const Span = styled.span`
   line-height: 1.2em;
   height: 3.6em;
 `;
+
