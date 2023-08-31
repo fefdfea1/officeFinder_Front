@@ -1,46 +1,27 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { OfficeName } from '../../components/booking/Officename';
+import { useQuery } from 'react-query';
 import { BackgroundCover } from '../../components/common/BackgroundCover';
 import { Button } from '../../components/common/Button';
 import { Title } from '../../components/common/Title';
+import { OfficeName } from '../../components/booking/Officename';
 import { RecentReviews } from "../../components/agent/RecentReviews"
-
-interface OfficeData {
-  id: number;
-  name: string;
-  locaion: string;
-  picture: string[];
-}
-
-interface MyOfficeResponse {
-  myOffice: {
-    data: OfficeData[];
-  };
-}
+import type { MyOfficeResponse, OfficeData } from './agentTypes'; // Import the MyOffice type
+import { fetchMyOfficeData } from '../../fetch/get/agent';
 
 export const MyOffice = () => {
-  const [myOfficeData, setMyOfficeData] = useState<OfficeData[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { data, isLoading, isError } = useQuery<MyOfficeResponse>('myOfficeData', fetchMyOfficeData, {
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get<MyOfficeResponse>("https://my-json-server.typicode.com/kjewt/json-server/db");
-        setMyOfficeData(response.data.myOffice.data);
-        setLoading(false);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
+  });
 
-    fetchData();
-  }, []);
-
-  if (loading) {
+  if (isLoading) {
     return <div className="p-4 text-center font-bold">Loading...</div>;
   }
+
+  if (isError) {
+    return <div className="p-4 text-center font-bold">데이터를 가져올 수 없습니다.</div>;
+  }
+
+  const myOfficeData = data?.data;
 
   return (
     <>
@@ -51,26 +32,31 @@ export const MyOffice = () => {
       </div>
       <BackgroundCover>
         <Title>나의 지점보기</Title>
-        {myOfficeData.map((office, index) => (
-          <div key={office.id} className={`flex flex-col gap-4 p-4 lg:flex-row ${index !== myOfficeData.length - 1 ? 'border-b border-accent border-solid' : ''}`}>
-            <figure className="flex flex-col w-full lg:w-1/3 gap-1">
-              <img className="rounded-xl" src={office.picture[0]} alt={office.name} />
-            </figure>
-            <div className="reviews flex flex-col gap-2 border-black w-full">
-              <OfficeName name={office.name} address={office.locaion} />
-              <Link to="/SalesAnalysis"><button className="btn btn-primary w-full">매출 자세히보기</button></Link>
+        {myOfficeData && myOfficeData.length > 0 ? (
+          myOfficeData.map((office: OfficeData, index) => (
+            <div key={office.id} className={`flex flex-col gap-4 p-4 lg:flex-row ${index !== myOfficeData.length - 1 ? 'border-b border-accent border-solid' : ''}`}>
+              <figure className="flex flex-col w-full lg:w-1/3 gap-1">
+                <img className="rounded-xl" src={office.picture[0]} alt={office.name} />
+              </figure>
+              <div className="reviews flex flex-col gap-2 border-black w-full">
+                <OfficeName name={office.name} address={office.locaion} />
+                <Link to="/SalesAnalysis"><button className="btn btn-primary w-full">매출 자세히보기</button></Link>
 
-              <div className="reviews">
-                <div className="w-full shadow-md rounded-xl p-4 h-full">
-                  <p className="text-primary pb-4">Reviews</p>
-                  <RecentReviews />
+                <div className="reviews">
+                  <div className="w-full shadow-md rounded-xl p-4 h-full">
+                    <p className="text-primary pb-4">Reviews</p>
+                    <RecentReviews />
 
+                  </div>
                 </div>
               </div>
             </div>
+          ))
+        ) : (
+          <div className="text-center p-4">
+            <div className="p-4 text-center font-bold">아직 등록된 오피스가 없습니다. <br />먼저 오피스를 등록해주세요.</div>
           </div>
-        ))}
-
+        )}
       </BackgroundCover>
     </>
   );

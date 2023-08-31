@@ -7,7 +7,7 @@ import { MyOfficeListDropDown } from '../../components/common/MyOfficeListDropDo
 import { OfficeName } from '../../components/booking/Officename';
 import { OfficeOptions } from '../../components/booking/OfficeOptions';
 import { ReservationAttendeesList } from '../../components/agent/ReservationAttendeesList'
-import { SalesCharts } from './SalesCharts';
+import { SalesCharts } from '../../components/agent/SalesCharts';
 
 
 export const SalesAnalysis = () => {
