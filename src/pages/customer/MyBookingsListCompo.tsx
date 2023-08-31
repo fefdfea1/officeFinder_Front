@@ -1,13 +1,18 @@
 import { OfficeName } from '../../components/booking/Officename';
 import { Heart } from '../../components/common/Heart';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import { MyBookingsDataType } from './MyBookings';
+import { useSetStatusText } from './MyBookingsSetStatusText';
 
 type propsType = {
   type?: string;
+  item: MyBookingsDataType;
 };
 
 export const MyBookingsListCompo = (props: propsType) => {
   const [writeReviewState, setReviewState] = useState<boolean>(false);
+  const statePTag = useRef<HTMLParagraphElement>(null);
+  useSetStatusText(statePTag, props.item.leaseStatus);
   return (
     <>
       <div className="flex px-10 sm:px-2 sm:flex-col lg:flex-row mb-8">
@@ -31,7 +36,7 @@ export const MyBookingsListCompo = (props: propsType) => {
               2023년 8월 10일 ~ 2023년 9월 9일
             </p>
             {props.type === 'MyBooking' && (
-              <p className="mb-8">다음 사용자를 위해 기간 내에 오피스를 깨끗히 해주세요.</p>
+              <p className="mb-4">다음 사용자를 위해 기간 내에 오피스를 깨끗히 해주세요.</p>
             )}
           </div>
           <div
@@ -40,6 +45,10 @@ export const MyBookingsListCompo = (props: propsType) => {
               'flex justify-between items-center sm:flex-col sm:items-start lg:flex-row lg:items-center'
             }`}
           >
+            <div className="mb-4">
+              <p className="font-black text-lg">현재 상태</p>
+              <p ref={statePTag} className="text-base"></p>
+            </div>
             <p className="text-base mb-1">2023년 8월 7일 결제 완료</p>
             {props.type === 'MyBooking' && <p className="text-primary">다음 월 정기 결제일은 0000입니다</p>}
             {props.type === 'last_reservation' && (

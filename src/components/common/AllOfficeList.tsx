@@ -19,6 +19,7 @@ export const AllOfficeList = (): JSX.Element => {
             <p className="font-medium text-sm price">월 500,000</p>
           </div>
         </figure>
+
         <figure className="mx-auto">
           <img className="rounded-xl" src="https://picsum.photos/320" alt="Shoes" />
           <div className="text-left">
@@ -79,6 +80,7 @@ export const AllOfficeList = (): JSX.Element => {
             <p className="font-medium text-sm price">월 500,000</p>
           </div>
         </figure>
+
       </div>
     </>
   );

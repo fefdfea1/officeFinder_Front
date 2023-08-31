@@ -2,9 +2,10 @@ import { OfficeName } from '../../components/booking/Officename';
 import { AiFillStar } from 'react-icons/ai';
 import { Heart } from '../../components/common/Heart';
 import { Link } from 'react-router-dom';
-
+import { BookMarkDataType } from './BookMark';
 type propsType = {
   imgSrc: string;
+  item: BookMarkDataType;
 };
 
 export const BookMarkOfficeCompo = (props: propsType) => {
@@ -17,7 +18,7 @@ export const BookMarkOfficeCompo = (props: propsType) => {
         </figure>
       </Link>
       <div className="flex justify-between relative">
-        <OfficeName name="오피스 이름입니다" address="주소" />
+        <OfficeName name={`${props.item.officeName}`} address={`${props.item.officeAddress}`} />
         <div className="flex items-center absolute top-2 right-2 font-bold text-sm tracking-tight">
           <AiFillStar className="mr-1" />
           <span className="mr-1">(4.91)</span>

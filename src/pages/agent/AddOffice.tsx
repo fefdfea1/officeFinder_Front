@@ -43,10 +43,10 @@ export const AddOffice = () => {
           <div className="">
             <p className="text-center text-base pb-4">최대 인원수와 오피스의 개수, 가격을 입력하세요.</p>
             <div className="flex flex-col md:flex-row">
-              <Input type="number" placeholder="숫자로 입력하세요." inputLabelPosition="text-center" inputLabel="최대 인원수" warning="" />
-              <Input type="number" placeholder="숫자로 입력하세요." inputLabelPosition="text-center" inputLabel="개수" warning="" />
+              <Input type="number" placeholder="숫자로 입력하세요." inputLabelPosition="text-center" inputLabel="최대 인원수" onInputChange={() => { }} />
+              <Input type="number" placeholder="숫자로 입력하세요." inputLabelPosition="text-center" inputLabel="개수" onInputChange={() => { }} />
               <div className="flex flex-col items-center">
-                <Input type="text" onInputChange={handlePriceChange} placeholder="숫자로 입력하세요." inputLabelPosition="text-center" inputLabel="가격" warning="" />
+                <Input type="text" onInputChange={handlePriceChange} placeholder="숫자로 입력하세요." inputLabelPosition="text-center" inputLabel="가격" />
                 {monthlyPrice ? <NumberToKoreanConverter price={monthlyPrice || 0} /> : null}
               </div>
             </div>
