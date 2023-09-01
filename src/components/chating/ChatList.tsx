@@ -11,6 +11,7 @@ type ChatingProps = {
 };
 
 export const ChatList = ({ onIsOpenChange }: ChatingProps) => {
+
   const [showChatDetail, setShowChatDetail] = useState(0);
 
   useEffect(() => {
@@ -22,10 +23,12 @@ export const ChatList = ({ onIsOpenChange }: ChatingProps) => {
     localStorage.setItem("showChatDetail", String(showChatDetail));
   }, [showChatDetail]);
 
+
   const handleChatClose = () => {
     onIsOpenChange(false);
     setShowChatDetail(0);
   };
+
 
   const handleGoToList = () => {
     setShowChatDetail(0);
@@ -64,6 +67,7 @@ export const ChatList = ({ onIsOpenChange }: ChatingProps) => {
                 </div>
               </button>
               {/* -- 첫번째 채팅 -- */}
+
             </div>
           ) : (
             <ShowChat />
