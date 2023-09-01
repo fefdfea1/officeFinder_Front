@@ -1,9 +1,9 @@
-import { useState } from 'react';
-import { changeCommentHandler } from '../../components/booking/ReviewsChangeComment';
-import { OfficeProfile } from './AddOfficeReviewsOfficeCompo';
+import { useState } from "react";
+import { changeCommentHandler } from "../../Business/Reviews/ReviewsChangeComment";
+import { OfficeProfile } from "./AddOfficeReviewsOfficeCompo";
 
 export const AddOfficeReviews = () => {
-  const [textAreaCount, setCount] = useState<string>('');
+  const [textAreaCount, setCount] = useState<string>("");
 
   return (
     <div className="pt-20 sm:px-6">
@@ -35,7 +35,7 @@ export const AddOfficeReviews = () => {
             rows={10}
             placeholder="사용한 오피스가 어땠는지 평가해주세요."
             className="placeholder:text-primary p-4 w-full border border-primary"
-            style={{ resize: 'none' }}
+            style={{ resize: "none" }}
             onChange={e => {
               changeCommentHandler(e, textAreaCount, setCount);
             }}
