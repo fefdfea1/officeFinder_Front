@@ -20,9 +20,6 @@ export const OfficeOptions = (props: propsType) => {
       const keys = Object.keys(props.OptionData);
       const changeArr = changeOptionName(keys);
       setOptionData(changeArr);
-      if (optionData.length >= 1) {
-        console.log(optionData);
-      }
     }
   }, []);
 
