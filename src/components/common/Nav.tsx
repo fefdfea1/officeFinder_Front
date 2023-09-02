@@ -70,7 +70,7 @@ export const Nav = () => {
               </li>
             </ul>
           </div>
-          <div className="dropdown dropdown-end mx-auto z-20">
+          <div className="dropdown dropdown-end mx-auto z-20 ">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="rounded-full">
                 <PiBellRingingBold className="w-7 h-7" />
@@ -81,7 +81,7 @@ export const Nav = () => {
             </label>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 py-3 text-ms shadow bg-base-100 rounded-box w-48"
+              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 py-3 text-ms shadow bg-base-100 rounded-box w-48 hover:none"
             >
               <li className="p-0 text-left">
                 <a>3일 후 예약한 오피스의 이용 기간이 만료됩니다.</a>
@@ -92,9 +92,9 @@ export const Nav = () => {
               <li>
                 <a>예약이 거절되었습니다. </a>
               </li>
-              <li className="justify-center hover:bg-white">
-                <Button text={"더보기 +"} style={"btn btn-outline btn-accent w-full m-2 text-base "}></Button>
-              </li>
+              <div className="w-full">
+                <Button text={"더보기 +"} style={"btn btn-outline btn-primary btn-outline w-full text-base "}></Button>
+              </div>
             </ul>
           </div>
         </div>
