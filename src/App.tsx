@@ -1,22 +1,20 @@
-import './css/App.css';
-import { QueryClientProvider, QueryClient } from 'react-query';
+import "./css/App.css";
+import { QueryClientProvider, QueryClient } from "react-query";
 
-import { Router } from './router/Router';
-import { Nav } from './components/common/Nav';
-import { Footer } from './components/common/Footer';
-import { Chat } from './components/chating/Chat';
-import { MyProvider } from './contexts/MyContext';
-
-
+import { Router } from "./router/Router";
+import { Nav } from "./components/common/Nav";
+import { Footer } from "./components/common/Footer";
+import { Chat } from "./components/chating/Chat";
+import { MyProvider } from "./contexts/MyContext";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 export const App = () => {
-
   const queryClient = new QueryClient();
 
   return (
     <>
-
-      <MyProvider >
+      <MyProvider>
         <QueryClientProvider client={queryClient}>
           <Nav />
           <Chat />
@@ -29,4 +27,3 @@ export const App = () => {
     </>
   );
 };
-
