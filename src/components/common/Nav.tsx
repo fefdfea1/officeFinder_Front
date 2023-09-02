@@ -1,10 +1,8 @@
-
 import { VscCircleFilled } from "react-icons/vsc";
 import { CgProfile } from "react-icons/cg";
 import { PiBellRingingBold } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
 import { Button } from "./Button";
-
 
 export const Nav = () => {
   const navigate = useNavigate();
@@ -23,12 +21,10 @@ export const Nav = () => {
         </div>
         <div className="flex-none">
           <div className="m-3">
-
             <span className="text-base font-bold text-primary lg:inline md:hidden sm:hidden">c/a</span>
           </div>
           <div className="m-3">
             <span className="text-sm font-bold md:inline sm:hidden">닉네임</span>
-
           </div>
           <div className="dropdown dropdown-end z-20">
             <label tabIndex={0} className="btn bg-white border-none">
@@ -38,9 +34,7 @@ export const Nav = () => {
             </label>
             <div tabIndex={0} className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow">
               <div className="card-body">
-
                 <div className="card-actions ">
-
                   <button className="btn btn-primary btn-block">충전하기</button>
                 </div>
               </div>
@@ -76,7 +70,6 @@ export const Nav = () => {
                 <PiBellRingingBold className="w-7 h-7" />
 
                 <VscCircleFilled className="absolute text-primary top-[0] right-[0] text-xl" />
-
               </div>
             </label>
             <ul
@@ -92,7 +85,7 @@ export const Nav = () => {
               <li>
                 <a>예약이 거절되었습니다. </a>
               </li>
-              <li className="justify-center hover:bg-white">
+              <li className="justify-center">
                 <Button text={"더보기 +"} style={"btn btn-outline btn-accent w-full m-2 text-base "}></Button>
               </li>
             </ul>
