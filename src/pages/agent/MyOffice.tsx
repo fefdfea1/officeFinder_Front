@@ -36,7 +36,10 @@ export const MyOffice = () => {
         <Title>나의 지점보기</Title>
         {myOfficeData && myOfficeData.length > 0 ? (
           myOfficeData.map((office: OfficeData, index: number) => (
-            <div key={office.id} className={`flex flex-col gap-4 p-4 lg:flex-row ${index !== myOfficeData.length - 1 ? 'border-b border-accent border-solid' : ''}`}>
+            <div key={office.id} className={`flex flex-col gap-4 p-4 lg:flex-row 
+            ${office.picture.length === 0 ? 'p-4' : 'p-12'}
+            ${index !== myOfficeData.length - 1 ? 'border-b border-accent border-solid' : ''}
+            `}>
               <div className="w-full lg:w-2/5 lg:max-w-[400px]">
                 <MyOfficeFigure source={office.picture} />
               </div>
