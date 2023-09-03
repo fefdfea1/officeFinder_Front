@@ -1,19 +1,14 @@
 import { useState } from "react";
+import type { Address } from '../../type/agentTypes';
 
 type Options = {
     [key: string]: boolean;
 };
-type Address = {
-    legion: string,
-    city: string,
-    town: string,
-    street: string,
-    detail: string,
-    zipcode: string
-};
+
 
 
 export const useAddOfficeHandel = () => {
+    const [name, setName] = useState<string>()
     const [selectedOptions, setSelectedOptions] = useState<Options>({});
     const [address, setAddress] = useState<Address>({
         legion: "",
@@ -21,13 +16,20 @@ export const useAddOfficeHandel = () => {
         town: "",
         street: "",
         detail: "",
-        zipcode: "",
+        zipcode: 0,
     })
+    const [rooms, setRooms] = useState<number>()
+    const [maxCapacity, setMaxCapacity] = useState<number>()
     const [monthlyPrice, setMonthlyPrice] = useState<number>()
-    // 옵션 
-    const handleOptionsChange = (options: Options) => {
-        setSelectedOptions(options);
-    };
+
+
+    //오피스 이름
+    const handleOfficeName = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const officeName = e.target.value;
+        setName(officeName);
+    }
+
+
     //주소
     const handleAddressChange = (address: Address) => {
         setAddress({
@@ -48,7 +50,21 @@ export const useAddOfficeHandel = () => {
             event.target.value = formatValue;
         }
     };
+    // 옵션 
+    const handleOptionsChange = (options: Options) => {
+        setSelectedOptions(options);
+    };
+    // 방 개수 
+    const handleCountRoomsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const rooms = parseInt(e.target.value, 10); // 문자열을 숫자로 변환
+        setRooms(rooms);
+    };
 
+    // 최대 인원 수
+    const handleMaxCapacityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const capacity = parseInt(e.target.value, 10); // 문자열을 숫자로 변환
+        setMaxCapacity(capacity);
+    };
 
 
 
@@ -60,5 +76,12 @@ export const useAddOfficeHandel = () => {
         handleAddressChange,
         monthlyPrice,
         handlePriceChange,
+        name,
+        handleOfficeName,
+        rooms,
+        handleCountRoomsChange,
+        maxCapacity,
+        handleMaxCapacityChange
+
     };
 };
