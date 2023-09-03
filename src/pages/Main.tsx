@@ -1,24 +1,20 @@
-import { AllOfficeList } from '../components/common/AllOfficeList';
-import { Search } from '../components/common/Search';
-import styled from '@emotion/styled';
-import { useState } from 'react';
-import { AiOutlineSearch } from 'react-icons/ai';
+import { AllOfficeList } from "../components/common/AllOfficeList";
+import { Search } from "../components/common/Search";
+import styled from "@emotion/styled";
+import { useState } from "react";
+import { AiOutlineSearch } from "react-icons/ai";
 
 export const Main = () => {
   const [isHovering, setIsHovering] = useState(0);
 
   return (
     <>
-      <div
-        onMouseOver={() => setIsHovering(1)}
-        onMouseOut={() => setIsHovering(0)}
-        className=" mx-auto flex justify-center mt-4 h-20"
-      >
+      <div onMouseOver={() => setIsHovering(1)} onMouseOut={() => setIsHovering(0)} className="mx-auto mt-4 w-fit">
         {isHovering ? (
           <Search />
         ) : (
-          <SearchBoxContainer className="p-4 shadow-md">
-            <div className="top flex justify-center items-center pb-2">
+          <SearchBoxContainer className="p-3 shadow-md">
+            <div className="flex justify-center">
               <ContourBox className="text-info text-base p-4">장소</ContourBox>
               <ContourBox className="text-info text-base p-4">최대인원 수</ContourBox>
               <ContourBox className="text-info text-base p-4">옵션</ContourBox>
@@ -31,7 +27,7 @@ export const Main = () => {
           </SearchBoxContainer>
         )}
       </div>
-      <div className="p-4 mt-5 ">
+      <div className="p-4 mt-5">
         <AllOfficeList />
       </div>
     </>
@@ -69,7 +65,7 @@ const ContourBox = styled.div`
   }
 
   ::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 30%;
     right: 5%;

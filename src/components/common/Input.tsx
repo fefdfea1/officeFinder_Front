@@ -7,6 +7,7 @@ interface InputProps {
   type?: string;
   value?: string;
   name?: string;
+  bg?: string;
   onInputChange?: any;
 }
 
@@ -19,8 +20,9 @@ export const Input = (props: InputProps) => {
     inputLabelPosition = "",
     warning = "",
     type = "text",
-    value = "",
+    value,
     name = "",
+    bg = "",
   } = props;
 
   return (
@@ -33,7 +35,7 @@ export const Input = (props: InputProps) => {
           type={type}
           onChange={onInputChange}
           placeholder={placeholder}
-          className={`input input-bordered input-primary max-w-sm m-2 placeholder:text-base ${width}`}
+          className={`input input-bordered input-primary max-w-sm m-2 placeholder:text-base ${width} ${bg}`}
         />
         <p className="text-sm pl-2 mt-0 text-error">{warning}</p>
       </div>

@@ -87,13 +87,13 @@ export const Nav = () => {
               <li>
                 <a>예약이 거절되었습니다. </a>
               </li>
-              <li className="justify-center hover:bg-white">
+              <div className="w-full">
                 <Button
                   text={"더보기 +"}
-                  style={"btn btn-outline btn-accent w-full m-2 text-base "}
+                  style={"btn btn-outline btn-primary w-full text-base"}
                   clickHandler={clickMoreButton}
                 ></Button>
-              </li>
+              </div>
             </ul>
           </div>
         </div>
