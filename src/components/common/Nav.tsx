@@ -85,7 +85,7 @@ export const Nav = () => {
               <li>
                 <a>예약이 거절되었습니다. </a>
               </li>
-              <li className="justify-center">
+              <li className="justify-center hover:bg-white">
                 <Button text={"더보기 +"} style={"btn btn-outline btn-accent w-full m-2 text-base "}></Button>
               </li>
             </ul>
