@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { Address } from '../../type/agentTypes';
+import type { Address, officeOptions } from '../../type/agentTypes';
 
 type Options = {
     [key: string]: boolean;
@@ -9,7 +9,7 @@ type Options = {
 
 export const useAddOfficeHandel = () => {
     const [name, setName] = useState<string>()
-    const [selectedOptions, setSelectedOptions] = useState<Options>({});
+    const [selectedOptions, setSelectedOptions] = useState<officeOptions>();
     const [address, setAddress] = useState<Address>({
         legion: "",
         city: "",

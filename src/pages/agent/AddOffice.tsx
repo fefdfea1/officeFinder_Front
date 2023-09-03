@@ -9,11 +9,10 @@ import { AddOfficePhoto } from '../../components/agent/AddOfficePhoto';
 import { AddOfficeAddress } from '../../components/agent/AddOfficeAddress';
 import { useAddOfficeHandel } from '../../components/agent/HandelAddOffice'
 import { NumberToKoreanConverter } from '../../components/agent/NumberToKorean';
-import { NewOfficePost } from "../../type/agentTypes"
+import type { NewOfficePost } from "../../type/agentTypes"
 
 export const AddOffice = () => {
   const [postData, setPostData] = useState<NewOfficePost>()
-  //selectedOptions를 true만 넘길 수 있도록 filter사용 예정
   const { name, handleOfficeName,
     selectedOptions, handleOptionsChange,
     address, handleAddressChange,
@@ -42,7 +41,7 @@ export const AddOffice = () => {
   console.log(name)
   console.log(`이름: ${name}`)
   console.log(`주소: ${address}`)
-  // console.log(`가격: ${monthlyPrice}`)
+  // console.log(`가격: ${monthlyPrisce}`)
   // console.log(`최대인원수: ${maxCapacity}`)
   // console.log(`방개수: ${rooms}`)
   console.log(`옵션: ${selectedOptions}`)

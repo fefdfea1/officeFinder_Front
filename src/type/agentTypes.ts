@@ -25,8 +25,8 @@ export type NewOfficePost = {
   leaseFee: number | undefined;
   remainRoom: number | undefined;
   address: Address | undefined;
-  officeOption: officeOption | undefined;
-  officePicture: NewOfficePicture | undefined;
+  officeOption: officeOptions | undefined;
+  // officePicture: NewOfficePicture | undefined;
 };
 
 export type Address = {
@@ -38,22 +38,8 @@ export type Address = {
   detail: string;
 };
 
-export type officeOption = {
-  haveAirCondition: boolean;
-  haveCafe: boolean;
-  havePrinter: boolean;
-  packageSendServiceAvailable: boolean;
-  haveDoorLock: boolean;
-  faxServiceAvailable: boolean;
-  havePublicKitchen: boolean;
-  havePublicLounge: boolean;
-  havePrivateLocker: boolean;
-  haveTvProjector: boolean;
-  haveWhiteBoard: boolean;
-  haveWifi: boolean;
-  haveShowerBooth: boolean;
-  haveStorage: boolean;
-  haveHeater: boolean;
+export type officeOptions = {
+  [key: string]: boolean;
 };
 
 export type NewOfficePicture = {
