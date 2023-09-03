@@ -1,4 +1,3 @@
-import styled from "@emotion/styled";
 import { useState } from "react";
 import { Button } from "../common/Button";
 import { Input } from "../common/Input";
@@ -71,7 +70,7 @@ export const AgencyCard = ({ clickBack }: { clickBack: (step: number, key: strin
     <>
       <div className="shadow-md rounded-xl p-8  mx-auto my-4 flex-col items-center md:w-[400px] min-h-[600px] sm:w-[340px]">
         <h3 className="font-black">임대인 회원가입</h3>
-        <Div className="pt-6">
+        <div className="pt-6">
           <Input
             inputLabel={"이메일"}
             placeholder={"이메일을 입력해 주세요"}
@@ -141,23 +140,8 @@ export const AgencyCard = ({ clickBack }: { clickBack: (step: number, key: strin
             text={"다시 선택하기"}
             style={"btn btn-outline btn-primary m-2 text-base w-full"}
           />
-        </Div>
+        </div>
       </div>
     </>
   );
 };
-
-const Div = styled.div`
-  /* background-image: url($.image.src); */
-`;
-// const EyeIcon = styled.div`
-// background-image: url(AiOutlineEyeInvisible)
-//   ::after {
-//     content: ("AiOutlineEyeInvisible");
-//     position: absolute;
-//     top: 305px;
-//     right: 400px;
-//     width: 20px;
-//     height: 20px;
-//   }
-// `;
