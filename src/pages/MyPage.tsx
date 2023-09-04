@@ -3,14 +3,14 @@ import { TitleAndDesc } from "../components/common/TitleAndDesc";
 import { BackgroundCover } from "../components/common/BackgroundCover";
 import { Modal } from "../components/common/Modal";
 import { useState } from "react";
-import { cacheChargeModalStateFn } from "./MyPageModalState";
-import { pullCacheModalStateFn } from "./MyPageModalState";
+import { cacheChargeModalStateFn } from "../Business/Mypage/MyPageModalState";
+import { pullCacheModalStateFn } from "../Business/Mypage/MyPageModalState";
 import { useEffect, useRef } from "react";
-import { changeProfile, removeProfile } from "./MyPageChangeProfile";
-import { setEditClass, mypageBlueEventHandler } from "./MypageFouseHandler";
+import { changeProfile, removeProfile } from "../Business/Mypage/MyPageChangeProfile";
+import { setEditClass, mypageBlueEventHandler } from "../Business/Mypage/MypageFouseHandler";
 import { Link } from "react-router-dom";
 import { useQuery } from "react-query";
-import { fetchMyPageData } from "../fetch/api";
+import { fetchMyPageData } from "../fetch/get/agent";
 import styled from "@emotion/styled";
 
 type fetchDataType = {
