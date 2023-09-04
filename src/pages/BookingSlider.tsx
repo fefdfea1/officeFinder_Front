@@ -3,16 +3,16 @@ import Slider from "react-slick";
 import styled from "@emotion/styled";
 
 type BookingSliderType = {
-    children: ReactNode;
-    setting: settingType;
+  children: ReactNode;
+  setting: settingType;
 };
 
 type settingType = {
-    [key: string]: boolean | number;
+  [key: string]: boolean | number;
 };
 
 export const SlickSlider = ({ children, setting }: BookingSliderType) => {
-    return <SliderContainer {...setting}>{children}</SliderContainer>;
+  return <SliderContainer {...setting}>{children}</SliderContainer>;
 };
 
 const SliderContainer = styled(Slider)`
