@@ -1,10 +1,10 @@
-import { BackgroundCover } from '../../components/common/BackgroundCover';
-import { Title } from '../../components/common/Title';
-import { BookMarkOfficeCompo } from './BookMarkOfficeCompo';
-import { useQuery } from 'react-query';
-import { fetchBookMarkData } from '../../fetch/api';
-import { useEffect, useState } from 'react';
-import styled from '@emotion/styled';
+import { BackgroundCover } from "../../components/common/BackgroundCover";
+import { Title } from "../../components/common/Title";
+import { BookMarkOfficeCompo } from "./BookMarkOfficeCompo";
+import { useQuery } from "react-query";
+import { fetchBookMarkData } from "../../fetch/get/agent";
+import { useEffect, useState } from "react";
+import styled from "@emotion/styled";
 
 export type BookMarkDataType = {
   officeAddress: string;
@@ -13,14 +13,14 @@ export type BookMarkDataType = {
 
 const defaultValue = [
   {
-    officeName: '',
-    officeAddress: '',
+    officeName: "",
+    officeAddress: "",
   },
 ];
 
 export const BookMark = () => {
   const [BookMarkData, setBookMarkData] = useState<BookMarkDataType[]>(defaultValue);
-  const { data } = useQuery('BookMark', fetchBookMarkData);
+  const { data } = useQuery("BookMark", fetchBookMarkData);
   useEffect(() => {
     if (data) {
       setBookMarkData(data.BookMark.data);
