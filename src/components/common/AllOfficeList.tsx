@@ -3,7 +3,7 @@ import { BackgroundCover } from "./BackgroundCover";
 import { Pagination } from "./Pagination";
 
 export const AllOfficeList = (): JSX.Element => {
-  const list = Array.from({ length: 27 }, (v, i) => {
+  const list = Array.from({ length: 27 }, (_, i) => {
     return {
       id: i,
       image: "https://picsum.photos/320",

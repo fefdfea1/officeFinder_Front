@@ -4,7 +4,7 @@ import { Pagination } from "../components/common/Pagination";
 import { Title } from "../components/common/Title";
 
 export const NotiMessage = () => {
-  const data = Array.from({ length: 15 }, (v, i) => {
+  const data = Array.from({ length: 15 }, (_, i) => {
     return { id: i, title: "임대만료임박", time: "2023-08-29 12:34:56", content: "임대 만료가 3일 남았습니다!" };
   });
 
