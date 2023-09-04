@@ -12,11 +12,13 @@ import { fetchBookingData } from "../fetch/get/agent";
 import { GiPositionMarker } from "react-icons/gi";
 import { DrawMap } from "../Business/Booking/BookingPrintMap";
 import { SlickSlider } from "./BookingSlider";
-import { BookingFigure } from "./customer/BookingFigure";
-import styled from "@emotion/styled";
-import "react-day-picker/dist/style.css";
+import { BookingFigure } from "./BookingFigure";
 import { OfficeName } from "../components/booking/Officename";
 import { Link } from "react-router-dom";
+import { useMyContext } from "../contexts/MyContext";
+import styled from "@emotion/styled";
+import "react-day-picker/dist/style.css";
+import { BookingImageEmpty } from "./BookingEmptyImg";
 
 declare global {
   interface Window {
@@ -54,6 +56,10 @@ const setting = {
   pauseOnHover: true,
   autoplay: true,
 };
+//데이터 연결전 임시 타입입니다
+type img = {
+  img: string;
+};
 
 export const Booking = () => {
   const [selectedDay, setSelectedDay] = useState<Date>();
@@ -65,6 +71,9 @@ export const Booking = () => {
   const [loadViewToolTipState, setToolTipState] = useState<boolean>(false);
   const PrintDayDom = useRef<HTMLParagraphElement>(null);
   const { data } = useQuery(["BookingPageData"], fetchBookingData);
+  //데이터를 연결하면서 실제 이미지 데이터로 연결 해야함
+  const imageData: img[] = [];
+  const context = useMyContext();
 
   useEffect(() => {
     if (data) {
@@ -92,8 +101,13 @@ export const Booking = () => {
         <div className="flex mb-8 sm:flex-col xl:flex-row">
           <ImgAreaWidht>
             <SlickSlider setting={setting}>
-              <BookingFigure />
-              <BookingFigure />
+              {imageData.length >= 1 ? (
+                imageData.map(() => {
+                  return <BookingFigure img="" />;
+                })
+              ) : (
+                <BookingImageEmpty />
+              )}
             </SlickSlider>
             {/* 데이터 받아오면 넣어야함 */}
             <div className="w-full flex flex-col  lg:w-8/12 lg:mx-auto xl:px-0 xl:w-full">
@@ -107,7 +121,14 @@ export const Booking = () => {
                     다른 오피스 둘러보기
                   </Link>
                 </button>
-                <button className="btn btn-outline btn-primary block p-0 grow shrink basis-1/2">문의하기</button>
+                <button
+                  className="btn btn-outline btn-primary block p-0 grow shrink basis-1/2"
+                  onClick={() => {
+                    context.setIsChatListOpen(true);
+                  }}
+                >
+                  문의하기
+                </button>
               </div>
             </div>
           </ImgAreaWidht>
@@ -226,7 +247,7 @@ const CaledarAndOPtionWidth = styled.div`
   @media (min-width: 360px) {
     width: 100%;
   }
-  @media (min-width: 1280) {
+  @media (min-width: 1280px) {
     width: 60%;
   }
 `;

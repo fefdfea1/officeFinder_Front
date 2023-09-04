@@ -115,7 +115,7 @@ export const changeOptionName = (data: OptionType) => {
         changeArr.push(createObject);
         break;
       case "haveParking":
-        createObject.name = "난방기";
+        createObject.name = "주차장";
         createObject.Icon = <FaParking />;
         changeArr.push(createObject);
         break;
