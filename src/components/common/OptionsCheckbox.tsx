@@ -39,7 +39,6 @@ export const OptionsCheckbox: React.FC<OptionsCheckboxProps> = ({ onOptionChange
   );
 
   const [selectedOptions, setSelectedOptions] = React.useState<{ [key: string]: boolean }>(initialOptions);
-  console.log(selectedOptions)
   const handleCheckboxChange = (key: string) => {
     const updatedOptions = {
       ...selectedOptions,

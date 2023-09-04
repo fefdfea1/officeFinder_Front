@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { BackgroundCover } from '../../components/common/BackgroundCover';
 import { Title } from '../../components/common/Title';
 import { Button } from '../../components/common/Button';
@@ -9,9 +9,11 @@ import { AddOfficePhoto } from '../../components/agent/AddOfficePhoto';
 import { AddOfficeAddress } from '../../components/agent/AddOfficeAddress';
 import { useAddOfficeHandel } from '../../components/agent/HandelAddOffice'
 import { NumberToKoreanConverter } from '../../components/agent/NumberToKorean';
+import { postNewOfficeData } from "../../fetch/post/agent"
 import type { NewOfficePost } from "../../type/agentTypes"
 
 export const AddOffice = () => {
+  const navigate = useNavigate();
   const [postData, setPostData] = useState<NewOfficePost>()
   const { name, handleOfficeName,
     selectedOptions, handleOptionsChange,
@@ -25,7 +27,7 @@ export const AddOffice = () => {
     event.preventDefault()
   }
 
-  const SubmitData = () => {
+  const SubmitData = async () => {
     const updatedData = {
       ...postData,
       officeName: name,
@@ -35,18 +37,20 @@ export const AddOffice = () => {
       remainRoom: rooms,
       officeOption: selectedOptions,
     };
-
     setPostData(updatedData);
+    if (postData) {
+      try {
+        await postNewOfficeData(postData);
+        console.log("데이터 전송 완료");
+        alert('전송이 완료되었습니다.')
+        navigate("/MyOffice");
+      } catch (error) {
+        console.error("데이터 전송 중 오류 발생:", error);
+        alert('오류발생')
+      }
+    }
   }
-  console.log(name)
-  console.log(`이름: ${name}`)
-  console.log(`주소: ${address}`)
-  // console.log(`가격: ${monthlyPrisce}`)
-  // console.log(`최대인원수: ${maxCapacity}`)
-  // console.log(`방개수: ${rooms}`)
-  console.log(`옵션: ${selectedOptions}`)
-  // console.log(`Office: ${JSON.stringify(selectedOptions)}`);
-  console.log(address)
+
 
   return (
     <>
