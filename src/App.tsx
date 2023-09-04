@@ -26,4 +26,6 @@ export const App = () => {
       </MyProvider>
     </>
   );
+
 };
+
