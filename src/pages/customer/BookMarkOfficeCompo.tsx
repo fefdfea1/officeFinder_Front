@@ -1,8 +1,8 @@
-import { OfficeName } from '../../components/booking/Officename';
-import { AiFillStar } from 'react-icons/ai';
-import { Heart } from '../../components/common/Heart';
-import { Link } from 'react-router-dom';
-import { BookMarkDataType } from './BookMark';
+import { OfficeName } from "../../components/booking/Officename";
+import { AiFillStar } from "react-icons/ai";
+import { Heart } from "../../components/common/Heart";
+import { Link } from "react-router-dom";
+import { BookMarkDataType } from "./BookMark";
 type propsType = {
   imgSrc: string;
   item: BookMarkDataType;
@@ -12,7 +12,7 @@ export const BookMarkOfficeCompo = (props: propsType) => {
   return (
     <div className="flex flex-col relative">
       {/* 데이터를 받아올때 오피스 id를 받아와 이동 */}
-      <Link to={'#'}>
+      <Link to={"#"}>
         <figure className="overflow-hidden rounded-xl w-full md:h-44 ">
           <img src={props.imgSrc} alt="즐겨찾기한 오피스 목록입니다" className="w-full h-full" />
         </figure>
@@ -27,7 +27,7 @@ export const BookMarkOfficeCompo = (props: propsType) => {
       </div>
       <p className="text-sm pl-2 ">현재 위치와의 거리 200m</p>
       <button className="absolute right-2 top-2" type="button">
-        <Heart />
+        <Heart fillState="active" />
       </button>
     </div>
   );
