@@ -23,6 +23,8 @@ export const Input = (props: InputProps) => {
     warning = "",
     type = "text",
 
+    value,
+
     name = "",
     value,
 
