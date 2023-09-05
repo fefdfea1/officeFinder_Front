@@ -12,6 +12,7 @@ interface AgencyCardProps {
 }
 
 export const AgencyCard = ({ clickBack }: { clickBack: (step: number, key: string) => void }) => {
+
   const postLogin = useMutation(
     "signUP",
     () =>
@@ -68,7 +69,9 @@ export const AgencyCard = ({ clickBack }: { clickBack: (step: number, key: strin
   console.log({ signup });
   return (
     <>
+
       <div className="shadow-md rounded-xl p-8  mx-auto my-4 flex-col items-center md:w-[400px] min-h-[600px] sm:w-[340px]">
+
         <h3 className="font-black">임대인 회원가입</h3>
         <div className="pt-6">
           <Input
@@ -95,6 +98,7 @@ export const AgencyCard = ({ clickBack }: { clickBack: (step: number, key: strin
 
           <Input
             value={signup.passwordConfirm}
+
             name={"passwordConfirm"}
             inputLabel={"비밀번호 확인"}
             placeholder={"한 번 더 입력해주세요"}
@@ -104,6 +108,7 @@ export const AgencyCard = ({ clickBack }: { clickBack: (step: number, key: strin
                   ? "맞습니다"
                   : "비밀번호가 일치하지 않습니다"
                 : ""
+
             }
             type={"password"}
             onInputChange={handleFormData}
@@ -126,8 +131,10 @@ export const AgencyCard = ({ clickBack }: { clickBack: (step: number, key: strin
 
           <Button
             clickHandler={() => clickSignupButton()}
+
             style={"btn btn-outline btn-primary m-2 text-base w-full"}
             text={"회원가입"}
+
             disabled={
               !validateEmail(signup.email) ||
               !validatePassword(signup.password) ||
@@ -136,9 +143,11 @@ export const AgencyCard = ({ clickBack }: { clickBack: (step: number, key: strin
             }
           />
           <Button
+
             clickHandler={() => clickBack(0, "")}
             text={"다시 선택하기"}
             style={"btn btn-outline btn-primary m-2 text-base w-full"}
+
           />
         </div>
       </div>

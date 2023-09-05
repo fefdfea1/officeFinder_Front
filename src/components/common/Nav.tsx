@@ -71,6 +71,7 @@ export const Nav = () => {
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="rounded-full">
                 <PiBellRingingBold className="w-7 h-7" />
+
                 <VscCircleFilled className="absolute text-primary top-[0] right-[0] text-xl" />
               </div>
             </label>

@@ -1,13 +1,30 @@
 import { Link } from 'react-router-dom';
-import { OfficeName } from '../../components/booking/Officename';
+import { useQuery } from 'react-query';
 import { BackgroundCover } from '../../components/common/BackgroundCover';
 import { Button } from '../../components/common/Button';
-import { ProfileCircle } from '../../components/common/ProfileCircle';
 import { Title } from '../../components/common/Title';
+import { OfficeName } from '../../components/booking/Officename';
+import { RecentReviews } from "../../components/agent/RecentReviews"
+import type { MyOfficeResponse, OfficeData } from './agentTypes';
+import { fetchMyOfficeData } from '../../fetch/get/agent';
+import { MyOfficeFigure } from '../../components/agent/MyOfficeFigure';
 
 
 export const MyOffice = () => {
-  //내가 가진 officeList를 Map을 사용해 반복할 수 있도록 합니다.
+  const { data, isLoading, isError } = useQuery<MyOfficeResponse>('myOfficeData', fetchMyOfficeData, {
+
+  });
+
+  if (isLoading) {
+    return <div className="p-4 text-center font-bold">Loading...</div>;
+  }
+
+  if (isError) {
+    return <div className="p-4 text-center font-bold">데이터를 가져올 수 없습니다.</div>;
+  }
+
+  const myOfficeData = data?.data;
+
   return (
     <>
       <div className="flex justify-end relative">
@@ -17,38 +34,35 @@ export const MyOffice = () => {
       </div>
       <BackgroundCover>
         <Title>나의 지점보기</Title>
-        <div className="flex flex-col gap-4 p-4 lg:flex-row">
-          <figure className="flex flex-col w-full lg:w-1/3 gap-1">
-            <img className="rounded-xl" src="https://picsum.photos/350" alt="sample" />
-          </figure>
-          <div className="reviews flex flex-col gap-2 border-black w-full">
-            <OfficeName name="이름" address="주소" />
-            <Link to="/SalesAnalysis"><button className="btn btn-primary w-full">매출 자세히보기</button></Link>
-            {/* review */}
-            <div className="w-full shadow-md rounded-xl p-4 h-full">
-              <p className="text-primary pb-4">Reviews</p>
-              <div className="reviews">
+        {myOfficeData && myOfficeData.length > 0 ? (
+          myOfficeData.map((office: OfficeData, index: number) => (
+            <div key={office.id} className={`flex flex-col gap-4 p-4 lg:flex-row 
+            ${office.picture.length === 0 ? 'p-4' : 'p-12'}
+            ${index !== myOfficeData.length - 1 ? 'border-b border-accent border-solid' : ''}
+            `}>
+              <div className="w-full lg:w-2/5 lg:max-w-[400px]">
+                <MyOfficeFigure source={office.picture} />
+              </div>
+              <div className="reviews flex flex-col gap-2 border-black w-full lg:w-3/5">
+                <OfficeName name={office.name} address={office.locaion} />
+                <Link to="/SalesAnalysis"><button className="btn btn-primary w-full">매출 자세히보기</button></Link>
 
-                <div className="flex text-sm pb-4">
-                  <ProfileCircle />
+                <div className="reviews">
+                  <div className="w-full shadow-md rounded-xl p-4 h-full">
+                    <p className="text-primary pb-4">Reviews</p>
+                    <RecentReviews />
 
-                  <div>  첫 번째 리뷰 내용입니다.</div>
-                </div>
-                <div className="flex text-sm pb-4">
-                  <ProfileCircle />
-
-                  <div> 두 번째 리뷰 내용입니다.</div>
+                  </div>
                 </div>
               </div>
-
             </div>
-
-
-
+          ))
+        ) : (
+          <div className="text-center p-4">
+            <div className="p-4 text-center font-bold">아직 등록된 오피스가 없습니다. <br />먼저 오피스를 <Link to="/addOffice" className="link link-primary">등록</Link>해주세요.</div>
           </div>
-        </div>
-
-      </BackgroundCover >
+        )}
+      </BackgroundCover>
     </>
   );
 };

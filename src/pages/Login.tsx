@@ -1,8 +1,10 @@
+
 import { Input } from "../components/common/Input";
 import { Button } from "../components/common/Button";
 import { AiOutlineEyeInvisible } from "react-icons/ai";
 import { useMutation } from "react-query";
 import { useState } from "react";
+
 
 interface LoginProps {
   email: string;
@@ -22,6 +24,7 @@ export const Login = () => {
       return { ...prev, [name]: value };
     });
   };
+
 
   const postLogin = useMutation(
     "login",
@@ -46,6 +49,7 @@ export const Login = () => {
 
   return (
     <>
+
       <div className="shadow-md rounded-xl p-8 mx-auto my-4 flex-col items-center flex-col items-center md:w-[400px] min-h-[400px] sm:w-[340px]">
         <div>
           <Input
@@ -73,6 +77,7 @@ export const Login = () => {
           <div>
             <a className="text-base text-sm mx-auto">아직 회원이 아니신가요? 회원가입하기</a>
           </div>
+
         </div>
       </div>
     </>

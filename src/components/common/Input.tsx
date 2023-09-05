@@ -5,12 +5,15 @@ interface InputProps {
   inputLabelPosition?: string;
   warning?: string;
   type?: string;
+
   value?: string;
   name?: string;
   onInputChange?: any;
 }
 
+
 export const Input = (props: InputProps) => {
+
   const {
     onInputChange,
     width = "w-full",
@@ -19,8 +22,12 @@ export const Input = (props: InputProps) => {
     inputLabelPosition = "",
     warning = "",
     type = "text",
+
     value,
+
     name = "",
+    value,
+
   } = props;
 
   return (

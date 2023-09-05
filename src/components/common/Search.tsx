@@ -1,8 +1,10 @@
+
 import styled from "@emotion/styled";
 import { AiOutlineSearch } from "react-icons/ai";
 import { OptionsCheckbox } from "./OptionsCheckbox";
 import { MaxCapacityDropDown } from "./MaxCapacityDropDown";
 import "react-day-picker/dist/style.css";
+
 
 export const Search = () => {
   return (
@@ -15,6 +17,7 @@ export const Search = () => {
             className="placeholder:text-sm text-info input md:mr-2 sm:m-0"
           />
         </ContourBox>
+
         <div className="flex flex-row sm:justify-between">
           <ContourBox className="text-info mx-3 md:mr-4 sm:mr-8">
             <MaxCapacityCopy width="w-44" />
@@ -26,6 +29,7 @@ export const Search = () => {
             </button>
           </ContourBox>
         </div>
+
       </div>
       <div className="bottom">
         <OptionsCheckbox onOptionChange={() => {}} />
@@ -35,10 +39,13 @@ export const Search = () => {
 };
 /* 기존의 스타일변경으로는 크기와 위치를 세부적으로 조정하기 힘들어 커스텀했습니다 */
 const SearchBoxContainer = styled.form`
+
+
   min-height: 230px;
   background-color: #fff;
   border-radius: 12px;
   z-index: 10;
+
 `;
 
 const ContourBox = styled.div`
