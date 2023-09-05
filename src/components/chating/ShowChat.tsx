@@ -65,7 +65,7 @@ export const ShowChat = () => {
             </div>
             <div className="bg-secondary w-full h-1/3 p-3 rounded-b-xl">
                 <Textarea
-                    className="text-base"
+                    className="text-base h-full"
                     value={inputText}
                     onChange={handleInputChange}
                     onKeyDown={handleKeyDown}

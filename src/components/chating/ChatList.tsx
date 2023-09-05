@@ -1,5 +1,4 @@
-import { GrClose } from 'react-icons/gr';
-import { FaChevronLeft } from 'react-icons/fa';
+import { FaChevronLeft, FaTimes } from 'react-icons/fa';
 import { BackgroundCover } from '../common/BackgroundCover';
 import { ProfileCircle } from '../common/ProfileCircle';
 import styled from '@emotion/styled';
@@ -55,14 +54,14 @@ export const ChatList = ({ onIsOpenChange }: ChatingProps) => {
                 <BackgroundCover width="h-[35px] w-[320px] min-h-full relative" margin="m-0 p-0" padding={`${isChatRoom ? 'bg-accent' : 'bg-base-100'}`}>
                     <div className="flex flex-col items-center shadow-sm">
                         {isChatRoom ? (
-                            <button onClick={handleGoToList} className="btn btn-ghost btn-sm p-2 absolute left-0 top-0">
-                                <FaChevronLeft className="text-sm" />
+                            <button onClick={handleGoToList} className="btn btn-ghost btn-sm p-2 px-3 hover:bg-transparent hover:text-secondary absolute left-0 top-0">
+                                <FaChevronLeft />
                             </button>
                         ) : null}
-                        <button onClick={handleChatClose} className="btn btn-ghost btn-sm p-2 absolute right-0 top-0">
-                            <GrClose className="text-sm" />
+                        <button onClick={handleChatClose} className="btn btn-ghost btn-sm p-2 px-3 hover:bg-transparent hover:text-secondary absolute right-0 top-0">
+                            <FaTimes />
                         </button>
-                        <div className="font-bold text-base p-2">{isChatRoom ? "zb-FE" : "채팅목록"}</div>
+                        <div className="font-bold text-base p-2">{isChatRoom ? "아이디" : "채팅목록"}</div>
                     </div>
                     {renderContent()}
                 </BackgroundCover>
