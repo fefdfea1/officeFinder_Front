@@ -89,11 +89,9 @@ export const Nav = () => {
                 <a>예약이 거절되었습니다. </a>
               </li>
               <div className="w-full">
-                <Button
-                  text={"더보기 +"}
-                  style={"btn btn-outline btn-primary w-full text-base"}
-                  clickHandler={clickMoreButton}
-                ></Button>
+                <Button style={"btn btn-outline btn-primary w-full text-base"} clickHandler={clickMoreButton}>
+                  <p>더보기+</p>
+                </Button>
               </div>
             </ul>
           </div>

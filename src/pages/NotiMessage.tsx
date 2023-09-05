@@ -11,7 +11,7 @@ export const NotiMessage = () => {
   console.log({ data });
   return (
     <>
-      <BackgroundCover>
+      <BackgroundCover margin="mt-20">
         <Title>전체 알림</Title>
         <BackgroundCover margin="my-4" padding="lg:p-8 md:p-4 p-2">
           {data?.map(v => {
