@@ -5,7 +5,7 @@ import { useMutation } from "react-query";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
-import { loginAgencyApi } from "../fetch/get/main";
+import { loginAgencyApi } from "../fetch/post/main";
 
 interface LoginProps {
   email: string;
