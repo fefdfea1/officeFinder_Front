@@ -19,20 +19,20 @@ export const Join = () => {
   return (
     <>
       {process?.step === 0 && (
-        <div className="shadow-md rounded-xl p-8 mx-auto my-4 flex items-center justify-center md:w-[400px] min-h-[400px] sm:w-[340px]">
+        <div className="shadow-md rounded-xl p-8 mx-auto flex items-center justify-center md:w-[400px]  sm:w-[340px]">
           <div className="flex-col items-center justify-center">
             <Button
               clickHandler={() => handleSetProcess(1, 'customer')}
 
               text="일반 회원 회원가입"
-              style={'btn btn-outline btn-primary w-72 m-2 text-base'}
+              style={'btn btn-primary w-72 m-2 text-base'}
             ></Button>
             <Button
 
               clickHandler={() => handleSetProcess(1, 'agency')}
 
               text="임대인 회원가입"
-              style={'btn btn-outline btn-primary w-72 m-2 text-base'}
+              style={'btn btn-accent w-72 m-2 text-base'}
             ></Button>
           </div>
         </div>

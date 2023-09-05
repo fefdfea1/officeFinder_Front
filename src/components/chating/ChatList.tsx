@@ -30,7 +30,7 @@ export const ChatList = ({ onIsOpenChange }: ChatingProps) => {
             return (
                 <div className="flex flex-col w-full overflow-y-auto">
                     {/* 첫번째 채팅창 */}
-                    <button className="flex p-2 bg-base-100 justify-between gap-2" onClick={() => setIsChatRoom(true)}>
+                    <button className="flex p-3 bg-base-100 justify-between gap-2" onClick={() => setIsChatRoom(true)}>
                         <div className="flex">
                             <ProfileCircle />
                             <Span className="text-sm">
@@ -50,9 +50,9 @@ export const ChatList = ({ onIsOpenChange }: ChatingProps) => {
 
     return (
         <div className="relative z-20 ">
-            <div className="indicator h-[600px] fixed md:bottom-10 md:right-10 bottom-2 right-2">
-                <BackgroundCover width="h-[35px] w-[320px] min-h-full relative" margin="m-0 p-0" padding={`${isChatRoom ? 'bg-accent' : 'bg-base-100'}`}>
-                    <div className="flex flex-col items-center shadow-sm">
+            <div className="indicator md:h-[600px] h-full min-h-[350px] fixed bottom-0 right-0 md:bottom-2 md:right-2 ">
+                <BackgroundCover width="h-[35px] md:w-[320px] min-h-full relative w-screen" margin="m-0 p-0" padding={`${isChatRoom ? 'bg-accent' : 'bg-base-100'}`}>
+                    <div className="flex flex-col items-center border-b border-accent border-solid shadow-sm ">
                         {isChatRoom ? (
                             <button onClick={handleGoToList} className="btn btn-ghost btn-sm p-2 px-3 hover:bg-transparent hover:text-secondary absolute left-0 top-0">
                                 <FaChevronLeft />
