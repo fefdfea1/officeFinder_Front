@@ -15,6 +15,7 @@ type propsType = {
 
 export const BookMarkOfficeCompo = (props: propsType) => {
   return (
+
     <div data-index={props.index} className="BookMarkItem">
       <div className="flex flex-col relative">
         {/* 데이터를 받아올때 오피스 id를 받아와 이동 */}
@@ -30,6 +31,7 @@ export const BookMarkOfficeCompo = (props: propsType) => {
             <span className="mr-1">(4.91)</span>
             <span>484</span>
           </div>
+
         </div>
         <p className="text-sm pl-2 ">현재 위치와의 거리 200m</p>
         <button
@@ -43,6 +45,8 @@ export const BookMarkOfficeCompo = (props: propsType) => {
           <Heart fillState="active" />
         </button>
       </div>
+
+
     </div>
   );
 };
