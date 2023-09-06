@@ -4,7 +4,7 @@ import { BookMarkOfficeCompo } from "./BookMarkOfficeCompo";
 import { useQuery } from "react-query";
 import { fetchBookMarkData } from "../../fetch/get/agent";
 import { useEffect, useState } from "react";
-import { getCookie } from "../../fetch/Cookie/Cookie";
+import { BookMarkAlert } from "./BookMarkAlert";
 import styled from "@emotion/styled";
 
 export type BookMarkDataType = {
@@ -21,6 +21,7 @@ const defaultValue = [
 
 export const BookMark = () => {
   const [BookMarkData, setBookMarkData] = useState<BookMarkDataType[]>(defaultValue);
+  const [alertState, setAlertState] = useState<boolean>(false);
   const { data } = useQuery("BookMark", () => fetchBookMarkData(), {
     staleTime: Infinity,
   });
@@ -30,6 +31,10 @@ export const BookMark = () => {
       console.log(BookMarkData);
     }
   }, [data]);
+
+  useEffect(() => {
+    console.log(alertState);
+  }, [alertState]);
 
   return (
     <div className="mb-10">
@@ -47,11 +52,18 @@ export const BookMark = () => {
                 item={item}
                 imgSrc="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRS-IbhTFqh9vemV_FD7WQn48tFhODBKb1kEteLagL2mw&s"
                 key={index}
+                setAlertState={setAlertState}
+                index={index}
               />
             );
           })}
         </div>
       </BackgroundCover>
+      {alertState && (
+        <RemoveBookMarkAlertPostition>
+          <BookMarkAlert alertState={alertState} showText={"즐겨찾기에서 제거 됨"} />
+        </RemoveBookMarkAlertPostition>
+      )}
     </div>
   );
 };
@@ -60,4 +72,11 @@ const AllremovePosition = styled.button`
   position: absolute;
   top: 5px;
   right: 0.5rem;
+`;
+
+const RemoveBookMarkAlertPostition = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `;

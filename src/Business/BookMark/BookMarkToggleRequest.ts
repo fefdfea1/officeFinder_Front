@@ -5,9 +5,9 @@ export const toggleBookMarkRequest = (event: React.MouseEvent<HTMLButtonElement,
   const target = event.target as HTMLElement;
   if (target.classList.contains("active")) {
     //오피스 id , 계정 토큰
-    addBookMark();
+    // addBookMark();
   } else {
     //오피스 id , 계정 토큰
-    deleteBookmark();
+    // deleteBookmark();
   }
 };

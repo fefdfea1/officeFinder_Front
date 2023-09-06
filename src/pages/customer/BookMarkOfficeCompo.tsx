@@ -4,16 +4,18 @@ import { Heart } from "../../components/common/Heart";
 import { Link } from "react-router-dom";
 import { BookMarkDataType } from "./BookMark";
 import { toggleBookMarkRequest } from "../../Business/BookMark/BookMarkToggleRequest";
-import { useState } from "react";
+import { alertRemoveTimer } from "../../Business/BookMark/BookMarkTimer";
+
 type propsType = {
   imgSrc: string;
   item: BookMarkDataType;
+  setAlertState: React.Dispatch<React.SetStateAction<boolean>>;
+  index: number;
 };
 
 export const BookMarkOfficeCompo = (props: propsType) => {
-  const [alertState, setAlertState] = useState<boolean>(false);
   return (
-    <div>
+    <div data-index={props.index} className="BookMarkItem">
       <div className="flex flex-col relative">
         {/* 데이터를 받아올때 오피스 id를 받아와 이동 */}
         <Link to={"#"}>
@@ -35,6 +37,7 @@ export const BookMarkOfficeCompo = (props: propsType) => {
           type="button"
           onClick={event => {
             toggleBookMarkRequest(event);
+            alertRemoveTimer(props.setAlertState, props.index);
           }}
         >
           <Heart fillState="active" />
