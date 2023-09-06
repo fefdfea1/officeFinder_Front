@@ -1,23 +1,24 @@
 import { useState } from "react";
 import { Button } from "../common/Button";
 import { Input } from "../common/Input";
-import { useMutation, useQuery } from "react-query";
-import { getApi } from "../../fetch/get/main";
-import { signupApi } from "../../fetch/post/main";
+import { useMutation } from "react-query";
+// import { getCustomerApi } from "../../fetch/get/main";
+import { signupCustomerApi } from "../../fetch/post/main";
 import { FcGoogle } from "react-icons/fc";
 import { BsArrowCounterclockwise } from "react-icons/bs";
 // import { AiOutlineEyeInvisible } from "react-icons/ai";
 
 interface CustomerCardProps {
+  name: string;
   email: string;
   password: string;
   passwordConfirm: string;
 }
 
 export const CustomerCard = ({ clickBack }: { clickBack: (step: number, key: string) => void }) => {
-  const { data } = useQuery("data", getApi);
+  // const { data } = useQuery("data", getCustomerApi);
 
-  const postSignup = useMutation("signUP", signupApi, {
+  const postSignup = useMutation("signUP", signupCustomerApi, {
     onSuccess: res => {
       console.log("RES", res);
     },
@@ -25,9 +26,10 @@ export const CustomerCard = ({ clickBack }: { clickBack: (step: number, key: str
       console.log(error);
     },
   });
-  console.log({ data });
+  // console.log({ data });
 
   const [signup, setSignup] = useState<CustomerCardProps>({
+    name: "",
     email: "",
     password: "",
     passwordConfirm: "",
@@ -44,9 +46,14 @@ export const CustomerCard = ({ clickBack }: { clickBack: (step: number, key: str
   const clickSignupButton = () => {
     postSignup.mutate({
       email: signup?.email,
-      name: "testName",
+      name: signup?.name,
       password: signup?.password,
     });
+  };
+
+  const validateName = (name: string) => {
+    const nameRegex = /^\S{2,20}$/;
+    return nameRegex.test(name);
   };
 
   const validateEmail = (email: string) => {
@@ -64,6 +71,15 @@ export const CustomerCard = ({ clickBack }: { clickBack: (step: number, key: str
       <div className="shadow-md rounded-xl p-8 mx-auto mt-20 flex flex-col items-center justify-center md:w-[400px] min-h-[600px] sm:w-[340px]">
         <h3 className="font-black">일반회원 회원가입</h3>
         <div className="pt-6 w-full">
+          <Input
+            inputLabel={"닉네임"}
+            placeholder={"닉네임을 입력해주세요"}
+            warning={signup.name.trim() ? (validateName(signup.name) ? "" : "두 글자 이상 작성해주세요") : ""}
+            type={"text"}
+            value={signup.name}
+            name={"name"}
+            onInputChange={handleFormData}
+          />
           <Input
             inputLabel={"이메일"}
             placeholder={"이메일을 입력해 주세요"}
@@ -104,6 +120,7 @@ export const CustomerCard = ({ clickBack }: { clickBack: (step: number, key: str
             clickHandler={() => clickSignupButton()}
             style={"btn btn-outline btn-primary m-2 text-base w-full"}
             disabled={
+              !validateName(signup.name) ||
               !validateEmail(signup.email) ||
               !validatePassword(signup.password) ||
               signup.password !== signup.passwordConfirm

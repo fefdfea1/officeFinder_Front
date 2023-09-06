@@ -1,5 +1,7 @@
 import axios from "axios";
 
+axios.defaults.withCredentials = true;
+
 const baseAPI = (url = "https://www.officefinder.site/", options?: any) => {
   return axios.create({ baseURL: url, ...options });
 };

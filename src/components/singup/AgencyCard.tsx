@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Button } from "../common/Button";
 import { Input } from "../common/Input";
-import { useMutation, useQuery } from "react-query";
-import { getApi } from "../../fetch/get/main";
+import { useMutation } from "react-query";
+// import { getAgencyApi } from "../../fetch/get/main";
 import { signupAgencyApi } from "../../fetch/post/main";
 import { FcGoogle } from "react-icons/fc";
 import { BsArrowCounterclockwise } from "react-icons/bs";
@@ -16,7 +16,7 @@ interface AgencyCardProps {
 }
 
 export const AgencyCard = ({ clickBack }: { clickBack: (step: number, key: string) => void }) => {
-  const { data } = useQuery("data", getApi);
+  // const { data } = useQuery("data", getAgencyApi);
   const postSignup = useMutation("signUP", signupAgencyApi, {
     onSuccess: (res: any) => {
       console.log("RES", res);
@@ -25,7 +25,7 @@ export const AgencyCard = ({ clickBack }: { clickBack: (step: number, key: strin
       console.log(error);
     },
   });
-  console.log({ data });
+  // console.log({ data });
 
   const [signup, setSignup] = useState<AgencyCardProps>({
     businessNumber: "",

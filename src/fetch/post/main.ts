@@ -1,6 +1,6 @@
-import { baseInstance, authInstance } from "../common/axiosApi";
+import { baseInstance } from "../common/axiosApi";
 
-export const signupApi = async (userInfo: any) => {
+export const signupCustomerApi = async (userInfo: any) => {
   try {
     const { data } = await baseInstance.post(`api/customers/signup`, userInfo);
     return data;

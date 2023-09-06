@@ -1,35 +1,16 @@
-import { baseInstance, authInstance } from "../common/axiosApi";
+import { baseInstance } from "../common/axiosApi";
 
-export const signupApi = async (userInfo: any) => {
+export const getCustomerApi = async () => {
   try {
-    const { data } = await baseInstance.post(`api/customers/signup`, userInfo);
+    const { data } = await baseInstance.get(`api/customers/info`);
     return data;
   } catch (error) {
     console.error(error);
   }
 };
-
-export const signupAgencyApi = async (userInfo: any) => {
+export const getAgencyApi = async () => {
   try {
-    const { data } = await baseInstance.post(`api/agents/signup`, userInfo);
-    return data;
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-export const loginAgencyApi = async (userInfo: any) => {
-  try {
-    const { data } = await baseInstance.post(`api/agents/login`, userInfo);
-    return data;
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-export const getApi = async () => {
-  try {
-    const { data } = await baseInstance.get(`api/test`);
+    const { data } = await baseInstance.get(`api/agency/info`);
     return data;
   } catch (error) {
     console.error(error);
