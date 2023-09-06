@@ -1,3 +1,4 @@
+
 import { FaChevronLeft, FaTimes } from 'react-icons/fa';
 import { BackgroundCover } from '../common/BackgroundCover';
 import { ProfileCircle } from '../common/ProfileCircle';
@@ -5,21 +6,20 @@ import styled from '@emotion/styled';
 import { ShowChat } from './ShowChat';
 import { useMyContext } from '../../contexts/MyContext';
 
+
 type ChatingProps = {
-    onIsOpenChange: (isOpen: boolean) => void;
+  onIsOpenChange: (isOpen: boolean) => void;
 };
 
 export const ChatList = ({ onIsOpenChange }: ChatingProps) => {
-    const { isChatRoom, setIsChatRoom } = useMyContext();
 
-    const handleChatClose = () => {
-        onIsOpenChange(false);
-        setIsChatRoom(false);
-    };
+  const [showChatDetail, setShowChatDetail] = useState(0);
 
-    const handleGoToList = () => {
-        setIsChatRoom(false);
-    };
+  useEffect(() => {
+    const storedShowChatDetail = localStorage.getItem("showChatDetail");
+    setShowChatDetail(Number(storedShowChatDetail));
+  }, []);
+
 
     const renderContent = () => {
         if (isChatRoom) {
@@ -43,10 +43,11 @@ export const ChatList = ({ onIsOpenChange }: ChatingProps) => {
                         </div>
                     </button>
                     {/* -- 첫번째 채팅 -- */}
+
                 </div>
-            );
-        }
-    };
+              </button>
+              {/* -- 첫번째 채팅 -- */}
+
 
     return (
         <div className="relative z-20 ">
@@ -65,9 +66,15 @@ export const ChatList = ({ onIsOpenChange }: ChatingProps) => {
                     </div>
                     {renderContent()}
                 </BackgroundCover>
+
             </div>
-        </div>
-    );
+          ) : (
+            <ShowChat />
+          )}
+        </BackgroundCover>
+      </div>
+    </div>
+  );
 };
 
 const Span = styled.span`

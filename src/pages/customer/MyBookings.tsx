@@ -1,9 +1,9 @@
-import { MyBookingsListCompo } from './MyBookingsListCompo';
-import { BackgroundCover } from '../../components/common/BackgroundCover';
-import { Title } from '../../components/common/Title';
-import { useQuery } from 'react-query';
-import { fetchMyBookingsData } from '../../fetch/api';
-import { useState, useEffect } from 'react';
+import { MyBookingsListCompo } from "./MyBookingsListCompo";
+import { BackgroundCover } from "../../components/common/BackgroundCover";
+import { Title } from "../../components/common/Title";
+import { useQuery } from "react-query";
+import { fetchMyBookingsData } from "../../fetch/get/agent";
+import { useState, useEffect } from "react";
 
 export type MyBookingsDataType = {
   endDate: string;
@@ -19,7 +19,7 @@ export type MyBookingsDataType = {
 
 export const MyBookings = () => {
   const [MyBookingsData, setMyBookingsData] = useState<MyBookingsDataType[]>([]);
-  const { data } = useQuery(['fetchBookingData'], fetchMyBookingsData);
+  const { data } = useQuery(["fetchBookingData"], fetchMyBookingsData);
   useEffect(() => {
     if (data) {
       setMyBookingsData(data.content);
@@ -34,12 +34,12 @@ export const MyBookings = () => {
           <Title>나의 예약</Title>
           <div className="mt-8"></div>
           {MyBookingsData.map((item, index) => {
-            if (item.leaseStatus !== 'EXPIRED') return <MyBookingsListCompo item={item} type="MyBooking" key={index} />;
+            if (item.leaseStatus !== "EXPIRED") return <MyBookingsListCompo item={item} type="MyBooking" key={index} />;
           })}
           <Title>지난 예약</Title>
           <div className="mt-8">
             {MyBookingsData.map((item, index) => {
-              if (item.leaseStatus === 'EXPIRED')
+              if (item.leaseStatus === "EXPIRED")
                 return <MyBookingsListCompo item={item} type="last_reservation" key={index} />;
             })}
           </div>
