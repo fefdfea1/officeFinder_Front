@@ -18,7 +18,15 @@ export const signupAgencyApi = async (userInfo: any) => {
   }
 };
 
-export const loginAgencyApi = async (userInfo: any) => {
+export const loginCustomerApi = async (userInfo: any) => {
+  try {
+    const { data } = await baseInstance.post(`api/customers/login`, userInfo);
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+export const loginAgentApi = async (userInfo: any) => {
   try {
     const { data } = await baseInstance.post(`api/agents/login`, userInfo);
     return data;

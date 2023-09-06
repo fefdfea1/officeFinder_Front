@@ -37,7 +37,6 @@ export const CustomerCard = ({ clickBack }: { clickBack: (step: number, key: str
 
   const handleFormData = (e: React.ChangeEvent<HTMLInputElement>) => {
     let { name, value } = e.target;
-    console.log({ name, value });
     setSignup(prev => {
       return { ...prev, [name]: value };
     });

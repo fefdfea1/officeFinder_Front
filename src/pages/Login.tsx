@@ -5,7 +5,7 @@ import { useMutation } from "react-query";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
-import { loginAgencyApi } from "../fetch/post/main";
+import { loginCustomerApi } from "../fetch/post/main";
 
 interface LoginProps {
   email: string;
@@ -40,7 +40,7 @@ export const Login = () => {
     return passwordRegex.test(password);
   };
 
-  const postLogin = useMutation("login", loginAgencyApi, {
+  const postLogin = useMutation("login", loginCustomerApi, {
     onSuccess: res => {
       console.log("RES", res);
     },
