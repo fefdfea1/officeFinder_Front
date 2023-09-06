@@ -8,6 +8,8 @@ export const SalesCharts = () => {
     const doughnutInstanceRef = useRef<Chart<'doughnut', number[], string> | null>(null);
     const today = new Date();
     const thisMonth = today.getMonth() + 1;
+    const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--primary');
+    const SecondaryColor = getComputedStyle(document.documentElement).getPropertyValue('--secondary');
 
     useEffect(() => {
         const data = [
@@ -27,14 +29,16 @@ export const SalesCharts = () => {
         }
 
         if (ctx) {
+
             chartInstanceRef.current = new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: data.map(row => row.month),
                     datasets: [
                         {
-                            label: 'Acquisitions by month',
+                            label: '월별 매출현황',
                             data: data.map(row => row.count),
+                            borderColor: primaryColor,
                         },
                     ],
                 },
@@ -45,15 +49,15 @@ export const SalesCharts = () => {
     useEffect(() => {
         const data = {
             labels: [
-                '사용',
-                '미사용',
+                '사용 오피스',
+                '미사용 오피스',
             ],
             datasets: [{
-                label: '전체 오피스 10개',
+                label: '현재 사용 중인 오피스',
                 data: [8, 2], //[ 전체 오피스 - 사용 중인 오피스 , 사용 중인 오피스]
                 backgroundColor: [
-                    getComputedStyle(document.documentElement).getPropertyValue('--primary'),
-                    getComputedStyle(document.documentElement).getPropertyValue('--secondary'),
+                    primaryColor,
+                    SecondaryColor,
                 ],
                 hoverOffset: 4
             }]
