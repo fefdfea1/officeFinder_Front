@@ -4,6 +4,7 @@ import { BookMarkOfficeCompo } from "./BookMarkOfficeCompo";
 import { useQuery } from "react-query";
 import { fetchBookMarkData } from "../../fetch/get/agent";
 import { useEffect, useState } from "react";
+import { getCookie } from "../../fetch/Cookie/Cookie";
 import styled from "@emotion/styled";
 
 export type BookMarkDataType = {
@@ -20,7 +21,9 @@ const defaultValue = [
 
 export const BookMark = () => {
   const [BookMarkData, setBookMarkData] = useState<BookMarkDataType[]>(defaultValue);
-  const { data } = useQuery("BookMark", fetchBookMarkData);
+  const { data } = useQuery("BookMark", () => fetchBookMarkData(), {
+    staleTime: Infinity,
+  });
   useEffect(() => {
     if (data) {
       setBookMarkData(data.BookMark.data);
