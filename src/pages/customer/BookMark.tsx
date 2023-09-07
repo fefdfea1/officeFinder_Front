@@ -6,6 +6,7 @@ import { fetchBookMarkData } from "../../fetch/get/agent";
 import { useEffect, useState } from "react";
 import { BookMarkAlert } from "./BookMarkAlert";
 import styled from "@emotion/styled";
+import { Cookies, useCookies } from "react-cookie";
 
 export type BookMarkDataType = {
   officeAddress: string;
@@ -25,6 +26,16 @@ export const BookMark = () => {
   const { data } = useQuery("BookMark", () => fetchBookMarkData(), {
     staleTime: Infinity,
   });
+
+  useEffect(() => {
+    const [cookies, setCookie] = useCookies(["name"]);
+
+    function onChange(newName?: string) {
+      setCookie("name", newName, { path: "/" });
+    }
+    onChange();
+  }, []);
+
   useEffect(() => {
     if (data) {
       setBookMarkData(data.BookMark.data);
