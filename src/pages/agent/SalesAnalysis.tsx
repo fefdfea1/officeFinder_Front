@@ -12,7 +12,7 @@ import { SalesCharts } from '../../components/agent/SalesCharts';
 
 export const SalesAnalysis = () => {
 
-  const [officeName, setOfficeName] = useState("전체")
+  const [officeName, setOfficeName] = useState<string>("전체");
   const handleOfficeChange = (office: string) => {
     setOfficeName(office);
   };
@@ -36,14 +36,18 @@ export const SalesAnalysis = () => {
         <Title>{officeName} 매출 상세</Title>
         {/* 본문 */}
         <div className="flex flex-col gap-4">
-          <div className="p-3 flex justify-between">
-            <OfficeName name="오피스A" address="주소" />
-            <Link to="/AddOffice">
-              <Button style="btn btn-primary w-[86px] md:w-40"><p>수정하기</p></Button>
-            </Link>
-          </div>
-          <OfficeOptions needReviewCount={false} OptionData={{ haveTvProjector: true }} />
-          <SalesCharts />
+          {officeName === "전체" ? null :
+            <>
+              <div className="p-3 flex justify-between">
+                <OfficeName name="오피스A" address="주소" />
+                <Link to="/AddOffice/{id}">
+                  <Button style="btn btn-primary w-[86px] md:w-40"><p>수정하기</p></Button>
+                </Link>
+              </div>
+              <OfficeOptions needReviewCount={false} OptionData={{ haveTvProjector: true }} />
+            </>
+          }
+          <SalesCharts officeId={officeName} />
           <ReservationAttendeesList />
         </div>
       </BackgroundCover>

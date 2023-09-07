@@ -1,21 +1,14 @@
-import axios from "axios";
+import { authInstance } from "../common/axiosApi";
 import { newOfficeData } from "../../type/agentTypes";
 
-export const postNewOfficeData = async (newOfficeData: newOfficeData, cookie: string) => {
-  try {
-    const response = await axios.post(
-      "https://my-json-server.typicode.com/kjewt/json-server-post/myOffice",
-      {
-        request: newOfficeData,
-      },
-      {
-        headers: {
-          Authorization: cookie,
-        },
-      },
-    );
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
+export const postNewOfficeData = (newOfficeData: newOfficeData) => {
+  return authInstance
+    .post<newOfficeData>("api/agents/offices", {
+      newOfficeData,
+    })
+    .then(res => res.data)
+    .catch(error => {
+      console.error("데이터 전송 중 에러 발생:", error);
+      throw error;
+    });
 };
