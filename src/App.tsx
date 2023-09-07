@@ -6,6 +6,7 @@ import { Nav } from "./components/common/Nav";
 import { Footer } from "./components/common/Footer";
 import { Chat } from "./components/chating/Chat";
 import { MyProvider } from "./contexts/MyContext";
+import { CookiesProvider } from "react-cookie";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -14,16 +15,18 @@ export const App = () => {
 
   return (
     <>
-      <MyProvider>
-        <QueryClientProvider client={queryClient}>
-          <Nav />
-          <Chat />
-          <section id="container">
-            <Router />
-          </section>
-          <Footer />
-        </QueryClientProvider>
-      </MyProvider>
+      <CookiesProvider>
+        <MyProvider>
+          <QueryClientProvider client={queryClient}>
+            <Nav />
+            <Chat />
+            <section id="container">
+              <Router />
+            </section>
+            <Footer />
+          </QueryClientProvider>
+        </MyProvider>
+      </CookiesProvider>
     </>
   );
 
