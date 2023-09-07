@@ -35,7 +35,7 @@ export const AllOfficeList = (): JSX.Element => {
           );
         })}
       </div>
-      <BackgroundCover width="w-1/3" margin="mx-auto" padding="p-4">
+      <BackgroundCover width="w-1/3" margin="mx-auto mt-10" padding="p-4">
         <Pagination itemsPerPage={10} totalItems={list?.length} />
       </BackgroundCover>
     </>

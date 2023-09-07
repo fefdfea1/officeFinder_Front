@@ -10,6 +10,7 @@ import { BsArrowCounterclockwise } from "react-icons/bs";
 
 interface AgencyCardProps {
   email: string;
+  name: string;
   password: string;
   passwordConfirm: string;
   businessNumber: string;
@@ -30,6 +31,7 @@ export const AgencyCard = ({ clickBack }: { clickBack: (step: number, key: strin
   const [signup, setSignup] = useState<AgencyCardProps>({
     businessNumber: "",
     email: "",
+    name: "",
     password: "",
     passwordConfirm: "",
   });
@@ -46,9 +48,13 @@ export const AgencyCard = ({ clickBack }: { clickBack: (step: number, key: strin
     postSignup.mutate({
       businessNumber: signup?.businessNumber,
       email: signup?.email,
-      name: "testName",
+      name: signup?.email,
       password: signup?.password,
     });
+  };
+  const validateName = (name: string) => {
+    const nameRegex = /^\S{2,20}$/;
+    return nameRegex.test(name);
   };
   const validateEmail = (email: string) => {
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
@@ -68,6 +74,16 @@ export const AgencyCard = ({ clickBack }: { clickBack: (step: number, key: strin
       <div className="shadow-md rounded-xl p-8  mx-auto mt-20 flex flex-col items-center md:w-[400px] min-h-[600px] sm:w-[340px]">
         <h3 className="font-black">임대인 회원가입</h3>
         <div className="pt-6 w-full">
+          <Input
+            inputLabel={"닉네임"}
+            placeholder={"닉네임을 입력해주세요"}
+            warning={signup.name.trim() ? (validateName(signup.name) ? "" : "두 글자 이상 작성해주세요") : ""}
+            type={"text"}
+            value={signup.name}
+            name={"name"}
+            onInputChange={handleFormData}
+          />
+
           <Input
             inputLabel={"이메일"}
             placeholder={"이메일을 입력해 주세요"}
@@ -125,6 +141,7 @@ export const AgencyCard = ({ clickBack }: { clickBack: (step: number, key: strin
             clickHandler={() => clickSignupButton()}
             style={"btn btn-outline btn-primary m-2 text-base w-full"}
             disabled={
+              !validateName(signup.name) ||
               !validateEmail(signup.email) ||
               !validatePassword(signup.password) ||
               signup.password !== signup.passwordConfirm ||

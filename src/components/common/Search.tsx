@@ -7,17 +7,17 @@ import "react-day-picker/dist/style.css";
 export const Search = () => {
   return (
     <SearchBoxContainer className="p-4 shadow-md">
-      <div className="flex justify-center items-center border-b border-solid border-accent pb-2 md:flex-row sm:flex-col ">
-        <ContourBox className="border-r border-solid border-accent mx-4 md:border-solid sm:border-none sm:mx-auto sm:p-2">
+      <div className="flex justify-center items-center border-b border-solid border-accent pb-2 lg:flex-row md:flex-col sm:flex-col">
+        <ContourBox className="border-r border-solid border-accent mx-4 lg:border-solid md:mx-auto sm:border-none sm:mx-auto sm:p-2">
           <input
             type="text"
             placeholder="찾고싶은 지역을 검색해주세요"
-            className="placeholder:text-sm text-info input md:mr-2 sm:m-0"
+            className="placeholder:text-sm text-info input md:mr-2 md:items-center sm:m-0"
           />
         </ContourBox>
 
-        <div className="flex flex-row sm:justify-between">
-          <ContourBox className="text-info mx-3 md:mr-4 sm:mr-8">
+        <div className="flex flex-row md:justify-between sm:justify-between">
+          <ContourBox className="text-info mx-3 md:mr-10 sm:mr-8">
             <MaxCapacityCopy width="w-44" />
           </ContourBox>
           <ContourBox className="text-base">

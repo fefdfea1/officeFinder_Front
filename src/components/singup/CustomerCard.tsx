@@ -29,8 +29,8 @@ export const CustomerCard = ({ clickBack }: { clickBack: (step: number, key: str
   // console.log({ data });
 
   const [signup, setSignup] = useState<CustomerCardProps>({
-    name: "",
     email: "",
+    name: "",
     password: "",
     passwordConfirm: "",
   });
