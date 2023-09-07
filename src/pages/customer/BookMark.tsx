@@ -2,9 +2,10 @@ import { BackgroundCover } from "../../components/common/BackgroundCover";
 import { Title } from "../../components/common/Title";
 import { BookMarkOfficeCompo } from "./BookMarkOfficeCompo";
 import { useQuery } from "react-query";
-import { fetchBookMarkData } from "../../fetch/get/agent";
+import { fetchBookMarkData } from "../../fetch/get/customer";
 import { useEffect, useState } from "react";
 import { BookMarkAlert } from "./BookMarkAlert";
+import { Pagination } from "../../components/common/Pagination";
 import styled from "@emotion/styled";
 
 export type BookMarkDataType = {
@@ -22,12 +23,12 @@ const defaultValue = [
 export const BookMark = () => {
   const [BookMarkData, setBookMarkData] = useState<BookMarkDataType[]>(defaultValue);
   const [alertState, setAlertState] = useState<boolean>(false);
-  const { data } = useQuery("BookMark", () => fetchBookMarkData(), {
+  const { data } = useQuery("BookMark", () => fetchBookMarkData(1, 10), {
     staleTime: Infinity,
   });
   useEffect(() => {
     if (data) {
-      setBookMarkData(data.BookMark.data);
+      setBookMarkData(data);
       console.log(BookMarkData);
     }
   }, [data]);
@@ -64,6 +65,9 @@ export const BookMark = () => {
           <BookMarkAlert alertState={alertState} showText={"즐겨찾기에서 제거 됨"} />
         </RemoveBookMarkAlertPostition>
       )}
+      <div className="mt-6">
+        <Pagination itemsPerPage={10} totalItems={55} />
+      </div>
     </div>
   );
 };
