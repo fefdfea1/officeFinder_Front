@@ -16,11 +16,12 @@ export const useAddOfficeHandel = () => {
         town: "",
         street: "",
         detail: "",
-        zipcode: 0,
+        zipcode: "",
     })
     const [rooms, setRooms] = useState<number>()
     const [maxCapacity, setMaxCapacity] = useState<number>()
     const [monthlyPrice, setMonthlyPrice] = useState<number>()
+    const [images, setImages] = useState<string[]>([])
 
 
     //오피스 이름
@@ -65,6 +66,10 @@ export const useAddOfficeHandel = () => {
         const capacity = parseInt(e.target.value, 10); // 문자열을 숫자로 변환
         setMaxCapacity(capacity);
     };
+    // 파일저장
+    const handlefileUpload = (images: string[]) => {
+        setImages(images);
+    };
 
 
 
@@ -81,7 +86,9 @@ export const useAddOfficeHandel = () => {
         rooms,
         handleCountRoomsChange,
         maxCapacity,
-        handleMaxCapacityChange
+        handleMaxCapacityChange,
+        images,
+        handlefileUpload
 
     };
 };

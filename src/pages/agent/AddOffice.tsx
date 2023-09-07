@@ -11,17 +11,20 @@ import { AddOfficeAddress } from '../../components/agent/AddOfficeAddress';
 import { useAddOfficeHandel } from '../../components/agent/HandelAddOffice'
 import { NumberToKoreanConverter } from '../../components/agent/NumberToKorean';
 import { postNewOfficeData } from "../../fetch/post/agent"
-import type { NewOfficePost } from "../../type/agentTypes"
+import type { NewOfficeInfo } from "../../type/agentTypes"
 
 export const AddOffice = () => {
   const navigate = useNavigate();
-  const [postData, setPostData] = useState<NewOfficePost>()
+  const [postData, setPostData] = useState<NewOfficeInfo>()
+  const [selectedImages, setSelectedImages] = useState<string[]>([]);
+
   const { name, handleOfficeName,
     selectedOptions, handleOptionsChange,
     address, handleAddressChange,
     monthlyPrice, handlePriceChange,
     rooms, handleCountRoomsChange,
-    maxCapacity, handleMaxCapacityChange
+    maxCapacity, handleMaxCapacityChange,
+    images, handlefileUpload
   } = useAddOfficeHandel();
 
 
@@ -40,9 +43,13 @@ export const AddOffice = () => {
       officeOption: selectedOptions,
     };
     setPostData(updatedData);
+    setSelectedImages(images)
     if (postData) {
       try {
-        await postNewOfficeData(postData);
+        await postNewOfficeData({
+          request: postData,
+          multipartFileList: selectedImages
+        });
         console.log("데이터 전송 완료");
         alert("전송이 완료되었습니다.")
         navigate("/MyOffice");
@@ -53,7 +60,7 @@ export const AddOffice = () => {
     }
   }
 
-
+  console.log(selectedImages)
   return (
     <>
       <div className="flex justify-end relative">
@@ -85,7 +92,7 @@ export const AddOffice = () => {
               </div>
             </div>
           </div>
-          <AddOfficePhoto />
+          <AddOfficePhoto onImgChange={handlefileUpload} />
           <Button style="btn btn-primary w-64 mt-2" clickHandler={SubmitData} ><p>등록하기</p></Button>
         </form>
       </BackgroundCover>

@@ -1,11 +1,18 @@
 import axios from "axios";
-import { NewOfficePost } from "../../type/agentTypes";
+import { newOfficeData } from "../../type/agentTypes";
 
-export const postNewOfficeData = async (newOfficeData: NewOfficePost) => {
+export const postNewOfficeData = async (newOfficeData: newOfficeData, cookie: string) => {
   try {
     const response = await axios.post(
       "https://my-json-server.typicode.com/kjewt/json-server-post/myOffice",
-      newOfficeData,
+      {
+        request: newOfficeData,
+      },
+      {
+        headers: {
+          Authorization: cookie,
+        },
+      },
     );
     return response.data;
   } catch (error) {

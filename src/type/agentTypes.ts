@@ -1,9 +1,9 @@
 //get
 export type OfficeData = {
+  address: string;
   id: number;
-  name: string;
-  locaion: string;
-  picture: string[];
+  imagePath: [];
+  officeName: string;
 };
 
 export type PageInfo = {
@@ -14,19 +14,34 @@ export type PageInfo = {
 };
 
 export type MyOfficeResponse = {
-  data: OfficeData[];
-  pageInfo: PageInfo;
+  content: [OfficeData];
+  empty: boolean;
+  first: boolean;
+  last: boolean;
+  number: number;
+  numberOfElements: number;
+  size: number;
+  sort: {
+    empty: boolean;
+    sorted: boolean;
+    unsorted: boolean;
+  };
+  totalElements: number;
+  totalPages: number;
+};
+// post
+export type newOfficeData = {
+  request: NewOfficeInfo;
+  multipartFileList: string[];
 };
 
-// post
-export type NewOfficePost = {
+export type NewOfficeInfo = {
   officeName: string | undefined;
   maxCapacity: number | undefined;
   leaseFee: number | undefined;
   remainRoom: number | undefined;
   address: Address | undefined;
   officeOption: officeOptions | undefined;
-  // officePicture: NewOfficePicture | undefined;
 };
 
 export type Address = {
@@ -34,18 +49,10 @@ export type Address = {
   city: string;
   town: string;
   street: string;
-  zipcode: number;
+  zipcode: string;
   detail: string;
 };
 
 export type officeOptions = {
   [key: string]: boolean;
-};
-
-export type NewOfficePicture = {
-  picture1?: string;
-  picture2?: string;
-  picture3?: string;
-  picture4?: string;
-  picture5?: string;
 };
