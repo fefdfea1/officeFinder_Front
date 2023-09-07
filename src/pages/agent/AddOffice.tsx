@@ -1,4 +1,4 @@
-import axios from "axios";
+
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom";
 import { BackgroundCover } from "../../components/common/BackgroundCover";
@@ -23,23 +23,7 @@ export const AddOffice = () => {
     rooms, handleCountRoomsChange,
     maxCapacity, handleMaxCapacityChange
   } = useAddOfficeHandel();
-  const fetchAddOfficeData = async () => {
-    const token =
-      "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZ2VudCIsImlkIjoxLCJuYW1lIjoidGVzdCIsImlhdCI6MTY5Mzk5NzIyMywiZXhwIjoxNjk0MDgzNjIzfQ.n65ZSD5g0BY6cz-21wOvd_KiLUnlZFbCoqDD4C5H3QiHXH_IaypmoCPWQoY5cFdeaB-reEEHUIVoNOCVq0URCQ";
 
-    const config = {
-      headers: {
-        Authorization: `bearer ${token}`,
-      },
-    };
-
-    try {
-      const response = await axios.post("https://www.officefinder.site/api/agents/offices", config);
-      return response.data;
-    } catch (error) {
-      throw error;
-    }
-  };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -102,7 +86,7 @@ export const AddOffice = () => {
             </div>
           </div>
           <AddOfficePhoto />
-          <Button text="등록하기" style="btn btn-primary w-64 mt-2" clickHandler={SubmitData} />
+          <Button style="btn btn-primary w-64 mt-2" clickHandler={SubmitData} ><p>등록하기</p></Button>
         </form>
       </BackgroundCover>
     </>
