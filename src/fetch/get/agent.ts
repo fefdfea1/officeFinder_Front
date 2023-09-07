@@ -1,5 +1,4 @@
 import axios from "axios";
-import { baseInstance } from "../common/axiosApi";
 import { authInstance } from "../common/axiosApi";
 
 import type { MyOfficeResponse } from "../../type/agentTypes";

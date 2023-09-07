@@ -8,7 +8,7 @@ import { OfficeOptions } from "../components/booking/OfficeOptions";
 import { BlindBooking } from "./BlindBooking";
 import { SelectDateDropDown } from "../components/agent/SelectDateDropDown";
 import { useQuery } from "react-query";
-import { fetchBookingData } from "../fetch/get/agent";
+import { fetchBookingData } from "../fetch/get/customer";
 import { GiPositionMarker } from "react-icons/gi";
 import { DrawMap } from "../Business/Booking/BookingPrintMap";
 import { SlickSlider } from "./BookingSlider";
