@@ -1,8 +1,19 @@
 import axios from "axios";
 import { baseInstance } from "../common/axiosApi";
 import { authInstance } from "../common/axiosApi";
+import { Cookies } from "react-cookie";
+
+const cookies = new Cookies();
 
 // 지금은 모두 같지만 추후 url을 변경해야합니다.
+
+cookies.set(
+  "Authorization",
+  "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjdXN0b21lciIsImlkIjoyLCJuYW1lIjoi6rmA7LC96recIiwiaWF0IjoxNjk0MDYyODYxLCJleHAiOjE2OTQxNDkyNjF9.OJH1MWNOV_UC9Ir_ZncF5vZEonX4vyx9oogxrMkqITTmgRNvwFcqk9H91SYF7fAZ_qET9sfvRuGGX0ercHCEOQ",
+  {
+    path: "officefinder.site",
+  },
+);
 
 export const fetchBookMarkData = (page: number, size: number) => {
   authInstance
