@@ -1,4 +1,4 @@
-import { OfficeName } from "../../components/booking/Officename";
+import { OfficeName } from "../../components/booking/OfficeName";
 import { AiFillStar } from "react-icons/ai";
 import { Heart } from "../../components/common/Heart";
 import { Link } from "react-router-dom";
@@ -24,7 +24,7 @@ export const BookMarkOfficeCompo = (props: propsType) => {
           </figure>
         </Link>
         <div className="flex justify-between relative">
-          <OfficeName name={`${props.item.content.officName}`} address={`${props.item.content.officeAddress}`} />
+          <OfficeName name={`${props.item.content.officeName}`} address={`${props.item.content.officeAddress}`} />
           <div className="flex items-center absolute top-2 right-2 font-bold text-sm tracking-tight">
             <AiFillStar className="mr-1" />
             <span className="mr-1">(4.91)</span>

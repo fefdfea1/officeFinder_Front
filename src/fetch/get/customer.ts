@@ -19,4 +19,11 @@ export const fetchBookMarkData = async (page: number, size: number) => {
 export const fetchMyBookingsData = () =>
   axios.get("https://my-json-server.typicode.com/fefdfea1/jsonData/db").then(res => res.data);
 
-export const fetchBookingData = () => baseInstance.get("api/customers/info/leases", {}).then(res => res.data);
+export const fetchBookingData = (officeNumber: number) => {
+  try {
+    const response = authInstance.get(`api/offices/${officeNumber}`).then(res => res.data);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};

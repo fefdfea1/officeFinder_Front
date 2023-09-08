@@ -13,12 +13,14 @@ import { GiPositionMarker } from "react-icons/gi";
 import { DrawMap } from "../Business/Booking/BookingPrintMap";
 import { SlickSlider } from "./BookingSlider";
 import { BookingFigure } from "./BookingFigure";
-import { OfficeName } from "../components/booking/Officename";
-import { Link } from "react-router-dom";
+import { OfficeName } from "../components/booking/OfficeName";
+import { Link, useLocation } from "react-router-dom";
 import { useMyContext } from "../contexts/MyContext";
+import { BookingImageEmpty } from "./BookingEmptyImg";
+import { fetchCreateChatRoom } from "../fetch/post/customer";
+import { fetchReservation } from "../fetch/post/customer";
 import styled from "@emotion/styled";
 import "react-day-picker/dist/style.css";
-import { BookingImageEmpty } from "./BookingEmptyImg";
 
 declare global {
   interface Window {
@@ -28,25 +30,48 @@ declare global {
 
 export type BookingDataType = {
   address: string;
-  name: string;
-  id: number;
-  option: {
-    haveHeater?: boolean;
+  leaseFee: number;
+  maxCapacity: number;
+  maxRoomCount: number;
+  officeName: string;
+  officeOptionDto: {
+    faxServiceAvailable: boolean;
+    haveAirCondition: boolean;
+    haveCafe: boolean;
+    haveDoorLock: boolean;
+    haveHeater: boolean;
+    haveParkArea: boolean;
+    havePrinter: boolean;
+    havePrivateLocker: boolean;
+    havePublicKitchen: boolean;
+    havePublicLounge: boolean;
+    haveShowerBooth: boolean;
+    haveStorage: boolean;
+    haveTvProjector: boolean;
+    haveWhiteBoard: boolean;
+    haveWifi: boolean;
+    packageSendServiceAvailable: boolean;
   };
-  price: number;
+  officePictureList: string[];
+  reviewCount: string;
+  reviews: {
+    createdAt: string;
+    customerImagePath: string;
+    customerName: string;
+    description: string;
+    rate: number;
+  };
 };
 
-export type corrdinateType = {
+export type selectValueType = {
+  selectDay: string;
+  month: number;
+  maxPeople: number;
+};
+
+export type coordinateType = {
   La: number;
   Ma: number;
-};
-
-const defaultValue = {
-  address: "",
-  name: "",
-  id: 0,
-  option: {},
-  price: 0,
 };
 
 const setting = {
@@ -56,29 +81,34 @@ const setting = {
   pauseOnHover: true,
   autoplay: true,
 };
-//데이터 연결전 임시 타입입니다
-type img = {
-  img: string;
+
+const valueDefault = {
+  selectDay: "",
+  month: 0,
+  maxPeople: 0,
 };
 
 export const Booking = () => {
   const [selectedDay, setSelectedDay] = useState<Date>();
   const [selectMonth, setMonth] = useState<boolean>(false);
-  const [selectMaxPeople, setMaxPeople] = useState<boolean>(false);
+  const [selectMaxPeople, setSelectMaxPeople] = useState<boolean>(false);
+  const [selectValue, setSelectValue] = useState<selectValueType>(valueDefault);
   const [reservationComplete, setReservationComplete] = useState<boolean>(false);
-  const [BookingData, setBookingData] = useState<BookingDataType>(defaultValue);
-  const [officePosition, setOfficePosition] = useState<corrdinateType>();
+  const [BookingData, setBookingData] = useState<BookingDataType | null>(null);
+  const [officePosition, setOfficePosition] = useState<coordinateType>();
   const [loadViewToolTipState, setToolTipState] = useState<boolean>(false);
   const PrintDayDom = useRef<HTMLParagraphElement>(null);
-  const { data } = useQuery(["BookingPageData"], fetchBookingData);
+  const location = useLocation();
+  const officeId = Number(location.pathname.slice(9));
+  const { data } = useQuery(["BookingPageData"], () => fetchBookingData(officeId), {
+    staleTime: Infinity,
+    refetchOnWindowFocus: false,
+  });
   //데이터를 연결하면서 실제 이미지 데이터로 연결 해야함
-  const imageData: img[] = [];
   const context = useMyContext();
 
   useEffect(() => {
-    if (data) {
-      setBookingData(data.Booking);
-    }
+    if (data) setBookingData(data);
   }, [data]);
 
   useEffect(() => {
@@ -88,7 +118,9 @@ export const Booking = () => {
   useEffect(() => {
     const target = PrintDayDom.current as HTMLParagraphElement;
     if (selectedDay !== undefined) {
-      target.innerText = format(selectedDay, "yyyy-MM-dd");
+      const formatDate = format(selectedDay, "yyyy-MM-dd");
+      target.innerText = formatDate;
+      setSelectValue({ ...selectValue, selectDay: formatDate });
     }
   }, [selectedDay]);
 
@@ -99,11 +131,11 @@ export const Booking = () => {
           <Title>예약하기</Title>
         </div>
         <div className="flex mb-8 sm:flex-col xl:flex-row">
-          <ImgAreaWidht>
+          <ImgAreaWidth>
             <SlickSlider setting={setting}>
-              {imageData.length >= 1 ? (
-                imageData.map(() => {
-                  return <BookingFigure img="" />;
+              {BookingData !== null && BookingData.officePictureList.length >= 1 ? (
+                BookingData.officePictureList.map((item, index) => {
+                  if (item !== "None") return <BookingFigure img={item} key={index} />;
                 })
               ) : (
                 <BookingImageEmpty />
@@ -113,7 +145,11 @@ export const Booking = () => {
             <div className="w-full flex flex-col  lg:w-8/12 lg:mx-auto xl:px-0 xl:w-full">
               <div className="mb-8 sm:mb-3">
                 {/* 데이터 받아오면 주소에 넣어야함 */}
-                <OfficeName name={BookingData.name} address={BookingData.address}></OfficeName>
+                {BookingData !== null ? (
+                  <OfficeName name={BookingData.officeName} address={BookingData.address} />
+                ) : (
+                  <OfficeName name="정보 없음" address="정보 없음" />
+                )}
               </div>
               <div className="flex w-full gap-x-2">
                 <button className="btn btn-outline btn-primary block p-0 grow shrink basis-1/2">
@@ -125,14 +161,15 @@ export const Booking = () => {
                   className="btn btn-outline btn-primary block p-0 grow shrink basis-1/2"
                   onClick={() => {
                     context.setIsChatListOpen(true);
+                    fetchCreateChatRoom(officeId);
                   }}
                 >
                   문의하기
                 </button>
               </div>
             </div>
-          </ImgAreaWidht>
-          <CaledarAndOPtionWidth>
+          </ImgAreaWidth>
+          <CalendarAndOPtionWidth>
             {/* flex와 div로 영역을 나누기 위해 div를 많이 쓰더라도 사용했습니다 */}
 
             <div className="relative sm:mt-8 xl:mt-0">
@@ -144,32 +181,41 @@ export const Booking = () => {
                         시작 날짜를 알려주세요
                       </span>
                     </BackgroundCoverLeftAreaTopContour>
-                    <InheritanceDayPickr mode="single" selected={selectedDay} onSelect={setSelectedDay} />
+                    <InheritanceDayPicker mode="single" selected={selectedDay} onSelect={setSelectedDay} />
                   </BackgroundCoverLeftAreaRightContour>
                   <div className="sm:w-full">
-                    <div className="flex flex-col justify-center sm:w-full">
+                    <div className="flex flex-col justify-center  sm:w-full sm:h-full">
                       <div className="ml-4 text-base">
                         <p>몇 개월 사용할지 알려주세요</p>
                         <p className="mb-4">1년 이상 장기 예약은 문의가 필요합니다</p>
                       </div>
-                      <div className="mb-4">
-                        <SelectDateDropDown width="w-full" setChangeState={setMonth} />
+                      <div className="mb-8">
+                        <SelectDateDropDown
+                          width="w-full"
+                          setChangeState={setMonth}
+                          setSelectValue={setSelectValue}
+                          selectValue={selectValue}
+                        />
                       </div>
-                      <div className="mb-4">
+                      <div>
                         <p className="ml-4 mb-1 text-base">사용할 인원을 선택해주세요</p>
-                        <MaxCapacityDropDown width="w-full" setMaxPeople={setMaxPeople} />
-                      </div>
-                      {/* 월 정기 결제 버튼  */}
-                      <div className="flex ml-4">
-                        <div className="form-control">
-                          <label className="label cursor-pointer">
-                            <input type="checkbox" className="checkbox checkbox-primary" />
-                            <span className="label-text ml-4 text-base">월 정기 결제</span>
-                          </label>
-                        </div>
-                      </div>
-                      <div className="text-base sm:ml-5 lg:ml-12">
-                        <p className="text-primary">다음 월 정기 결제일은 0000입니다</p>
+                        {BookingData !== null ? (
+                          <MaxCapacityDropDown
+                            width="w-full"
+                            setSelectMaxPeople={setSelectMaxPeople}
+                            maxPeople={BookingData.maxCapacity}
+                            selectValue={selectValue}
+                            setSelectValue={setSelectValue}
+                          />
+                        ) : (
+                          <MaxCapacityDropDown
+                            width="w-full"
+                            setSelectMaxPeople={setSelectMaxPeople}
+                            maxPeople={0}
+                            selectValue={selectValue}
+                            setSelectValue={setSelectValue}
+                          />
+                        )}
                       </div>
                     </div>
                   </div>
@@ -179,24 +225,30 @@ export const Booking = () => {
                 <button
                   className="btn btn-primary w-full relative"
                   onClick={() => {
-                    setReservationComplete(true);
+                    fetchReservation(
+                      officeId,
+                      selectValue.selectDay,
+                      selectValue.maxPeople,
+                      selectValue.month,
+                      setReservationComplete,
+                    );
                   }}
                 >
                   예약하기
-                  {selectedDay && selectMonth && selectMaxPeople ? (
+                  {selectedDay && selectMonth && selectMaxPeople && BookingData !== null ? (
                     <TotalPriceAreaPosition className="rounded-full bg-secondary whitespace-nowrap">
-                      <span>총 결제 금액은 {BookingData.price}원입니다</span>
+                      <span>총 결제 금액은 {BookingData.leaseFee * selectValue.maxPeople}원입니다</span>
                     </TotalPriceAreaPosition>
                   ) : null}
                 </button>
                 {reservationComplete && (
-                  <div className="w-full h-full absolute top-0 left-0  z-50">
+                  <div className="w-full h-full absolute top-0 left-0  z-10">
                     <BlindBooking />
                   </div>
                 )}
               </BackgroundCover>
             </div>
-          </CaledarAndOPtionWidth>
+          </CalendarAndOPtionWidth>
         </div>
         <div id="map" style={{ width: "100%", height: "500px" }} className="mx-auto mb-8 relative">
           {officePosition !== undefined && (
@@ -223,8 +275,17 @@ export const Booking = () => {
 
         {/* width : w-full or 숫자입력으로 width값 조절 */}
         <div>
-          {BookingData.address !== "" && (
-            <OfficeOptions width="w-full" needReviewCount={true} OptionData={BookingData.option} />
+          {BookingData !== null ? (
+            <OfficeOptions
+              width="w-full"
+              needReviewCount={true}
+              OptionData={BookingData.officeOptionDto}
+              totalReview={BookingData.reviewCount}
+              maxPeople={BookingData.maxCapacity}
+              price={BookingData.leaseFee}
+            />
+          ) : (
+            <OfficeOptions width="w-full" needReviewCount={true} OptionData={{}} totalReview="0" />
           )}
         </div>
       </div>
@@ -232,7 +293,7 @@ export const Booking = () => {
   );
 };
 
-const ImgAreaWidht = styled.div`
+const ImgAreaWidth = styled.div`
   @media (min-width: 360px) {
     width: 100%;
   }
@@ -243,7 +304,7 @@ const ImgAreaWidht = styled.div`
   }
 `;
 
-const CaledarAndOPtionWidth = styled.div`
+const CalendarAndOPtionWidth = styled.div`
   @media (min-width: 360px) {
     width: 100%;
   }
@@ -253,7 +314,7 @@ const CaledarAndOPtionWidth = styled.div`
 `;
 
 //캘린더 커스텀을 위한 styled
-const InheritanceDayPickr = styled(DayPicker)`
+const InheritanceDayPicker = styled(DayPicker)`
   & .rdp-caption {
     position: relative;
     justify-content: center;

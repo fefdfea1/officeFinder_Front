@@ -24,7 +24,7 @@ export const Router = () => {
       <Route path="/MyOffice" element={<MyOffice />}></Route>
       <Route path="/SalesAnalysis" element={<SalesAnalysis />}></Route>
       <Route path="/MyBookings" element={<MyBookings />}></Route>
-      <Route path="/Booking" element={<Booking />}></Route>
+      <Route path="/Booking/:id" element={<Booking />}></Route>
       <Route path="/Join" element={<Join />}></Route>
       <Route path="/Login" element={<Login />}></Route>
       <Route path="/Profile" element={<Profile />}></Route>

@@ -16,7 +16,7 @@ export type BookMarkContentType = {
     officeAddress: string;
     officeId: number;
     officeImagePath: string;
-    officName: string;
+    officeName: string;
   };
 };
 
@@ -65,13 +65,8 @@ export const BookMark = () => {
   useEffect(() => {
     if (data) {
       setBookMarkData(data);
-      console.log(BookMarkData);
     }
   }, [data]);
-
-  useEffect(() => {
-    console.log(alertState);
-  }, [alertState]);
 
   return (
     <div className="mb-10">
@@ -105,9 +100,9 @@ export const BookMark = () => {
         </div>
       </BackgroundCover>
       {alertState && (
-        <RemoveBookMarkAlertPostition>
+        <RemoveBookMarkAlertPosition>
           <BookMarkAlert alertState={alertState} showText={"즐겨찾기에서 제거 됨"} />
-        </RemoveBookMarkAlertPostition>
+        </RemoveBookMarkAlertPosition>
       )}
       <div className="mt-6">
         <Pagination itemsPerPage={10} totalItems={BookMarkData.totalElements} />
@@ -122,7 +117,7 @@ const AllremovePosition = styled.button`
   right: 0.5rem;
 `;
 
-const RemoveBookMarkAlertPostition = styled.div`
+const RemoveBookMarkAlertPosition = styled.div`
   position: absolute;
   bottom: 0;
   left: 50%;

@@ -1,8 +1,8 @@
-import { OfficeName } from '../../components/booking/Officename';
-import { Heart } from '../../components/common/Heart';
-import { useState, useRef } from 'react';
-import { MyBookingsDataType } from './MyBookings';
-import { useSetStatusText } from './MyBookingsSetStatusText';
+import { OfficeName } from "../../components/booking/OfficeName";
+import { Heart } from "../../components/common/Heart";
+import { useState, useRef } from "react";
+import { MyBookingsDataType } from "./MyBookings";
+import { useSetStatusText } from "./MyBookingsSetStatusText";
 
 type propsType = {
   type?: string;
@@ -28,21 +28,21 @@ export const MyBookingsListCompo = (props: propsType) => {
         </figure>
         <div className="flex flex-col justify-center sm:w-full lg:w-6/12">
           <div className=" sm:mb-0">
-            <OfficeName name={'선릉 공유오피스 더공간A'} address="서울시 강남구 테헤란로70길 14-10 번" />
+            <OfficeName name={"선릉 공유오피스 더공간A"} address="서울시 강남구 테헤란로70길 14-10 번" />
           </div>
           <div className="p-2 text-sm">
             <p className="font-bold text-base">이용 기간</p>
             <p className="font-bold text-lg mb-3 sm:text-sm md:text-base lg:text-lg">
               2023년 8월 10일 ~ 2023년 9월 9일
             </p>
-            {props.type === 'MyBooking' && (
+            {props.type === "MyBooking" && (
               <p className="mb-4">다음 사용자를 위해 기간 내에 오피스를 깨끗히 해주세요.</p>
             )}
           </div>
           <div
             className={`p-2 text-sm ${
-              props.type === 'last_reservation' &&
-              'flex justify-between items-center sm:flex-col sm:items-start lg:flex-row lg:items-center'
+              props.type === "last_reservation" &&
+              "flex justify-between items-center sm:flex-col sm:items-start lg:flex-row lg:items-center"
             }`}
           >
             <div className="mb-4">
@@ -50,8 +50,8 @@ export const MyBookingsListCompo = (props: propsType) => {
               <p ref={statePTag} className="text-base"></p>
             </div>
             <p className="text-base mb-1">2023년 8월 7일 결제 완료</p>
-            {props.type === 'MyBooking' && <p className="text-primary">다음 월 정기 결제일은 0000입니다</p>}
-            {props.type === 'last_reservation' && (
+            {props.type === "MyBooking" && <p className="text-primary">다음 월 정기 결제일은 0000입니다</p>}
+            {props.type === "last_reservation" && (
               <button
                 className="btn btn-primary sm:mt-4 sm:w-full lg:w-5/12 lg:mt-0 xl:w-4/12"
                 onClick={() => {
@@ -64,7 +64,7 @@ export const MyBookingsListCompo = (props: propsType) => {
           </div>
         </div>
       </div>
-      {props.type === 'last_reservation' && writeReviewState ? (
+      {props.type === "last_reservation" && writeReviewState ? (
         <input
           type="text"
           placeholder="리뷰를 작성해주세요"

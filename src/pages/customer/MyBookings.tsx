@@ -19,7 +19,10 @@ export type MyBookingsDataType = {
 
 export const MyBookings = () => {
   const [MyBookingsData, setMyBookingsData] = useState<MyBookingsDataType[]>([]);
-  const { data } = useQuery(["fetchBookingData"], fetchMyBookingsData);
+  const { data } = useQuery(["fetchBookingData"], fetchMyBookingsData, {
+    staleTime: Infinity,
+    refetchOnWindowFocus: false,
+  });
   useEffect(() => {
     if (data) {
       setMyBookingsData(data.content);

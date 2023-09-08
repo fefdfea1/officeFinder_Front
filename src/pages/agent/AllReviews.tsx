@@ -1,17 +1,15 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { BackgroundCover } from '../../components/common/BackgroundCover';
-import { Title } from '../../components/common/Title';
-import { Button } from '../../components/common/Button';
-import { MyOfficeListDropDown } from '../../components/common/MyOfficeListDropDown';
-import { OfficeName } from '../../components/booking/Officename';
-import { Reviews } from '../../components/booking/Reviews';
-import { Pagination } from '../../components/common/Pagination';
-
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { BackgroundCover } from "../../components/common/BackgroundCover";
+import { Title } from "../../components/common/Title";
+import { Button } from "../../components/common/Button";
+import { MyOfficeListDropDown } from "../../components/common/MyOfficeListDropDown";
+import { OfficeName } from "../../components/booking/OfficeName";
+import { Reviews } from "../../components/booking/Reviews";
+import { Pagination } from "../../components/common/Pagination";
 
 export const AllReviews = () => {
-
-  const [officeName, setOfficeName] = useState('전체')
+  const [officeName, setOfficeName] = useState("전체");
   const handleOfficeChange = (office: string) => {
     setOfficeName(office);
   };
@@ -26,7 +24,9 @@ export const AllReviews = () => {
               <hr className="border-primary group-hover:border-transparent" />
             </div>
             <Link to="/SalesAnalysis">
-              <Button style="btn btn-primary btn-outline  w-[86px] md:w-40"><p>매출보기</p></Button>
+              <Button style="btn btn-primary btn-outline  w-[86px] md:w-40">
+                <p>매출보기</p>
+              </Button>
             </Link>
           </div>
         </div>

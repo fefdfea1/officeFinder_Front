@@ -1,23 +1,31 @@
-import { useEffect, useState } from 'react';
-import { RiArrowDropDownLine } from 'react-icons/ri';
+import { useEffect, useState } from "react";
+import { RiArrowDropDownLine } from "react-icons/ri";
+import { selectValueType } from "../../pages/Booking";
 
 export const SelectDateDropDown = (props: {
   width: string;
   setChangeState?: React.Dispatch<React.SetStateAction<boolean>>;
+  setSelectValue?: React.Dispatch<React.SetStateAction<selectValueType>>;
+  selectValue?: selectValueType;
 }): JSX.Element => {
   // width로 넓이를 지정할 수 있습니다. ex) w-52, w-full
   const MaxMonth = Array.from({ length: 11 });
-  const [selectedItem, setSelectedItem] = useState('');
+  const [selectedItem, setSelectedItem] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    if (props.setChangeState && selectedItem !== '') props.setChangeState(true);
+    if (props.setChangeState && selectedItem !== "") {
+      const sliceValue = Number(selectedItem.replace("개월", ""));
+      if (props.setSelectValue && props.selectValue) {
+        props.setSelectValue({ ...props.selectValue, month: sliceValue });
+      }
+      props.setChangeState(true);
+    }
   }, [selectedItem]);
 
   const handleItemClick = (item: string) => {
     setSelectedItem(item);
-
-    setIsOpen(false);
+    if (props.setSelectValue && props.selectValue) setIsOpen(false);
   };
 
   const toggleDropDown = () => {
@@ -41,12 +49,12 @@ export const SelectDateDropDown = (props: {
           <ul
             tabIndex={0}
             className={`dropdown-content w-full h-52 z-[1] menu p-2 shadow bg-base-100 rounded-box flex flex-nowrap overflow-y-auto 
-            ${isOpen ? '' : 'hidden'}`}
+            ${isOpen ? "" : "hidden"}`}
           >
             {MaxMonth.map((_, index) => {
               return (
-                <li>
-                  <a onClick={() => handleItemClick(`${index + 1}인`)}>{`${index + 1} 개월`}</a>
+                <li key={index}>
+                  <a onClick={() => handleItemClick(`${index + 1}개월`)}>{`${index + 1} 개월`}</a>
                 </li>
               );
             })}
