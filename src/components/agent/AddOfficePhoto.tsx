@@ -30,13 +30,8 @@ export const AddOfficePhoto = ({ onImgChange }: AddOfficePhotoProps) => {
     useEffect(() => {
         onImgChange(images)
     }, [images])
-    const formData = new FormData();
 
-    images.forEach((image) => {
-        const blob = new Blob([image], { type: 'image/jpeg, image/png' });
 
-        formData.append('file', blob);
-    });
 
 
     return (

@@ -8,14 +8,19 @@ import { OfficeName } from '../../components/booking/Officename';
 import { Reviews } from '../../components/booking/Reviews';
 import { Pagination } from '../../components/common/Pagination';
 
+// import { useQuery } from 'react-query';
+
 
 export const AllReviews = () => {
 
-  const [officeName, setOfficeName] = useState('전체')
-  const handleOfficeChange = (office: string) => {
+  const [officeName, setOfficeName] = useState<string>('전체')
+  const [officeId, setOfficeId] = useState<number>()
+  const handleOfficeChange = (office: string, id: number) => {
     setOfficeName(office);
+    setOfficeId(id)
   };
-
+  // const {data} = useQuery("")
+  console.log(officeId)
   return (
     <>
       <div className="flex justify-end relative">

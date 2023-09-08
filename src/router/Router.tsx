@@ -20,9 +20,9 @@ export const Router = () => {
       <Route path="/" element={<Main />}></Route>
       <Route path="/BookMark" element={<BookMark />}></Route>
       <Route path="/AddOffice" element={<AddOffice />}></Route>
-      <Route path="/AllReviews" element={<AllReviews />}></Route>
+      <Route path="/AllReviews/:paramsId/:paramsName" element={<AllReviews />}></Route>
       <Route path="/MyOffice" element={<MyOffice />}></Route>
-      <Route path="/SalesAnalysis" element={<SalesAnalysis />}></Route>
+      <Route path="/SalesAnalysis/:paramsId/:paramsName" element={<SalesAnalysis />}></Route>
       <Route path="/MyBookings" element={<MyBookings />}></Route>
       <Route path="/Booking" element={<Booking />}></Route>
       <Route path="/Join" element={<Join />}></Route>

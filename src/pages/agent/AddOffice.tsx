@@ -1,22 +1,49 @@
-
-import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom";
 import { BackgroundCover } from "../../components/common/BackgroundCover";
-import { Title } from '../../components/common/Title';
-import { Button } from '../../components/common/Button';
-import { Input } from '../../components/common/Input';
-import { OptionsCheckbox } from '../../components/common/OptionsCheckbox';
-import { AddOfficePhoto } from '../../components/agent/AddOfficePhoto';
-import { AddOfficeAddress } from '../../components/agent/AddOfficeAddress';
-import { useAddOfficeHandel } from '../../components/agent/HandelAddOffice'
-import { NumberToKoreanConverter } from '../../components/agent/NumberToKorean';
+import { Title } from "../../components/common/Title";
+import { Button } from "../../components/common/Button";
+import { Input } from "../../components/common/Input";
+import { OptionsCheckbox } from "../../components/common/OptionsCheckbox";
+import { AddOfficePhoto } from "../../components/agent/AddOfficePhoto";
+import { AddOfficeAddress } from "../../components/agent/AddOfficeAddress";
+import { useAddOfficeHandel } from "../../components/agent/HandelAddOffice"
+import { NumberToKoreanConverter } from "../../components/agent/NumberToKorean";
 import { postNewOfficeData } from "../../fetch/post/agent"
-import type { NewOfficeInfo } from "../../type/agentTypes"
 
 export const AddOffice = () => {
   const navigate = useNavigate();
-  const [postData, setPostData] = useState<NewOfficeInfo>()
-  const [selectedImages, setSelectedImages] = useState<string[]>([]);
+  // const [postData, setPostData] = useState<NewOfficeInfo>({
+  //   officeName: "",
+  //   address: {
+  //     legion: "",
+  //     city: "",
+  //     town: "",
+  //     detail: "",
+  //     street: "",
+  //     zipcode: ""
+  //   },
+  //   leaseFee: 0,
+  //   maxCapacity: 0,
+  //   remainRoom: 0,
+  //   officeOption: {
+  //     "haveAirCondition": false,
+  //     "haveCafe": false,
+  //     "havePrinter": false,
+  //     "packageSendServiceAvailable": false,
+  //     "haveDoorLock": false,
+  //     "faxServiceAvailable": false,
+  //     "havePublicKitchen": false,
+  //     "havePublicLounge": false,
+  //     "havePrivateLocker": false,
+  //     "haveTvProjector": false,
+  //     "haveWhiteBoard": false,
+  //     "haveWifi": false,
+  //     "haveShowerBooth": false,
+  //     "haveStorage": false,
+  //     "haveHeater": false,
+  //     "haveParkArea": false
+  //   }
+  // });
 
   const { name, handleOfficeName,
     selectedOptions, handleOptionsChange,
@@ -27,14 +54,12 @@ export const AddOffice = () => {
     images, handlefileUpload
   } = useAddOfficeHandel();
 
-
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
   }
 
   const SubmitData = async () => {
     const updatedData = {
-      ...postData,
       officeName: name,
       address: address,
       leaseFee: monthlyPrice,
@@ -42,25 +67,30 @@ export const AddOffice = () => {
       remainRoom: rooms,
       officeOption: selectedOptions,
     };
-    setPostData(updatedData);
-    setSelectedImages(images)
-    if (postData) {
-      try {
-        await postNewOfficeData({
-          request: postData,
-          multipartFileList: selectedImages
-        });
-        console.log("데이터 전송 완료");
-        alert("전송이 완료되었습니다.")
-        navigate("/MyOffice");
-      } catch (error) {
-        console.error("데이터 전송 중 오류 발생:", error);
-        alert('오류발생')
-      }
-    }
-  }
 
-  console.log(selectedImages)
+    const formData = new FormData();
+    formData.append("request", JSON.stringify(updatedData));
+    console.log(formData)
+    images.forEach((image) => {
+      const blob = new Blob([JSON.stringify(image)], {
+        type: 'application/json',
+      });
+      formData.append("multipartFileList", blob);
+    });
+
+    try {
+      await postNewOfficeData({
+        formData
+      });
+      console.log("데이터 전송 완료");
+      alert("전송이 완료되었습니다.");
+      navigate("/MyOffice");
+    } catch (error) {
+      console.error("데이터 전송 중 오류 발생:", error);
+      alert("오류가 발생했습니다.");
+    }
+  };
+
   return (
     <>
       <div className="flex justify-end relative">

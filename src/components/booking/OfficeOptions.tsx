@@ -11,6 +11,7 @@ type propsType = {
   width?: string;
   needReviewCount?: boolean;
   OptionData: PropsOptionType;
+  totalReview: number
 };
 
 export const OfficeOptions = (props: propsType) => {
@@ -61,7 +62,7 @@ export const OfficeOptions = (props: propsType) => {
             <Link to={"/AllReviews"}>
               <span className="mr-2">Reviews</span>
               {/* 데이터를 받으면 동적으로 추가 */}
-              <span>({231})</span>
+              <span>({props.totalReview})</span>
             </Link>
           </h3>
         )}

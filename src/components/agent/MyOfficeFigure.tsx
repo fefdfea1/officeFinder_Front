@@ -18,7 +18,6 @@ export const MyOfficeFigure = (props: ImgProps) => {
     // lg:w-8/12 lg:mx-auto xl:w-full
 
     if (picturesList.length === 0) {
-        // 만약 picturesList가 비어있는 경우 대체 이미지를 표시합니다.
         return (
             <div className="h-96 rounded-xl overflow-hidden mb-4">
                 <img src={`/officeImg/noimage.png`} alt="오피스 대체 이미지" className="block w-full h-full" />
@@ -31,7 +30,7 @@ export const MyOfficeFigure = (props: ImgProps) => {
             <SlickSlider setting={setting}>
                 {picturesList.map((key, index: number) =>
                     <figure key={key}>
-                        <div className="h-96 rounded-xl overflow-hidden mb-4">
+                        <div className="h-96 rounded-xl overflow-hidden ">
                             <img
                                 id={key}
                                 src={picturesList[index]}

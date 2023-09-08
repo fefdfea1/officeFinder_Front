@@ -1,9 +1,22 @@
-//get
+//get, myOffice
 export type OfficeData = {
   address: string;
   id: number;
   imagePath: [];
   officeName: string;
+};
+
+export type ShortReview = {
+  data: Reviews[];
+  reviewAmount: string;
+};
+
+export type Reviews = {
+  createdAt: string;
+  customerImagePath: string;
+  customerName: string;
+  description: string;
+  rate: number;
 };
 
 export type PageInfo = {
@@ -31,7 +44,7 @@ export type MyOfficeResponse = {
 };
 // post
 export type newOfficeData = {
-  request: NewOfficeInfo;
+  request: string;
   multipartFileList: string[];
 };
 
@@ -55,4 +68,17 @@ export type Address = {
 
 export type officeOptions = {
   [key: string]: boolean;
+};
+
+//charts
+
+export type chartsData = {
+  data: doughnutChart;
+  status: string;
+};
+
+export type doughnutChart = {
+  officeRoomCount: number;
+  roomsInUse: number;
+  leaseRate: number;
 };
