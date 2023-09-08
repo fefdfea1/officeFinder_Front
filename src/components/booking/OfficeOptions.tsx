@@ -12,8 +12,8 @@ type propsType = {
   needReviewCount?: boolean;
   maxPeople?: number;
   price?: number;
-  OptionData: PropsOptionType;
   totalReview: string;
+  OptionData: PropsOptionType;
 };
 
 export const OfficeOptions = (props: propsType) => {

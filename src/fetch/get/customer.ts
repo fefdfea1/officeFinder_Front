@@ -1,5 +1,5 @@
 import axios from "axios";
-import { baseInstance } from "../common/axiosApi";
+// import { baseInstance } from "../common/axiosApi";
 import { authInstance } from "../common/axiosApi";
 
 // 지금은 모두 같지만 추후 url을 변경해야합니다.
