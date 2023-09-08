@@ -13,7 +13,7 @@ import { GiPositionMarker } from "react-icons/gi";
 import { DrawMap } from "../Business/Booking/BookingPrintMap";
 import { SlickSlider } from "./BookingSlider";
 import { BookingFigure } from "./BookingFigure";
-import { OfficeName } from "../components/booking/Officename";
+import { OfficeName } from "../components/booking/OfficeName";
 import { Link, useLocation } from "react-router-dom";
 import { useMyContext } from "../contexts/MyContext";
 import { BookingImageEmpty } from "./BookingEmptyImg";
