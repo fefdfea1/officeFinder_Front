@@ -1,29 +1,14 @@
-import axios from "axios";
+import { authInstance } from "../common/axiosApi";
 
-export const deleteBookmark = (officeId: number, cookie: string) => {
-  axios.post(
-    "/api/bookarks/delete",
-    {
-      officdId: officeId,
-    },
-    {
-      headers: {
-        Authorization: cookie,
-      },
-    },
-  );
-};
-
-export const addBookMark = (officeId: number, cookie: string) => {
-  axios.post(
-    "/api/bookmarks/submit",
-    {
-      officdId: officeId,
-    },
-    {
-      headers: {
-        Authorization: cookie,
-      },
-    },
-  );
+export const fetchAddBookMark = (officeId: number) => {
+  try {
+    const addBookMark = authInstance
+      .post("api/bookmarks/submit", {
+        officeId,
+      })
+      .then(res => res.data);
+    return addBookMark;
+  } catch (error) {
+    console.log(error);
+  }
 };

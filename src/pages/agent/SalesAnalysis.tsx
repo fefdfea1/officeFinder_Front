@@ -26,8 +26,8 @@ export const SalesAnalysis = () => {
               <MyOfficeListDropDown onOfficeChange={handleOfficeChange} />
               <hr className="border-primary group-hover:border-transparent" />
             </div>
-            <Link to="/AddOffice">
-              <Button style="btn btn-primary btn-outline w-[86px] md:w-40" text="오피스 수정하기" />
+            <Link to="/AllReviews">
+              <Button style="btn btn-primary btn-outline w-[90px] md:w-40"><p>전체 리뷰</p></Button>
             </Link>
           </div>
         </div>
@@ -38,8 +38,8 @@ export const SalesAnalysis = () => {
         <div className="flex flex-col gap-4">
           <div className="p-3 flex justify-between">
             <OfficeName name="오피스A" address="주소" />
-            <Link to="/AllReviews">
-              <Button style="btn btn-primary w-[90px] md:w-40" text="전체 리뷰보기" />
+            <Link to="/AddOffice">
+              <Button style="btn btn-primary w-[86px] md:w-40"><p>수정하기</p></Button>
             </Link>
           </div>
           <OfficeOptions needReviewCount={false} OptionData={{ haveTvProjector: true }} />

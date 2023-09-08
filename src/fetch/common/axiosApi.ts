@@ -12,8 +12,7 @@ const authAPI = (url = "https://www.officefinder.site/", options?: any) => {
   return axios.create({
     baseURL: url,
     headers: {
-      "Accept": "application/json",
-      Authorization: `${token}`,
+      Authorization: `Bearer ${token}`,
     },
     ...options,
   });

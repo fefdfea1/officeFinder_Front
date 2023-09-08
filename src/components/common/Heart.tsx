@@ -1,7 +1,9 @@
 import styled from "@emotion/styled";
 import { heartActive } from "./HeartActive";
 
+
 //BookMark에는 기본적으로 active상태이기 때문에 추가
+
 type propsType = {
   fillState?: string;
 };
@@ -9,7 +11,9 @@ type propsType = {
 export const Heart = (props: propsType) => {
   return (
     <div onClick={heartActive} className="cursor-pointer">
+
       <HeartFillStyle className={`relative ${props.fillState ? props.fillState : null}`}>
+
         <HeartStyle className="heart-2 absolute"></HeartStyle>
         <FillUpHeart className="w-full h-full bg-primary absolute fillUp"></FillUpHeart>
       </HeartFillStyle>
