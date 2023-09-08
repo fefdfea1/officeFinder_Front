@@ -4,7 +4,7 @@ import { BackgroundCover } from "../../components/common/BackgroundCover";
 import { Title } from "../../components/common/Title";
 import { Button } from "../../components/common/Button";
 import { MyOfficeListDropDown } from "../../components/common/MyOfficeListDropDown";
-import { OfficeName } from "../../components/booking/OfficeName";
+import { OfficeName } from "../../components/booking/Officename";
 import { Reviews } from "../../components/booking/Reviews";
 import { Pagination } from "../../components/common/Pagination";
 

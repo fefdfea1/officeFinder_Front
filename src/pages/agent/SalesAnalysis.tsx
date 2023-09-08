@@ -4,7 +4,7 @@ import { BackgroundCover } from "../../components/common/BackgroundCover";
 import { Title } from "../../components/common/Title";
 import { Button } from "../../components/common/Button";
 import { MyOfficeListDropDown } from "../../components/common/MyOfficeListDropDown";
-import { OfficeName } from "../../components/booking/OfficeName";
+import { OfficeName } from "../../components/booking/Officename";
 import { OfficeOptions } from "../../components/booking/OfficeOptions";
 import { ReservationAttendeesList } from "../../components/agent/ReservationAttendeesList";
 import { SalesCharts } from "../../components/agent/SalesCharts";

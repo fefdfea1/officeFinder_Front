@@ -1,5 +1,5 @@
 import { Heart } from "../../components/common/Heart";
-import { OfficeName } from "../../components/booking/OfficeName";
+import { OfficeName } from "../../components/booking/Officename";
 
 export const OfficeProfile = () => {
   return (
