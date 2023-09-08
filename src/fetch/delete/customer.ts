@@ -12,7 +12,7 @@ export const fetchBookMarkAllDelete = () => {
 //낱개로 삭제
 export const fetchBookMarkDelete = (officeId: number) => {
   try {
-    const response = authInstance.delete(`/api/bookmarks/${officeId}`).then(res => res.data);
+    const response = authInstance.delete(`api/bookmarks/${officeId}`).then(res => res.data);
     return response;
   } catch (error) {
     console.log(error);
