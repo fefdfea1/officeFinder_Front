@@ -1,4 +1,4 @@
-import { OfficeName } from "../../components/booking/Officename";
+import { OfficeName } from "../../components/booking/OfficeName";
 import { AiFillStar } from "react-icons/ai";
 import { Heart } from "../../components/common/Heart";
 import { Link } from "react-router-dom";

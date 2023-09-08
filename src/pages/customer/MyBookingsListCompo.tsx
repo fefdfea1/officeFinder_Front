@@ -1,4 +1,4 @@
-import { OfficeName } from "../../components/booking/Officename";
+import { OfficeName } from "../../components/booking/OfficeName";
 import { Heart } from "../../components/common/Heart";
 import { useState, useRef } from "react";
 import { MyBookingsDataType } from "./MyBookings";

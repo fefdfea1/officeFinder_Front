@@ -49,5 +49,6 @@ export const DrawMap = (
     };
 
     let map = new window.kakao.maps.Map(container, options);
+    console.log(map);
   }
 };
