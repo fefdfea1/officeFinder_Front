@@ -26,7 +26,7 @@ export const AllReviews = () => {
               <hr className="border-primary group-hover:border-transparent" />
             </div>
             <Link to="/SalesAnalysis">
-              <Button style="btn btn-primary btn-outline  w-[86px] md:w-40" text="매출보기" />
+              <Button style="btn btn-primary btn-outline  w-[86px] md:w-40"><p>매출보기</p></Button>
             </Link>
           </div>
         </div>

@@ -19,3 +19,21 @@ export const alertRemoveTimer = (setAlertState: React.Dispatch<React.SetStateAct
     setAlertState(false);
   }, 1300);
 };
+
+export const AllRemoveAlert = (setAlertState: React.Dispatch<React.SetStateAction<boolean>>) => {
+  setAlertState(true);
+  if (timerId) {
+    clearTimeout(timerId);
+  }
+  timerId = setTimeout(() => {
+    const AllBookMarkItems = document.querySelectorAll(".BookMarkItem");
+    if (AllBookMarkItems.length >= 1) {
+      for (let i = 0; i <= AllBookMarkItems.length; i++) {
+        const target = AllBookMarkItems[i] as HTMLElement;
+        target.style.display = "none";
+      }
+    }
+
+    setAlertState(false);
+  }, 1300);
+};

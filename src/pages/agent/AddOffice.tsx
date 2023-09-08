@@ -1,6 +1,7 @@
-import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom';
-import { BackgroundCover } from '../../components/common/BackgroundCover';
+
+import { useState } from "react"
+import { Link, useNavigate } from "react-router-dom";
+import { BackgroundCover } from "../../components/common/BackgroundCover";
 import { Title } from '../../components/common/Title';
 import { Button } from '../../components/common/Button';
 import { Input } from '../../components/common/Input';
@@ -23,6 +24,7 @@ export const AddOffice = () => {
     maxCapacity, handleMaxCapacityChange
   } = useAddOfficeHandel();
 
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
   }
@@ -42,7 +44,7 @@ export const AddOffice = () => {
       try {
         await postNewOfficeData(postData);
         console.log("데이터 전송 완료");
-        alert('전송이 완료되었습니다.')
+        alert("전송이 완료되었습니다.")
         navigate("/MyOffice");
       } catch (error) {
         console.error("데이터 전송 중 오류 발생:", error);
@@ -57,7 +59,7 @@ export const AddOffice = () => {
       <div className="flex justify-end relative">
         <div className="absolute top-10 right-10 flex z-10">
           <Link to="/MyOffice">
-            <Button style="btn btn-primary btn-outline w-[90px] md:w-40" text="등록취소" />
+            <Button style="btn btn-primary btn-outline w-[90px] md:w-40"><p>등록취소</p></Button>
           </Link>
         </div>
       </div>
@@ -84,7 +86,7 @@ export const AddOffice = () => {
             </div>
           </div>
           <AddOfficePhoto />
-          <Button text="등록하기" style="btn btn-primary w-64 mt-2" clickHandler={SubmitData} />
+          <Button style="btn btn-primary w-64 mt-2" clickHandler={SubmitData} ><p>등록하기</p></Button>
         </form>
       </BackgroundCover>
     </>

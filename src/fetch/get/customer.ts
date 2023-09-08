@@ -1,12 +1,11 @@
 import axios from "axios";
 
-import { Cookies } from "react-cookie";
 import { authInstance, baseInstance } from "../common/axiosApi";
 
 // 지금은 모두 같지만 추후 url을 변경해야합니다.
 
-export const fetchBookMarkData = (page: number, size: number) => {
-  authInstance
+export const fetchBookMarkData = async (page: number, size: number) => {
+  const response = await authInstance
     .get("api/bookmarks", {
       params: {
         page,
@@ -14,17 +13,10 @@ export const fetchBookMarkData = (page: number, size: number) => {
       },
     })
     .then(res => res.data);
+  return response;
 };
 
 export const fetchMyBookingsData = () =>
   axios.get("https://my-json-server.typicode.com/fefdfea1/jsonData/db").then(res => res.data);
 
-export const fetchBookingData = () =>
-  baseInstance
-    .get("api/customers/info/leases", {
-      headers: {
-        "Access-Control-Allow-Origin": `http://127.0.0.1:5173`,
-        "Access-Control-Allow-Credentials": "true",
-      },
-    })
-    .then(res => res.data);
+export const fetchBookingData = () => baseInstance.get("api/customers/info/leases", {}).then(res => res.data);
