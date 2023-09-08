@@ -48,6 +48,6 @@ export const DrawMap = (
       level: 3, //지도의 레벨(확대, 축소 정도)
     };
 
-    let map = new window.kakao.maps.Map(container, options);
+    // let map = new window.kakao.maps.Map(container, options);
   }
 };
