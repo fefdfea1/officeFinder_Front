@@ -1,5 +1,4 @@
 import { authInstance } from "../common/axiosApi";
-
 import type { DetailData, MyOfficeResponse, ShortReview } from "../../type/agentTypes";
 
 export const fetchMyOfficeData = async (): Promise<MyOfficeResponse> => {
@@ -99,6 +98,17 @@ export const fetchMyPageData = () => {};
 export const fetchRequestListData = async (officeId: number) => {
   try {
     const res = await authInstance.get(`/api/agents/offices/${officeId}/lease-requests`);
+    return res.data;
+  } catch (error) {
+    console.error("API 호출 중 에러 발생:", error);
+    throw error;
+  }
+};
+
+//특정 오피스 리뷰 불러오기
+export const fetchReviewsData = async (officeId: number) => {
+  try {
+    const res = await authInstance.get(`/api/offices/${officeId}/reviews`);
     return res.data;
   } catch (error) {
     console.error("API 호출 중 에러 발생:", error);

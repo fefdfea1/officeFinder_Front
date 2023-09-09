@@ -7,7 +7,7 @@ import { OptionsCheckbox } from "../../components/common/OptionsCheckbox";
 import { AddOfficePhoto } from "../../components/agent/AddOfficePhoto";
 import { AddOfficeAddress } from "../../components/agent/AddOfficeAddress";
 import { useAddOfficeHandel } from "../../components/agent/HandelAddOffice"
-import { NumberToKoreanConverter } from "../../components/agent/NumberToKorean";
+import { NumberToKoreanConverter } from "../../Business/Agent/NumberToKorean";
 import { postNewOfficeData } from "../../fetch/post/agent"
 
 export const AddOffice = () => {

@@ -6,21 +6,28 @@ import { fetchMyOfficesNameData } from "../../fetch/get/agent"
 
 type MyOfficeListDropDownProps = {
   onOfficeChange: (office: string, id: number) => void;
-  officeName: string
+  officeName: string;
+  forReview: boolean;
 };
 
 type Item = {
   officeName: string;
   id: number;
+
 };
 
-export const MyOfficeListDropDown: React.FC<MyOfficeListDropDownProps> = ({ onOfficeChange, officeName }) => {
+export const MyOfficeListDropDown: React.FC<MyOfficeListDropDownProps> = ({ onOfficeChange, officeName, forReview }) => {
   const [selectedItem, setSelectedItem] = useState<Item>({ id: -1, officeName: officeName });
   const [isOpen, setIsOpen] = useState(false);
 
-  const { data: myOfficeNames } = useQuery('MyOfficesName', fetchMyOfficesNameData);
+  const { data: myOfficeNames } = useQuery('MyOfficesName', fetchMyOfficesNameData, {
 
-  const officeList = myOfficeNames?.data || ["오피스를 추가하세요"];
+  });
+  let officeList = myOfficeNames?.data || ["오피스를 추가하세요"];
+
+  if (forReview && officeList.length > 1) {
+    officeList = officeList.slice(1);
+  }
 
   const handleOfficeNameChange = (officeName: string, id: number) => {
     setSelectedItem({ ...selectedItem, id, officeName });
