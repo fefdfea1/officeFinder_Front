@@ -41,7 +41,6 @@ export const MyBookings = () => {
   });
   useEffect(() => {
     if (data) {
-      console.log(data);
       setMyBookingsData(data);
     }
   }, [data]);
