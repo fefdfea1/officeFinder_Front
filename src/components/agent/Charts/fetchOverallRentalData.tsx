@@ -1,37 +1,40 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useQuery } from "react-query";
 import { fetchOverallRentalData, fetchRentalRateData } from "../../../fetch/get/agent";
-import { chartsData } from "../../../type/agentTypes"
+import { chartsData } from "../../../type/agentTypes";
 import Chart from "chart.js/auto";
 
-
 type Id = {
-    officeId: number
-}
+    officeId: number;
+};
 
 export const OverallRentalChart = (props: Id) => {
     const primaryColor = getComputedStyle(document.documentElement).getPropertyValue("--primary");
     const secondaryColor = getComputedStyle(document.documentElement).getPropertyValue("--secondary");
     const doughnutChart = useRef<HTMLCanvasElement | null>(null);
     const doughnutInstanceRef = useRef<Chart<"doughnut", number[], string> | null>(null);
-    const { data: totalData, isLoading: totalLoading, isError: totalError } = useQuery<chartsData>("overallRental", fetchOverallRentalData, {
-        enabled: props.officeId === -1,
-        retry: 1,
-
-    });
-    const { data: rentalRateData, isLoading, isError } = useQuery<chartsData>(["rentalRate", props.officeId], () => fetchRentalRateData(props.officeId), {
-        enabled: props.officeId !== -1,
-        retry: 1,
-    });
-    let overallRentalData = rentalRateData
-    if (props.officeId === -1) {
-        overallRentalData = totalData
-    }
-
+    const [doughnutData, setDoughnutData] = useState<chartsData | null>(null);
+    const { isLoading: totalLoading, isError: totalError } = useQuery<chartsData>(
+        "overallRental",
+        fetchOverallRentalData,
+        {
+            enabled: props.officeId === -1,
+            retry: 1,
+            onSuccess: (data) => setDoughnutData(data),
+        }
+    );
+    const { isLoading, isError } = useQuery<chartsData>(["rentalRate", props.officeId], () =>
+        fetchRentalRateData(props.officeId),
+        {
+            enabled: props.officeId !== -1,
+            retry: 1,
+            onSuccess: (data) => setDoughnutData(data),
+        }
+    );
 
     useEffect(() => {
-        if (!overallRentalData) return
-        const chartData = overallRentalData.data
+        if (!doughnutData) return;
+        const chartData = doughnutData.data;
         const ctx = doughnutChart.current?.getContext("2d");
 
         if (doughnutInstanceRef.current) {
@@ -58,18 +61,17 @@ export const OverallRentalChart = (props: Id) => {
                 data: data,
             });
         }
-    }, [props.officeId]);
-    if (totalLoading || isLoading) return (<p>Loading...</p>);
-    if (totalError || isError) return (<p>데이터를 불러 올 수 없습니다.</p>);
-    console.log(overallRentalData)
+    }, [doughnutData, primaryColor, secondaryColor]);
+
+    if (totalLoading || isLoading) return <p>Loading...</p>;
+    if (totalError || isError) return <p>데이터를 불러 올 수 없습니다.</p>;
 
     return (
         <div className="w-60">
             <canvas id="percent" ref={doughnutChart}></canvas>
-            {overallRentalData && (
-                <p className="text-center p-2 text-sm">점유율: {overallRentalData.data.leaseRate} %</p>
+            {doughnutData && (
+                <p className="text-center p-2 text-sm">점유율: {doughnutData.data.leaseRate} %</p>
             )}
-
         </div>
     );
 };
