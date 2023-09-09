@@ -6,6 +6,7 @@ import { fetchMyOfficesNameData } from "../../fetch/get/agent"
 
 type MyOfficeListDropDownProps = {
   onOfficeChange: (office: string, id: number) => void;
+  officeName: string
 };
 
 type Item = {
@@ -13,8 +14,8 @@ type Item = {
   id: number;
 };
 
-export const MyOfficeListDropDown: React.FC<MyOfficeListDropDownProps> = ({ onOfficeChange }) => {
-  const [selectedItem, setSelectedItem] = useState<Item>({ id: -1, officeName: "전체" });
+export const MyOfficeListDropDown: React.FC<MyOfficeListDropDownProps> = ({ onOfficeChange, officeName }) => {
+  const [selectedItem, setSelectedItem] = useState<Item>({ id: -1, officeName: officeName });
   const [isOpen, setIsOpen] = useState(false);
 
   const { data: myOfficeNames } = useQuery('MyOfficesName', fetchMyOfficesNameData);

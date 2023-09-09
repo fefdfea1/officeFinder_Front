@@ -1,6 +1,6 @@
 import { authInstance } from "../common/axiosApi";
 
-import type { MyOfficeResponse, ShortReview } from "../../type/agentTypes";
+import type { DetailData, MyOfficeResponse, ShortReview } from "../../type/agentTypes";
 
 export const fetchMyOfficeData = async (): Promise<MyOfficeResponse> => {
   try {
@@ -21,12 +21,21 @@ export const fetchShortReviewsData = async (officeId: number): Promise<ShortRevi
     throw error;
   }
 };
+// 상세 데이터 불러오기
+export const fetchdetailOfficeData = async (officeId: number): Promise<DetailData> => {
+  try {
+    const res = await authInstance.get(`/api/agents/offices/${officeId}`);
+    return res.data;
+  } catch (error) {
+    console.error("API 호출 중 에러 발생:", error);
+    throw error;
+  }
+};
 
 //선형 차트
 export const fetchRevenueData = async (officeId: number) => {
   try {
-    const res = await authInstance.get(`/api/agents/offices/${officeId}/total-revenue`);
-    console.log(res.data);
+    const res = await authInstance.get(`/api/agents/offices/${officeId}/revenue`);
     return res.data;
   } catch (error) {
     console.error("API 호출 중 에러 발생:", error);
@@ -45,7 +54,7 @@ export const fetchTotalRevenueData = async () => {
 //도넛 차트
 export const fetchRentalRateData = async (officeId: number) => {
   try {
-    const res = await authInstance.get(`/api/agents/offices/${officeId}/overall-rental-status`);
+    const res = await authInstance.get(`/api/agents/offices/${officeId}/rental-status`);
     console.log(res.data);
     return res.data;
   } catch (error) {
@@ -56,7 +65,6 @@ export const fetchRentalRateData = async (officeId: number) => {
 export const fetchOverallRentalData = async () => {
   try {
     const res = await authInstance.get("/api/agents/offices/overall-rental-status");
-    console.log(res.data);
     return res.data;
   } catch (error) {
     console.error("API 호출 중 에러 발생:", error);
@@ -67,7 +75,6 @@ export const fetchOverallRentalData = async () => {
 export const fetchMyOfficesNameData = async () => {
   try {
     const res = await authInstance.get("/api/agents/offices/names");
-    console.log(res.data);
     return res.data;
   } catch (error) {
     console.error("API 호출 중 에러 발생:", error);
@@ -79,7 +86,6 @@ export const fetchAllReviewsData = async () => {
   // 아직 api 미완성
   try {
     const res = await authInstance.get("/api/agents/offices/names");
-    console.log(res.data);
     return res.data;
   } catch (error) {
     console.error("API 호출 중 에러 발생:", error);
@@ -88,3 +94,14 @@ export const fetchAllReviewsData = async () => {
 };
 
 export const fetchMyPageData = () => {};
+
+//예약자 명단 불러오기
+export const fetchRequestListData = async (officeId: number) => {
+  try {
+    const res = await authInstance.get(`/api/agents/offices/${officeId}/lease-requests`);
+    return res.data;
+  } catch (error) {
+    console.error("API 호출 중 에러 발생:", error);
+    throw error;
+  }
+};

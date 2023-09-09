@@ -70,6 +70,14 @@ export type officeOptions = {
   [key: string]: boolean;
 };
 
+export type DetailData = {
+  address: string;
+  leaseFee: number;
+  maxCapacity: number;
+  maxRoomCount: number;
+  officeName: string;
+  officeOptionDto: officeOptions;
+};
 //charts
 
 export type chartsData = {
