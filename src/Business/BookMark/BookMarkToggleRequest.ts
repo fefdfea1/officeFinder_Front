@@ -3,7 +3,7 @@ import { fetchAddBookMark } from "../../fetch/post/customer";
 
 export const toggleBookMarkRequest = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
   const target = event.target as HTMLElement;
-  const closet = target.closest("[data-officeNum]") as HTMLElement;
+  const closet = target.closest("[data-officenum]") as HTMLElement;
   if (closet !== null) {
     const officeId = Number(closet.dataset.officenum);
     if (target.classList.contains("active")) {

@@ -13,7 +13,7 @@ type propsType = {
 
 export const BookMarkOfficeCompo = (props: propsType) => {
   return (
-    <div data-index={props.index} data-officeNum={props.item.content.officeId} className="BookMarkItem">
+    <div data-index={props.index} data-officenum={props.item.content.officeId} className="BookMarkItem">
       <div className="flex flex-col relative">
         {/* 데이터를 받아올때 오피스 id를 받아와 이동 */}
         <Link to={"#"}>

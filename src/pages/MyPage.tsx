@@ -14,19 +14,16 @@ import { fetchMyPageData } from "../fetch/get/agent";
 import styled from "@emotion/styled";
 
 type fetchDataType = {
-  email: string;
-  id: string;
-  name: string;
-  point: number;
-  roles: string;
-};
-
-const defaultUserData = {
-  email: "",
-  id: "",
-  name: "",
-  point: 0,
-  roles: "",
+  status: string;
+  data: {
+    id: number;
+    email: string;
+    name: string;
+    point: number;
+    roles: string[];
+  };
+  histories: [];
+  profileImagePath: string;
 };
 
 const arr = Array.from({ length: 10 });
@@ -36,13 +33,16 @@ export const MyPage = () => {
   const [cacheChargeModalState, setcacheChargeModalState] = useState<boolean>(false);
   const [pullCacheModalState, setpullCacheModalState] = useState<boolean>(false);
   const [OwnerState, setOwnerState] = useState<boolean>(false);
-  const [fetchUserData, setUserData] = useState<fetchDataType>(defaultUserData);
+  const [fetchUserData, setUserData] = useState<fetchDataType | null>(null);
   const cacheChargeButtonDom = useRef<HTMLButtonElement>(null);
   const pullCacheButtonDom = useRef<HTMLButtonElement>(null);
   const imageDom = useRef<HTMLImageElement>(null);
   const nameInputDom = useRef<HTMLInputElement>(null);
   console.log(setOwnerState);
-  const { data } = useQuery("getData", fetchMyPageData);
+  const { data } = useQuery("getData", fetchMyPageData, {
+    staleTime: Infinity,
+    refetchOnWindowFocus: false,
+  });
 
   useEffect(() => {
     //클린업 함수를 위해 해당 부분에 작성
@@ -71,7 +71,7 @@ export const MyPage = () => {
 
   useEffect(() => {
     if (data) {
-      setUserData(data.MyPage);
+      setUserData(data);
       console.log(data);
     }
   }, [data]);
@@ -129,24 +129,26 @@ export const MyPage = () => {
             <div className="mb-6 pb-4 border-b border-solid border-accent">
               <TitleAndDesc
                 title="아이디"
-                description={`${fetchUserData ? fetchUserData.email : "불러오기에 실패하였습니다"}`}
+                description={`${fetchUserData ? fetchUserData.data.email : "불러오기에 실패하였습니다"}`}
               />
             </div>
             <div className="mb-6 pb-4 border-b border-solid border-accent relative leading-loose">
               <h3 className="font-black text-lg pl-4">닉네임</h3>
               <form action="#" method="post">
                 {/* defaultValue값에 false일때 값을 주게 되면 해당 값으로 고정 되어버려 넣지 않음 */}
-                <input
-                  type="text"
-                  id="EditIdInput"
-                  className="text-base pl-4 mr font-bold bg-transparent"
-                  defaultValue={`${fetchUserData ? fetchUserData.name : ""}`}
-                  readOnly
-                  ref={nameInputDom}
-                  onBlur={() => {
-                    mypageBlueEventHandler(nameInputDom);
-                  }}
-                />
+                {fetchUserData && (
+                  <input
+                    type="text"
+                    id="EditIdInput"
+                    className="text-base pl-4 mr font-bold bg-transparent"
+                    defaultValue={`${fetchUserData && fetchUserData.data.name}`}
+                    readOnly
+                    ref={nameInputDom}
+                    onBlur={() => {
+                      mypageBlueEventHandler(nameInputDom);
+                    }}
+                  />
+                )}
               </form>
 
               <EditPosition
@@ -162,7 +164,7 @@ export const MyPage = () => {
             <div className="mb-6 pb-4 border-b border-solid border-accent">
               <TitleAndDesc
                 title="현재 포인트"
-                description={`${fetchUserData ? fetchUserData.point : "불러오기에 실패하였습니다"}`}
+                description={`${fetchUserData ? fetchUserData.data.point : "불러오기에 실패하였습니다"}`}
                 type="point"
               />
             </div>
