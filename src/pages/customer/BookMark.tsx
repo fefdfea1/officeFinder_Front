@@ -73,7 +73,7 @@ export const BookMark = () => {
       <BackgroundCover>
         <div className="relative mb-4">
           <Title>즐겨찾는 office</Title>
-          <AllremovePosition
+          <AllRemovePosition
             className="absolute"
             onClick={() => {
               fetchBookMarkAllDelete();
@@ -81,7 +81,7 @@ export const BookMark = () => {
             }}
           >
             전체삭제
-          </AllremovePosition>
+          </AllRemovePosition>
         </div>
         {/* breakPoint별로 grid-cols를 변경해야함 */}
         <div className="grid grid-cols-4 gap-8 mb-8 sm:grid-cols-1 sm:gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ">
@@ -111,7 +111,7 @@ export const BookMark = () => {
   );
 };
 
-const AllremovePosition = styled.button`
+const AllRemovePosition = styled.button`
   position: absolute;
   top: 5px;
   right: 0.5rem;

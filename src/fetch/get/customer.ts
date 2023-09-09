@@ -1,4 +1,3 @@
-import axios from "axios";
 // import { baseInstance } from "../common/axiosApi";
 import { authInstance } from "../common/axiosApi";
 
@@ -16,8 +15,14 @@ export const fetchBookMarkData = async (page: number, size: number) => {
   return response;
 };
 
-export const fetchMyBookingsData = () =>
-  axios.get("https://my-json-server.typicode.com/fefdfea1/jsonData/db").then(res => res.data);
+export const fetchMyBookingsData = () => {
+  try {
+    const response = authInstance.get(`api/customers/info/leases`).then(res => res.data);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const fetchBookingData = (officeNumber: number) => {
   try {

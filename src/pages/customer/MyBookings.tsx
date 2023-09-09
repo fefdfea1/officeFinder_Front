@@ -5,27 +5,44 @@ import { useQuery } from "react-query";
 import { fetchMyBookingsData } from "../../fetch/get/customer";
 import { useState, useEffect } from "react";
 
-export type MyBookingsDataType = {
+export type MyBookingContentType = {
   endDate: string;
-  isMonthly: boolean;
-  isReviewed: boolean;
   leaseId: number;
   leaseStatus: string;
   location: string;
   name: string;
-  paymentData: string;
+  paymentDate: string;
+  reviewed: boolean;
   startDate: string;
 };
 
+export type MyBookingsDataType = {
+  content: MyBookingContentType[];
+  empty: boolean;
+  first: boolean;
+  last: boolean;
+  number: number;
+  numberOfElements: number;
+  size: number;
+  sort: {
+    empty: boolean;
+    sorted: boolean;
+    unsorted: boolean;
+  };
+  totalElements: number;
+  totalPages: number;
+};
+
 export const MyBookings = () => {
-  const [MyBookingsData, setMyBookingsData] = useState<MyBookingsDataType[]>([]);
+  const [MyBookingsData, setMyBookingsData] = useState<MyBookingsDataType | null>(null);
   const { data } = useQuery(["fetchBookingData"], fetchMyBookingsData, {
     staleTime: Infinity,
     refetchOnWindowFocus: false,
   });
   useEffect(() => {
     if (data) {
-      setMyBookingsData(data.content);
+      console.log(data);
+      setMyBookingsData(data);
     }
   }, [data]);
 
@@ -36,15 +53,18 @@ export const MyBookings = () => {
         <BackgroundCover>
           <Title>나의 예약</Title>
           <div className="mt-8"></div>
-          {MyBookingsData.map((item, index) => {
-            if (item.leaseStatus !== "EXPIRED") return <MyBookingsListCompo item={item} type="MyBooking" key={index} />;
-          })}
+          {MyBookingsData &&
+            MyBookingsData.content.map((item, index) => {
+              if (item.leaseStatus !== "EXPIRED")
+                return <MyBookingsListCompo item={item} type="MyBooking" key={index} />;
+            })}
           <Title>지난 예약</Title>
           <div className="mt-8">
-            {MyBookingsData.map((item, index) => {
-              if (item.leaseStatus === "EXPIRED")
-                return <MyBookingsListCompo item={item} type="last_reservation" key={index} />;
-            })}
+            {MyBookingsData &&
+              MyBookingsData.content.map((item, index) => {
+                if (item.leaseStatus === "EXPIRED")
+                  return <MyBookingsListCompo item={item} type="last_reservation" key={index} />;
+              })}
           </div>
         </BackgroundCover>
       </div>
