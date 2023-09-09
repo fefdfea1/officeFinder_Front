@@ -2,8 +2,6 @@ import { OfficeName } from "../../components/booking/OfficeName";
 import { AiFillStar } from "react-icons/ai";
 import { Heart } from "../../components/common/Heart";
 import { Link } from "react-router-dom";
-import { toggleBookMarkRequest } from "../../Business/BookMark/BookMarkToggleRequest";
-import { alertRemoveTimer } from "../../Business/BookMark/BookMarkTimer";
 import { BookMarkContentType } from "./BookMark";
 
 type propsType = {
@@ -32,16 +30,8 @@ export const BookMarkOfficeCompo = (props: propsType) => {
           </div>
         </div>
         <p className="text-sm pl-2 ">현재 위치와의 거리 200m</p>
-        <button
-          className="absolute right-2 top-2"
-          type="button"
-          onClick={event => {
-            toggleBookMarkRequest(event, props.item.content.officeId);
-            alertRemoveTimer(props.setAlertState, props.index);
-          }}
-        >
-          <Heart fillState="active" />
-        </button>
+
+        <Heart fillState="active" />
       </div>
     </div>
   );
