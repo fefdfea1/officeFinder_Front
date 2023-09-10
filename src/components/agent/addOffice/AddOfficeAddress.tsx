@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { useDaumPostcodePopup } from "react-daum-postcode";
-import type { Address } from "../../type/agentTypes";
+import type { Address } from "../../../type/agentTypes";
 type OnAddressHandler = (address: Address) => void;
 
 
@@ -37,7 +37,7 @@ export const AddOfficeAddress = ({ onAddressHandler }: { onAddressHandler: OnAdd
 
         if (addressRef.current && postcodeRef.current && extraAddressRef.current) {
             postcodeRef.current.value = data.zonecode;
-            addressRef.current.value = data.query;
+            addressRef.current.value = data.address;
             extraAddressRef.current.value = "(" + data.bname + ")" + " " + data.buildingName
         }
 

@@ -4,11 +4,11 @@ import { Title } from "../../components/common/Title";
 import { Button } from "../../components/common/Button";
 import { Input } from "../../components/common/Input";
 import { OptionsCheckbox } from "../../components/common/OptionsCheckbox";
-import { AddOfficePhoto } from "../../components/agent/AddOfficePhoto";
-import { AddOfficeAddress } from "../../components/agent/AddOfficeAddress";
-import { useAddOfficeHandel } from "../../components/agent/HandelAddOffice"
+import { AddOfficePhoto } from "../../components/agent/addOffice/AddOfficePhoto";
+import { AddOfficeAddress } from "../../components/agent/addOffice/AddOfficeAddress";
+import { useAddOfficeHandel } from "../../components/agent/addOffice/HandelAddOffice"
 import { NumberToKoreanConverter } from "../../Business/Agent/NumberToKorean";
-import { postNewOfficeData } from "../../fetch/post/agent"
+import { usePost } from "../../fetch/post/agent"
 
 export const AddOffice = () => {
   const navigate = useNavigate();
@@ -57,8 +57,8 @@ export const AddOffice = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
   }
-
-  const SubmitData = async () => {
+  const { mutate } = usePost()
+  const handleChange = () => {
     const updatedData = {
       officeName: name,
       address: address,
@@ -67,29 +67,18 @@ export const AddOffice = () => {
       remainRoom: rooms,
       officeOption: selectedOptions,
     };
-
-    const formData = new FormData();
-    formData.append("request", JSON.stringify(updatedData));
-    console.log(formData)
-    images.forEach((image) => {
-      const blob = new Blob([JSON.stringify(image)], {
-        type: 'application/json',
-      });
-      formData.append("multipartFileList", blob);
+    console.log(updatedData)
+    const formData = new FormData()
+    const blob = new Blob([JSON.stringify(updatedData)], {
+      // JSON 타입 지정
+      type: 'application/json',
     });
-
-    try {
-      await postNewOfficeData({
-        formData
-      });
-      console.log("데이터 전송 완료");
-      alert("전송이 완료되었습니다.");
-      navigate("/MyOffice");
-    } catch (error) {
-      console.error("데이터 전송 중 오류 발생:", error);
-      alert("오류가 발생했습니다.");
-    }
-  };
+    formData.append("request", blob);
+    images.forEach((image) => {
+      formData.append("multipartFileList", image);
+    });
+    mutate(formData, { onSuccess: () => navigate("/MyOffice") })
+  }
 
   return (
     <>
@@ -123,7 +112,7 @@ export const AddOffice = () => {
             </div>
           </div>
           <AddOfficePhoto onImgChange={handlefileUpload} />
-          <Button style="btn btn-primary w-64 mt-2" clickHandler={SubmitData} ><p>등록하기</p></Button>
+          <Button style="btn btn-primary w-64 mt-2" clickHandler={handleChange} ><p>등록하기</p></Button>
         </form>
       </BackgroundCover>
     </>

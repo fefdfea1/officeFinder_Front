@@ -5,7 +5,6 @@ import { BackgroundCover } from '../../components/common/BackgroundCover';
 import { Title } from '../../components/common/Title';
 import { Button } from '../../components/common/Button';
 import { MyOfficeListDropDown } from '../../components/common/MyOfficeListDropDown';
-import { OfficeName } from '../../components/booking/Officename';
 import { Reviews } from '../../components/booking/Reviews';
 import { Pagination } from '../../components/common/Pagination';
 import { fetchReviewsData } from '../../fetch/get/agent';
@@ -23,7 +22,7 @@ export const AllReviews = () => {
   useEffect(() => {
     const parsedId = Number(paramsId);
     setOfficeId(parsedId);
-    setOfficeName(paramsName || "전체");
+    setOfficeName(paramsName || "");
   }, [paramsId, paramsName]);
 
   const handleOfficeChange = (office: string, id: number) => {
@@ -31,14 +30,14 @@ export const AllReviews = () => {
     setOfficeName(office);
     setOfficeId(id)
   };
-  const { data, isLoading, isError } = useQuery(["reviews", officeId], () => fetchReviewsData(officeId), {
+  const { data: reviews, isLoading, isError, error }: { data: any; isLoading: boolean; isError: boolean; error: any } = useQuery(["reviews", officeId], () => fetchReviewsData(officeId), {
     retry: 1,
-    onError: (data) => console.log(data)
+    staleTime: 1 * 60 * 1000,
   })
-  console.log(data)
+  console.log(reviews)
 
   if (isLoading) return <p>Loading...</p>;
-  if (isError) return <p>데이터를 불러 올 수 없습니다.</p>;
+
 
   return (
     <>
@@ -58,17 +57,21 @@ export const AllReviews = () => {
       <BackgroundCover>
         <Title>{officeName} 리뷰</Title>
         {/* 본문 */}
-        <div className="flex flex-col gap-4">
-          <div className="p-3 flex justify-between">
-            <OfficeName name="오피스A" address="주소" />
-          </div>
+        {reviews ? <div className="flex flex-col gap-4">
+
           <BackgroundCover margin="m-0" padding="lg:p-8 md:p-4 p-2">
             <Reviews />
             <div className="flex justify-center mt-4">
-              <Pagination itemsPerPage={10} totalItems={55} />
+              <Pagination itemsPerPage={10} totalItems={reviews.totalPage} />
             </div>
           </BackgroundCover>
-        </div>
+        </div> : isError ? (
+          error.response && error.response.status === 400 ? (
+            <p className="text-center p-8"> 아직 작성된 리뷰가 없습니다</p>
+          ) : (
+            <p>{error.message}</p>
+          )
+        ) : null}
         {/* 본문 끝 */}
       </BackgroundCover>
     </>

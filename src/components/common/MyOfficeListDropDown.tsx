@@ -11,10 +11,9 @@ type MyOfficeListDropDownProps = {
 };
 
 type Item = {
-  officeName: string;
   id: number;
-
-};
+  officeName: string;
+}
 
 export const MyOfficeListDropDown: React.FC<MyOfficeListDropDownProps> = ({ onOfficeChange, officeName, forReview }) => {
   const [selectedItem, setSelectedItem] = useState<Item>({ id: -1, officeName: officeName });
@@ -45,10 +44,10 @@ export const MyOfficeListDropDown: React.FC<MyOfficeListDropDownProps> = ({ onOf
           <RiArrowDropDownLine className="text-2xl" />
         </label>
         <ul tabIndex={0} className={`dropdown-content w-full z-[1] menu p-2 shadow bg-base-100 rounded-box ${isOpen ? '' : 'hidden'}`}>
-          {officeList.map((item: Item) => (
-            <li key={item.id}>
-              <a onClick={() => handleOfficeNameChange(item.officeName, item.id)}>
-                {item.officeName}
+          {officeList.map(({ id, officeName }: { id: number, officeName: string }) => (
+            <li key={id}>
+              <a onClick={() => handleOfficeNameChange(officeName, id)}>
+                {officeName}
               </a>
             </li>
           ))}

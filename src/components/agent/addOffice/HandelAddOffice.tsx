@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { Address, officeOptions } from '../../type/agentTypes';
+import type { Address, officeOptions } from '../../../type/agentTypes';
 
 type Options = {
     [key: string]: boolean;
@@ -21,7 +21,7 @@ export const useAddOfficeHandel = () => {
     const [rooms, setRooms] = useState<number>()
     const [maxCapacity, setMaxCapacity] = useState<number>()
     const [monthlyPrice, setMonthlyPrice] = useState<number>()
-    const [images, setImages] = useState<string[]>([])
+    const [images, setImages] = useState<Blob[]>([])
 
 
     //오피스 이름
@@ -67,7 +67,7 @@ export const useAddOfficeHandel = () => {
         setMaxCapacity(capacity);
     };
     // 파일저장
-    const handlefileUpload = (images: string[]) => {
+    const handlefileUpload = (images: Blob[]) => {
         setImages(images);
     };
 

@@ -68,7 +68,7 @@ export const SalesAnalysis = () => {
                   </Button>
                 </Link>
               </div>
-              <OfficeOptions totalReview={20} needReviewCount={false} OptionData={detailData.officeOptionDto} />
+              <OfficeOptions totalReview="2" maxPeople={detailData.maxCapacity} price={detailData.leaseFee} needReviewCount={false} OptionData={detailData.officeOptionDto} />
             </>
           )}
           <SalesCharts officeId={officeId} />

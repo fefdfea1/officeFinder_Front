@@ -2,17 +2,19 @@ import { useState, ChangeEvent, useEffect } from 'react';
 import { MdOutlineAddPhotoAlternate, MdCancel } from 'react-icons/md';
 
 type AddOfficePhotoProps = {
-    onImgChange: (images: string[]) => void;
+    onImgChange: (images: Blob[]) => void;
 };
 
 export const AddOfficePhoto = ({ onImgChange }: AddOfficePhotoProps) => {
-    const [images, setImages] = useState<string[]>([]);
+    const [images, setImages] = useState<string[]>([])
+    const [files, setFiles] = useState<Blob[]>([]);
 
     const handleImageAdd = (event: ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
         if (file) {
             if (images.length < 5) {
                 setImages(prevImages => [...prevImages, URL.createObjectURL(file)]);
+                setFiles(prevFiles => [...prevFiles, file]);
             } else {
                 alert('최대 5개의 이미지만 추가할 수 있습니다.');
             }
@@ -28,11 +30,8 @@ export const AddOfficePhoto = ({ onImgChange }: AddOfficePhotoProps) => {
     };
 
     useEffect(() => {
-        onImgChange(images)
-    }, [images])
-
-
-
+        onImgChange(files)
+    }, [files])
 
     return (
         <>
