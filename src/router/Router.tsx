@@ -28,7 +28,7 @@ export const Router = () => {
       <Route path="/Join" element={<Join />}></Route>
       <Route path="/Login" element={<Login />}></Route>
       <Route path="/Profile" element={<Profile />}></Route>
-      <Route path="/AddOfficeReviews" element={<AddOfficeReviews />}></Route>
+      <Route path="/AddOfficeReviews/:id" element={<AddOfficeReviews />}></Route>
       <Route path="/MyPage" element={<MyPage />}></Route>
       <Route path="/Noti" element={<NotiMessage />}></Route>
     </Routes>

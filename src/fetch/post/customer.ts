@@ -80,3 +80,17 @@ export const fetchEditProfile = (formData: FormData) => {
     value: formData,
   });
 };
+
+export const fetchAddReview = (leaseId: number, desc: string, rate: number) => {
+  try {
+    const response = authInstance
+      .post(`api/customers/info/leases/${leaseId}/reviews`, {
+        description: desc,
+        rate,
+      })
+      .then(res => res.data);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};

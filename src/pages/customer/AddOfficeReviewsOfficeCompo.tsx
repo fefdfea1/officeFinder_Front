@@ -1,26 +1,64 @@
-import { Heart } from "../../components/common/Heart";
 import { OfficeName } from "../../components/booking/OfficeName";
+import { AddOfficeReviewsOfficeInfoCompo } from "./AddOfficeReviewsOfficeInfoCompo";
+import { SlickSlider } from "../BookingSlider";
+import { useEffect, useState } from "react";
+import { returnImgSrc } from "../../Business/AddOfficeReviews/AddOfficeReviewsReturnImgSrc";
+import { OfficeReviewsType } from "./AddOfficeReviews";
 
-export const OfficeProfile = () => {
+type propsTpye = {
+  officeData: OfficeReviewsType;
+};
+
+type imgSrcType = string[];
+
+const setting = {
+  dots: true,
+  infinite: true,
+  speed: 500,
+  pauseOnHover: true,
+  autoplay: true,
+};
+
+export const OfficeProfile = (props: propsTpye) => {
+  const [ImageSrc, setImageSrc] = useState<imgSrcType>(["sdfsdf"]);
+  const defaultImagePath = "/officeImg/noimage.png";
+
+  useEffect(() => {
+    const filterSrcArr = returnImgSrc(props.officeData.officeImagePath);
+    setImageSrc(filterSrcArr);
+  }, [props.officeData.officeImagePath]);
+
   return (
     <div className="flex sm:flex-col lg:flex-row">
-      <figure className="h-80 rounded-lg overflow-hidden mr-6 relative sm:w-full lg:w-96">
-        <img
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlHBP4Mb-Yi9zZovnacK-KaJm1N6WrtvaOdZHbR3rA-g&s"
-          alt="오피스 이미지"
-          className="w-full h-full"
-        />
-        <div className="absolute right-2 top-2">
-          <Heart />
-        </div>
-      </figure>
-      <div className="flex flex-col justify-between text-base py-3">
+      <div className="h-80 sm:w-full lg:w-96">
+        <SlickSlider setting={setting}>
+          {ImageSrc.length >= 1 &&
+            ImageSrc.map((item, index) => {
+              return <AddOfficeReviewsOfficeInfoCompo imgSrc={item} key={index} />;
+            })}
+        </SlickSlider>
+        {ImageSrc.length === 0 && <AddOfficeReviewsOfficeInfoCompo imgSrc={defaultImagePath} />}
+      </div>
+      <div className="flex flex-col justify-between text-base py-3 ml-4">
         <div>
-          <OfficeName name="선릉 공유오피스 더공간B" address="서울시 강남구 테헤란로70길 14-10 번" />
+          {props.officeData ? (
+            <OfficeName name={props.officeData.name} address={props.officeData.location} />
+          ) : (
+            <OfficeName name={"찾을 수 없음"} address={"찾을 수 없음"} />
+          )}
+
           <p className="pl-2 mt-4 font-black">이용 기간</p>
-          <p className="pl-2">{`2023년 7월 8일 ~ 2023년 8월 7일`}</p>
+          {props.officeData ? (
+            <p className="pl-2">{`${props.officeData.startDate} ~ ${props.officeData.endDate}`}</p>
+          ) : (
+            <p className="pl-2">{`찾을 수 없음 ~ 찾을 수 없음`}</p>
+          )}
         </div>
-        <p className="sm:pl-2 sm:mt-10 sm:pl-2">2023년 7월 1일 결제완료</p>
+        {props.officeData ? (
+          <p className="sm:pl-2 sm:mt-10 sm:pl-2">2023년 7월 1일 결제완료</p>
+        ) : (
+          <p className="sm:pl-2 sm:mt-10 sm:pl-2">찾을 수 없음</p>
+        )}
       </div>
     </div>
   );
