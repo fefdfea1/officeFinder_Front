@@ -13,5 +13,7 @@ export const fetchReviewsData = async (): Promise<MyOfficeResponse> => {
   return response.data;
 };
 
-// export const fetchMyPageData = () => authInstance.get("api/customers/info").then(res => res.data);
-export const fetchMyPageData = () => authInstance.get("api/customers/info").then(res => res.data);
+export const fetchMyPageData = () => {
+  const response = authInstance.get("api/customers/info").then(res => res.data);
+  return response;
+};
