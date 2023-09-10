@@ -8,12 +8,12 @@ export const cacheChargeModalStateFn = (
   setcacheChargeModalState(!cacheChargeModalState);
 };
 
-export const pullCacheModalStateFn = (
-  pullCacheModalState: boolean,
-  cacheChargeModalState: boolean,
-  setcacheChargeModalState: React.Dispatch<React.SetStateAction<boolean>>,
-  setpullCacheModalState: React.Dispatch<React.SetStateAction<boolean>>,
-) => {
-  if (cacheChargeModalState) setcacheChargeModalState(false);
-  setpullCacheModalState(!pullCacheModalState);
-};
+// export const pullCacheModalStateFn = (
+//   pullCacheModalState: boolean,
+//   cacheChargeModalState: boolean,
+//   setcacheChargeModalState: React.Dispatch<React.SetStateAction<boolean>>,
+//   setpullCacheModalState: React.Dispatch<React.SetStateAction<boolean>>,
+// ) => {
+//   if (cacheChargeModalState) setcacheChargeModalState(false);
+//   setpullCacheModalState(!pullCacheModalState);
+// };

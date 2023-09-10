@@ -18,3 +18,12 @@ export const fetchBookMarkDelete = (officeId: number) => {
     console.log(error);
   }
 };
+
+export const fetchRemoveUserProfile = () => {
+  try {
+    const response = authInstance.delete("api/customers/info/profileImage").then(res => res.data);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};

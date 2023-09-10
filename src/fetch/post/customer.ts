@@ -1,6 +1,8 @@
 import { authInstance } from "../common/axiosApi";
 // import { baseInstance } from "../common/axiosApi";
 import { reservationType } from "../../type/customerTypes";
+import { reFetchingType } from "../../pages/MyPage";
+import { formInstance } from "../common/axiosApi";
 
 export const fetchAddBookMark = (officeId: number) => {
   try {
@@ -58,4 +60,23 @@ export const fetchReservation: reservationType = (
   } catch (error) {
     console.log(error);
   }
+};
+
+export const fetchAddPoint = (chargePoint: string, refetch: reFetchingType) => {
+  if (chargePoint === "") return;
+  const response = authInstance
+    .post("api/customers/charge", {
+      chargeAmount: chargePoint,
+    })
+    .then(res => {
+      refetch();
+      return res.data;
+    });
+  return response;
+};
+
+export const fetchEditProfile = (formData: FormData) => {
+  formInstance.post("https://www.officefinder.site/api/customers/info/profileImage", {
+    value: formData,
+  });
 };
