@@ -81,19 +81,6 @@ export const fetchMyOfficesNameData = async () => {
   }
 };
 
-export const fetchAllReviewsData = async () => {
-  // 아직 api 미완성
-  try {
-    const res = await authInstance.get("/api/agents/offices/names");
-    return res.data;
-  } catch (error) {
-    console.error("API 호출 중 에러 발생:", error);
-    throw error;
-  }
-};
-
-export const fetchMyPageData = () => {};
-
 //예약자 명단 불러오기
 export const fetchRequestListData = async (officeId: number) => {
   try {
@@ -115,3 +102,15 @@ export const fetchReviewsData = async (officeId: number) => {
     throw error;
   }
 };
+
+export const fetchOriginOfficeData = async (officeId: number) => {
+  try {
+    const res = await authInstance.get(`/api/offices/${officeId}`);
+    return res.data;
+  } catch (error) {
+    console.error("API 호출 중 에러 발생:", error);
+    throw error;
+  }
+};
+
+export const fetchMyPageData = () => {};

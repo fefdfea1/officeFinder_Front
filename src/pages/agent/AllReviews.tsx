@@ -5,7 +5,7 @@ import { BackgroundCover } from '../../components/common/BackgroundCover';
 import { Title } from '../../components/common/Title';
 import { Button } from '../../components/common/Button';
 import { MyOfficeListDropDown } from '../../components/common/MyOfficeListDropDown';
-import { Reviews } from '../../components/booking/Reviews';
+import { Reviews } from '../../components/agent/Reviews';
 import { Pagination } from '../../components/common/Pagination';
 import { fetchReviewsData } from '../../fetch/get/agent';
 
@@ -17,7 +17,7 @@ export const AllReviews = () => {
   const { paramsId, paramsName } = useParams();
   const navigate = useNavigate();
   const [officeName, setOfficeName] = useState<string>("전체");
-  const [officeId, setOfficeId] = useState<number>(0);
+  const [officeId, setOfficeId] = useState<number>(Number(paramsId));
 
   useEffect(() => {
     const parsedId = Number(paramsId);
@@ -35,6 +35,7 @@ export const AllReviews = () => {
     staleTime: 1 * 60 * 1000,
   })
   console.log(reviews)
+  const reviewsData = reviews?.content
 
   if (isLoading) return <p>Loading...</p>;
 
@@ -57,21 +58,26 @@ export const AllReviews = () => {
       <BackgroundCover>
         <Title>{officeName} 리뷰</Title>
         {/* 본문 */}
-        {reviews ? <div className="flex flex-col gap-4">
-
-          <BackgroundCover margin="m-0" padding="lg:p-8 md:p-4 p-2">
-            <Reviews />
+        {reviews ? (
+          <div className="flex flex-col gap-4">
+            {reviewsData.map((review: any) => (
+              <BackgroundCover key={review.id} margin="m-0" padding="lg:p-8 md:p-4 p-2">
+                <Reviews description={review.description} date={review.createdAt} rating={review.rate} />
+              </BackgroundCover>
+            ))}
             <div className="flex justify-center mt-4">
               <Pagination itemsPerPage={10} totalItems={reviews.totalPage} />
             </div>
-          </BackgroundCover>
-        </div> : isError ? (
+          </div>
+        ) : isError ? (
           error.response && error.response.status === 400 ? (
             <p className="text-center p-8"> 아직 작성된 리뷰가 없습니다</p>
           ) : (
             <p>{error.message}</p>
           )
-        ) : null}
+        ) : (
+          <p>Loading...</p>
+        )}
         {/* 본문 끝 */}
       </BackgroundCover>
     </>

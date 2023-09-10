@@ -12,38 +12,6 @@ import { usePost } from "../../fetch/post/agent"
 
 export const AddOffice = () => {
   const navigate = useNavigate();
-  // const [postData, setPostData] = useState<NewOfficeInfo>({
-  //   officeName: "",
-  //   address: {
-  //     legion: "",
-  //     city: "",
-  //     town: "",
-  //     detail: "",
-  //     street: "",
-  //     zipcode: ""
-  //   },
-  //   leaseFee: 0,
-  //   maxCapacity: 0,
-  //   remainRoom: 0,
-  //   officeOption: {
-  //     "haveAirCondition": false,
-  //     "haveCafe": false,
-  //     "havePrinter": false,
-  //     "packageSendServiceAvailable": false,
-  //     "haveDoorLock": false,
-  //     "faxServiceAvailable": false,
-  //     "havePublicKitchen": false,
-  //     "havePublicLounge": false,
-  //     "havePrivateLocker": false,
-  //     "haveTvProjector": false,
-  //     "haveWhiteBoard": false,
-  //     "haveWifi": false,
-  //     "haveShowerBooth": false,
-  //     "haveStorage": false,
-  //     "haveHeater": false,
-  //     "haveParkArea": false
-  //   }
-  // });
 
   const { name, handleOfficeName,
     selectedOptions, handleOptionsChange,
@@ -54,6 +22,7 @@ export const AddOffice = () => {
     images, handlefileUpload
   } = useAddOfficeHandel();
 
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
   }
@@ -61,22 +30,23 @@ export const AddOffice = () => {
   const handleChange = () => {
     const updatedData = {
       officeName: name,
-      address: address,
-      leaseFee: monthlyPrice,
       maxCapacity: maxCapacity,
-      remainRoom: rooms,
+      leaseFee: monthlyPrice,
+      maxRoomCount: rooms,
+      address: address,
       officeOption: selectedOptions,
     };
     console.log(updatedData)
     const formData = new FormData()
+
     const blob = new Blob([JSON.stringify(updatedData)], {
-      // JSON 타입 지정
       type: 'application/json',
     });
     formData.append("request", blob);
     images.forEach((image) => {
       formData.append("multipartFileList", image);
     });
+    console.log(formData)
     mutate(formData, { onSuccess: () => navigate("/MyOffice") })
   }
 

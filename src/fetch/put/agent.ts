@@ -11,6 +11,7 @@ export const fetchAcceptData = async (leaseId: number) => {
     throw error;
   }
 };
+
 //임대요청 거절
 export const fetchRejectData = async (leaseId: number) => {
   try {

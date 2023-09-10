@@ -36,6 +36,8 @@ export const MyOfficeListDropDown: React.FC<MyOfficeListDropDownProps> = ({ onOf
   const toggleDropDown = () => {
     setIsOpen(!isOpen);
   };
+
+  // 대소문자 구별을 유지하기 위해 선택된 옵션과 옵션 리스트를 소문자로 변환하지 않음
   return (
     <div className="form-control lg:w-52 md:w-40 w-32">
       <div className="dropdown">

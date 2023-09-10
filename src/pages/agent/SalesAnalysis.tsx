@@ -48,9 +48,9 @@ export const SalesAnalysis = () => {
               <hr className="border-primary group-hover:border-transparent" />
             </div>
             <Link to={`/AllReviews/${officeId}/${officeName}`}>
-              <Button style="btn btn-primary btn-outline w-[90px] md:w-40">
+              {officeName === '전체' ? null : <Button style="btn btn-primary btn-outline w-[90px] md:w-40">
                 <p>{officeName} 리뷰</p>
-              </Button>
+              </Button>}
             </Link>
           </div>
         </div>
@@ -62,7 +62,7 @@ export const SalesAnalysis = () => {
             <>
               <div className="p-3 flex justify-between">
                 <OfficeName name={officeName} address={detailData.address} />
-                <Link to={`/AddOffice/${officeId}`}>
+                <Link to={`/UpdateOffice/${officeId}`}>
                   <Button style="btn btn-primary w-[86px] md:w-40">
                     <p>수정하기</p>
                   </Button>

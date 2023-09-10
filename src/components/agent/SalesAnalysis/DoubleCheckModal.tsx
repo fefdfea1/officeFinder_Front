@@ -29,6 +29,7 @@ export const DoubleCheckModal = (props: ModalProps) => {
         },
     });
     const handleAcceptRequest = (leaseId: number) => {
+
         acceptMutation(leaseId);
     };
 

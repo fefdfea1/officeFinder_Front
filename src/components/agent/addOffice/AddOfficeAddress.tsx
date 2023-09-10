@@ -3,8 +3,14 @@ import { useDaumPostcodePopup } from "react-daum-postcode";
 import type { Address } from "../../../type/agentTypes";
 type OnAddressHandler = (address: Address) => void;
 
+type AddressType = {
+    onAddressHandler: OnAddressHandler;
+    data?: string;
+}
 
-export const AddOfficeAddress = ({ onAddressHandler }: { onAddressHandler: OnAddressHandler }) => {
+
+export const AddOfficeAddress = (props: AddressType) => {
+    // export const AddOfficeAddress = ({ onAddressHandler }: { onAddressHandler: OnAddressHandler }) => {
     const open = useDaumPostcodePopup();
     const postcodeRef = useRef<HTMLInputElement>(null);
     const addressRef = useRef<HTMLInputElement>(null);
@@ -18,6 +24,7 @@ export const AddOfficeAddress = ({ onAddressHandler }: { onAddressHandler: OnAdd
         zipcode: "",
         detail: ""
     });
+    console.log(props.data)
 
 
 
@@ -50,12 +57,12 @@ export const AddOfficeAddress = ({ onAddressHandler }: { onAddressHandler: OnAdd
             zipcode: data.zonecode,
         }
         setAddress(newAddress);
-        onAddressHandler(newAddress);
+        props.onAddressHandler(newAddress);
     };
 
     const detailHandler = () => {
         setAddress({ ...address, detail: detailAddressRef.current?.value || "" })
-        onAddressHandler({ ...address, detail: detailAddressRef.current?.value || "" })
+        props.onAddressHandler({ ...address, detail: detailAddressRef.current?.value || "" })
     }
 
     const handleClick = () => {
@@ -71,7 +78,9 @@ export const AddOfficeAddress = ({ onAddressHandler }: { onAddressHandler: OnAdd
                         주소검색
                     </button>
                 </div>
-                <input type="text" ref={addressRef} placeholder="주소" className="input input-primary placeholder:text-base w-80 md:w-full" readOnly />
+                {(!!props.data) ?
+                    <input type="text" defaultValue={props.data} ref={addressRef} placeholder="주소" className="input input-primary placeholder:text-base w-80 md:w-full" readOnly /> :
+                    <input type="text" ref={addressRef} placeholder="주소" className="input input-primary placeholder:text-base w-80 md:w-full" readOnly />}
                 <div className="flex gap-2 w-80 md:w-full">
                     <input type="text" ref={detailAddressRef} placeholder="상세 주소를 입력해주세요." onChange={detailHandler} className="placeholder:text-base input input-primary w-2/3" />
                     <input type="text" ref={extraAddressRef} placeholder="참고항목" className="input input-primary w-1/3 placeholder:text-base" readOnly />

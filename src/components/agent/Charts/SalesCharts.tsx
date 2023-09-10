@@ -11,7 +11,6 @@ export const SalesCharts = (props: Id) => {
         <div className="flex flex-col gap-2 p-8 lg:flex-row items-center">
             <TotalRevenueChart officeId={props.officeId} />
             <OverallRentalChart officeId={props.officeId} />
-            {props.officeId}
         </div>
     );
 };
