@@ -24,11 +24,16 @@ export const fetchMyBookingsData = () => {
   }
 };
 
-export const fetchBookingData = (officeNumber: number) => {
+export const fetchBookingData = (officeid: number) => {
   try {
-    const response = authInstance.get(`api/offices/${officeNumber}`).then(res => res.data);
+    const response = authInstance.get(`api/offices/${officeid}`).then(res => res.data);
     return response;
   } catch (error) {
     console.log(error);
   }
+};
+
+export const fetchAddOfficeReview = (officeid: number) => {
+  const response = authInstance.get(`api/customers/info/leases/${officeid}`).then(res => res.data);
+  return response;
 };
