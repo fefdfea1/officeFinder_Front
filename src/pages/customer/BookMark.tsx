@@ -7,7 +7,8 @@ import { useEffect, useState } from "react";
 import { BookMarkAlert } from "./BookMarkAlert";
 import { Pagination } from "../../components/common/Pagination";
 import { fetchBookMarkAllDelete } from "../../fetch/delete/customer";
-import { AllRemoveAlert } from "../../Business/BookMark/BookMarkTimer";
+import { AllRemoveAlert } from "../../Business/BookMark/BookMarkRemoveItem";
+import { useMyContext } from "../../contexts/MyContext";
 import styled from "@emotion/styled";
 
 export type BookMarkContentType = {
@@ -56,7 +57,7 @@ const defaultValue = {
 
 export const BookMark = () => {
   const [BookMarkData, setBookMarkData] = useState<BookMarkDataType>(defaultValue);
-  const [alertState, setAlertState] = useState<boolean>(false);
+  const { isAlertState, setIsAlertState } = useMyContext();
   const { data } = useQuery<BookMarkDataType>("BookMark", () => fetchBookMarkData(1, 10), {
     staleTime: Infinity,
     refetchOnWindowFocus: false,
@@ -77,7 +78,7 @@ export const BookMark = () => {
             className="absolute"
             onClick={() => {
               fetchBookMarkAllDelete();
-              AllRemoveAlert(setAlertState);
+              AllRemoveAlert(setIsAlertState);
             }}
           >
             전체삭제
@@ -98,9 +99,9 @@ export const BookMark = () => {
           })}
         </div>
       </BackgroundCover>
-      {alertState && (
+      {isAlertState && (
         <RemoveBookMarkAlertPosition>
-          <BookMarkAlert alertState={alertState} showText={"즐겨찾기에서 제거 됨"} />
+          <BookMarkAlert alertState={isAlertState} showText={"즐겨찾기에서 제거 됨"} />
         </RemoveBookMarkAlertPosition>
       )}
       <div className="mt-6">
