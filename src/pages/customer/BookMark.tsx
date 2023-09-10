@@ -92,7 +92,6 @@ export const BookMark = () => {
                 item={item}
                 imgSrc="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRS-IbhTFqh9vemV_FD7WQn48tFhODBKb1kEteLagL2mw&s"
                 key={item.content.officeId}
-                setAlertState={setAlertState}
                 index={index}
               />
             );
