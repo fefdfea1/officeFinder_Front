@@ -24,6 +24,10 @@ export const MyOffice = () => {
   }
 
   const myOfficeData = officeData?.content;
+  // const filteredImagePaths = myOfficeData
+  //   ?.map((office) => office.imagePath)
+  //   .filter((imagePath) => imagePath !== "None");
+
   console.log(myOfficeData)
 
   return (

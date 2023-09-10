@@ -9,9 +9,6 @@ import { Reviews } from '../../components/agent/Reviews';
 import { Pagination } from '../../components/common/Pagination';
 import { fetchReviewsData } from '../../fetch/get/agent';
 
-// import { useQuery } from 'react-query';
-
-
 export const AllReviews = () => {
 
   const { paramsId, paramsName } = useParams();

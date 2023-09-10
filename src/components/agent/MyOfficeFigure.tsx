@@ -14,13 +14,14 @@ type ImgProps = {
 }
 
 export const MyOfficeFigure = (props: ImgProps) => {
-    const picturesList = Array.isArray(props.picturesUrl) ? props.picturesUrl : [];
-    // lg:w-8/12 lg:mx-auto xl:w-full
+    const picturesList = Array.isArray(props.picturesUrl)
+        ? props.picturesUrl.filter((url) => url !== "None")
+        : [];
 
     if (picturesList.length === 0) {
         return (
             <div className="h-96 rounded-xl overflow-hidden mb-4">
-                <img src={`/officeImg/noimage.png`} alt="오피스 대체 이미지" className="block w-full h-full" />
+                <img src={`public/officeImg/noImage.png`} alt="오피스 대체 이미지" className="block w-full h-full object-cover" />
             </div>
         );
     }
@@ -28,19 +29,19 @@ export const MyOfficeFigure = (props: ImgProps) => {
     return (
         <>
             <SlickSlider setting={setting}>
-                {picturesList.map((key, index: number) =>
-                    <figure key={key}>
-                        <div className="h-96 rounded-xl overflow-hidden ">
+                {picturesList.map((url, index: number) => (
+                    <figure key={index}>
+                        <div className="h-96 rounded-xl overflow-hidden">
                             <img
-                                id={key}
-                                src={picturesList[index]}
+                                id={String(index)}
+                                src={url}
                                 alt="오피스 이미지"
                                 className="block w-full h-full object-cover"
                             />
                         </div>
                     </figure>
-                )}
+                ))}
             </SlickSlider>
         </>
     );
-}
+};

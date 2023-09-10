@@ -43,6 +43,9 @@ export const AddOffice = () => {
       type: 'application/json',
     });
     formData.append("request", blob);
+    if (images.length === 0) {
+      formData.append("multipartFileList", "None")
+    }
     images.forEach((image) => {
       formData.append("multipartFileList", image);
     });
