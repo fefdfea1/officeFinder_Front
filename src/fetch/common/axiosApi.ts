@@ -7,6 +7,7 @@ axios.defaults.withCredentials = true;
 const baseAPI = (url = "https://www.officefinder.site/", options?: any) => {
   return axios.create({ baseURL: url, ...options });
 };
+
 const authAPI = (url = "https://www.officefinder.site/", options?: any) => {
   const token = cookies.get("Authorization");
   return axios.create({

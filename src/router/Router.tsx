@@ -9,7 +9,6 @@ import { MyBookings } from "../pages/customer/MyBookings";
 import { Booking } from "../pages/Booking";
 import { Join } from "../pages/Join";
 import { Login } from "../pages/Login";
-import Profile from "../pages/Profile";
 import { AddOfficeReviews } from "../pages/customer/AddOfficeReviews";
 import { MyPage } from "../pages/MyPage";
 import { NotiMessage } from "../pages/NotiMessage";
@@ -27,7 +26,6 @@ export const Router = () => {
       <Route path="/Booking/:id" element={<Booking />}></Route>
       <Route path="/Join" element={<Join />}></Route>
       <Route path="/Login" element={<Login />}></Route>
-      <Route path="/Profile" element={<Profile />}></Route>
       <Route path="/AddOfficeReviews/:id" element={<AddOfficeReviews />}></Route>
       <Route path="/MyPage" element={<MyPage />}></Route>
       <Route path="/Noti" element={<NotiMessage />}></Route>
