@@ -1,21 +1,22 @@
 import axios from "axios";
+import { Cookies } from "react-cookie";
+
+export const cookies = new Cookies();
 
 axios.defaults.withCredentials = true;
-
 const baseAPI = (url = "https://www.officefinder.site/", options?: any) => {
   return axios.create({ baseURL: url, ...options });
 };
-
 const authAPI = (url = "https://www.officefinder.site/", options?: any) => {
-  const token = localStorage.getItem("jwt_token");
+  const token = cookies.get("Authorization");
   return axios.create({
     baseURL: url,
     headers: {
-      Authorization: `bearer ${token}`,
+      "Accept": "application/json",
+      Authorization: `Bearer ${token}`,
     },
     ...options,
   });
 };
-
 export const baseInstance = baseAPI();
 export const authInstance = authAPI();

@@ -2,8 +2,10 @@ import { BackgroundCover } from "../../components/common/BackgroundCover";
 import { Title } from "../../components/common/Title";
 import { BookMarkOfficeCompo } from "./BookMarkOfficeCompo";
 import { useQuery } from "react-query";
-import { fetchBookMarkData } from "../../fetch/get/agent";
+import { fetchBookMarkData } from "../../fetch/get/customer";
 import { useEffect, useState } from "react";
+import { BookMarkAlert } from "./BookMarkAlert";
+import { Pagination } from "../../components/common/Pagination";
 import styled from "@emotion/styled";
 
 export type BookMarkDataType = {
@@ -20,13 +22,20 @@ const defaultValue = [
 
 export const BookMark = () => {
   const [BookMarkData, setBookMarkData] = useState<BookMarkDataType[]>(defaultValue);
-  const { data } = useQuery("BookMark", fetchBookMarkData);
+  const [alertState, setAlertState] = useState<boolean>(false);
+  const { data } = useQuery("BookMark", () => fetchBookMarkData(1, 10), {
+    staleTime: Infinity,
+  });
   useEffect(() => {
     if (data) {
-      setBookMarkData(data.BookMark.data);
+      setBookMarkData(data);
       console.log(BookMarkData);
     }
   }, [data]);
+
+  useEffect(() => {
+    console.log(alertState);
+  }, [alertState]);
 
   return (
     <div className="mb-10">
@@ -44,11 +53,21 @@ export const BookMark = () => {
                 item={item}
                 imgSrc="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRS-IbhTFqh9vemV_FD7WQn48tFhODBKb1kEteLagL2mw&s"
                 key={index}
+                setAlertState={setAlertState}
+                index={index}
               />
             );
           })}
         </div>
       </BackgroundCover>
+      {alertState && (
+        <RemoveBookMarkAlertPostition>
+          <BookMarkAlert alertState={alertState} showText={"즐겨찾기에서 제거 됨"} />
+        </RemoveBookMarkAlertPostition>
+      )}
+      <div className="mt-6">
+        <Pagination itemsPerPage={10} totalItems={55} />
+      </div>
     </div>
   );
 };
@@ -57,4 +76,11 @@ const AllremovePosition = styled.button`
   position: absolute;
   top: 5px;
   right: 0.5rem;
+`;
+
+const RemoveBookMarkAlertPostition = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `;

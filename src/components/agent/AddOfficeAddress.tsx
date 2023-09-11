@@ -1,16 +1,8 @@
 import { useRef, useState } from 'react';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
+import type { Address } from '../../type/agentTypes';
 type OnAddressHandler = (address: Address) => void;
 
-type Address = {
-    legion?: string,
-    city?: string,
-    town?: string,
-    village?: string,
-    street?: string,
-    zipcode?: string,
-    detail?: string,
-}
 
 export const AddOfficeAddress = ({ onAddressHandler }: { onAddressHandler: OnAddressHandler }) => {
     const open = useDaumPostcodePopup();
@@ -22,11 +14,12 @@ export const AddOfficeAddress = ({ onAddressHandler }: { onAddressHandler: OnAdd
         legion: '',
         city: '',
         town: '',
-        village: '',
         street: '',
-        zipcode: '',
+        zipcode: 0,
         detail: ''
     });
+
+
 
     const handleComplete = (data: any) => {
         let fullAddress = data.address;
@@ -46,30 +39,30 @@ export const AddOfficeAddress = ({ onAddressHandler }: { onAddressHandler: OnAdd
             postcodeRef.current.value = data.zonecode;
             addressRef.current.value = data.query;
             extraAddressRef.current.value = "(" + data.bname + ")" + " " + data.buildingName
-
         }
-        setAddress({
+
+        const newAddress = {
             ...address,
             legion: data.sido,
             city: data.sigungu,
             town: data.bname,
             street: data.roadAddress,
             zipcode: data.zonecode,
-        })
+        }
+        setAddress(newAddress);
+        onAddressHandler(newAddress); // 이 부분을 수정
 
-
-        console.log(data)
     };
 
     const detailHandler = () => {
         setAddress({ ...address, detail: detailAddressRef.current?.value || "" })
+        onAddressHandler({ ...address, detail: detailAddressRef.current?.value || "" })
     }
 
-    onAddressHandler(address)
     const handleClick = () => {
         open({ onComplete: handleComplete });
     };
-
+    // console.log(address)
     return (
         <div className="w-96">
             <p className="flex justify-center text-base mb-4">오피스의 주소를 입력해주세요.</p>

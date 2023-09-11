@@ -35,10 +35,10 @@ export const ReservationAttendeesList = () => {
                                 </td>
                                 <td className="text-base font-bold">{'5,000,000'}P</td>
                                 <th>
-                                    <DoubleCheckModal buttonName="수락" title="정말 수락하시겠습니까?" content="수락하면 다시 거절할 수 없습니다." actionButtonName="수락" onConfirm={() => { }} />
+                                    <DoubleCheckModal id="accept" buttonName="수락" title="정말 수락하시겠습니까?" content="수락하면 다시 거절할 수 없습니다." actionButtonName="수락" onConfirm={() => { }} />
                                 </th>
                                 <th>
-                                    <DoubleCheckModal buttonName="거절" title="정말 거절하시겠습니까?" content="거절하면 다시 수락할 수 없습니다." actionButtonName="거절" onConfirm={() => { }} />
+                                    <DoubleCheckModal id="reject" buttonName="거절" title="정말 거절하시겠습니까?" content="거절하면 다시 수락할 수 없습니다." actionButtonName="거절" onConfirm={() => { }} />
                                 </th>
                             </tr>
                         </tbody>

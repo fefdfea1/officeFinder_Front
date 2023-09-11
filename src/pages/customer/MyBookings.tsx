@@ -2,7 +2,7 @@ import { MyBookingsListCompo } from "./MyBookingsListCompo";
 import { BackgroundCover } from "../../components/common/BackgroundCover";
 import { Title } from "../../components/common/Title";
 import { useQuery } from "react-query";
-import { fetchMyBookingsData } from "../../fetch/get/agent";
+import { fetchMyBookingsData } from "../../fetch/get/customer";
 import { useState, useEffect } from "react";
 
 export type MyBookingsDataType = {

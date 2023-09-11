@@ -7,6 +7,7 @@ interface InputProps {
   type?: string;
   value?: string;
   name?: string;
+
   onInputChange?: any;
 }
 

@@ -5,7 +5,8 @@ import { useMutation } from "react-query";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
-import { loginCustomerApi } from "../fetch/post/main";
+import { loginAgentApi, loginCustomerApi } from "../fetch/post/main";
+import { cookies } from "../fetch/common/axiosApi";
 
 interface LoginProps {
   email: string;
@@ -40,15 +41,29 @@ export const Login = () => {
     return passwordRegex.test(password);
   };
 
-  const postLogin = useMutation("login", loginCustomerApi, {
+  const [ischecked, setChecked] = useState(false);
+
+  const postLogin = useMutation("login", ischecked ? loginAgentApi : loginCustomerApi, {
     onSuccess: res => {
-      console.log("RES", res);
+      const userType = res?.data?.userType;
+      window.localStorage.setItem("userType", userType);
+      const token = res?.data?.token;
+      cookies.set("Authorization", token, { maxAge: 3600 });
+      console.log(userType);
+      alert("환영합니다:)");
+      navigate("/");
+      console.log(res);
     },
-    onError: error => {
+    onError: (error: any) => {
+      alert("이메일이나 비밀번호를 다시 확인해주세요.");
       console.log(error);
     },
   });
-  console.log({ useMutation });
+
+  const clickCheckbox = () => {
+    setChecked(prev => !prev);
+  };
+  console.log(ischecked);
 
   const clickLoginButton = () => {
     postLogin.mutate({
@@ -62,6 +77,13 @@ export const Login = () => {
       <div className="shadow-md rounded-xl p-8 mx-auto mt-20 flex flex-col items-center justify-center md:w-[400px] sm:w-[340px]">
         <h3 className="font-black">로그인</h3>
         <div className="pt-6 w-full flex flex-col">
+          <div className="pl-6">
+            <label className="label cursor-pointer justify-start gap-2">
+              <input type="checkbox" className="checkbox checkbox-xs checkbox-primary" onClick={clickCheckbox} />
+              <span className="label-text">임대인 회원</span>
+              {/* <span className="text-sm text-info">임대인이시라면 체크해주세요. </span> */}
+            </label>
+          </div>
           <Input
             inputLabel={"이메일"}
             placeholder={"Email"}
@@ -84,12 +106,12 @@ export const Login = () => {
           <Button
             clickHandler={() => clickLoginButton()}
             style={"btn btn-outline btn-primary m-2 text-base w-full"}
-            disabled={
-              !login.email.trim() ||
-              !login.password.trim() ||
-              !validateEmail(login.email) ||
-              !validatePassword(login.password)
-            }
+            // disabled={
+            //   !login.email.trim() ||
+            //   !login.password.trim() ||
+            //   !validateEmail(login.email) ||
+            //   !validatePassword(login.password)
+            // }
           >
             <p>로그인</p>
           </Button>

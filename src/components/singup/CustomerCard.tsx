@@ -6,6 +6,7 @@ import { useMutation } from "react-query";
 import { signupCustomerApi } from "../../fetch/post/main";
 import { FcGoogle } from "react-icons/fc";
 import { BsArrowCounterclockwise } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 // import { AiOutlineEyeInvisible } from "react-icons/ai";
 
 interface CustomerCardProps {
@@ -17,12 +18,15 @@ interface CustomerCardProps {
 
 export const CustomerCard = ({ clickBack }: { clickBack: (step: number, key: string) => void }) => {
   // const { data } = useQuery("data", getCustomerApi);
-
+  const navigate = useNavigate();
   const postSignup = useMutation("signUP", signupCustomerApi, {
-    onSuccess: res => {
+    onSuccess: (res: any) => {
+      alert("회원가입이 완료되었습니다:)");
+      navigate("/Login");
       console.log("RES", res);
     },
-    onError: error => {
+    onError: (error: any) => {
+      alert("이미 가입된 정보입니다.");
       console.log(error);
     },
   });
@@ -107,7 +111,7 @@ export const CustomerCard = ({ clickBack }: { clickBack: (step: number, key: str
             warning={
               signup.passwordConfirm.trim()
                 ? signup.password === signup.passwordConfirm
-                  ? "맞습니다"
+                  ? ""
                   : "비밀번호가 일치하지 않습니다"
                 : ""
             }
@@ -118,12 +122,12 @@ export const CustomerCard = ({ clickBack }: { clickBack: (step: number, key: str
           <Button
             clickHandler={() => clickSignupButton()}
             style={"btn btn-outline btn-primary m-2 text-base w-full"}
-            disabled={
-              !validateName(signup.name) ||
-              !validateEmail(signup.email) ||
-              !validatePassword(signup.password) ||
-              signup.password !== signup.passwordConfirm
-            }
+            // disabled={
+            //   !validateName(signup.name) ||
+            //   !validateEmail(signup.email) ||
+            //   !validatePassword(signup.password) ||
+            //   signup.password !== signup.passwordConfirm
+            // }
           >
             <p>회원가입</p>
           </Button>

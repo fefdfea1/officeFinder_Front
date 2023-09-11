@@ -6,6 +6,7 @@ import { useMutation } from "react-query";
 import { signupAgencyApi } from "../../fetch/post/main";
 import { FcGoogle } from "react-icons/fc";
 import { BsArrowCounterclockwise } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 // import { AiOutlineEyeInvisible } from "react-icons/ai";
 
 interface AgencyCardProps {
@@ -18,11 +19,15 @@ interface AgencyCardProps {
 
 export const AgencyCard = ({ clickBack }: { clickBack: (step: number, key: string) => void }) => {
   // const { data } = useQuery("data", getAgencyApi);
+  const navigate = useNavigate();
   const postSignup = useMutation("signUP", signupAgencyApi, {
     onSuccess: (res: any) => {
+      alert("회원가입이 완료되었습니다:)");
+      navigate("/Login");
       console.log("RES", res);
     },
     onError: (error: any) => {
+      alert("이미 가입된 정보입니다.");
       console.log(error);
     },
   });
@@ -114,7 +119,7 @@ export const AgencyCard = ({ clickBack }: { clickBack: (step: number, key: strin
             warning={
               signup.passwordConfirm.trim()
                 ? signup.password === signup.passwordConfirm
-                  ? "맞습니다"
+                  ? ""
                   : "비밀번호가 일치하지 않습니다"
                 : ""
             }
@@ -140,13 +145,13 @@ export const AgencyCard = ({ clickBack }: { clickBack: (step: number, key: strin
           <Button
             clickHandler={() => clickSignupButton()}
             style={"btn btn-outline btn-primary m-2 text-base w-full"}
-            disabled={
-              !validateName(signup.name) ||
-              !validateEmail(signup.email) ||
-              !validatePassword(signup.password) ||
-              signup.password !== signup.passwordConfirm ||
-              !validateBusinessNumber(signup.businessNumber)
-            }
+            // disabled={
+            //   !validateName(signup.name) ||
+            //   !validateEmail(signup.email) ||
+            //   !validatePassword(signup.password) ||
+            //   signup.password !== signup.passwordConfirm ||
+            //   !validateBusinessNumber(signup.businessNumber)
+            // }
           >
             <p>회원가입</p>
           </Button>

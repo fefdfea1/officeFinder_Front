@@ -3,24 +3,47 @@ import { Search } from "../components/common/Search";
 import styled from "@emotion/styled";
 import { useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
+import { useQuery } from "react-query";
+import { getSearchApi } from "../fetch/get/main";
+import { useQueryClient } from "react-query";
+// import { useMutation } from "react-query";
 
 export const Main = () => {
+  const queryClient = useQueryClient();
   const [isHovering, setIsHovering] = useState(0);
+
+  const [filterObject, setFilterObject] = useState({});
+  const [checkfetch, setCheckfetch] = useState(true);
+  const { data } = useQuery(["getSearchApi", checkfetch], () => getSearchApi(filterObject));
+  console.log({ data });
+
+  const clickFilter = (filters: any) => {
+    setFilterObject(filters);
+  };
+  const clickSearch = () => {
+    setCheckfetch(prev => !prev);
+  };
+
+  console.log(filterObject);
+  console.log(isHovering);
 
   return (
     <>
-      <div onMouseOver={() => setIsHovering(1)} onMouseOut={() => setIsHovering(0)} className="mx-auto mt-4 w-fit">
+      <div
+        onMouseOver={() => setIsHovering(1)}
+        onMouseOut={() => {
+          setIsHovering(0);
+        }}
+        className="mx-auto mt-4 w-fit"
+      >
         {isHovering ? (
-          <Search />
+          <Search clickFilter={clickFilter} clickSearch={clickSearch} />
         ) : (
-
           <SearchBoxContainer className="p-3 shadow-md">
             <div className="flex justify-center">
-
-              <ContourBox className="text-info text-base p-4">장소</ContourBox>
+              <ContourBox className="text-info text-base p-4">주소</ContourBox>
               <ContourBox className="text-info text-base p-4">최대인원 수</ContourBox>
               <ContourBox className="text-info text-base p-4">옵션</ContourBox>
-
               <ContourBox className="text-base">
                 <button className="btn btn-primary rounded-full bg-primary text-base flex items-center">
                   <span>검색</span> <SearchSvg />
@@ -31,7 +54,7 @@ export const Main = () => {
         )}
       </div>
       <div className="p-4 mt-5">
-        <AllOfficeList />
+        <AllOfficeList data={data} />
       </div>
     </>
   );
