@@ -2,6 +2,7 @@ import { useQuery } from "react-query"
 import { ProfileCircle } from "../../common/ProfileCircle"
 import { DoubleCheckModal } from "../SalesAnalysis/DoubleCheckModal"
 import { fetchRequestListData } from "../../../fetch/get/agent"
+import { TimeFormating } from "../../../Business/Agent/TimeFormating"
 
 type Id = {
     officeId: number
@@ -30,18 +31,7 @@ export const ReservationAttendeesList = (props: Id) => {
     const listData = data?.content
     console.log(listData)
 
-    const formatDate = (dateString: string) => {
-        const options: Intl.DateTimeFormatOptions = {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-            hour: 'numeric',
-            minute: 'numeric',
-            hour12: true,
-        };
-        const formattedDate = new Date(dateString).toLocaleString('ko-KR', options);
-        return formattedDate;
-    };
+
 
     return (
         <>
@@ -66,7 +56,7 @@ export const ReservationAttendeesList = (props: Id) => {
                             {listData.map((request: Request) => (
                                 <tr key={request.leaseId}>
                                     <th className="flex justify-center">
-                                        <div className="text-sm w-32">{formatDate(request.requestDateTime)}</div>
+                                        <div className="text-sm w-32">{TimeFormating(request.requestDateTime)}</div>
                                     </th>
                                     <td>
                                         <ProfileCircle />

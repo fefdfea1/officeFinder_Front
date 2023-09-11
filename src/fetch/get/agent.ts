@@ -103,9 +103,12 @@ export const fetchReviewsData = async (officeId: number) => {
   }
 };
 
-export const fetchOriginOfficeData = async (officeId: number) => {
+export const fetchMyPageData = () => {};
+
+//채팅 - 새로운 메세지 boolean
+export const fetchNewMessageData = async () => {
   try {
-    const res = await authInstance.get(`/api/offices/${officeId}`);
+    const res = await authInstance.get(`/api/chat/room/new-message`);
     return res.data;
   } catch (error) {
     console.error("API 호출 중 에러 발생:", error);
@@ -113,4 +116,13 @@ export const fetchOriginOfficeData = async (officeId: number) => {
   }
 };
 
-export const fetchMyPageData = () => {};
+//채팅 - 채팅 목록
+export const fetchChatListData = async () => {
+  try {
+    const res = await authInstance.get(`/api/chat/rooms`);
+    return res.data;
+  } catch (error) {
+    console.error("API 호출 중 에러 발생:", error);
+    throw error;
+  }
+};

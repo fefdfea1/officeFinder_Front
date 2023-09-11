@@ -62,7 +62,7 @@ export const SalesAnalysis = () => {
             <>
               <div className="p-3 flex justify-between">
                 <OfficeName name={officeName} address={detailData.address} />
-                <Link to={`/UpdateOffice/${officeId}`}>
+                <Link to={`/AddOffice/${officeId}`}>
                   <Button style="btn btn-primary w-[86px] md:w-40">
                     <p>수정하기</p>
                   </Button>

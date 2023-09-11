@@ -90,3 +90,14 @@ export type doughnutChart = {
   roomsInUse: number;
   leaseRate: number;
 };
+
+//chat
+
+export type ChatListData = {
+  lastMessage: string;
+  lastMessageTime: string;
+  newMessage: boolean;
+  roomName: string;
+  roomUid: string;
+  userName: string;
+};

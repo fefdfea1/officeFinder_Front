@@ -6,6 +6,7 @@ type Message = {
     time: string;
 };
 
+
 export const ShowChat = () => {
     const [inputText, setInputText] = useState("");
     const [messages, setMessages] = useState<Message[]>([]);
@@ -63,15 +64,17 @@ export const ShowChat = () => {
                     </div>
                 ))}
             </div>
-            <div className="bg-secondary w-full h-[46px] md:h-1/3 p-3 md:rounded-b-xl">
-                <Textarea
-                    className="text-base h-full"
-                    value={inputText}
-                    onChange={handleInputChange}
-                    onKeyDown={handleKeyDown}
-                    placeholder="엔터키로 메시지를 전송하세요."
-                />
-            </div>
+            <form className="bg-secondary w-full h-[46px] md:h-1/3 p-3 md:rounded-b-xl">
+                <div className="relative h-full flex flex-row gap-2 md:flex-col items-end ">
+                    <Textarea
+                        className="text-base h-full"
+                        value={inputText}
+                        onChange={handleInputChange}
+                        onKeyDown={handleKeyDown}
+                    />
+                    <button className="btn btn-primary btn-sm w-16 absolute bottom-[-5px] right-0">send</button>
+                </div>
+            </form>
         </div>
     );
 };
