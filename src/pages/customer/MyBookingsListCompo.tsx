@@ -15,7 +15,7 @@ export const MyBookingsListCompo = (props: propsType) => {
   useSetStatusText(statePTag, props.item.leaseStatus);
   return (
     <>
-      <div className="flex px-10 sm:px-2 sm:flex-col lg:flex-row mb-8">
+      <div className="flex px-10 sm:px-2 sm:flex-col lg:flex-row mb-8" data-officeNum="1">
         <figure className="overflow-hidden rounded-lg h-72 relative sm: mr-0 lg:w-2/5 lg:mr-8">
           <img
             src={props.item.officeImagePath !== null ? props.item.officeImagePath : "/officeImg/noimage.png"}
