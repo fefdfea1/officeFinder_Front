@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Cookies } from "react-cookie";
 
-const cookies = new Cookies();
+export const cookies = new Cookies();
 
 axios.defaults.withCredentials = true;
 const baseAPI = (url = "https://www.officefinder.site/", options?: any) => {
