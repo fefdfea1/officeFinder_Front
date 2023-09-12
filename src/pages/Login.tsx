@@ -8,6 +8,7 @@ import { FcGoogle } from "react-icons/fc";
 import { loginAgentApi, loginCustomerApi } from "../fetch/post/main";
 import { cookies } from "../fetch/common/axiosApi";
 import { fetchSSE } from "../fetch/get/sse";
+import { useMyContext } from "../contexts/MyContext";
 interface LoginProps {
   email: string;
   password: string;
@@ -36,7 +37,9 @@ export const Login = () => {
     const passwordRegex = /^\S{10,20}$/;
     return passwordRegex.test(password);
   };
+
   const [ischecked, setChecked] = useState(false);
+  const { setAlamData, setSseAlertState, setSseText } = useMyContext();
 
   const postLogin = useMutation("login", ischecked ? loginAgentApi : loginCustomerApi, {
     onSuccess: res => {
@@ -44,10 +47,9 @@ export const Login = () => {
       window.localStorage.setItem("userType", userType);
       const token = res?.data?.token;
       cookies.set("Authorization", token, { maxAge: 3600 * 24 });
-      fetchSSE();
+      fetchSSE(setAlamData, setSseAlertState, setSseText);
       alert("환영합니다:)");
       navigate("/");
-      console.log(res);
     },
     onError: (error: any) => {
       alert("이메일이나 비밀번호를 다시 확인해주세요.");
@@ -57,7 +59,7 @@ export const Login = () => {
   const clickCheckbox = () => {
     setChecked(prev => !prev);
   };
-  console.log(ischecked);
+
   const clickLoginButton = () => {
     postLogin.mutate({
       email: login?.email,

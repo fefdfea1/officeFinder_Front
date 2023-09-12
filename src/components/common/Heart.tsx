@@ -18,7 +18,7 @@ export const Heart = (props: propsType) => {
       type="button"
       onClick={event => {
         toggleBookMarkRequest(event);
-        alertRemoveTimer(setIsAlertState);
+        alertRemoveTimer(setIsAlertState, 1300);
       }}
     >
       <div onClick={heartActive} className="cursor-pointer">
