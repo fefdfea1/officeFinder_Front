@@ -65,12 +65,14 @@ export const Login = () => {
   };
   console.log(ischecked);
 
+  console.log({ useMutation });
   const clickLoginButton = () => {
     postLogin.mutate({
       email: login?.email,
       password: login?.password,
     });
   };
+  console.log({ useMutation });
 
   return (
     <>

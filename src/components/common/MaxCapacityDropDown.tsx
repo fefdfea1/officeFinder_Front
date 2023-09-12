@@ -1,16 +1,26 @@
-import { useEffect, useState } from 'react';
-import { RiArrowDropDownLine } from 'react-icons/ri';
+import { useEffect, useState } from "react";
+import { RiArrowDropDownLine } from "react-icons/ri";
+import { selectValueType } from "../../pages/Booking";
 
 export const MaxCapacityDropDown = (props: {
   width: string;
-  setMaxPeople?: React.Dispatch<React.SetStateAction<boolean>>;
+  setSelectMaxPeople?: React.Dispatch<React.SetStateAction<boolean>>;
+  maxPeople: number;
+  setSelectValue: React.Dispatch<React.SetStateAction<selectValueType>>;
+  selectValue: selectValueType;
 }): JSX.Element => {
   // width로 넓이를 지정할 수 있습니다. ex) w-52, w-full
-  const [selectedItem, setSelectedItem] = useState('');
+  const [selectedItem, setSelectedItem] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
+  const createMaxPeopleArray = Array.from({ length: props.maxPeople });
+
   useEffect(() => {
-    if (props.setMaxPeople && selectedItem !== '') props.setMaxPeople(true);
+    if (props.setSelectMaxPeople && selectedItem !== "") {
+      const sliceValue = Number(selectedItem.replace("인", ""));
+      props.setSelectValue({ ...props.selectValue, maxPeople: sliceValue });
+      props.setSelectMaxPeople(true);
+    }
   }, [selectedItem]);
 
   const handleItemClick = (item: string) => {
@@ -32,7 +42,7 @@ export const MaxCapacityDropDown = (props: {
             className="group btn btn-primary btn-outline justify-between w-full"
             onClick={toggleDropDown}
             onChange={() => {
-              props.setMaxPeople ? props.setMaxPeople(true) : null;
+              props.setSelectMaxPeople ? props.setSelectMaxPeople(true) : null;
             }}
           >
             <span className="label-text font-medium group-hover:text-white">
@@ -42,39 +52,14 @@ export const MaxCapacityDropDown = (props: {
           </label>
           <ul
             tabIndex={0}
-            className={`dropdown-content w-full h-52 z-[1] menu p-2 shadow bg-base-100 rounded-box flex flex-nowrap overflow-y-auto 
-            ${isOpen ? '' : 'hidden'}`}
+            className={`dropdown-content w-full max-h-[13rem] z-[1] menu p-2 shadow bg-base-100 rounded-box flex flex-nowrap overflow-y-auto 
+            ${isOpen ? "" : "hidden"}`}
           >
-            <li>
-              <a onClick={() => handleItemClick('1인')}>1인</a>
-            </li>
-            <li>
-              <a onClick={() => handleItemClick('2인')}>2인</a>
-            </li>
-            <li>
-              <a onClick={() => handleItemClick('3인')}>3인</a>
-            </li>
-            <li>
-              <a onClick={() => handleItemClick('4인')}>4인</a>
-            </li>
-            <li>
-              <a onClick={() => handleItemClick('5인')}>5인</a>
-            </li>
-            <li>
-              <a onClick={() => handleItemClick('6인')}>6인</a>
-            </li>
-            <li>
-              <a onClick={() => handleItemClick('7인')}>7인</a>
-            </li>
-            <li>
-              <a onClick={() => handleItemClick('8인')}>8인</a>
-            </li>
-            <li>
-              <a onClick={() => handleItemClick('9인')}>9인</a>
-            </li>
-            <li>
-              <a onClick={() => handleItemClick('10인 이상')}>10인 이상</a>
-            </li>
+            {createMaxPeopleArray.map((_, index) => (
+              <li key={index}>
+                <a onClick={() => handleItemClick(`${index + 1}인`)}>{`${index + 1}인`}</a>
+              </li>
+            ))}
           </ul>
         </div>
       </div>

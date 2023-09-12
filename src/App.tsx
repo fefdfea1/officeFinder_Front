@@ -18,8 +18,8 @@ export const App = () => {
       <CookiesProvider>
         <MyProvider>
           <QueryClientProvider client={queryClient}>
+            <Nav />
             <section id="container">
-              <Nav />
               <Chat />
               <Router />
             </section>

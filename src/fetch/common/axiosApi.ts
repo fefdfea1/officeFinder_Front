@@ -12,11 +12,23 @@ const authAPI = (url = "https://www.officefinder.site/", options?: any) => {
   return axios.create({
     baseURL: url,
     headers: {
-      "Accept": "application/json",
       Authorization: `Bearer ${token}`,
+    },
+    ...options,
+  });
+};
+
+const formDataAPI = (url = "https://www.officefinder.site/", options?: any) => {
+  const token = cookies.get("Authorization");
+  return axios.create({
+    baseURL: url,
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "multipart/form-data",
     },
     ...options,
   });
 };
 export const baseInstance = baseAPI();
 export const authInstance = authAPI();
+export const formInstance = formDataAPI();

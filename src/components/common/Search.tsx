@@ -3,6 +3,8 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { OptionsCheckbox } from "./OptionsCheckbox";
 import { MaxCapacityDropDown } from "./MaxCapacityDropDown";
 import "react-day-picker/dist/style.css";
+import { SetStateAction } from "react";
+import { selectValueType } from "../../pages/Booking";
 
 export const Search = ({ clickFilter, clickFiltersearch }: any) => {
   return (
@@ -13,22 +15,38 @@ export const Search = ({ clickFilter, clickFiltersearch }: any) => {
             type="text"
             placeholder="시/도"
             className="w-24 placeholder:text-sm text-info input md:mr-3 md:items-center sm:mr-2"
+            // onChange={clickFilter}
           />
           <input
             type="text"
             placeholder="시/군/구"
             className="w-24 placeholder:text-sm text-info input md:mr-3 md:items-center sm:mr-2"
+            // onChange={clickFilter}
           />
           <input
             type="text"
             placeholder="읍/면/동/리"
             className="w-24 placeholder:text-sm text-info input md:mr-3 md:items-center sm:mr-2"
+            // onChange={clickFilter}
           />
         </ContourBox>
 
         <div className="flex flex-row w-full justify-around md:justify-around sm:justify-between">
           <ContourBox className="text-info mx-3 md:mr-6 sm:mr-6">
-            <MaxCapacityCopy width="w-32" />
+            {/* <MaxCapac width="w-32" /> */}
+            {/* <MaxCapacityDropDown /> */}
+            <MaxCapacityDropDown
+              width={"w-32"}
+              maxPeople={10}
+              setSelectValue={function (value: SetStateAction<selectValueType>): void {
+                throw new Error("Function not implemented.");
+              }}
+              selectValue={{
+                selectDay: "",
+                month: 0,
+                maxPeople: 0,
+              }}
+            />
           </ContourBox>
           <ContourBox className="text-base">
             <button

@@ -10,11 +10,17 @@ type PropsOptionType = {
 type propsType = {
   width?: string;
   needReviewCount?: boolean;
+  maxPeople?: number;
+  price?: number;
+  totalReview: string;
   OptionData: PropsOptionType;
 };
 
 export const OfficeOptions = (props: propsType) => {
   const [optionData, setOptionData] = useState<ObjectType[]>([]);
+  const maxPeopleArray = Array.from({ length: props.maxPeople || 0 });
+  const price = props.price || 0;
+
   useEffect(() => {
     if (props.OptionData) {
       const keys = Object.keys(props.OptionData);
@@ -28,15 +34,10 @@ export const OfficeOptions = (props: propsType) => {
       <div className={`shadow-lg ${props.width && props.width}  py-4 rounded-lg sm:px-4 md:px-12 lg:px-16`}>
         <h3 className="text-lg text-primary mb-4">Price</h3>
         <div className="border-b border-solid border-accent pb-4 mb-4 rounded-sm">
-          <div className=" text-base sm:w-11/12 lg:w-4/6">
-            <p className="flex justify-between mb-3">
-              <span>{`1인실 월 00 포인트`}</span>
-              <span>{`1인실 월 00 포인트`}</span>
-            </p>
-            <p className="flex justify-between">
-              <span>{`1인실 월 00 포인트`}</span>
-              <span>{`1인실 월 00 포인트`}</span>
-            </p>
+          <div className="grid grid-rows-2 grid-cols-2 gap-y-3 text-base sm:w-11/12 lg:w-4/6">
+            {maxPeopleArray.map((_, index) => {
+              return <span key={index}>{`${index + 1}인실 월 ${price * (index + 1)}포인트`}</span>;
+            })}
           </div>
         </div>
         <h3 className="text-lg text-primary mb-4">Options</h3>
@@ -61,7 +62,7 @@ export const OfficeOptions = (props: propsType) => {
             <Link to={"/AllReviews"}>
               <span className="mr-2">Reviews</span>
               {/* 데이터를 받으면 동적으로 추가 */}
-              <span>({231})</span>
+              <span>({props.totalReview})</span>
             </Link>
           </h3>
         )}

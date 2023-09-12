@@ -1,18 +1,16 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { BackgroundCover } from '../../components/common/BackgroundCover';
-import { Title } from '../../components/common/Title';
-import { Button } from '../../components/common/Button';
-import { MyOfficeListDropDown } from '../../components/common/MyOfficeListDropDown';
-import { OfficeName } from '../../components/booking/Officename';
-import { OfficeOptions } from '../../components/booking/OfficeOptions';
-import { ReservationAttendeesList } from '../../components/agent/ReservationAttendeesList'
-import { SalesCharts } from '../../components/agent/SalesCharts';
-
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { BackgroundCover } from "../../components/common/BackgroundCover";
+import { Title } from "../../components/common/Title";
+import { Button } from "../../components/common/Button";
+import { MyOfficeListDropDown } from "../../components/common/MyOfficeListDropDown";
+import { OfficeName } from "../../components/booking/OfficeName";
+import { OfficeOptions } from "../../components/booking/OfficeOptions";
+import { ReservationAttendeesList } from "../../components/agent/ReservationAttendeesList";
+import { SalesCharts } from "../../components/agent/SalesCharts";
 
 export const SalesAnalysis = () => {
-
-  const [officeName, setOfficeName] = useState("전체")
+  const [officeName, setOfficeName] = useState("전체");
   const handleOfficeChange = (office: string) => {
     setOfficeName(office);
   };
@@ -27,7 +25,9 @@ export const SalesAnalysis = () => {
               <hr className="border-primary group-hover:border-transparent" />
             </div>
             <Link to="/AllReviews">
-              <Button style="btn btn-primary btn-outline w-[90px] md:w-40"><p>전체 리뷰</p></Button>
+              <Button style="btn btn-primary btn-outline w-[90px] md:w-40">
+                <p>전체 리뷰</p>
+              </Button>
             </Link>
           </div>
         </div>
@@ -39,7 +39,9 @@ export const SalesAnalysis = () => {
           <div className="p-3 flex justify-between">
             <OfficeName name="오피스A" address="주소" />
             <Link to="/AddOffice">
-              <Button style="btn btn-primary w-[86px] md:w-40"><p>수정하기</p></Button>
+              <Button style="btn btn-primary w-[86px] md:w-40">
+                <p>수정하기</p>
+              </Button>
             </Link>
           </div>
           <OfficeOptions needReviewCount={false} OptionData={{ haveTvProjector: true }} />

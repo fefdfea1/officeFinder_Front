@@ -1,13 +1,17 @@
-// import { addBookMark } from "../../fetch/post/agent";
-// import { deleteBookmark } from "../../fetch/post/agent";
-//만약 오피스 id 정보가 get 요청으로 함께 온다면 data- 로 저장하여 가져와서 전달
+import { fetchBookMarkDelete } from "../../fetch/delete/customer";
+import { fetchAddBookMark } from "../../fetch/post/customer";
+
 export const toggleBookMarkRequest = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
   const target = event.target as HTMLElement;
-  if (target.classList.contains("active")) {
-    //오피스 id , 계정 토큰
-    // addBookMark();
-  } else {
-    //오피스 id , 계정 토큰
-    // deleteBookmark();
+  const closet = target.closest("[data-officenum]") as HTMLElement;
+  if (closet !== null) {
+    const officeId = Number(closet.dataset.officenum);
+    if (target.classList.contains("active")) {
+      fetchBookMarkDelete(officeId);
+      //오피스 id , 계정 토큰
+    } else {
+      fetchAddBookMark(officeId);
+      //오피스 id , 계정 토큰
+    }
   }
 };

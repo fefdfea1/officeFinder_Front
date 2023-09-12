@@ -38,7 +38,7 @@ export const getCustomerNotiApi = async () => {
 };
 export const getSearchApi = async (params: any = {}) => {
   let filter = objToUrl(params);
-  console.log(filter);
+  // console.log(filter);
   try {
     const { data } = await authInstance.get(`api/offices?${filter}`);
     return data;
