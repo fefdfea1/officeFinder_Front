@@ -37,3 +37,8 @@ export const fetchAddOfficeReview = (officeid: number) => {
   const response = authInstance.get(`api/customers/info/leases/${officeid}`).then(res => res.data);
   return response;
 };
+
+export const fetchCustomerMyPageData = () => {
+  const response = authInstance.get("api/customers/info").then(res => res.data);
+  return response;
+};
