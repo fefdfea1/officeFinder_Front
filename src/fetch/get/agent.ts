@@ -13,6 +13,17 @@ export const fetchReviewsData = async (): Promise<MyOfficeResponse> => {
   return response.data;
 };
 
+export const fetchAgentBookMarkData = (page: number, size: number) => {
+  const response = authInstance
+    .get("api/bookmarks", {
+      params: {
+        page,
+        size,
+      },
+    })
+    .then(res => res.data);
+  return response;
+};
 export const fetchMyPageData = () => {
   const response = authInstance.get("api/customers/info").then(res => res.data);
   return response;
