@@ -21,6 +21,7 @@ import { fetchCreateChatRoom } from "../fetch/post/customer";
 import { fetchReservation } from "../fetch/post/customer";
 import styled from "@emotion/styled";
 import "react-day-picker/dist/style.css";
+import { moneyExp } from "./../Business/moneyExp/moneyExp";
 
 declare global {
   interface Window {
@@ -237,7 +238,7 @@ export const Booking = () => {
                   예약하기
                   {selectedDay && selectMonth && selectMaxPeople && BookingData !== null ? (
                     <TotalPriceAreaPosition className="rounded-full bg-secondary whitespace-nowrap">
-                      <span>총 결제 금액은 {BookingData.leaseFee * selectValue.maxPeople}원입니다</span>
+                      <span>총 결제 금액은 {moneyExp(BookingData.leaseFee * selectValue.maxPeople)}원입니다</span>
                     </TotalPriceAreaPosition>
                   ) : null}
                 </button>

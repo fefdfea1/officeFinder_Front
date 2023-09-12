@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { changeOptionName } from "../../Business/Booking/BookingOptionIcon";
 import { ObjectType } from "../../Business/Booking/BookingOptionIcon";
+import { moneyExp } from "../../Business/moneyExp/moneyExp";
 
 type PropsOptionType = {
   [key: string]: boolean;
@@ -36,7 +37,7 @@ export const OfficeOptions = (props: propsType) => {
         <div className="border-b border-solid border-accent pb-4 mb-4 rounded-sm">
           <div className="grid grid-rows-2 grid-cols-2 gap-y-3 text-base sm:w-11/12 lg:w-4/6">
             {maxPeopleArray.map((_, index) => {
-              return <span key={index}>{`${index + 1}인실 월 ${price * (index + 1)}포인트`}</span>;
+              return <span key={index}>{`${index + 1}인실 월 ${moneyExp(price * (index + 1))}포인트`}</span>;
             })}
           </div>
         </div>

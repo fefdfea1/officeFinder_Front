@@ -31,12 +31,15 @@ export const DrawMap = (
 
         // 인포윈도우로 장소에 대한 설명을 표시합니다
         const infowindow = new window.kakao.maps.InfoWindow({
-          constcontent: `<div style="width:150px;text-align:center;padding:6px 0;">${BookingData.officeName}</div>`,
+          content: `<div style="width:150px;text-align:center;padding:6px 0; border-radius:15px;" id="infoWindow">${BookingData.officeName}</div>`,
         });
         infowindow.open(map, marker);
 
         // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
         map.setCenter(coords);
+        const infoWindowDom = document.querySelector("#infoWindow");
+        const infoWindowParentDom = infoWindowDom?.parentNode?.parentNode as HTMLElement;
+        infoWindowParentDom ? (infoWindowParentDom.style.borderRadius = "15px") : null;
       }
     });
   } else {
