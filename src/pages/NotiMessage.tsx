@@ -28,7 +28,7 @@ export const NotiMessage = () => {
             );
           })}
         </BackgroundCover>
-        {/* <Pagination itemsPerPage={10} totalItems={data?.totalPages} /> */}
+        {data?.content?.length > 0 ? <Pagination itemsPerPage={10} totalItems={data?.totalPages} /> : null}
       </BackgroundCover>
     </>
   );

@@ -5,6 +5,7 @@ import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 
 export const AllOfficeList = ({ data }: any): JSX.Element => {
+  console.log({ data });
   return (
     <>
       <div className="grid justify-center sm:grid-cols-1 sm:gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 min-w-min">
@@ -33,9 +34,11 @@ export const AllOfficeList = ({ data }: any): JSX.Element => {
           );
         })}
       </div>
-      <BackgroundCover width="w-1/3" margin="mx-auto mt-10" padding="p-4">
-        {/* <Pagination itemsPerPage={10} totalItems={data?.totalPages} /> */}
-      </BackgroundCover>
+      {data?.content?.length > 0 ? (
+        <BackgroundCover width="w-1/3" margin="mx-auto mt-10" padding="p-4">
+          <Pagination itemsPerPage={10} totalItems={data?.totalPages} />
+        </BackgroundCover>
+      ) : null}
     </>
   );
 };

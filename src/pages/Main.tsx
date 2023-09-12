@@ -10,11 +10,23 @@ import { useQueryClient } from "react-query";
 
 export const Main = () => {
   const queryClient = useQueryClient();
-  const [isHovering, setIsHovering] = useState(0);
+  const [isClicked, setIsClicked] = useState(false);
 
   const [filterObject, setFilterObject] = useState({});
+  const [filterAddress, setFilterAddress] = useState({
+    legion: "",
+    city: "",
+    town: "",
+  });
+  const [selectPeople, setSelectPeople] = useState({
+    maxCapacity: "",
+  });
+  console.log({ filterAddress });
   const [checkfetch, setCheckfetch] = useState(true);
-  const { data } = useQuery(["getSearchApi", checkfetch], () => getSearchApi(filterObject));
+  const { data } = useQuery(["getSearchApi", checkfetch], () =>
+    getSearchApi({ ...filterObject, ...filterAddress, ...selectPeople }),
+  );
+  // refetchOnWindowFocus: false,
   console.log({ data });
 
   const clickFilter = (filters: any) => {
@@ -22,22 +34,41 @@ export const Main = () => {
   };
   const clickSearch = () => {
     setCheckfetch(prev => !prev);
+    setIsClicked(false);
+  };
+  const clickButton = (e: any) => {
+    e.preventDefault();
+    setIsClicked(true);
   };
 
+  const handleChangeFilterAddress = (e: any) => {
+    let { name, value } = e.target;
+    setFilterAddress(prev => {
+      return { ...prev, [name]: value };
+    });
+  };
+  const handleSelectPeople = (number: any) => {
+    console.log(number);
+    setSelectPeople({
+      maxCapacity: number,
+    });
+  };
+  console.log(selectPeople);
   console.log(filterObject);
-  console.log(isHovering);
+  console.log(isClicked);
 
   return (
     <>
-      <div
-        onMouseOver={() => setIsHovering(1)}
-        onMouseOut={() => {
-          setIsHovering(0);
-        }}
-        className="mx-auto mt-4 w-fit"
-      >
-        {isHovering ? (
-          <Search clickFilter={clickFilter} clickSearch={clickSearch} />
+      <div className="mx-auto mt-4 w-fit">
+        {isClicked ? (
+          <Search
+            clickFilter={clickFilter}
+            clickSearch={clickSearch}
+            handleChangeFilterAddress={handleChangeFilterAddress}
+            filterAddress={filterAddress}
+            handleSelectPeople={handleSelectPeople}
+            selectPeople={selectPeople}
+          />
         ) : (
           <SearchBoxContainer className="p-3 shadow-md">
             <div className="flex justify-center">
@@ -45,7 +76,10 @@ export const Main = () => {
               <ContourBox className="text-info text-base p-4">최대인원 수</ContourBox>
               <ContourBox className="text-info text-base p-4">옵션</ContourBox>
               <ContourBox className="text-base">
-                <button className="btn btn-primary rounded-full bg-primary text-base flex items-center">
+                <button
+                  onClick={clickButton}
+                  className="btn btn-primary rounded-full bg-primary text-base flex items-center"
+                >
                   <span>검색</span> <SearchSvg />
                 </button>
               </ContourBox>

@@ -63,16 +63,13 @@ export const Login = () => {
   const clickCheckbox = () => {
     setChecked(prev => !prev);
   };
-  console.log(ischecked);
 
-  console.log({ useMutation });
   const clickLoginButton = () => {
     postLogin.mutate({
       email: login?.email,
       password: login?.password,
     });
   };
-  console.log({ useMutation });
 
   return (
     <>

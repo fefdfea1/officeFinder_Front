@@ -6,51 +6,62 @@ import "react-day-picker/dist/style.css";
 import { SetStateAction } from "react";
 import { selectValueType } from "../../pages/Booking";
 
-export const Search = ({ clickFilter, clickFiltersearch }: any) => {
+export const Search = ({
+  clickFilter,
+  clickSearch,
+  handleChangeFilterAddress,
+  filterAddress,
+  handleSelectPeople,
+  selectPeople,
+}: any) => {
   return (
     <SearchBoxContainer className="p-4 shadow-md">
       <div className="flex justify-center items-center border-b border-solid border-accent pb-2 lg:flex-row md:flex-col sm:flex-col">
         <ContourBox className="flex border-r border-solid border-accent mx-4 lg:border-solid md:mx-auto sm:border-none sm:mx-auto sm:p-2">
           <input
+            value={filterAddress?.legion}
+            name="legion"
             type="text"
             placeholder="시/도"
             className="w-24 placeholder:text-sm text-info input md:mr-3 md:items-center sm:mr-2"
-            // onChange={clickFilter}
+            onChange={handleChangeFilterAddress}
           />
           <input
+            value={filterAddress?.city}
+            name="city"
             type="text"
             placeholder="시/군/구"
             className="w-24 placeholder:text-sm text-info input md:mr-3 md:items-center sm:mr-2"
-            // onChange={clickFilter}
+            onChange={handleChangeFilterAddress}
           />
           <input
+            value={filterAddress?.town}
+            name="town"
             type="text"
             placeholder="읍/면/동/리"
             className="w-24 placeholder:text-sm text-info input md:mr-3 md:items-center sm:mr-2"
-            // onChange={clickFilter}
+            onChange={handleChangeFilterAddress}
           />
         </ContourBox>
 
         <div className="flex flex-row w-full justify-around md:justify-around sm:justify-between">
           <ContourBox className="text-info mx-3 md:mr-6 sm:mr-6">
-            {/* <MaxCapac width="w-32" /> */}
-            {/* <MaxCapacityDropDown /> */}
             <MaxCapacityDropDown
               width={"w-32"}
               maxPeople={10}
-              setSelectValue={function (value: SetStateAction<selectValueType>): void {
-                throw new Error("Function not implemented.");
-              }}
+              // setSelectValue={}
               selectValue={{
                 selectDay: "",
                 month: 0,
                 maxPeople: 0,
               }}
+              handleSelectPeople={handleSelectPeople}
+              selectPeople={selectPeople}
             />
           </ContourBox>
           <ContourBox className="text-base">
             <button
-              onClick={clickFiltersearch}
+              onClick={clickSearch}
               className="btn btn-primary rounded-full bg-primary text-base flex items-center"
             >
               <span className="lg:inline md:hidden sm:hidden">검색</span>
@@ -115,8 +126,8 @@ const SearchSvg = styled(AiOutlineSearch)`
   color: #fff;
 `;
 
-const MaxCapacityCopy = styled(MaxCapacityDropDown)`
-  & .form-control {
-    position: absolute;
-  }
-`;
+// const MaxCapacityCopy = styled(MaxCapacityDropDown)`
+//   & .form-control {
+//     position: absolute;
+//   }
+// `;
