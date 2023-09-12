@@ -1,16 +1,19 @@
 import React, { createContext, useContext, useState, ReactNode } from "react";
+import { alamDataType } from "../components/common/NavRingCompo";
 
 interface MyContextType {
   isChatListOpen: boolean;
-  setIsChatListOpen: React.Dispatch<React.SetStateAction<boolean>>;
   isChatRoom: boolean;
-  setIsChatRoom: React.Dispatch<React.SetStateAction<boolean>>;
   isAlertState: boolean;
-  setIsAlertState: React.Dispatch<React.SetStateAction<boolean>>;
   isSseAlertState: boolean;
-  setSseAlertState: React.Dispatch<React.SetStateAction<boolean>>;
   isSseText: string;
+  isAlamData: alamDataType | null;
+  setIsChatListOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsChatRoom: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsAlertState: React.Dispatch<React.SetStateAction<boolean>>;
+  setSseAlertState: React.Dispatch<React.SetStateAction<boolean>>;
   setSseText: React.Dispatch<React.SetStateAction<string>>;
+  setAlamData: React.Dispatch<React.SetStateAction<alamDataType | null>>;
 }
 
 const MyContext = createContext<MyContextType | undefined>(undefined);
@@ -21,6 +24,7 @@ export const MyProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [isAlertState, setIsAlertState] = useState<boolean>(false);
   const [isSseAlertState, setSseAlertState] = useState<boolean>(false);
   const [isSseText, setSseText] = useState<string>("");
+  const [isAlamData, setAlamData] = useState<alamDataType | null>(null);
 
   const contextValue: MyContextType = {
     isChatListOpen,
@@ -28,11 +32,13 @@ export const MyProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     isAlertState,
     isSseAlertState,
     isSseText,
+    isAlamData,
     setIsChatListOpen,
     setIsChatRoom,
     setIsAlertState,
     setSseAlertState,
     setSseText,
+    setAlamData,
   };
 
   return <MyContext.Provider value={contextValue}>{children}</MyContext.Provider>;

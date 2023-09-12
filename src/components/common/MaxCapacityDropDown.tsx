@@ -6,8 +6,8 @@ export const MaxCapacityDropDown = (props: {
   width: string;
   setSelectMaxPeople?: React.Dispatch<React.SetStateAction<boolean>>;
   maxPeople: number;
-  setSelectValue: React.Dispatch<React.SetStateAction<selectValueType>>;
-  selectValue: selectValueType;
+  setSelectValue?: React.Dispatch<React.SetStateAction<selectValueType>>;
+  selectValue?: selectValueType;
 }): JSX.Element => {
   // width로 넓이를 지정할 수 있습니다. ex) w-52, w-full
   const [selectedItem, setSelectedItem] = useState("");
@@ -17,8 +17,10 @@ export const MaxCapacityDropDown = (props: {
 
   useEffect(() => {
     if (props.setSelectMaxPeople && selectedItem !== "") {
-      const sliceValue = Number(selectedItem.replace("인", ""));
-      props.setSelectValue({ ...props.selectValue, maxPeople: sliceValue });
+      if (props.setSelectValue && props.selectValue) {
+        const sliceValue = Number(selectedItem.replace("인", ""));
+        props.setSelectValue({ ...props.selectValue, maxPeople: sliceValue });
+      }
       props.setSelectMaxPeople(true);
     }
   }, [selectedItem]);

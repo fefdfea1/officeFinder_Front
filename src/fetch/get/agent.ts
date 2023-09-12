@@ -17,3 +17,15 @@ export const fetchMyPageData = () => {
   const response = authInstance.get("api/customers/info").then(res => res.data);
   return response;
 };
+
+export const fetchAgnetAlamData = () => {
+  const response = authInstance
+    .get("/api/agents/notifications", {
+      params: {
+        page: 0,
+        size: 3,
+      },
+    })
+    .then(res => res.data);
+  return response;
+};

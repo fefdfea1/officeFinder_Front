@@ -37,12 +37,13 @@ export const Login = () => {
     return passwordRegex.test(password);
   };
   const [ischecked, setChecked] = useState(false);
+
   const postLogin = useMutation("login", ischecked ? loginAgentApi : loginCustomerApi, {
     onSuccess: res => {
       const userType = res?.data?.userType;
       window.localStorage.setItem("userType", userType);
       const token = res?.data?.token;
-      cookies.set("Authorization", token, { maxAge: 3600 });
+      cookies.set("Authorization", token, { maxAge: 3600 * 24 });
       fetchSSE();
       alert("환영합니다:)");
       navigate("/");
