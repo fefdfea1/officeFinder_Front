@@ -20,7 +20,10 @@ const setting = {
 };
 
 export const OfficeProfile = (props: propsTpye) => {
+
   const [ImageSrc, setImageSrc] = useState<imgSrcType>([]);
+
+
   const defaultImagePath = "/officeImg/noimage.png";
 
   useEffect(() => {

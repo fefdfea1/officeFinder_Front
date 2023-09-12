@@ -13,6 +13,7 @@ export type MyBookingContentType = {
   name: string;
   paymentDate: string;
   reviewed: boolean;
+  officeImagePath: string | null;
   startDate: string;
 };
 
