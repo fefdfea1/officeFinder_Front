@@ -38,7 +38,14 @@ export const fetchAddOfficeReview = (officeid: number) => {
   return response;
 };
 
-export const fetchCustomerMyPageData = () => {
-  const response = authInstance.get("api/customers/info").then(res => res.data);
+export const fetchCustomerAlamData = () => {
+  const response = authInstance
+    .get("api/customers/notifications", {
+      params: {
+        page: 0,
+        size: 3,
+      },
+    })
+    .then(res => res.data);
   return response;
 };

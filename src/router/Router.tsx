@@ -12,8 +12,14 @@ import { Login } from "../pages/Login";
 import { AddOfficeReviews } from "../pages/customer/AddOfficeReviews";
 import { MyPage } from "../pages/MyPage";
 import { NotiMessage } from "../pages/NotiMessage";
+import { usefetchSSE } from "./../fetch/get/sse";
+import { useMyContext } from "../contexts/MyContext";
 
 export const Router = () => {
+  const { setAlamData, setSseAlertState, setSseText } = useMyContext();
+
+  usefetchSSE(setAlamData, setSseAlertState, setSseText);
+
   return (
     <Routes>
       <Route path="/" element={<Main />}></Route>
