@@ -1,13 +1,18 @@
+import { useEffect, useState } from "react";
+import { useQuery } from "react-query";
+import styled from "@emotion/styled";
 import { AllOfficeList } from "../components/common/AllOfficeList";
 import { Search } from "../components/common/Search";
-import styled from "@emotion/styled";
-import { useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
-import { useQuery } from "react-query";
 import { getSearchApi } from "../fetch/get/main";
-export const Main = () => {
-  const [isClicked, setIsClicked] = useState(false);
+import { cookies } from "../fetch/common/axiosApi"; // Import cookies
+import type { OfficeResponse } from "../type/mainTypes";
+import { NotLogin } from "../components/main/NotLogin";
 
+
+export const Main = () => {
+  const [isLogin, setIsLogin] = useState(false)
+  const [isClicked, setIsClicked] = useState(false);
   const [filterObject, setFilterObject] = useState({});
   const [filterAddress, setFilterAddress] = useState({
     legion: "",
@@ -19,17 +24,30 @@ export const Main = () => {
   });
 
   const [checkfetch, setCheckfetch] = useState(true);
-  const { data } = useQuery(["getSearchApi", checkfetch], () =>
-    getSearchApi({ ...filterObject, ...filterAddress, ...selectPeople }),
+  const token = cookies.get("Authorization");
+  const { data } = useQuery<OfficeResponse>(["getSearchApi", checkfetch], () =>
+    getSearchApi({ ...filterObject, ...filterAddress, ...selectPeople }), {
+    enabled: isLogin
+  }
   );
+  useEffect(() => {
+    setIsLogin(!!token);
+  }, [token]);
 
+  if (!isLogin) {
+    return (<>
+      <NotLogin />
+    </>)
+  }
   const clickFilter = (filters: any) => {
     setFilterObject(filters);
   };
+
   const clickSearch = () => {
-    setCheckfetch(prev => !prev);
+    setCheckfetch((prev) => !prev);
     setIsClicked(false);
   };
+
   const clickButton = (e: any) => {
     e.preventDefault();
     setIsClicked(true);
@@ -37,10 +55,11 @@ export const Main = () => {
 
   const handleChangeFilterAddress = (e: any) => {
     let { name, value } = e.target;
-    setFilterAddress(prev => {
+    setFilterAddress((prev) => {
       return { ...prev, [name]: value };
     });
   };
+
   const handleSelectPeople = (number: any) => {
     console.log(number);
     setSelectPeople({
@@ -50,39 +69,45 @@ export const Main = () => {
 
   return (
     <>
-      <div className="mx-auto mt-4 w-fit">
-        {isClicked ? (
-          <Search
-            clickFilter={clickFilter}
-            clickSearch={clickSearch}
-            handleChangeFilterAddress={handleChangeFilterAddress}
-            filterAddress={filterAddress}
-            handleSelectPeople={handleSelectPeople}
-            setMaxPeople={setSelectPeople}
-          />
-        ) : (
-          <SearchBoxContainer className="p-3 shadow-md">
-            <div className="flex justify-center">
-              <ContourBox className="text-info text-base p-4">주소</ContourBox>
-              <ContourBox className="text-info text-base p-4">최대인원 수</ContourBox>
-              <ContourBox className="text-info text-base p-4">옵션</ContourBox>
-              <ContourBox className="text-base">
-                <button
-                  onClick={clickButton}
-                  className="btn btn-primary rounded-full bg-primary text-base flex items-center"
-                >
-                  <span>검색</span> <SearchSvg />
-                </button>
-              </ContourBox>
-            </div>
-          </SearchBoxContainer>
-        )}
-      </div>
-      <div className="p-4 mt-5">
-        <AllOfficeList data={data} />
-      </div>
+      {data ? (
+        <>
+          <div className="mx-auto mt-4 w-fit">
+            {isClicked ? (
+              <Search
+                clickFilter={clickFilter}
+                clickSearch={clickSearch}
+                handleChangeFilterAddress={handleChangeFilterAddress}
+                filterAddress={filterAddress}
+                handleSelectPeople={handleSelectPeople}
+                setMaxPeople={setSelectPeople}
+              />
+            ) : (
+              <SearchBoxContainer className="p-3 shadow-md">
+                <div className="flex justify-center">
+                  <ContourBox className="text-info text-base p-4">주소</ContourBox>
+                  <ContourBox className="text-info text-base p-4">최대인원 수</ContourBox>
+                  <ContourBox className="text-info text-base p-4">옵션</ContourBox>
+                  <ContourBox className="text-base">
+                    <button
+                      onClick={clickButton}
+                      className="btn btn-primary rounded-full bg-primary text-base flex items-center"
+                    >
+                      <span>검색</span> <SearchSvg />
+                    </button>
+                  </ContourBox>
+                </div>
+              </SearchBoxContainer>
+            )}
+          </div>
+          <div className="p-4 mt-5">
+            <AllOfficeList data={data} />
+          </div></>
+      ) : (
+        <NotLogin />
+      )}
     </>
   );
+
 };
 const SearchBoxContainer = styled.form`
   display: inline-block;
