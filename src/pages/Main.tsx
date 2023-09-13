@@ -1,7 +1,7 @@
 import { AllOfficeList } from "../components/common/AllOfficeList";
 import { Search } from "../components/common/Search";
 import styled from "@emotion/styled";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { useQuery } from "react-query";
 import { getSearchApi } from "../fetch/get/main";
