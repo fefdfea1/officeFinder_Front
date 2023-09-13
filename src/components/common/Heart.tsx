@@ -8,6 +8,7 @@ import { useMyContext } from "../../contexts/MyContext";
 
 type propsType = {
   fillState?: string;
+  type?: string;
 };
 
 export const Heart = (props: propsType) => {
@@ -17,7 +18,7 @@ export const Heart = (props: propsType) => {
       className="absolute right-2 top-2"
       type="button"
       onClick={event => {
-        toggleBookMarkRequest(event);
+        toggleBookMarkRequest(event, props.type);
         alertRemoveTimer(setIsAlertState, 1300);
       }}
     >

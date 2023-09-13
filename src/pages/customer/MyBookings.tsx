@@ -4,6 +4,9 @@ import { Title } from "../../components/common/Title";
 import { useQuery } from "react-query";
 import { fetchMyBookingsData } from "../../fetch/get/customer";
 import { useState, useEffect } from "react";
+import { BookMarkAlert } from "./BookMarkAlert";
+import { useMyContext } from "../../contexts/MyContext";
+import styled from "@emotion/styled";
 
 export type MyBookingContentType = {
   endDate: string;
@@ -36,13 +39,8 @@ export type MyBookingsDataType = {
 
 export const MyBookings = () => {
   const [MyBookingsData, setMyBookingsData] = useState<MyBookingsDataType | null>(null);
-  const { data } = useQuery(["fetchBookingData"], fetchMyBookingsData, {
-    //3분
-    staleTime: 1000 * 60 * 3,
-    // 3분 40초
-    cacheTime: 1000 * 40 * 5.5,
-    refetchOnWindowFocus: false,
-  });
+  const { data } = useQuery(["fetchBookingData"], fetchMyBookingsData);
+  const { isAlertState } = useMyContext();
   useEffect(() => {
     if (data) {
       setMyBookingsData(data);
@@ -50,7 +48,7 @@ export const MyBookings = () => {
   }, [data]);
 
   return (
-    <div className="w-11/12 mx-auto">
+    <div className="w-11/12 mx-auto relative">
       {/* 각각 데이터의 갯수만큼 반복하여 제작 */}
       <div className="mt-10 mb-10">
         <BackgroundCover>
@@ -73,6 +71,20 @@ export const MyBookings = () => {
           </div>
         </BackgroundCover>
       </div>
+      <RemoveBookMarkAlertPosition>
+        <BookMarkAlert
+          submitText="즐겨찾기에 추가 됨"
+          deleteSubmitText="즐겨찾기에서 제거 됨"
+          alertState={isAlertState}
+        />
+      </RemoveBookMarkAlertPosition>
     </div>
   );
 };
+
+const RemoveBookMarkAlertPosition = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;

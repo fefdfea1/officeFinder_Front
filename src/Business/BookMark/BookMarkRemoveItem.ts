@@ -20,11 +20,11 @@ export const removeSubmitItem = (index: number) => {
 };
 
 export const AllRemoveAlert = (setAlertState: React.Dispatch<React.SetStateAction<boolean>>) => {
-  setAlertState(true);
   if (timerId) {
     clearTimeout(timerId);
   }
   timerId = setTimeout(() => {
+    setAlertState(false);
     const AllBookMarkItems = document.querySelectorAll(".BookMarkItem");
     if (AllBookMarkItems.length >= 1) {
       for (let i = 0; i <= AllBookMarkItems.length; i++) {
@@ -32,7 +32,5 @@ export const AllRemoveAlert = (setAlertState: React.Dispatch<React.SetStateActio
         target.style.display = "none";
       }
     }
-
-    setAlertState(false);
   }, 1300);
 };

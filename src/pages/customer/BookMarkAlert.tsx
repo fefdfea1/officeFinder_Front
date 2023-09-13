@@ -1,9 +1,20 @@
+import { useEffect } from "react";
+import { BookMarkClickHandler } from "../../Business/BookMark/BookMarkAlertClickHancler";
+import { useState } from "react";
 type propsType = {
-  showText: string;
+  submitText: string;
+  deleteSubmitText: string;
   alertState: boolean;
 };
 
 export const BookMarkAlert = (props: propsType) => {
+  const [submitState, setSubmitState] = useState<boolean>(false);
+  useEffect(() => {
+    window.addEventListener("click", event => BookMarkClickHandler(event, setSubmitState));
+
+    return () => window.removeEventListener("click", event => BookMarkClickHandler(event, setSubmitState));
+  }, []);
+
   return (
     <>
       {props.alertState && (
@@ -21,7 +32,7 @@ export const BookMarkAlert = (props: propsType) => {
               d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
             />
           </svg>
-          <span>{props.showText}</span>
+          <span>{submitState ? props.submitText : props.deleteSubmitText}</span>
         </div>
       )}
     </>

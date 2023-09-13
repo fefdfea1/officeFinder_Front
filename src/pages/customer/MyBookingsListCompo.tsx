@@ -53,7 +53,7 @@ export const MyBookingsListCompo = (props: propsType) => {
               <p className="font-black text-lg">현재 상태</p>
               <p ref={statePTag} className="text-base"></p>
             </div>
-            <p className="text-base mb-1">2023년 8월 7일 결제 완료</p>
+            <p className="text-base mb-1">{`결제일: ${props.item.paymentDate}`}</p>
             {props.type === "last_reservation" && (
               <button
                 className="btn btn-primary sm:mt-4 sm:w-full lg:w-5/12 xl:w-4/12"

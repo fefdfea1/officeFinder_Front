@@ -6,7 +6,7 @@ import { formInstance } from "../common/axiosApi";
 export const fetchAddBookMark = (officeId: string) => {
   try {
     const response = authInstance
-      .post("api/bookmarks/submit", {
+      .post(`api/offices/${officeId}/bookmarks`, {
         officeId,
       })
       .then(res => res.data);

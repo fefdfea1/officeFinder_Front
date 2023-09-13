@@ -148,6 +148,11 @@ export const fetchAgnetAlamData = () => {
   return response;
 };
 
+export const fetchAgentMyPageData = () => {
+  const response = authInstance.get("api/agents/info").then(res => res.data);
+  return response;
+};
+
 export const fetchAgentBookMarkData = (page: number, size: number) => {
   const response = authInstance
     .get("api/bookmarks", {
@@ -157,10 +162,5 @@ export const fetchAgentBookMarkData = (page: number, size: number) => {
       },
     })
     .then(res => res.data);
-  return response;
-};
-
-export const fetchAgentMyPageData = () => {
-  const response = authInstance.get("api/agents/info").then(res => res.data);
   return response;
 };
