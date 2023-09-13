@@ -71,14 +71,22 @@ export const fetchOverallRentalData = async () => {
   }
 };
 
-export const fetchMyOfficesNameData = async () => {
-  try {
-    const res = await authInstance.get("/api/agents/offices/names");
-    return res.data;
-  } catch (error) {
-    console.error("API 호출 중 에러 발생:", error);
-    throw error;
-  }
+
+export const fetchAgentBookMarkData = (page: number, size: number) => {
+  const response = authInstance
+    .get("api/bookmarks", {
+      params: {
+        page,
+        size,
+      },
+    })
+    .then(res => res.data);
+  return response;
+};
+export const fetchMyPageData = () => {
+  const response = authInstance.get("api/customers/info").then(res => res.data);
+  return response;
+
 };
 
 //예약자 명단 불러오기

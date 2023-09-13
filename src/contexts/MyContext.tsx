@@ -7,6 +7,10 @@ interface MyContextType {
   setIsChatRoom: React.Dispatch<React.SetStateAction<boolean>>;
   isAlertState: boolean;
   setIsAlertState: React.Dispatch<React.SetStateAction<boolean>>;
+  isSseAlertState: boolean;
+  setSseAlertState: React.Dispatch<React.SetStateAction<boolean>>;
+  isSseText: string;
+  setSseText: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const MyContext = createContext<MyContextType | undefined>(undefined);
@@ -15,14 +19,20 @@ export const MyProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [isChatListOpen, setIsChatListOpen] = useState<boolean>(false);
   const [isChatRoom, setIsChatRoom] = useState<boolean>(false);
   const [isAlertState, setIsAlertState] = useState<boolean>(false);
+  const [isSseAlertState, setSseAlertState] = useState<boolean>(false);
+  const [isSseText, setSseText] = useState<string>("");
 
   const contextValue: MyContextType = {
     isChatListOpen,
-    setIsChatListOpen,
     isChatRoom,
-    setIsChatRoom,
     isAlertState,
+    isSseAlertState,
+    isSseText,
+    setIsChatListOpen,
+    setIsChatRoom,
     setIsAlertState,
+    setSseAlertState,
+    setSseText,
   };
 
   return <MyContext.Provider value={contextValue}>{children}</MyContext.Provider>;

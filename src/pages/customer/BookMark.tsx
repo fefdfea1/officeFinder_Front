@@ -2,7 +2,8 @@ import { BackgroundCover } from "../../components/common/BackgroundCover";
 import { Title } from "../../components/common/Title";
 import { BookMarkOfficeCompo } from "./BookMarkOfficeCompo";
 import { useQuery } from "react-query";
-import { fetchBookMarkData } from "../../fetch/get/customer";
+import { fetchCustomerBookMarkData } from "../../fetch/get/customer";
+import { fetchAgentBookMarkData } from "../../fetch/get/agent";
 import { useEffect, useState } from "react";
 import { BookMarkAlert } from "./BookMarkAlert";
 import { Pagination } from "../../components/common/Pagination";
@@ -58,10 +59,18 @@ const defaultValue = {
 export const BookMark = () => {
   const [BookMarkData, setBookMarkData] = useState<BookMarkDataType>(defaultValue);
   const { isAlertState, setIsAlertState } = useMyContext();
-  const { data } = useQuery<BookMarkDataType>("BookMark", () => fetchBookMarkData(1, 10), {
-    staleTime: Infinity,
-    refetchOnWindowFocus: false,
-  });
+  const userType = localStorage.getItem("userType");
+  const { data } = useQuery<BookMarkDataType>(
+    "BookMark",
+    () =>
+      userType === "customer" && userType !== undefined
+        ? fetchCustomerBookMarkData(1, 10)
+        : fetchAgentBookMarkData(1, 10),
+    {
+      staleTime: Infinity,
+      refetchOnWindowFocus: false,
+    },
+  );
 
   useEffect(() => {
     if (data) {
