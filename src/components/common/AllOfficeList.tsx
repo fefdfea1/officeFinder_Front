@@ -2,6 +2,7 @@ import { AiFillStar } from "react-icons/ai";
 import { BackgroundCover } from "./BackgroundCover";
 import { Heart } from "./Heart";
 import { mainClickEventHandler } from "../../Business/Main/targetLogic";
+
 import { Link } from "react-router-dom";
 import { Pagination } from "./Pagination";
 import { useQuery } from "react-query";

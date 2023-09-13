@@ -39,7 +39,7 @@ export const Nav = () => {
   });
   return (
     <>
-      <div className="navbar bg-base-100 border-solid border-b-2 border-gray-200 p-5 sm:p-2 md:p-3 lg:p-5">
+      <div className="navbar bg-base-100 border-solid border-b border-gray-200 sm:p-2 md:p-3 lg:p-4">
         <div className="flex-1">
           <a onClick={clickLogo} className="btn bg-white border-none hover:bg-white normal-case text-2xl text-primary">
             officeFinder
@@ -120,8 +120,8 @@ export const Nav = () => {
             <NavRingCompo clickMoreButton={clickMoreButton} />
           </div>
         ) : (
-          <Button style={undefined} onClick={clickLogin}>
-            <p>로그인</p>
+          <Button style="" onClick={clickLogin}>
+            <p className="font-bold text-base">로그인</p>
           </Button>
         )}
       </div>
