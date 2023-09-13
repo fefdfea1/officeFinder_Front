@@ -1,7 +1,7 @@
-import React from 'react';
-import { useState } from 'react';
-import { useQuery } from 'react-query';
-import { RiArrowDropDownLine } from 'react-icons/ri';
+import React from "react";
+import { useState } from "react";
+import { useQuery } from "react-query";
+import { RiArrowDropDownLine } from "react-icons/ri";
 import { fetchMyOfficesNameData } from "../../fetch/get/agent"
 
 type MyOfficeListDropDownProps = {
@@ -19,7 +19,7 @@ export const MyOfficeListDropDown: React.FC<MyOfficeListDropDownProps> = ({ onOf
   const [selectedItem, setSelectedItem] = useState<Item>({ id: -1, officeName: officeName });
   const [isOpen, setIsOpen] = useState(false);
 
-  const { data: myOfficeNames } = useQuery('MyOfficesName', fetchMyOfficesNameData, {
+  const { data: myOfficeNames } = useQuery("MyOfficesName", fetchMyOfficesNameData, {
 
   });
   let officeList = myOfficeNames?.data || ["오피스를 추가하세요"];
@@ -44,7 +44,7 @@ export const MyOfficeListDropDown: React.FC<MyOfficeListDropDownProps> = ({ onOf
           <span className="text-base group-hover:text-white">{selectedItem.officeName}</span>
           <RiArrowDropDownLine className="text-2xl" />
         </label>
-        <ul tabIndex={0} className={`dropdown-content w-full z-[1] menu p-2 shadow bg-base-100 rounded-box ${isOpen ? '' : 'hidden'}`}>
+        <ul tabIndex={0} className={`dropdown-content w-full z-[1] menu p-2 shadow bg-base-100 rounded-box ${isOpen ? "" : "hidden"}`}>
           {officeList.map(({ id, officeName }: { id: number, officeName: string }) => (
             <li key={id}>
               <a onClick={() => handleOfficeNameChange(officeName, id)}>

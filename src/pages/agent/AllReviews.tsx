@@ -1,14 +1,14 @@
-
-import { useState, useEffect } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
-import { useQuery } from 'react-query';
-import { BackgroundCover } from '../../components/common/BackgroundCover';
-import { Title } from '../../components/common/Title';
-import { Button } from '../../components/common/Button';
-import { MyOfficeListDropDown } from '../../components/common/MyOfficeListDropDown';
-import { Reviews } from '../../components/agent/Reviews';
-import { Pagination } from '../../components/common/Pagination';
-import { fetchReviewsData } from '../../fetch/get/agent';
+import { useState, useEffect } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { useQuery } from "react-query";
+import { BackgroundCover } from "../../components/common/BackgroundCover";
+import { Title } from "../../components/common/Title";
+import { Button } from "../../components/common/Button";
+import { MyOfficeListDropDown } from "../../components/common/MyOfficeListDropDown";
+import { Reviews } from "../../components/agent/Reviews";
+import { Pagination } from "../../components/common/Pagination";
+import { fetchReviewsData } from "../../fetch/get/agent";
+import type { ReviewData } from "../../type/agentTypes"
 
 export const AllReviews = () => {
 
@@ -29,15 +29,11 @@ export const AllReviews = () => {
     setOfficeName(office);
     setOfficeId(id)
   };
-  const { data: reviews, isLoading, isError, error }: { data: any; isLoading: boolean; isError: boolean; error: any } = useQuery(["reviews", officeId], () => fetchReviewsData(officeId), {
+  const { data: reviews, isError, error }: { data: any; isLoading: boolean; isError: boolean; error: any } = useQuery(["reviews", officeId], () => fetchReviewsData(officeId), {
     retry: 1,
     staleTime: 1 * 60 * 1000,
   })
-  console.log(reviews)
   const reviewsData = reviews?.content
-
-  if (isLoading) return <p>Loading...</p>;
-
 
   return (
     <>
@@ -61,9 +57,9 @@ export const AllReviews = () => {
         {/* 본문 */}
         {reviews ? (
           <div className="flex flex-col gap-4">
-            {reviewsData.map((review: any) => (
-              <BackgroundCover key={review.id} margin="m-0" padding="lg:p-8 md:p-4 p-2">
-                <Reviews description={review.description} date={review.createdAt} rating={review.rate} />
+            {reviewsData.map((review: ReviewData, index: number) => (
+              <BackgroundCover key={index} margin="m-0" padding="lg:p-8 md:p-4 p-2">
+                <Reviews customerName={review.customerName} customerImagePath={review.customerImagePath} description={review.description} createdAt={review.createdAt} rate={review.rate} />
               </BackgroundCover>
             ))}
             <div className="flex justify-center mt-4">

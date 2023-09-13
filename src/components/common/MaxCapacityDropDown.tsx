@@ -7,17 +7,18 @@ export const MaxCapacityDropDown = (props: {
   setSelectMaxPeople?: React.Dispatch<React.SetStateAction<boolean>>;
   maxPeople: number;
   setSelectValue?: React.Dispatch<React.SetStateAction<selectValueType>>;
+  setMainMaxValue?: React.Dispatch<
+    React.SetStateAction<{
+      maxCapacity: number;
+    }>
+  >;
   selectValue?: selectValueType;
-  handleSelectPeople: any;
-  selectPeople: any;
-
 }): JSX.Element => {
   // width로 넓이를 지정할 수 있습니다. ex) w-52, w-full
   const [selectedItem, setSelectedItem] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
   const createMaxPeopleArray = Array.from({ length: props.maxPeople });
-
   useEffect(() => {
     if (props.setSelectMaxPeople && selectedItem !== "") {
       if (props.setSelectValue && props.selectValue) {
@@ -25,6 +26,11 @@ export const MaxCapacityDropDown = (props: {
         props.setSelectValue({ ...props.selectValue, maxPeople: sliceValue });
       }
       props.setSelectMaxPeople(true);
+    }
+    if (props.setMainMaxValue) {
+      const sliceValue = Number(selectedItem.replace("인", ""));
+      console.log(sliceValue);
+      props.setMainMaxValue({ maxCapacity: sliceValue });
     }
   }, [selectedItem]);
 
@@ -65,7 +71,6 @@ export const MaxCapacityDropDown = (props: {
                 <a
                   onClick={() => {
                     handleItemClick(`${index + 1}인`);
-                    props.handleSelectPeople(index + 1);
                   }}
                 >
                   {`${index + 1}인`}

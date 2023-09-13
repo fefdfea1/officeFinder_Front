@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { BackgroundCover } from "../../components/common/BackgroundCover";
 import { Title } from "../../components/common/Title";
 import { Button } from "../../components/common/Button";
@@ -8,11 +8,12 @@ import { AddOfficePhoto } from "../../components/agent/addOffice/AddOfficePhoto"
 import { AddOfficeAddress } from "../../components/agent/addOffice/AddOfficeAddress";
 import { useAddOfficeHandel } from "../../components/agent/addOffice/HandelAddOffice"
 import { NumberToKoreanConverter } from "../../Business/Agent/NumberToKorean";
-import { usePost } from "../../fetch/post/agent"
+import { usePost, useUpdate } from "../../fetch/post/agent"
 
 export const AddOffice = () => {
   const navigate = useNavigate();
-
+  const paramsId = useParams();
+  console.log(paramsId.paramsId)
   const { name, handleOfficeName,
     selectedOptions, handleOptionsChange,
     address, handleAddressChange,
@@ -22,11 +23,12 @@ export const AddOffice = () => {
     images, handlefileUpload
   } = useAddOfficeHandel();
 
-
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
   }
-  const { mutate } = usePost()
+
+  const { mutate: PostMutate } = usePost()
+  const { mutate: UpdateMutate } = useUpdate(Number(paramsId.paramsId))
   const handleChange = () => {
     const updatedData = {
       officeName: name,
@@ -36,21 +38,34 @@ export const AddOffice = () => {
       address: address,
       officeOption: selectedOptions,
     };
-    console.log(updatedData)
+
     const formData = new FormData()
 
     const blob = new Blob([JSON.stringify(updatedData)], {
-      type: 'application/json',
+      type: "application/json",
     });
     formData.append("request", blob);
-    if (images.length === 0) {
-      formData.append("multipartFileList", "None")
+
+    if (images.length !== 0) {
+      images.forEach((image) => {
+        formData.append("multipartFileList", image);
+      });
     }
-    images.forEach((image) => {
-      formData.append("multipartFileList", image);
-    });
-    console.log(formData)
-    mutate(formData, { onSuccess: () => navigate("/MyOffice") })
+    if (paramsId.paramsId !== undefined) {
+      UpdateMutate(formData, {
+        onSuccess: () => {
+          alert("수정이 완료되었습니다!")
+          navigate("/MyOffice");
+        },
+      });
+    } else {
+      PostMutate(formData, {
+        onSuccess: () => {
+          alert("등록이 완료되었습니다!")
+          navigate("/MyOffice");
+        },
+      });
+    }
   }
 
   return (
@@ -63,11 +78,11 @@ export const AddOffice = () => {
         </div>
       </div>
       <BackgroundCover>
-        <Title>새 지점 등록하기</Title>
+        {(paramsId.paramsId === undefined) ? <Title>오피스 등록하기</Title> : <Title>오피스 수정하기</Title>}
         <form className="flex flex-col items-center py-8 gap-6" onSubmit={handleSubmit}>
           <Input type="text" width="w-80" inputLabel="공간의 이름을 입력해주세요." inputLabelPosition="text-center" onInputChange={handleOfficeName} />
           <AddOfficeAddress onAddressHandler={handleAddressChange} />
-          <div className="">
+          <div>
             <div className="flex justify-center gap-2">
               <p className="text-center text-base">필요한 옵션을 선택하세요.</p>
             </div>
@@ -79,7 +94,7 @@ export const AddOffice = () => {
               <Input type="number" placeholder="숫자로 입력하세요." inputLabelPosition="text-center" inputLabel="최대 인원수" onInputChange={handleMaxCapacityChange} />
               <Input type="number" placeholder="숫자로 입력하세요." inputLabelPosition="text-center" inputLabel="개수" onInputChange={handleCountRoomsChange} />
               <div className="flex flex-col items-center">
-                <Input type="text" onInputChange={handlePriceChange} placeholder="숫자로 입력하세요." inputLabelPosition="text-center" inputLabel="월 가격" />
+                <Input type="text" onInputChange={handlePriceChange} placeholder="숫자로 입력하세요." inputLabelPosition="text-center" inputLabel="1인당 월 가격" />
                 {monthlyPrice ? <NumberToKoreanConverter price={monthlyPrice || 0} /> : null}
               </div>
             </div>

@@ -4,9 +4,9 @@ type price = {
 }
 
 export const NumberToKoreanConverter = (props: price) => {
-    let result = '';
+    let result = "";
     const characters = 8 // 숫자열의 길이값
-    const units = ['', '만 ', '억 ', '조 ', '경 ', '해 ', '자 ', '양 ', '구 ', '간 ', '정 '];
+    const units = ["", "만 ", "억 ", "조 ", "경 ", "해 ", "자 ", "양 ", "구 ", "간 ", "정 "];
     let num = props.price;
     let resultCharacters = 0;
 
@@ -15,10 +15,10 @@ export const NumberToKoreanConverter = (props: price) => {
         const currentUnit = units[currentUnitIndex];
         let currentNum = num / Math.pow(10, currentUnitIndex * 4);
         currentNum = Math.floor(currentNum);
-        const currentNumStr = currentNum.toString().split('');
+        const currentNumStr = currentNum.toString().split("");
         for (let i = 0; i < currentNumStr.length; i++) {
             if (i !== 0 && (currentNumStr.length - i) % 4 === 0) {
-                result += ',';
+                result += ",";
             }
             result += currentNumStr[i];
         }

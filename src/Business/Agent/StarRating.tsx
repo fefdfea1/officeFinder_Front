@@ -1,4 +1,4 @@
-import { ImStarFull, ImStarHalf, ImStarEmpty } from 'react-icons/im';
+import { ImStarFull, ImStarHalf, ImStarEmpty } from "react-icons/im";
 
 
 export const renderStarRating = (rating: number) => {
