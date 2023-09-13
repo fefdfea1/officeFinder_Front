@@ -8,7 +8,9 @@ import { AddOfficePhoto } from "../../components/agent/addOffice/AddOfficePhoto"
 import { AddOfficeAddress } from "../../components/agent/addOffice/AddOfficeAddress";
 import { useAddOfficeHandel } from "../../components/agent/addOffice/HandelAddOffice";
 import { NumberToKoreanConverter } from "../../Business/Agent/NumberToKorean";
-import { usePost, useUpdate } from "../../fetch/post/agent";
+
+import { usePost, useUpdate } from "../../fetch/post/agent"
+
 
 export const AddOffice = () => {
   const navigate = useNavigate();
@@ -37,6 +39,7 @@ export const AddOffice = () => {
 
   const { mutate: PostMutate } = usePost();
   const { mutate: UpdateMutate } = useUpdate(Number(paramsId.paramsId));
+
   const handleChange = () => {
     const updatedData = {
       officeName: name,
@@ -47,7 +50,8 @@ export const AddOffice = () => {
       officeOption: selectedOptions,
     };
 
-    const formData = new FormData();
+    const formData = new FormData()
+
 
     const blob = new Blob([JSON.stringify(updatedData)], {
       type: "application/json",
@@ -55,26 +59,28 @@ export const AddOffice = () => {
     formData.append("request", blob);
 
     if (images.length !== 0) {
-      images.forEach(image => {
+
+      images.forEach((image) => {
         formData.append("multipartFileList", image);
       });
     }
     if (paramsId.paramsId !== undefined) {
       UpdateMutate(formData, {
         onSuccess: () => {
-          alert("수정이 완료되었습니다!");
+          alert("수정이 완료되었습니다!")
           navigate("/MyOffice");
         },
       });
     } else {
       PostMutate(formData, {
         onSuccess: () => {
-          alert("등록이 완료되었습니다!");
+          alert("등록이 완료되었습니다!")
           navigate("/MyOffice");
         },
       });
     }
-  };
+  }
+
 
   return (
     <>
@@ -88,7 +94,9 @@ export const AddOffice = () => {
         </div>
       </div>
       <BackgroundCover>
-        {paramsId.paramsId === undefined ? <Title>오피스 등록하기</Title> : <Title>오피스 수정하기</Title>}
+
+        {(paramsId.paramsId === undefined) ? <Title>오피스 등록하기</Title> : <Title>오피스 수정하기</Title>}
+
         <form className="flex flex-col items-center py-8 gap-6" onSubmit={handleSubmit}>
           <Input
             type="text"
@@ -122,6 +130,7 @@ export const AddOffice = () => {
                 onInputChange={handleCountRoomsChange}
               />
               <div className="flex flex-col items-center">
+
                 <Input
                   type="text"
                   onInputChange={handlePriceChange}
@@ -129,6 +138,7 @@ export const AddOffice = () => {
                   inputLabelPosition="text-center"
                   inputLabel="1인당 월 가격"
                 />
+
                 {monthlyPrice ? <NumberToKoreanConverter price={monthlyPrice || 0} /> : null}
               </div>
             </div>

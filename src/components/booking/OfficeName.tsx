@@ -4,12 +4,6 @@ import { MdContentCopy } from "react-icons/md";
 const copyToClipboard = (text: string) => {
   navigator.clipboard
     .writeText(text)
-    .then(() => {
-      console.log("Text copied to clipboard:", text);
-    })
-    .catch(error => {
-      console.error("Error copying text to clipboard:", error);
-    });
 };
 
 type OfficeNameProps = {
@@ -23,7 +17,7 @@ export const OfficeName = ({ name, address }: OfficeNameProps) => {
   const handleCopyClick = (text: string) => {
     copyToClipboard(text);
     setCopied(true);
-    setTimeout(() => setCopied(false), 1500); // Reset the copied state after 1.5 seconds
+    setTimeout(() => setCopied(false), 1500);
   };
 
   return (

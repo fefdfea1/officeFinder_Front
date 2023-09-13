@@ -90,3 +90,32 @@ export type doughnutChart = {
   roomsInUse: number;
   leaseRate: number;
 };
+
+//chat
+
+export type ChatListData = {
+  lastMessage: string;
+  lastMessageTime: string;
+  newMessage: boolean;
+  roomName: string;
+  roomUid: string;
+  userName: string;
+  profileImageUrl: string;
+};
+
+export type MessagesListData = {
+  createdAt: string;
+  message: string;
+  myMessage: true;
+  sender: string;
+};
+
+//리뷰
+
+export type ReviewData = {
+  createdAt: string;
+  customerImagePath: string;
+  customerName: string;
+  description: string;
+  rate: number;
+};

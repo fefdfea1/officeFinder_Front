@@ -1,11 +1,9 @@
 import { useState } from "react";
-import type { Address, officeOptions } from '../../../type/agentTypes';
+import type { Address, officeOptions } from "../../../type/agentTypes";
 
 type Options = {
     [key: string]: boolean;
 };
-
-
 
 export const useAddOfficeHandel = () => {
     const [name, setName] = useState<string>()
@@ -23,13 +21,11 @@ export const useAddOfficeHandel = () => {
     const [monthlyPrice, setMonthlyPrice] = useState<number>()
     const [images, setImages] = useState<Blob[]>([])
 
-
     //오피스 이름
     const handleOfficeName = (e: React.ChangeEvent<HTMLInputElement>) => {
         const officeName = e.target.value;
         setName(officeName);
     }
-
 
     //주소
     const handleAddressChange = (address: Address) => {
@@ -40,8 +36,8 @@ export const useAddOfficeHandel = () => {
 
     //가격 -> 세자리 수마다 콤마
     const handlePriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        let priceValue = parseFloat(event.target.value.replace(/[^0-9]/g, ''));
-        const formatValue = priceValue.toLocaleString('ko-KR');
+        let priceValue = parseFloat(event.target.value.replace(/[^0-9]/g, ""));
+        const formatValue = priceValue.toLocaleString("ko-KR");
 
         if (isNaN(priceValue)) {
             setMonthlyPrice(0);
@@ -51,6 +47,7 @@ export const useAddOfficeHandel = () => {
             event.target.value = formatValue;
         }
     };
+
     // 옵션 
     const handleOptionsChange = (options: Options) => {
         setSelectedOptions(options);
@@ -66,6 +63,7 @@ export const useAddOfficeHandel = () => {
         const capacity = parseInt(e.target.value, 10); // 문자열을 숫자로 변환
         setMaxCapacity(capacity);
     };
+
     // 파일저장
     const handlefileUpload = (images: Blob[]) => {
         setImages(images);

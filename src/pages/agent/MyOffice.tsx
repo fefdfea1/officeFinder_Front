@@ -3,17 +3,15 @@ import { useQuery } from "react-query";
 import { BackgroundCover } from "../../components/common/BackgroundCover";
 import { Button } from "../../components/common/Button";
 import { Title } from "../../components/common/Title";
-
 import { OfficeName } from "../../components/booking/OfficeName";
 import { RecentReviews } from "../../components/agent/RecentReviews"
 import type { MyOfficeResponse, OfficeData } from "../../type/agentTypes";
 import { fetchMyOfficeData } from "../../fetch/get/agent";
 import { MyOfficeFigure } from "../../components/agent/MyOfficeFigure";
 
-
 export const MyOffice = () => {
-
   const { data: officeData, isLoading: isOfficeLoading, isError: isOfficeError } = useQuery<MyOfficeResponse>("myOfficeData", fetchMyOfficeData, {
+    refetchOnWindowFocus: false,
   });
 
 
@@ -26,11 +24,6 @@ export const MyOffice = () => {
   }
 
   const myOfficeData = officeData?.content;
-  // const filteredImagePaths = myOfficeData
-  //   ?.map((office) => office.imagePath)
-  //   .filter((imagePath) => imagePath !== "None");
-
-  console.log(myOfficeData)
 
   return (
     <>
