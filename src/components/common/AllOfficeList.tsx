@@ -1,9 +1,8 @@
 import { AiFillStar } from "react-icons/ai";
-import { Pagination } from "./Pagination";
-import { Link } from "react-router-dom";
 import { OfficeData, OfficeResponse } from "../../type/mainTypes";
 import { Heart } from "./Heart";
 import { mainClickEventHandler } from "../../Business/Main/targetLogic";
+import { BackgroundCover } from "./BackgroundCover";
 import { Link } from "react-router-dom";
 import { Pagination } from "./Pagination";
 import { useQuery } from "react-query";
