@@ -3,7 +3,6 @@ import { Title } from "../../components/common/Title";
 import { BookMarkOfficeCompo } from "./BookMarkOfficeCompo";
 import { useQuery } from "react-query";
 import { fetchCustomerBookMarkData } from "../../fetch/get/customer";
-import { fetchAgentBookMarkData } from "../../fetch/get/agent";
 import { useEffect, useState } from "react";
 import { BookMarkAlert } from "./BookMarkAlert";
 import { Pagination } from "../../components/common/Pagination";
@@ -13,13 +12,13 @@ import { useMyContext } from "../../contexts/MyContext";
 import styled from "@emotion/styled";
 
 export type BookMarkContentType = {
-  content: {
-    id: number;
-    officeAddress: string;
-    officeId: number;
-    officeImagePath: string;
-    officeName: string;
-  };
+  id: number;
+  officeAddress: string;
+  officeId: number;
+  officeImagePath: string;
+  officeName: string;
+  officeReviewAmount: string;
+  officeReviewRate: string;
 };
 
 export type BookMarkDataType = {
@@ -59,18 +58,7 @@ const defaultValue = {
 export const BookMark = () => {
   const [BookMarkData, setBookMarkData] = useState<BookMarkDataType>(defaultValue);
   const { isAlertState, setIsAlertState } = useMyContext();
-  const userType = localStorage.getItem("userType");
-  const { data } = useQuery<BookMarkDataType>(
-    "BookMark",
-    () =>
-      userType === "customer" && userType !== undefined
-        ? fetchCustomerBookMarkData(1, 10)
-        : fetchAgentBookMarkData(1, 10),
-    {
-      staleTime: Infinity,
-      refetchOnWindowFocus: false,
-    },
-  );
+  const { data } = useQuery<BookMarkDataType>("BookMark", () => fetchCustomerBookMarkData(0, 10));
 
   useEffect(() => {
     if (data) {
@@ -97,12 +85,11 @@ export const BookMark = () => {
         <div className="grid grid-cols-4 gap-8 mb-8 sm:grid-cols-1 sm:gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ">
           {/* 데이터를 불러오면 map으로 처리해야하는 부분입니다 */}
           {BookMarkData.content.map((item, index) => {
-            console.log(item);
             return (
               <BookMarkOfficeCompo
                 item={item}
                 imgSrc="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRS-IbhTFqh9vemV_FD7WQn48tFhODBKb1kEteLagL2mw&s"
-                key={item.content.officeId}
+                key={index}
                 index={index}
               />
             );
@@ -114,9 +101,7 @@ export const BookMark = () => {
           <BookMarkAlert alertState={isAlertState} showText={"즐겨찾기에서 제거 됨"} />
         </RemoveBookMarkAlertPosition>
       )}
-      <div className="mt-6">
-        <Pagination itemsPerPage={10} totalItems={BookMarkData.totalElements} />
-      </div>
+      <div className="mt-6">{data && <Pagination itemsPerPage={10} totalItems={data.totalElements} />}</div>
     </div>
   );
 };

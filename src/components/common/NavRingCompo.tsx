@@ -38,6 +38,10 @@ export const NavRingCompo = (props: propsType) => {
   const { data } = useQuery(
     ["getAlamData", isAlamData],
     getUserType === "customer" && getUserType !== undefined ? fetchCustomerAlamData : fetchAgnetAlamData,
+    {
+      refetchOnWindowFocus: false,
+      staleTime: Infinity,
+    },
   );
 
   useEffect(() => {

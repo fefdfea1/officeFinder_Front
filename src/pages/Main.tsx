@@ -1,13 +1,12 @@
 import { AllOfficeList } from "../components/common/AllOfficeList";
 import { Search } from "../components/common/Search";
 import styled from "@emotion/styled";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { useQuery } from "react-query";
 import { getSearchApi } from "../fetch/get/main";
 export const Main = () => {
   const [isClicked, setIsClicked] = useState(false);
-
   const [filterObject, setFilterObject] = useState({});
   const [filterAddress, setFilterAddress] = useState({
     legion: "",
@@ -19,7 +18,8 @@ export const Main = () => {
   });
 
   const [checkfetch, setCheckfetch] = useState(true);
-  const { data } = useQuery(["getSearchApi", checkfetch], () =>
+
+  const { data } = useQuery(["getSearchApi"], () =>
     getSearchApi({ ...filterObject, ...filterAddress, ...selectPeople }),
   );
 
