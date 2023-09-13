@@ -1,5 +1,4 @@
 import { authInstance } from "../common/axiosApi";
-// import { baseInstance } from "../common/axiosApi";
 import { reservationType } from "../../type/customerTypes";
 import { reFetchingType } from "../../pages/MyPage";
 import { formInstance } from "../common/axiosApi";

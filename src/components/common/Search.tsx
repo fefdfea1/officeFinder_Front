@@ -3,17 +3,8 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { OptionsCheckbox } from "./OptionsCheckbox";
 import { MaxCapacityDropDown } from "./MaxCapacityDropDown";
 import "react-day-picker/dist/style.css";
-import { SetStateAction } from "react";
-import { selectValueType } from "../../pages/Booking";
 
-export const Search = ({
-  clickFilter,
-  clickSearch,
-  handleChangeFilterAddress,
-  filterAddress,
-  handleSelectPeople,
-  selectPeople,
-}: any) => {
+export const Search = ({ clickFilter, clickSearch, handleChangeFilterAddress, filterAddress, setMaxPeople }: any) => {
   return (
     <SearchBoxContainer className="p-4 shadow-md">
       <div className="flex justify-center items-center border-b border-solid border-accent pb-2 lg:flex-row md:flex-col sm:flex-col">
@@ -46,18 +37,7 @@ export const Search = ({
 
         <div className="flex flex-row w-full justify-around md:justify-around sm:justify-between">
           <ContourBox className="text-info mx-3 md:mr-6 sm:mr-6">
-            <MaxCapacityDropDown
-              width={"w-32"}
-              maxPeople={10}
-              // setSelectValue={}
-              selectValue={{
-                selectDay: "",
-                month: 0,
-                maxPeople: 0,
-              }}
-              handleSelectPeople={handleSelectPeople}
-              selectPeople={selectPeople}
-            />
+            <MaxCapacityDropDown width={"w-32"} maxPeople={10} setMainMaxValue={setMaxPeople} />
           </ContourBox>
           <ContourBox className="text-base">
             <button

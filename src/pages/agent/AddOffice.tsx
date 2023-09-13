@@ -6,29 +6,40 @@ import { Input } from "../../components/common/Input";
 import { OptionsCheckbox } from "../../components/common/OptionsCheckbox";
 import { AddOfficePhoto } from "../../components/agent/addOffice/AddOfficePhoto";
 import { AddOfficeAddress } from "../../components/agent/addOffice/AddOfficeAddress";
-import { useAddOfficeHandel } from "../../components/agent/addOffice/HandelAddOffice"
+import { useAddOfficeHandel } from "../../components/agent/addOffice/HandelAddOffice";
 import { NumberToKoreanConverter } from "../../Business/Agent/NumberToKorean";
+
 import { usePost, useUpdate } from "../../fetch/post/agent"
+
 
 export const AddOffice = () => {
   const navigate = useNavigate();
   const paramsId = useParams();
-  console.log(paramsId.paramsId)
-  const { name, handleOfficeName,
-    selectedOptions, handleOptionsChange,
-    address, handleAddressChange,
-    monthlyPrice, handlePriceChange,
-    rooms, handleCountRoomsChange,
-    maxCapacity, handleMaxCapacityChange,
-    images, handlefileUpload
+  console.log(paramsId.paramsId);
+  const {
+    name,
+    handleOfficeName,
+    selectedOptions,
+    handleOptionsChange,
+    address,
+    handleAddressChange,
+    monthlyPrice,
+    handlePriceChange,
+    rooms,
+    handleCountRoomsChange,
+    maxCapacity,
+    handleMaxCapacityChange,
+    images,
+    handlefileUpload,
   } = useAddOfficeHandel();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-  }
+    event.preventDefault();
+  };
 
-  const { mutate: PostMutate } = usePost()
-  const { mutate: UpdateMutate } = useUpdate(Number(paramsId.paramsId))
+  const { mutate: PostMutate } = usePost();
+  const { mutate: UpdateMutate } = useUpdate(Number(paramsId.paramsId));
+
   const handleChange = () => {
     const updatedData = {
       officeName: name,
@@ -41,12 +52,14 @@ export const AddOffice = () => {
 
     const formData = new FormData()
 
+
     const blob = new Blob([JSON.stringify(updatedData)], {
       type: "application/json",
     });
     formData.append("request", blob);
 
     if (images.length !== 0) {
+
       images.forEach((image) => {
         formData.append("multipartFileList", image);
       });
@@ -68,19 +81,30 @@ export const AddOffice = () => {
     }
   }
 
+
   return (
     <>
       <div className="flex justify-end relative">
         <div className="absolute top-10 right-10 flex z-10">
           <Link to="/MyOffice">
-            <Button style="btn btn-primary btn-outline w-[90px] md:w-40"><p>등록취소</p></Button>
+            <Button style="btn btn-primary btn-outline w-[90px] md:w-40">
+              <p>등록취소</p>
+            </Button>
           </Link>
         </div>
       </div>
       <BackgroundCover>
+
         {(paramsId.paramsId === undefined) ? <Title>오피스 등록하기</Title> : <Title>오피스 수정하기</Title>}
+
         <form className="flex flex-col items-center py-8 gap-6" onSubmit={handleSubmit}>
-          <Input type="text" width="w-80" inputLabel="공간의 이름을 입력해주세요." inputLabelPosition="text-center" onInputChange={handleOfficeName} />
+          <Input
+            type="text"
+            width="w-80"
+            inputLabel="공간의 이름을 입력해주세요."
+            inputLabelPosition="text-center"
+            onInputChange={handleOfficeName}
+          />
           <AddOfficeAddress onAddressHandler={handleAddressChange} />
           <div>
             <div className="flex justify-center gap-2">
@@ -91,16 +115,38 @@ export const AddOffice = () => {
           <div className="">
             <p className="text-center text-base pb-4">최대 인원수와 오피스의 개수, 가격을 입력하세요.</p>
             <div className="flex flex-col md:flex-row">
-              <Input type="number" placeholder="숫자로 입력하세요." inputLabelPosition="text-center" inputLabel="최대 인원수" onInputChange={handleMaxCapacityChange} />
-              <Input type="number" placeholder="숫자로 입력하세요." inputLabelPosition="text-center" inputLabel="개수" onInputChange={handleCountRoomsChange} />
+              <Input
+                type="number"
+                placeholder="숫자로 입력하세요."
+                inputLabelPosition="text-center"
+                inputLabel="최대 인원수"
+                onInputChange={handleMaxCapacityChange}
+              />
+              <Input
+                type="number"
+                placeholder="숫자로 입력하세요."
+                inputLabelPosition="text-center"
+                inputLabel="개수"
+                onInputChange={handleCountRoomsChange}
+              />
               <div className="flex flex-col items-center">
-                <Input type="text" onInputChange={handlePriceChange} placeholder="숫자로 입력하세요." inputLabelPosition="text-center" inputLabel="1인당 월 가격" />
+
+                <Input
+                  type="text"
+                  onInputChange={handlePriceChange}
+                  placeholder="숫자로 입력하세요."
+                  inputLabelPosition="text-center"
+                  inputLabel="1인당 월 가격"
+                />
+
                 {monthlyPrice ? <NumberToKoreanConverter price={monthlyPrice || 0} /> : null}
               </div>
             </div>
           </div>
           <AddOfficePhoto onImgChange={handlefileUpload} />
-          <Button style="btn btn-primary w-64 mt-2" clickHandler={handleChange} ><p>등록하기</p></Button>
+          <Button style="btn btn-primary w-64 mt-2" clickHandler={handleChange}>
+            <p>등록하기</p>
+          </Button>
         </form>
       </BackgroundCover>
     </>
