@@ -15,3 +15,10 @@ export const TimeFormating = (props: string) => {
 
     return formattedDate;
 };
+
+export const ChatTimeFormating = (props: string) => {
+    const date = new Date(props);
+    const formatter = date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
+    console.log(props)
+    return formatter;
+};

@@ -1,14 +1,15 @@
-import { useQuery } from 'react-query';
-import { fetchChatListData } from '../../fetch/get/agent';
-import { FaChevronLeft, FaTimes } from 'react-icons/fa';
-import { BackgroundCover } from '../common/BackgroundCover';
-import { ProfileCircle } from '../common/ProfileCircle';
-import styled from '@emotion/styled';
-import { ShowChat } from './ShowChat';
-import { useMyContext } from '../../contexts/MyContext';
-import { ChatListData } from '../../type/agentTypes';
+import { useState, useEffect } from "react"
+import { useQuery, useQueryClient } from "react-query";
+import { fetchChatListData } from "../../fetch/get/agent";
+import { useReadMessage } from "../../fetch/post/agent"
+import { FaChevronLeft, FaTimes } from "react-icons/fa";
+import { BackgroundCover } from "../common/BackgroundCover";
+import { ProfileCircle } from "../common/ProfileCircle";
+import styled from "@emotion/styled";
+import { ShowChat } from "./ShowChat";
+import { useMyContext } from "../../contexts/MyContext";
+import { ChatListData } from "../../type/agentTypes";
 import { TimeFormating } from "../../Business/Agent/TimeFormating"
-
 type ChatingProps = {
     onIsOpenChange: (isOpen: boolean) => void;
 };
@@ -16,23 +17,45 @@ type ChatList = ChatListData[];
 
 export const ChatList = ({ onIsOpenChange }: ChatingProps) => {
     const { isChatRoom, setIsChatRoom } = useMyContext();
+    const queryClient = useQueryClient()
+    const [roomId, setRoomId] = useState("")
+    const [userName, setUserName] = useState("")
+    const [roomName, setRoomName] = useState("")
     const { data: chatData, status } = useQuery<ChatList>("chatList", fetchChatListData, {
-        retry: 1
+        retry: 1,
+        refetchOnWindowFocus: false,
+
     });
-    console.log(chatData)
+    const readMessage = useReadMessage()
+    useEffect(() => {
+        if (!isChatRoom) {
+            queryClient.invalidateQueries("chatList");
+        }
+    }, [isChatRoom]);
+
     const handleChatClose = () => {
         onIsOpenChange(false);
         setIsChatRoom(false);
+        onIsOpenChange(false);
     };
 
     const handleGoToList = () => {
-        setIsChatRoom(false);
+        readMessage(roomId)
+        setIsChatRoom(false)
+
     };
 
+    const handleReadMessage = async () => {
+        readMessage(roomId)
+        setIsChatRoom(false)
+        onIsOpenChange(false);
+
+    }
+
     const renderContent = () => {
-        if (status === 'success') {
+        if (status === "success") {
             if (isChatRoom) {
-                return <ShowChat />;
+                return <ShowChat roomId={roomId} userName={userName} />;
             } else {
                 return (
                     <div className="flex flex-col w-full overflow-y-auto">
@@ -41,11 +64,16 @@ export const ChatList = ({ onIsOpenChange }: ChatingProps) => {
                             <button
                                 key={data.roomUid}
                                 className="flex p-3 bg-base-100 justify-betwee items-center gap-2 hover:bg-secondary"
-                                onClick={() => setIsChatRoom(true)}
+                                onClick={() => {
+                                    setIsChatRoom(true)
+                                    setRoomId(data.roomUid)
+                                    setUserName(data.userName)
+                                    setRoomName(data.roomName)
+                                }}
                             >
-                                <div className="flex">
-                                    <ProfileCircle />
-                                    <Span className="text-sm">{data.lastMessage ? data.lastMessage : "아직 메세지가 없습니다! 채팅을 시작해보세요."}</Span>
+                                <div className="flex w-full relative">
+                                    <ProfileCircle useName={data.userName} imgUrl={data.profileImageUrl} />
+                                    <Span className="text-sm absolute">{data.lastMessage ? data.lastMessage : ""}</Span>
 
                                 </div>
                                 <div className="flex flex-col justify-between h-full">
@@ -64,17 +92,19 @@ export const ChatList = ({ onIsOpenChange }: ChatingProps) => {
     return (
         <div className="relative z-20">
             <div className="indicator md:h-[520px] h-full min-h-[350px] fixed bottom-0 right-0 md:bottom-2 md:right-2">
-                <BackgroundCover width="h-[35px] md:w-[320px] min-h-full relative w-screen" margin="m-0 p-0" padding={`${isChatRoom ? 'bg-accent' : 'bg-base-100'}`}>
+                <BackgroundCover width="h-[35px] md:w-[320px] min-h-full relative w-screen" margin="m-0 p-0" padding={`${isChatRoom ? "bg-accent" : "bg-base-100"}`}>
                     <div className="flex flex-col items-center border-b border-accent border-solid shadow-sm">
                         {isChatRoom ? (
                             <button onClick={handleGoToList} className="btn btn-ghost btn-sm p-2 px-3 hover:bg-transparent hover:text-secondary absolute left-0 top-0">
                                 <FaChevronLeft />
                             </button>
                         ) : null}
-                        <button onClick={handleChatClose} className="btn btn-ghost btn-sm p-2 px-3 hover:bg-transparent hover:text-secondary absolute right-0 top-0">
+                        {isChatRoom ? (<button onClick={handleReadMessage} className="btn btn-ghost btn-sm p-2 px-3 hover:bg-transparent hover:text-secondary absolute right-0 top-0">
                             <FaTimes />
-                        </button>
-                        <div className="font-bold text-base p-2">{isChatRoom ? "아이디" : "채팅목록"}</div>
+                        </button>) : (<button onClick={handleChatClose} className="btn btn-ghost btn-sm p-2 px-3 hover:bg-transparent hover:text-secondary absolute right-0 top-0">
+                            <FaTimes />
+                        </button>)}
+                        <div className="font-bold text-base p-2">{isChatRoom ? `${roomName} | ${userName}` : "채팅목록"}</div>
                     </div>
                     {renderContent()}
                 </BackgroundCover>

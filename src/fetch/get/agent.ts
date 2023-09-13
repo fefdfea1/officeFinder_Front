@@ -126,3 +126,13 @@ export const fetchChatListData = async () => {
     throw error;
   }
 };
+
+export const fetchChatRoomData = async (roomId: string) => {
+  try {
+    const res = await authInstance.get(`/api/chat/room/${roomId}`);
+    return res.data;
+  } catch (error) {
+    console.error("API 호출 중 에러 발생:", error);
+    throw error;
+  }
+};

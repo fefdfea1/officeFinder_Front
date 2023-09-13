@@ -8,6 +8,7 @@ import { MyOfficeListDropDown } from '../../components/common/MyOfficeListDropDo
 import { Reviews } from '../../components/agent/Reviews';
 import { Pagination } from '../../components/common/Pagination';
 import { fetchReviewsData } from '../../fetch/get/agent';
+import type { ReviewData } from "../../type/agentTypes"
 
 export const AllReviews = () => {
 
@@ -57,9 +58,9 @@ export const AllReviews = () => {
         {/* 본문 */}
         {reviews ? (
           <div className="flex flex-col gap-4">
-            {reviewsData.map((review: any) => (
-              <BackgroundCover key={review.id} margin="m-0" padding="lg:p-8 md:p-4 p-2">
-                <Reviews description={review.description} date={review.createdAt} rating={review.rate} />
+            {reviewsData.map((review: ReviewData, index: number) => (
+              <BackgroundCover key={index} margin="m-0" padding="lg:p-8 md:p-4 p-2">
+                <Reviews customerName={review.customerName} customerImagePath={review.customerImagePath} description={review.description} createdAt={review.createdAt} rate={review.rate} />
               </BackgroundCover>
             ))}
             <div className="flex justify-center mt-4">

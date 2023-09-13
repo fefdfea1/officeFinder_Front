@@ -62,7 +62,7 @@ export const AddOffice = () => {
     if (paramsId.paramsId !== undefined) {
       UpdateMutate(formData, {
         onSuccess: () => {
-          alert("등록이 완료되었습니다!")
+          alert("수정이 완료되었습니다!")
           navigate("/MyOffice");
 
         },
@@ -70,7 +70,7 @@ export const AddOffice = () => {
     } else {
       PostMutate(formData, {
         onSuccess: () => {
-          alert("수정이 완료되었습니다!")
+          alert("등록이 완료되었습니다!")
           navigate("/MyOffice");
         },
       });

@@ -22,7 +22,8 @@ type Request = {
 export const ReservationAttendeesList = (props: Id) => {
 
     const { data, isLoading, isError } = useQuery(["requestList", props.officeId], () => fetchRequestListData(props.officeId), {
-        retry: 1
+        retry: 1,
+        refetchOnWindowFocus: false,
     })
 
     if (isLoading) return (<p>Loading...</p>);
@@ -59,7 +60,7 @@ export const ReservationAttendeesList = (props: Id) => {
                                         <div className="text-sm w-32">{TimeFormating(request.requestDateTime)}</div>
                                     </th>
                                     <td>
-                                        <ProfileCircle />
+                                        <ProfileCircle imgUrl="None" useName={request.customerName} />
                                     </td>
                                     <td className="flex flex-col items-center">
                                         <div className="text-sm w-36"> {request.startDate} ~ </div>

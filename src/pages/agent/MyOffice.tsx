@@ -13,6 +13,7 @@ import { MyOfficeFigure } from "../../components/agent/MyOfficeFigure";
 export const MyOffice = () => {
 
   const { data: officeData, isLoading: isOfficeLoading, isError: isOfficeError } = useQuery<MyOfficeResponse>("myOfficeData", fetchMyOfficeData, {
+    refetchOnWindowFocus: false,
   });
 
   if (isOfficeLoading) {
