@@ -41,7 +41,7 @@ export const ShowChat = () => {
     }, [messages]);
 
     return (
-        <div className="flex flex-col md:h-[565px] justify-between">
+        <div className="flex flex-col md:h-[485px] justify-between">
             <div className="overflow-y-scroll md:h-2/3 h-[calc(100vh-82px)]" ref={chatContainerRef}>
                 <div className="chat chat-start pl-3">
                     <div className="chat-image avatar">

@@ -42,7 +42,7 @@ export const OfficeOptions = (props: propsType) => {
         </div>
         <h3 className="text-lg text-primary mb-4">Options</h3>
         <div className={`${props.needReviewCount && "border-b border-solid border-accent pb-4 mb-4"}`}>
-          <div className="w-3/6 text-base">
+          <div className="w-full text-base grid grid-cols-3 ">
             {/* p태그로 서버에서 받아오는 옵션을 반복문으로 넣어야함 */}
             {optionData.length >= 1 &&
               optionData.map((item, index) => {

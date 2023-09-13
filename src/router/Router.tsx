@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { Main } from "../pages/Main";
 import { AddOffice } from "../pages/agent/AddOffice";
+import { UpdateOffice } from "../pages/agent/UpdateOffice";
 import { AllReviews } from "../pages/agent/AllReviews";
 import { MyOffice } from "../pages/agent/MyOffice";
 import { SalesAnalysis } from "../pages/agent/SalesAnalysis";
@@ -20,9 +21,10 @@ export const Router = () => {
       <Route path="/" element={<Main />}></Route>
       <Route path="/BookMark" element={<BookMark />}></Route>
       <Route path="/AddOffice" element={<AddOffice />}></Route>
-      <Route path="/AllReviews" element={<AllReviews />}></Route>
+      <Route path="/UpdateOffice/:paramsId" element={<UpdateOffice />}></Route>
+      <Route path="/AllReviews/:paramsId/:paramsName" element={<AllReviews />}></Route>
       <Route path="/MyOffice" element={<MyOffice />}></Route>
-      <Route path="/SalesAnalysis" element={<SalesAnalysis />}></Route>
+      <Route path="/SalesAnalysis/:paramsId/:paramsName" element={<SalesAnalysis />}></Route>
       <Route path="/MyBookings" element={<MyBookings />}></Route>
       <Route path="/Booking/:id" element={<Booking />}></Route>
       <Route path="/Join" element={<Join />}></Route>

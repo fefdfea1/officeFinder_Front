@@ -12,6 +12,8 @@ export const Pagination: React.FC<PaginationProps> = ({ itemsPerPage, totalItems
     const totalPages = Math.ceil(totalItems / itemsPerPage);
     const [currentPage, setCurrentPage] = useState(1);
 
+    if (!totalPages) { return null }
+
     const handlePageChange = (newPage: number) => {
         if (newPage >= 1 && newPage <= totalPages) {
             setCurrentPage(newPage);
