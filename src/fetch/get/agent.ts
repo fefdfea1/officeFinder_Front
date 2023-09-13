@@ -83,8 +83,8 @@ export const fetchAgentBookMarkData = (page: number, size: number) => {
     .then(res => res.data);
   return response;
 };
-export const fetchMyPageData = () => {
-  const response = authInstance.get("api/customers/info").then(res => res.data);
+export const fetchAgentMyPageData = () => {
+  const response = authInstance.get("api/agents/info").then(res => res.data);
   return response;
 
 };

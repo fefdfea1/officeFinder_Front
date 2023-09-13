@@ -9,7 +9,8 @@ import { changeProfile, removeProfile } from "../Business/Mypage/MyPageChangePro
 import { setEditClass, mypageBlueEventHandler } from "../Business/Mypage/MypageFouseHandler";
 import { Link } from "react-router-dom";
 import { QueryObserverResult, RefetchOptions, RefetchQueryFilters, useQuery } from "react-query";
-import { fetchMyPageData } from "../fetch/get/agent";
+import { fetchAgentMyPageData } from "../fetch/get/agent";
+import { fetchCustomerMyPageData } from "../fetch/get/customer";
 import { fetchRemoveUserProfile } from "../fetch/delete/customer";
 import { fetchChangeName } from "../fetch/put/customer";
 import styled from "@emotion/styled";
@@ -44,12 +45,16 @@ export const MyPage = () => {
   const pullCacheButtonDom = useRef<HTMLButtonElement>(null);
   const imageDom = useRef<HTMLImageElement>(null);
   const nameInputDom = useRef<HTMLInputElement>(null);
-  console.log(setOwnerState);
-  const { data, refetch } = useQuery("getData", fetchMyPageData, {
-    staleTime: Infinity,
-    refetchOnWindowFocus: false,
-    refetchOnMount: false,
-  });
+  const userType = localStorage.getItem("userType");
+  const { data, refetch } = useQuery(
+    "getData",
+    userType === "customer" && userType !== undefined ? fetchCustomerMyPageData : fetchAgentMyPageData,
+    {
+      staleTime: Infinity,
+      refetchOnWindowFocus: false,
+      refetchOnMount: false,
+    },
+  );
 
   useEffect(() => {
     //클린업 함수를 위해 해당 부분에 작성
