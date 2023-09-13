@@ -4,18 +4,15 @@ export const getCustomerApi = async () => {
   try {
     const { data } = await authInstance.get(`api/customers/user-overviews`);
     return data;
-
   } catch (error: any) {
     console.error(error);
     throw new Error(error.message);
-
   }
 };
 export const getAgencyApi = async () => {
   try {
     const { data } = await authInstance.get(`api/agents/info-overview`);
     return data;
-
   } catch (error: any) {
     console.error(error);
     throw new Error(error.message);
@@ -40,10 +37,9 @@ export const getCustomerNotiApi = async () => {
   }
 };
 
-
 export const getSearchApi = async (params: any = {}) => {
+  console.log(params);
   let filter = objToUrl(params);
-
 
   try {
     const { data } = await authInstance.get(`api/offices?${filter}`);
@@ -70,4 +66,3 @@ export const objToUrl = (obj: any) => {
   const url = params.join("&");
   return url;
 };
-

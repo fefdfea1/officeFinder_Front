@@ -47,13 +47,11 @@ export const fetchCustomerAlamData = () => {
       },
     })
     .then(res => res.data);
-<<<<<<< HEAD
-=======
-}
+  return response;
+};
 
 export const fetchCustomerMyPageData = () => {
   const response = authInstance.get("api/customers/info").then(res => res.data);
 
->>>>>>> a215ec88af5ce097eb7117f82919a091f61629fe
   return response;
 };

@@ -1,15 +1,11 @@
 import { AllOfficeList } from "../components/common/AllOfficeList";
 import { Search } from "../components/common/Search";
 import styled from "@emotion/styled";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { useQuery } from "react-query";
 import { getSearchApi } from "../fetch/get/main";
-import { useQueryClient } from "react-query";
-// import { useMutation } from "react-query";
-
 export const Main = () => {
-  const queryClient = useQueryClient();
   const [isClicked, setIsClicked] = useState(false);
 
   const [filterObject, setFilterObject] = useState({});
@@ -19,15 +15,17 @@ export const Main = () => {
     town: "",
   });
   const [selectPeople, setSelectPeople] = useState({
-    maxCapacity: "",
+    maxCapacity: 0,
   });
-  console.log({ filterAddress });
+
   const [checkfetch, setCheckfetch] = useState(true);
   const { data } = useQuery(["getSearchApi", checkfetch], () =>
     getSearchApi({ ...filterObject, ...filterAddress, ...selectPeople }),
   );
-  // refetchOnWindowFocus: false,
-  console.log({ data });
+
+  useEffect(() => {
+    console.log(selectPeople);
+  }, [selectPeople]);
 
   const clickFilter = (filters: any) => {
     setFilterObject(filters);
@@ -53,20 +51,9 @@ export const Main = () => {
       maxCapacity: number,
     });
   };
-  console.log(selectPeople);
-  console.log(filterObject);
-  console.log(isClicked);
 
-
-  const clickFilter = (filters: any) => {
-    setFilterObject(filters);
-  };
-  const clickSearch = () => {
-    setCheckfetch(prev => !prev);
-  };
   return (
     <>
-
       <div className="mx-auto mt-4 w-fit">
         {isClicked ? (
           <Search
@@ -75,9 +62,8 @@ export const Main = () => {
             handleChangeFilterAddress={handleChangeFilterAddress}
             filterAddress={filterAddress}
             handleSelectPeople={handleSelectPeople}
-            selectPeople={selectPeople}
+            setMaxPeople={setSelectPeople}
           />
-
         ) : (
           <SearchBoxContainer className="p-3 shadow-md">
             <div className="flex justify-center">
