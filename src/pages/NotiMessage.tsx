@@ -4,10 +4,12 @@ import { Pagination } from "../components/common/Pagination";
 import { Title } from "../components/common/Title";
 import { useQuery } from "react-query";
 import { getAgencyNotiApi, getCustomerNotiApi } from "../fetch/get/main";
+import { useState } from "react";
 
 export const NotiMessage = () => {
   const userType = window.localStorage.getItem("userType");
-  const { data } = useQuery("getNotiApi", userType === "customer" ? getCustomerNotiApi : getAgencyNotiApi);
+  const [pageState, setPageState] = useState<number>(0);
+  const { data } = useQuery(["getNotiApi", pageState], userType === "customer" ? getCustomerNotiApi : getAgencyNotiApi);
 
   return (
     <>
@@ -26,7 +28,9 @@ export const NotiMessage = () => {
             );
           })}
         </BackgroundCover>
-        {data?.content?.length > 0 ? <Pagination itemsPerPage={10} totalItems={data?.totalPages} /> : null}
+        {data?.content?.length > 0 ? (
+          <Pagination itemsPerPage={10} totalItems={data?.totalPages} setPageState={setPageState} />
+        ) : null}
       </BackgroundCover>
     </>
   );

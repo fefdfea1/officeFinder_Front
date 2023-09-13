@@ -8,14 +8,15 @@ import { MyOfficeListDropDown } from "../../components/common/MyOfficeListDropDo
 import { Reviews } from "../../components/agent/Reviews";
 import { Pagination } from "../../components/common/Pagination";
 import { fetchReviewsData } from "../../fetch/get/agent";
-import type { ReviewData } from "../../type/agentTypes"
+import type { ReviewData } from "../../type/agentTypes";
 
 export const AllReviews = () => {
-
   const { paramsId, paramsName } = useParams();
   const navigate = useNavigate();
   const [officeName, setOfficeName] = useState<string>("전체");
   const [officeId, setOfficeId] = useState<number>(Number(paramsId));
+  const [page, setPageState] = useState<number>(0);
+  console.log(page);
 
   useEffect(() => {
     const parsedId = Number(paramsId);
@@ -27,13 +28,21 @@ export const AllReviews = () => {
     navigate(`/AllReviews/${id}/${office}`);
 
     setOfficeName(office);
-    setOfficeId(id)
+    setOfficeId(id);
   };
-  const { data: reviews, isError, error }: { data: any; isLoading: boolean; isError: boolean; error: any } = useQuery(["reviews", officeId], () => fetchReviewsData(officeId), {
-    retry: 1,
-    staleTime: 1 * 60 * 1000,
-  })
-  const reviewsData = reviews?.content
+  const {
+    data: reviews,
+    isError,
+    error,
+  }: { data: any; isLoading: boolean; isError: boolean; error: any } = useQuery(
+    ["reviews", officeId],
+    () => fetchReviewsData(officeId),
+    {
+      retry: 1,
+      staleTime: 1 * 60 * 1000,
+    },
+  );
+  const reviewsData = reviews?.content;
 
   return (
     <>
@@ -46,8 +55,9 @@ export const AllReviews = () => {
             </div>
 
             <Link to={`/SalesAnalysis/${officeId}/${officeName}`}>
-              <Button style="btn btn-primary btn-outline  w-[86px] md:w-40"><p>매출보기</p></Button>
-
+              <Button style="btn btn-primary btn-outline  w-[86px] md:w-40">
+                <p>매출보기</p>
+              </Button>
             </Link>
           </div>
         </div>
@@ -59,11 +69,17 @@ export const AllReviews = () => {
           <div className="flex flex-col gap-4">
             {reviewsData.map((review: ReviewData, index: number) => (
               <BackgroundCover key={index} margin="m-0" padding="lg:p-8 md:p-4 p-2">
-                <Reviews customerName={review.customerName} customerImagePath={review.customerImagePath} description={review.description} createdAt={review.createdAt} rate={review.rate} />
+                <Reviews
+                  customerName={review.customerName}
+                  customerImagePath={review.customerImagePath}
+                  description={review.description}
+                  createdAt={review.createdAt}
+                  rate={review.rate}
+                />
               </BackgroundCover>
             ))}
             <div className="flex justify-center mt-4">
-              <Pagination itemsPerPage={10} totalItems={reviews.totalPage} />
+              <Pagination itemsPerPage={10} totalItems={reviews.totalPage} setPageState={setPageState} />
             </div>
           </div>
         ) : isError ? (
