@@ -18,7 +18,7 @@ export const Join = () => {
   return (
     <>
       {process?.step === 0 && (
-        <div className="shadow-md rounded-xl p-8 mx-auto mt-20 flex flex-col items-center justify-center md:w-[400px] sm:w-[340px]">
+        <div className="shadow-md rounded-xl p-8 mx-auto my-20 flex flex-col items-center justify-center md:w-[400px] sm:w-[340px]">
           <h3 className="font-black">회원가입</h3>
           <div className="flex flex-col items-center justify-center">
             <Button clickHandler={() => handleSetProcess(1, "customer")} style={"btn btn-primary w-72 m-2 text-base"}>

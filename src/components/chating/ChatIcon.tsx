@@ -40,7 +40,7 @@ export const ChatIcon = ({ onIsOpenChange }: ChatIconProps) => {
             <div className="indicator fixed bottom-10 right-10">
                 {newData?.data ? <BsFillCircleFill className="absolute text-error top-[-2px] right-[-2px] text-base" /> : null}
                 <button onClick={handleChatOpen} className="btn btn-secondary shadow-md  rounded-2xl w-12 h-12">
-                    <BsChatFill className="text-xl" />
+                    <BsChatFill className="text-xl animate-ping" />
                 </button>
             </div>
         </div>
