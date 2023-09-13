@@ -16,15 +16,12 @@ export const Main = () => {
     refetchOnWindowFocus: false,
   });
 
-  console.log({ data });
   const clickFilter = (filters: any) => {
     setFilterObject(filters);
   };
   const clickSearch = () => {
     setCheckfetch(prev => !prev);
   };
-  console.log(filterObject);
-  console.log(isHovering);
   return (
     <>
       <div

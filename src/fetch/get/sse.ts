@@ -2,49 +2,72 @@ import { EventSourcePolyfill } from "event-source-polyfill";
 import { Cookies } from "react-cookie";
 import { alertRemoveTimer } from "../../Business/BookMark/BookMarkTimer";
 import { alamDataType } from "../../components/common/NavRingCompo";
+import { useEffect } from "react";
+import { useState } from "react";
 const cookie = new Cookies();
-export const fetchSSE = (
+
+export const usefetchSSE = (
   setAlamData: React.Dispatch<React.SetStateAction<alamDataType | null>>,
   setSseAlertState: React.Dispatch<React.SetStateAction<boolean>>,
   setSseText: React.Dispatch<React.SetStateAction<string>>,
 ) => {
+  const [getMeesageState, setMeesageState] = useState<boolean>(false);
   const getCookie = cookie.get("Authorization");
-  console.log(getCookie);
-  if (getCookie !== undefined) {
-    const eventSource = new EventSourcePolyfill("https://www.officefinder.site/sub", {
-      headers: {
-        Authorization: `Bearer ${getCookie}`,
-        "Content-Type": "text/event-stream",
-        "Connection": "keep-alive",
-        "Cache-Control": "no-cache",
-      },
-      heartbeatTimeout: 86400000,
-      withCredentials: true,
-    });
 
-    eventSource.onopen = () => {
-      console.log("open");
-    };
+  useEffect(() => {
+    if (getCookie !== undefined) {
+      if (getCookie) {
+        let eventSource: any;
+        const fetchSse = async () => {
+          try {
+            eventSource = new EventSourcePolyfill(`https://www.officefinder.site/sub`, {
+              headers: {
+                Authorization: `Bearer ${getCookie}`,
+                "Content-Type": "text/event-stream",
+                "Cache-Control": "no-cache",
+                "Connection": "keep-alive",
+              },
+              heartbeatTimeout: 8640000,
+              withCredentials: true,
+            });
 
-    eventSource.onmessage = event => {
-      const data = event.data;
-      const changeString = data as String;
-      const sliceString = changeString.slice(0, 11);
-      if (sliceString === "연결이 성공하였습니다") return;
-      alertRemoveTimer(setSseAlertState, 3000);
-      setSseText(data);
-      setAlamData;
-    };
+            eventSource.onopen = async (_: any) => {
+              console.log("open");
+            };
 
-    eventSource.onerror = (e: any) => {
-      console.log(e);
-      // eventSource.close();
-    };
+            /* EVENTSOURCE ONMESSAGE ---------------------------------------------------- */
+            eventSource.onmessage = async (event: any) => {
+              const data = event.data;
+              if (JSON.parse(data) !== undefined) {
+                const contentData = JSON.parse(data);
 
-    return () => {
-      if (eventSource !== undefined && getCookie === undefined) {
-        eventSource.close();
+                // const title = data.title;
+                // const createdAt = data.createdAt;
+                const changeString = data as String;
+                const sliceString = changeString.slice(0, 11);
+                if (sliceString === "연결이 성공하였습니다") return;
+                alertRemoveTimer(setSseAlertState, 3000);
+                setSseText(contentData.content);
+                setAlamData;
+              }
+            }; // 헤더 마이페이지 아이콘 상태 변경};
+
+            /* EVENTSOURCE ONERROR ------------------------------------------------------ */
+            eventSource.onerror = async (event: any) => {
+              const errorMessage = event.error.message;
+              if (errorMessage === "network error") {
+                eventSource.close();
+                fetchSse();
+              }
+            };
+          } catch (error) {}
+        };
+        fetchSse();
+        return () => {
+          eventSource.close();
+          setMeesageState(!getMeesageState);
+        };
       }
-    };
-  } else return;
+    } else return;
+  }, [getMeesageState]);
 };
