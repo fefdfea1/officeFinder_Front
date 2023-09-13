@@ -97,6 +97,7 @@ export const BookMark = () => {
         <div className="grid grid-cols-4 gap-8 mb-8 sm:grid-cols-1 sm:gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ">
           {/* 데이터를 불러오면 map으로 처리해야하는 부분입니다 */}
           {BookMarkData.content.map((item, index) => {
+            console.log(item);
             return (
               <BookMarkOfficeCompo
                 item={item}

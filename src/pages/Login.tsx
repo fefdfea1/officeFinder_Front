@@ -41,28 +41,26 @@ export const Login = () => {
     return passwordRegex.test(password);
   };
 
-
   const [ischecked, setChecked] = useState(false);
   const { setAlamData, setSseAlertState, setSseText } = useMyContext();
-
+  usefetchSSE(setAlamData, setSseAlertState, setSseText);
 
   const postLogin = useMutation("login", ischecked ? loginAgentApi : loginCustomerApi, {
     onSuccess: res => {
+      navigate("/");
+      location.reload();
       const userType = res?.data?.userType;
       window.localStorage.setItem("userType", userType);
       const token = res?.data?.token;
-      cookies.set("Authorization", token, { maxAge: 3600  });
-      usefetchSSE(setAlamData, setSseAlertState, setSseText);
+      cookies.set("Authorization", token, { maxAge: 3600 });
 
       alert("환영합니다:)");
-      navigate("/");
     },
     onError: (error: any) => {
       alert("이메일이나 비밀번호를 다시 확인해주세요.");
       console.log(error);
     },
   });
-
 
   const clickCheckbox = () => {
     setChecked(prev => !prev);
