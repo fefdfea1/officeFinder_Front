@@ -1,5 +1,7 @@
 import { AiFillStar } from "react-icons/ai";
-import { BackgroundCover } from "./BackgroundCover";
+import { Pagination } from "./Pagination";
+import { Link } from "react-router-dom";
+import { OfficeData, OfficeResponse } from "../../type/mainTypes";
 import { Heart } from "./Heart";
 import { mainClickEventHandler } from "../../Business/Main/targetLogic";
 import { Link } from "react-router-dom";
@@ -32,6 +34,7 @@ export const AllOfficeList = ({ data }: any): JSX.Element => {
   return (
     <>
       <div className="grid justify-center sm:grid-cols-1 sm:gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 min-w-min">
+
         {BookMarkDataState !== null && BookMarkDataState !== undefined
           ? data?.content?.map((item: any) => {
               const match: boolean = activeMatchBookMarkList(item, BookMarkDataState);
@@ -54,6 +57,7 @@ export const AllOfficeList = ({ data }: any): JSX.Element => {
                   )}
                   {match === true ? <Heart fillState="active" type="main" /> : <Heart type="main" />}
 
+
                   <div className="text-left mt-2 px-1 relative">
                     <div className="flex justify-between flex-row">
                       <p className="font-bold text-base tracking-tight">{item?.name}</p>
@@ -73,9 +77,11 @@ export const AllOfficeList = ({ data }: any): JSX.Element => {
           : null}
       </div>
 
+
       <BackgroundCover width="w-1/3" margin="mx-auto mt-10" padding="p-4">
         {data && <Pagination itemsPerPage={10} totalItems={data.totalElements} setPageState={setPageState} />}
       </BackgroundCover>
+
     </>
   );
 };
