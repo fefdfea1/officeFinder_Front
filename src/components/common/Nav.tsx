@@ -1,11 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "./Button";
-// import { useMutation, useQuery } from "react-query";
+import { Link } from "react-router-dom";
 import { getCustomerApi, getAgencyApi } from "../../fetch/get/main";
 import { useQuery } from "react-query";
 import { NavRingCompo } from "./NavRingCompo";
 import { cookies } from "../../fetch/common/axiosApi";
 
+const customerUrl = ["/MyPage", "/BookMark", "/MyBookings"];
+const agentUrl = ["/MyPage", "MyOffice", "SalesAnalysis"];
+const customerItems = ["프로필", "즐겨찾기", "예약내역", "로그아웃"];
+const agentItems = ["프로필", "나의 오피스", "매출 보기", "로그아웃"];
 
 export const Nav = () => {
   const navigate = useNavigate();
@@ -18,27 +22,11 @@ export const Nav = () => {
   const clickMoreButton = () => {
     navigate("/Noti");
   };
-  const clickBookmark = () => {
-    navigate("/BookMark");
-  };
-  const clickMyBookings = () => {
-    navigate("/MyBookings");
-  };
   const clickMyPage = () => {
     navigate("/MyPage");
   };
-  const clickMyOffice = () => {
-    navigate("/MyOffice");
-  };
-  const clickAddOffice = () => {
-    navigate("/AddOffice");
-  };
-  const clickSales = () => {
-    navigate("/SalesAnalysis");
-  };
 
   const clickLogout = () => {
-    navigate("/");
     cookies.remove("Authorization", { path: "/" });
     window.localStorage.clear();
     // expires 24시간&로그아웃 newdate
@@ -96,43 +84,37 @@ export const Nav = () => {
                   tabIndex={0}
                   className="menu menu-sm dropdown-content mt-3 z-[1] p-2 py-3 text-ms shadow bg-base-100 rounded-box w-48"
                 >
-                  <li>
-                    <a onClick={clickMyPage} className="justify-between">
-                      프로필
-                    </a>
-                  </li>
-                  <li>
-                    <a onClick={clickBookmark}>즐겨찾기</a>
-                  </li>
-                  <li>
-                    <a onClick={clickMyBookings}>예약내역</a>
-                  </li>
-                  <li>
-                    <a onClick={clickLogout}>로그아웃</a>
-                  </li>
+                  {customerItems.map((item, index) => {
+                    console.log(customerItems[index]);
+                    return (
+                      <li>
+                        <Link
+                          to={`${customerUrl[index] !== undefined ? customerUrl[index] : "/"}`}
+                          onClick={customerUrl[index] === undefined ? clickLogout : () => {}}
+                        >
+                          {item}
+                        </Link>
+                      </li>
+                    );
+                  })}
                 </ul>
               ) : (
                 <ul
                   tabIndex={0}
                   className="menu menu-sm dropdown-content mt-3 z-[1] p-2 py-3 text-ms shadow bg-base-100 rounded-box w-48"
                 >
-                  <li>
-                    <a onClick={clickMyPage} className="justify-between">
-                      프로필
-                    </a>
-                  </li>
-                  <li>
-                    <a onClick={clickMyOffice}>나의 오피스</a>
-                  </li>
-                  <li>
-                    <a onClick={clickAddOffice}>오피스 등록</a>
-                  </li>
-                  <li>
-                    <a onClick={clickSales}>매출 보기</a>
-                  </li>
-                  <li>
-                    <a onClick={clickLogout}>로그아웃</a>
-                  </li>
+                  {agentItems.map((item, index) => {
+                    return (
+                      <li>
+                        <Link
+                          to={`${agentUrl[index] !== undefined ? item : "/"}`}
+                          onClick={agentItems[index] ? clickLogout : () => {}}
+                        >
+                          {item}
+                        </Link>
+                      </li>
+                    );
+                  })}
                 </ul>
               )}
             </div>
