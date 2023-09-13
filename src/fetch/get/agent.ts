@@ -54,7 +54,6 @@ export const fetchTotalRevenueData = async () => {
 export const fetchRentalRateData = async (officeId: number) => {
   try {
     const res = await authInstance.get(`/api/agents/offices/${officeId}/rental-status`);
-    console.log(res.data);
     return res.data;
   } catch (error) {
     console.error("API 호출 중 에러 발생:", error);

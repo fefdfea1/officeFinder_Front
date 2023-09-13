@@ -23,10 +23,6 @@ export const Main = () => {
     getSearchApi({ ...filterObject, ...filterAddress, ...selectPeople }),
   );
 
-  useEffect(() => {
-    console.log(selectPeople);
-  }, [selectPeople]);
-
   const clickFilter = (filters: any) => {
     setFilterObject(filters);
   };

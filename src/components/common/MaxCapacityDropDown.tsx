@@ -29,7 +29,6 @@ export const MaxCapacityDropDown = (props: {
     }
     if (props.setMainMaxValue) {
       const sliceValue = Number(selectedItem.replace("인", ""));
-      console.log(sliceValue);
       props.setMainMaxValue({ maxCapacity: sliceValue });
     }
   }, [selectedItem]);

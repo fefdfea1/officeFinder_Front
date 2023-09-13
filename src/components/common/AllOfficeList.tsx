@@ -1,22 +1,30 @@
 import { AiFillStar } from "react-icons/ai";
 import { BackgroundCover } from "./BackgroundCover";
-
+import { Heart } from "./Heart";
+import { mainClickEventHandler } from "../../Business/Main/targetLogic";
 
 import { Link } from "react-router-dom";
 export const AllOfficeList = ({ data }: any): JSX.Element => {
-
   return (
     <>
       <div className="grid justify-center sm:grid-cols-1 sm:gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 min-w-min">
         {data?.content?.map((data: any) => {
           return (
-            <Link to={`Booking/${data?.id}`} key={data?.id} className="mx-auto my-3">
+            <Link
+              to={`Booking/${data?.id}`}
+              key={data?.id}
+              className="mx-auto my-3 relative"
+              onClick={e => mainClickEventHandler(e)}
+              data-officenum={data.id}
+            >
               {data?.imagePath === "None" ? (
                 <img className="rounded-xl" src={`officeImg/noimage.png`} />
               ) : (
                 <img className="rounded-xl object-cover h-48 w-72" alt="{data?.name}사진" src={data?.imagePath[0]} />
               )}
-              <div className="text-left mt-2 px-1">
+              <Heart />
+
+              <div className="text-left mt-2 px-1 relative">
                 <div className="flex justify-between flex-row">
                   <p className="font-bold text-base tracking-tight">{data?.name}</p>
                   <div className="flex gap-1 items-center">
@@ -37,7 +45,6 @@ export const AllOfficeList = ({ data }: any): JSX.Element => {
       <BackgroundCover width="w-1/3" margin="mx-auto mt-10" padding="p-4">
         {/* <Pagination itemsPerPage={10} totalItems={data.totalPages} /> */}
       </BackgroundCover>
-
     </>
   );
 };

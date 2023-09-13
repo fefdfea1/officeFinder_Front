@@ -30,7 +30,6 @@ export const CustomerCard = ({ clickBack }: { clickBack: (step: number, key: str
       console.log(error);
     },
   });
-  // console.log({ data });
 
   const [signup, setSignup] = useState<CustomerCardProps>({
     email: "",
@@ -68,7 +67,6 @@ export const CustomerCard = ({ clickBack }: { clickBack: (step: number, key: str
     return passwordRegex.test(password);
   };
 
-  console.log({ signup });
   return (
     <>
       <div className="shadow-md rounded-xl p-8 mx-auto mt-20 flex flex-col items-center justify-center md:w-[400px] min-h-[600px] sm:w-[340px]">

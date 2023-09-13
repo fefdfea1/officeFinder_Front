@@ -38,7 +38,6 @@ export const getCustomerNotiApi = async () => {
 };
 
 export const getSearchApi = async (params: any = {}) => {
-  console.log(params);
   let filter = objToUrl(params);
 
   try {
