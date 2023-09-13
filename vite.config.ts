@@ -8,7 +8,6 @@ export default ({ mode }) => {
   return {
     plugins: [
       react(),
-
       createHtmlPlugin({
         minify: true,
         inject: {

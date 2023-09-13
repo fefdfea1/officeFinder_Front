@@ -22,6 +22,7 @@
     "chart.js": "^4.3.3",
     "daisyui": "^3.5.1",
     "date-fns": "^2.30.0",
+    "event-source-polyfill": "^1.0.31",
     "postcss": "^8.4.27",
     "react": "^18.2.0",
     "react-cookie": "^6.1.0",
@@ -57,10 +58,12 @@
     "eslint-plugin-react-refresh": "^0.4.3",
     "jest": "^29.6.2",
     "jest-dom": "^4.0.0",
+    "mkcert": "^3.0.0",
     "prettier": "^3.0.1",
     "react-testing-library": "^8.0.1",
     "ts-jest": "^29.1.1",
     "typescript": "^5.0.2",
-    "vite": "^4.4.5"
+    "vite": "^4.4.5",
+    "vite-plugin-mkcert": "^1.16.0"
   }
 }
