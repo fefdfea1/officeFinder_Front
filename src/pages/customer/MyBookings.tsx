@@ -59,14 +59,16 @@ export const MyBookings = () => {
           {MyBookingsData &&
             MyBookingsData.content.map((item, index) => {
               if (item.leaseStatus !== "EXPIRED")
-                return <MyBookingsListCompo item={item} type="MyBooking" key={index} />;
+                return <MyBookingsListCompo item={item} type="MyBooking" key={index} officeNum={item.leaseId} />;
             })}
           <Title>지난 예약</Title>
           <div className="mt-8">
             {MyBookingsData &&
               MyBookingsData.content.map((item, index) => {
                 if (item.leaseStatus === "EXPIRED")
-                  return <MyBookingsListCompo item={item} type="last_reservation" key={index} />;
+                  return (
+                    <MyBookingsListCompo item={item} type="last_reservation" key={index} officeNum={item.leaseId} />
+                  );
               })}
           </div>
         </BackgroundCover>

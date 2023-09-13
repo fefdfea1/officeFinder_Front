@@ -1,11 +1,20 @@
-import axios from "axios";
-import { NewOfficePost } from "../../type/agentTypes";
+import type { AxiosResponse } from "axios";
+import { useMutation } from "react-query";
+import { authInstance } from "../common/axiosApi";
 
-export const postNewOfficeData = async (newOfficeData: NewOfficePost) => {
-  try {
-    const response = await axios.post("/api/agents/offices", newOfficeData);
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
+
+const config = {
+  headers: { "Content-Type": "multipart/form-data" },
+};
+export const usePost = () => {
+  return useMutation(
+    (formData: FormData): Promise<AxiosResponse> => authInstance.post("api/agents/offices", formData, config),
+  );
+};
+
+export const useUpdate = (id: number) => {
+  return useMutation(
+    (formData: FormData): Promise<AxiosResponse> => authInstance.post(`api/agents/offices/${id}`, formData, config),
+  );
+
 };

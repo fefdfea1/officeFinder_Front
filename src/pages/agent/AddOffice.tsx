@@ -1,58 +1,57 @@
-
-import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom";
 import { BackgroundCover } from "../../components/common/BackgroundCover";
-import { Title } from '../../components/common/Title';
-import { Button } from '../../components/common/Button';
-import { Input } from '../../components/common/Input';
-import { OptionsCheckbox } from '../../components/common/OptionsCheckbox';
-import { AddOfficePhoto } from '../../components/agent/AddOfficePhoto';
-import { AddOfficeAddress } from '../../components/agent/AddOfficeAddress';
-import { useAddOfficeHandel } from '../../components/agent/HandelAddOffice'
-import { NumberToKoreanConverter } from '../../components/agent/NumberToKorean';
-import { postNewOfficeData } from "../../fetch/post/agent"
-import type { NewOfficePost } from "../../type/agentTypes"
+import { Title } from "../../components/common/Title";
+import { Button } from "../../components/common/Button";
+import { Input } from "../../components/common/Input";
+import { OptionsCheckbox } from "../../components/common/OptionsCheckbox";
+import { AddOfficePhoto } from "../../components/agent/addOffice/AddOfficePhoto";
+import { AddOfficeAddress } from "../../components/agent/addOffice/AddOfficeAddress";
+import { useAddOfficeHandel } from "../../components/agent/addOffice/HandelAddOffice"
+import { NumberToKoreanConverter } from "../../Business/Agent/NumberToKorean";
+import { usePost } from "../../fetch/post/agent"
 
 export const AddOffice = () => {
   const navigate = useNavigate();
-  const [postData, setPostData] = useState<NewOfficePost>()
+
   const { name, handleOfficeName,
     selectedOptions, handleOptionsChange,
     address, handleAddressChange,
     monthlyPrice, handlePriceChange,
     rooms, handleCountRoomsChange,
-    maxCapacity, handleMaxCapacityChange
+    maxCapacity, handleMaxCapacityChange,
+    images, handlefileUpload
   } = useAddOfficeHandel();
 
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
   }
-
-  const SubmitData = async () => {
+  const { mutate } = usePost()
+  const handleChange = () => {
     const updatedData = {
-      ...postData,
       officeName: name,
-      address: address,
-      leaseFee: monthlyPrice,
       maxCapacity: maxCapacity,
-      remainRoom: rooms,
+      leaseFee: monthlyPrice,
+      maxRoomCount: rooms,
+      address: address,
       officeOption: selectedOptions,
     };
-    setPostData(updatedData);
-    if (postData) {
-      try {
-        await postNewOfficeData(postData);
-        console.log("데이터 전송 완료");
-        alert("전송이 완료되었습니다.")
-        navigate("/MyOffice");
-      } catch (error) {
-        console.error("데이터 전송 중 오류 발생:", error);
-        alert('오류발생')
-      }
-    }
-  }
+    console.log(updatedData)
+    const formData = new FormData()
 
+    const blob = new Blob([JSON.stringify(updatedData)], {
+      type: 'application/json',
+    });
+    formData.append("request", blob);
+    if (images.length === 0) {
+      formData.append("multipartFileList", "None")
+    }
+    images.forEach((image) => {
+      formData.append("multipartFileList", image);
+    });
+    console.log(formData)
+    mutate(formData, { onSuccess: () => navigate("/MyOffice") })
+  }
 
   return (
     <>
@@ -85,8 +84,8 @@ export const AddOffice = () => {
               </div>
             </div>
           </div>
-          <AddOfficePhoto />
-          <Button style="btn btn-primary w-64 mt-2" clickHandler={SubmitData} ><p>등록하기</p></Button>
+          <AddOfficePhoto onImgChange={handlefileUpload} />
+          <Button style="btn btn-primary w-64 mt-2" clickHandler={handleChange} ><p>등록하기</p></Button>
         </form>
       </BackgroundCover>
     </>

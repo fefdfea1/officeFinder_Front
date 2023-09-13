@@ -7,8 +7,10 @@ import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { loginAgentApi, loginCustomerApi } from "../fetch/post/main";
 import { cookies } from "../fetch/common/axiosApi";
+
 import { usefetchSSE } from "../fetch/get/sse";
 import { useMyContext } from "../contexts/MyContext";
+
 interface LoginProps {
   email: string;
   password: string;
@@ -18,6 +20,7 @@ export const Login = () => {
   const clickA = () => {
     navigate("/Join");
   };
+
   const [login, setLogin] = useState<LoginProps>({
     email: "",
     password: "",
@@ -28,6 +31,7 @@ export const Login = () => {
       return { ...prev, [name]: value };
     });
   };
+
   const validateEmail = (email: string) => {
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     return emailPattern.test(email);
@@ -37,16 +41,19 @@ export const Login = () => {
     return passwordRegex.test(password);
   };
 
+
   const [ischecked, setChecked] = useState(false);
   const { setAlamData, setSseAlertState, setSseText } = useMyContext();
+
 
   const postLogin = useMutation("login", ischecked ? loginAgentApi : loginCustomerApi, {
     onSuccess: res => {
       const userType = res?.data?.userType;
       window.localStorage.setItem("userType", userType);
       const token = res?.data?.token;
-      cookies.set("Authorization", token, { maxAge: 3600 * 24 });
+      cookies.set("Authorization", token, { maxAge: 3600  });
       usefetchSSE(setAlamData, setSseAlertState, setSseText);
+
       alert("환영합니다:)");
       navigate("/");
     },
@@ -55,6 +62,8 @@ export const Login = () => {
       console.log(error);
     },
   });
+
+
   const clickCheckbox = () => {
     setChecked(prev => !prev);
   };
@@ -65,6 +74,7 @@ export const Login = () => {
       password: login?.password,
     });
   };
+
   return (
     <>
       <div className="shadow-md rounded-xl p-8 mx-auto mt-20 flex flex-col items-center justify-center md:w-[400px] sm:w-[340px]">

@@ -1,13 +1,12 @@
-import { Button } from '../components/common/Button';
-import { useState } from 'react';
-import { AgencyCard } from '../components/singup/AgencyCard';
-import { CustomerCard } from '../components/singup/CustomerCard';
+import { Button } from "../components/common/Button";
+import { useState } from "react";
+import { AgencyCard } from "../components/singup/AgencyCard";
+import { CustomerCard } from "../components/singup/CustomerCard";
 
 export const Join = () => {
-
   const [process, setProcess] = useState({
     step: 0,
-    selected: '',
+    selected: "",
   });
 
   const handleSetProcess = (step: number, key: string) => {
@@ -19,28 +18,24 @@ export const Join = () => {
   return (
     <>
       {process?.step === 0 && (
-        <div className="shadow-md rounded-xl p-8 mx-auto my-4 flex items-center justify-center md:w-[400px] min-h-[400px] sm:w-[340px]">
-          <div className="flex-col items-center justify-center">
+        <div className="shadow-md rounded-xl p-8 mx-auto mt-20 flex flex-col items-center justify-center md:w-[400px] sm:w-[340px]">
+          <h3 className="font-black">회원가입</h3>
+          <div className="flex flex-col items-center justify-center">
+            <Button clickHandler={() => handleSetProcess(1, "customer")} style={"btn btn-primary w-72 m-2 text-base"}>
+              <p>일반회원 회원가입</p>
+            </Button>
             <Button
-              clickHandler={() => handleSetProcess(1, 'customer')}
-
-              text="일반 회원 회원가입"
-              style={'btn btn-outline btn-primary w-72 m-2 text-base'}
-            ></Button>
-            <Button
-
-              clickHandler={() => handleSetProcess(1, 'agency')}
-
-              text="임대인 회원가입"
-              style={'btn btn-outline btn-primary w-72 m-2 text-base'}
-            ></Button>
+              clickHandler={() => handleSetProcess(1, "agency")}
+              style={"btn btn-accent btn-primary w-72 m-2 text-base"}
+            >
+              <p>임대인 회원가입</p>
+            </Button>
           </div>
         </div>
       )}
 
-      {process?.selected === 'agency' && <AgencyCard clickBack={handleSetProcess} />}
-      {process?.selected === 'customer' && <CustomerCard clickBack={handleSetProcess} />}
-
+      {process?.selected === "agency" && <AgencyCard clickBack={handleSetProcess} />}
+      {process?.selected === "customer" && <CustomerCard clickBack={handleSetProcess} />}
     </>
   );
 };
