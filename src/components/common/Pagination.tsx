@@ -42,7 +42,7 @@ export const Pagination: React.FC<PaginationProps> = ({ itemsPerPage, totalItems
   const isLastGroup = getPageGroup() === Math.ceil(totalPages / 5);
 
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center Pagination">
       <button
         className={`btn btn-sm btn-ghost btn-circle ${isFirstGroup ? "hidden" : ""}`}
         onClick={() => handlePageChange(firstPageIndex - 1)}
@@ -56,7 +56,7 @@ export const Pagination: React.FC<PaginationProps> = ({ itemsPerPage, totalItems
             key={pageNumber}
             className={`btn btn-sm btn-ghost btn-circle hover:btn-secondary ${
               pageNumber === currentPage ? "active" : ""
-            }`}
+            } PaginationNum`}
             onClick={() => handlePageChange(pageNumber)}
           >
             {pageNumber}
