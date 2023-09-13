@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode } from "react";
 
 interface MyContextType {
     isChatListOpen: boolean;
@@ -26,7 +26,7 @@ export const MyProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 export const useMyContext = () => {
     const context = useContext(MyContext);
     if (!context) {
-        throw new Error('useMyContext는 MyProvider내에서 사용되야합니다.');
+        throw new Error("useMyContext는 MyProvider내에서 사용되야합니다.");
     }
     return context;
 };

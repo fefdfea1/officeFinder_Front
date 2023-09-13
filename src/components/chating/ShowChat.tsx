@@ -4,8 +4,8 @@ import { useQuery } from "react-query";
 import { fetchChatRoomData } from "../../fetch/get/agent";
 import { MessagesListData } from "../../type/agentTypes";
 import { ChatTimeFormating } from "../../Business/Agent/TimeFormating";
-import SockJS from 'sockjs-client';
-import * as Stomp from 'stompjs';
+import SockJS from "sockjs-client";
+import * as Stomp from "stompjs";
 import { token } from "../../fetch/common/axiosApi";
 type ChatProps = {
     roomId: string;
@@ -48,7 +48,7 @@ export const ShowChat = (props: ChatProps) => {
 
                 stompClient.current.subscribe(`/topic/chat/room/${props.roomId}`, (message: any) => {
                     const receivedMessage = JSON.parse(message.body) as MessagesListData;
-                    console.log('서버로부터 메시지 수신:', receivedMessage);
+                    console.log("서버로부터 메시지 수신:", receivedMessage);
 
                     setMessages(prevMessages => [...prevMessages, receivedMessage]);
                 });
@@ -56,7 +56,7 @@ export const ShowChat = (props: ChatProps) => {
         );
 
         onerror = (error: any) => {
-            console.error('WebSocket 연결 오류:', error);
+            console.error("WebSocket 연결 오류:", error);
         }
 
         return () => {

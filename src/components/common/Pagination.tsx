@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { MdNavigateBefore, MdNavigateNext } from 'react-icons/md'
+import React, { useState } from "react";
+import { MdNavigateBefore, MdNavigateNext } from "react-icons/md"
 
 type PaginationProps = {
     itemsPerPage: number;
@@ -34,7 +34,7 @@ export const Pagination: React.FC<PaginationProps> = ({ itemsPerPage, totalItems
     return (
         <div className="flex justify-center">
             <button
-                className={`btn btn-sm btn-ghost btn-circle ${isFirstGroup ? 'hidden' : ''}`}
+                className={`btn btn-sm btn-ghost btn-circle ${isFirstGroup ? "hidden" : ""}`}
                 onClick={() => handlePageChange(firstPageIndex - 1)}
             >
                 <MdNavigateBefore className="text-xl" />
@@ -44,7 +44,7 @@ export const Pagination: React.FC<PaginationProps> = ({ itemsPerPage, totalItems
                 return (
                     <button
                         key={pageNumber}
-                        className={`btn btn-sm btn-ghost btn-circle hover:btn-secondary ${pageNumber === currentPage ? 'active' : ''}`}
+                        className={`btn btn-sm btn-ghost btn-circle hover:btn-secondary ${pageNumber === currentPage ? "active" : ""}`}
                         onClick={() => handlePageChange(pageNumber)}
                     >
                         {pageNumber}
@@ -52,7 +52,7 @@ export const Pagination: React.FC<PaginationProps> = ({ itemsPerPage, totalItems
                 );
             })}
             <button
-                className={`btn btn-sm btn-ghost btn-circle  ${isLastGroup ? 'hidden' : ''}`}
+                className={`btn btn-sm btn-ghost btn-circle  ${isLastGroup ? "hidden" : ""}`}
                 onClick={() => handlePageChange(lastPageIndex + 1)}
             >
                 <MdNavigateNext className="text-xl" />

@@ -1,4 +1,3 @@
-// import { useEffect, useState } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { BackgroundCover } from "../../components/common/BackgroundCover";
 import { Title } from "../../components/common/Title";
@@ -14,7 +13,6 @@ import { usePost, useUpdate } from "../../fetch/post/agent"
 export const AddOffice = () => {
   const navigate = useNavigate();
   const paramsId = useParams();
-  // const [officeId, setOfficeId] = useState<number>(0)
   console.log(paramsId.paramsId)
   const { name, handleOfficeName,
     selectedOptions, handleOptionsChange,
@@ -24,12 +22,6 @@ export const AddOffice = () => {
     maxCapacity, handleMaxCapacityChange,
     images, handlefileUpload
   } = useAddOfficeHandel();
-
-  // useEffect(() => {
-  //   setOfficeId(Number(paramsId.paramsId))
-
-  // })
-  console.log(paramsId)
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -50,7 +42,7 @@ export const AddOffice = () => {
     const formData = new FormData()
 
     const blob = new Blob([JSON.stringify(updatedData)], {
-      type: 'application/json',
+      type: "application/json",
     });
     formData.append("request", blob);
 
@@ -64,7 +56,6 @@ export const AddOffice = () => {
         onSuccess: () => {
           alert("수정이 완료되었습니다!")
           navigate("/MyOffice");
-
         },
       });
     } else {
@@ -91,7 +82,7 @@ export const AddOffice = () => {
         <form className="flex flex-col items-center py-8 gap-6" onSubmit={handleSubmit}>
           <Input type="text" width="w-80" inputLabel="공간의 이름을 입력해주세요." inputLabelPosition="text-center" onInputChange={handleOfficeName} />
           <AddOfficeAddress onAddressHandler={handleAddressChange} />
-          <div className="">
+          <div>
             <div className="flex justify-center gap-2">
               <p className="text-center text-base">필요한 옵션을 선택하세요.</p>
             </div>

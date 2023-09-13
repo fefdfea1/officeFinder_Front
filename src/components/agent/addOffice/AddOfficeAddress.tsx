@@ -7,9 +7,7 @@ type AddressType = {
     onAddressHandler: OnAddressHandler;
 }
 
-
 export const AddOfficeAddress = (props: AddressType) => {
-    // export const AddOfficeAddress = ({ onAddressHandler }: { onAddressHandler: OnAddressHandler }) => {
     const open = useDaumPostcodePopup();
     const postcodeRef = useRef<HTMLInputElement>(null);
     const addressRef = useRef<HTMLInputElement>(null);
@@ -23,8 +21,6 @@ export const AddOfficeAddress = (props: AddressType) => {
         zipcode: "",
         detail: ""
     });
-
-
 
     const handleComplete = (data: any) => {
         let fullAddress = data.address;

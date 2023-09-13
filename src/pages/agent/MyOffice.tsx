@@ -9,9 +9,7 @@ import type { MyOfficeResponse, OfficeData } from "../../type/agentTypes";
 import { fetchMyOfficeData } from "../../fetch/get/agent";
 import { MyOfficeFigure } from "../../components/agent/MyOfficeFigure";
 
-
 export const MyOffice = () => {
-
   const { data: officeData, isLoading: isOfficeLoading, isError: isOfficeError } = useQuery<MyOfficeResponse>("myOfficeData", fetchMyOfficeData, {
     refetchOnWindowFocus: false,
   });
@@ -25,8 +23,6 @@ export const MyOffice = () => {
   }
 
   const myOfficeData = officeData?.content;
-
-  console.log(myOfficeData)
 
   return (
     <>

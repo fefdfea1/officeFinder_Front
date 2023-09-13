@@ -1,6 +1,6 @@
-import { ChatList } from './ChatList';
-import { ChatIcon } from './ChatIcon';
-import { useMyContext } from '../../contexts/MyContext'; // 실제 파일 경로로 바꾸세요
+import { ChatList } from "./ChatList";
+import { ChatIcon } from "./ChatIcon";
+import { useMyContext } from "../../contexts/MyContext"; // 실제 파일 경로로 바꾸세요
 
 export const Chat = () => {
     const { isChatListOpen, setIsChatListOpen } = useMyContext();

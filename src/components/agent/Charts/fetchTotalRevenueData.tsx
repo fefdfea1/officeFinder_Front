@@ -1,8 +1,8 @@
-import { useRef, useEffect, useState } from 'react';
-import { useQuery } from 'react-query';
-import { fetchTotalRevenueData, fetchRevenueData } from '../../../fetch/get/agent';
-import { chartsData } from '../../../type/agentTypes';
-import Chart from 'chart.js/auto';
+import { useRef, useEffect, useState } from "react";
+import { useQuery } from "react-query";
+import { fetchTotalRevenueData, fetchRevenueData } from "../../../fetch/get/agent";
+import { chartsData } from "../../../type/agentTypes";
+import Chart from "chart.js/auto";
 
 type Id = {
     officeId: number
@@ -10,17 +10,17 @@ type Id = {
 
 export const TotalRevenueChart = (props: Id) => {
     const lineChart = useRef<HTMLCanvasElement | null>(null);
-    const chartInstanceRef = useRef<Chart<'line', number[], string> | null>(null);
-    const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--primary');
+    const chartInstanceRef = useRef<Chart<"line", number[], string> | null>(null);
+    const primaryColor = getComputedStyle(document.documentElement).getPropertyValue("--primary");
     const [lineData, setLineData] = useState<chartsData | null>(null);
 
-    const { isLoading: totalLoading, isError: totalError } = useQuery<chartsData>('totalRevenue', fetchTotalRevenueData, {
+    const { isLoading: totalLoading, isError: totalError } = useQuery<chartsData>("totalRevenue", fetchTotalRevenueData, {
         retry: 1,
         enabled: props.officeId === -1,
         onSuccess: (data) => setLineData(data),
     });
 
-    const { isLoading, isError } = useQuery<chartsData>(['revenue', props.officeId], () => fetchRevenueData(props.officeId), {
+    const { isLoading, isError } = useQuery<chartsData>(["revenue", props.officeId], () => fetchRevenueData(props.officeId), {
         retry: 1,
         enabled: props.officeId !== -1,
         onSuccess: (data) => setLineData(data),
@@ -32,7 +32,7 @@ export const TotalRevenueChart = (props: Id) => {
                 const months = Object.keys(lineData.data);
                 const counts = Object.values(lineData.data);
 
-                const ctx = lineChart.current?.getContext('2d');
+                const ctx = lineChart.current?.getContext("2d");
 
                 if (chartInstanceRef.current) {
                     chartInstanceRef.current.destroy();
@@ -40,7 +40,7 @@ export const TotalRevenueChart = (props: Id) => {
 
                 if (ctx) {
                     chartInstanceRef.current = new Chart(ctx, {
-                        type: 'line',
+                        type: "line",
                         options: {
                             responsive: true,
                             plugins: {
@@ -58,7 +58,7 @@ export const TotalRevenueChart = (props: Id) => {
                             labels: months,
                             datasets: [
                                 {
-                                    label: '월별 매출현황',
+                                    label: "월별 매출현황",
                                     data: counts,
                                     borderColor: primaryColor,
                                 },

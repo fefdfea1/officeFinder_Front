@@ -1,6 +1,6 @@
-import { useQuery } from 'react-query';
-import { fetchNewMessageData } from '../../fetch/get/agent';
-import { BsChatFill, BsFillCircleFill } from 'react-icons/bs';
+import { useQuery } from "react-query";
+import { fetchNewMessageData } from "../../fetch/get/agent";
+import { BsChatFill, BsFillCircleFill } from "react-icons/bs";
 
 type ChatIconProps = {
     onIsOpenChange: (isOpen: boolean) => void;
