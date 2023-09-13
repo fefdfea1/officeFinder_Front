@@ -47,6 +47,7 @@ export const fetchCustomerAlamData = () => {
       },
     })
     .then(res => res.data);
+}
 
 export const fetchCustomerMyPageData = () => {
   const response = authInstance.get("api/customers/info").then(res => res.data);
