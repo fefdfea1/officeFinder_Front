@@ -71,35 +71,14 @@ export const fetchOverallRentalData = async () => {
   }
 };
 
-
-export const fetchAgentBookMarkData = (page: number, size: number) => {
-  const response = authInstance
-    .get("api/bookmarks", {
-      params: {
-        page,
-        size,
-      },
-    })
-    .then(res => res.data);
-  return response;
-};
-
-export const fetchAgnetAlamData = () => {
-  const response = authInstance
-    .get("/api/agents/notifications", {
-      params: {
-        page: 0,
-        size: 3,
-      },
-    })
-    .then(res => res.data);
-  return response;
-};
-
-export const fetchAgentMyPageData = () => {
-  const response = authInstance.get("api/agents/info").then(res => res.data);
-  return response;
-
+export const fetchMyOfficesNameData = async () => {
+  try {
+    const res = await authInstance.get("/api/agents/offices/names");
+    return res.data;
+  } catch (error) {
+    console.error("API 호출 중 에러 발생:", error);
+    throw error;
+  }
 };
 
 //예약자 명단 불러오기
@@ -124,9 +103,12 @@ export const fetchReviewsData = async (officeId: number) => {
   }
 };
 
-export const fetchOriginOfficeData = async (officeId: number) => {
+export const fetchMyPageData = () => {};
+
+//채팅 - 새로운 메세지 boolean
+export const fetchNewMessageData = async () => {
   try {
-    const res = await authInstance.get(`/api/offices/${officeId}`);
+    const res = await authInstance.get(`/api/chat/room/new-message`);
     return res.data;
   } catch (error) {
     console.error("API 호출 중 에러 발생:", error);
@@ -134,4 +116,23 @@ export const fetchOriginOfficeData = async (officeId: number) => {
   }
 };
 
+//채팅 - 채팅 목록
+export const fetchChatListData = async () => {
+  try {
+    const res = await authInstance.get(`/api/chat/rooms`);
+    return res.data;
+  } catch (error) {
+    console.error("API 호출 중 에러 발생:", error);
+    throw error;
+  }
+};
 
+export const fetchChatRoomData = async (roomId: string) => {
+  try {
+    const res = await authInstance.get(`/api/chat/room/${roomId}`);
+    return res.data;
+  } catch (error) {
+    console.error("API 호출 중 에러 발생:", error);
+    throw error;
+  }
+};
