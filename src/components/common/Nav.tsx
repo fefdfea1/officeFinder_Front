@@ -86,7 +86,7 @@ export const Nav = () => {
                 >
                   {customerItems.map((item, index) => {
                     return (
-                      <li>
+                      <li key={index}>
                         <Link
                           to={`${customerUrl[index] !== undefined ? customerUrl[index] : "/"}`}
                           onClick={customerUrl[index] === undefined ? clickLogout : () => {}}
@@ -104,10 +104,10 @@ export const Nav = () => {
                 >
                   {agentItems.map((item, index) => {
                     return (
-                      <li>
+                      <li key={index}>
                         <Link
-                          to={`${agentUrl[index] !== undefined ? item : "/"}`}
-                          onClick={agentItems[index] ? clickLogout : () => {}}
+                          to={`${agentUrl[index] !== undefined ? agentUrl[index] : "/"}`}
+                          onClick={agentUrl[index] === undefined ? clickLogout : () => {}}
                         >
                           {item}
                         </Link>

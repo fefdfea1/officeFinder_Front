@@ -152,3 +152,15 @@ export const fetchAgentMyPageData = () => {
   const response = authInstance.get("api/agents/info").then(res => res.data);
   return response;
 };
+
+export const fetchAgentBookMarkData = (page: number, size: number) => {
+  const response = authInstance
+    .get("api/bookmarks", {
+      params: {
+        page,
+        size,
+      },
+    })
+    .then(res => res.data);
+  return response;
+};

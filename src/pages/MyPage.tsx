@@ -156,7 +156,7 @@ export const MyPage = () => {
             </div>
             <div className="mb-6 pb-4 border-b border-solid border-accent relative leading-loose">
               <h3 className="font-black text-lg pl-4">닉네임</h3>
-              <form action="#" method="put" onSubmit={event => fetchChangeName(event)}>
+              <form action="#" method="put" onSubmit={event => fetchChangeName(event, refetch)}>
                 {/* defaultValue값에 false일때 값을 주게 되면 해당 값으로 고정 되어버려 넣지 않음 */}
                 {fetchUserData ? (
                   <input
@@ -216,23 +216,23 @@ export const MyPage = () => {
               <h4 className="mb-4">충전 내역</h4>
               <table className=" text-left border-separate border-spacing-y-1.5 sm:whitespace-nowrap sm:border-spacing-y-4 sm:w-full">
                 <thead className="font-black text-lg">
-                  <th className="pr-40 sm:pr-0">날짜</th>
-                  <th>충전 금액</th>
+                  <tr>
+                    <th className="pr-40 sm:pr-0">날짜</th>
+                    <th>충전 금액</th>
+                  </tr>
                 </thead>
                 <tbody className="font-thin text-base">
                   {fetchUserData &&
-                    fetchUserData.data.histories.map(item => {
+                    fetchUserData.data.histories.map((item, index) => {
                       const formatDate = item.createdAt.slice(0, 10);
                       return (
-                        <>
-                          <tr>
-                            <td>{formatDate}</td>
-                            <td>
-                              {item.chargeAmount}
-                              <span>원</span>
-                            </td>
-                          </tr>
-                        </>
+                        <tr key={index}>
+                          <td>{formatDate}</td>
+                          <td>
+                            {item.chargeAmount}
+                            <span>원</span>
+                          </td>
+                        </tr>
                       );
                     })}
                 </tbody>

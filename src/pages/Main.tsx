@@ -5,6 +5,8 @@ import { useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { useQuery } from "react-query";
 import { getSearchApi } from "../fetch/get/main";
+import { BookMarkAlert } from "./customer/BookMarkAlert";
+import { useMyContext } from "../contexts/MyContext";
 export const Main = () => {
   const [isClicked, setIsClicked] = useState(false);
   const [filterObject, setFilterObject] = useState({});
@@ -19,9 +21,10 @@ export const Main = () => {
 
   const [checkfetch, setCheckfetch] = useState(true);
 
-  const { data } = useQuery(["getSearchApi"], () =>
+  const { data } = useQuery(["getSearchApi", checkfetch], () =>
     getSearchApi({ ...filterObject, ...filterAddress, ...selectPeople }),
   );
+  const { isAlertState } = useMyContext();
 
   const clickFilter = (filters: any) => {
     setFilterObject(filters);
@@ -81,6 +84,13 @@ export const Main = () => {
       <div className="p-4 mt-5">
         <AllOfficeList data={data} />
       </div>
+      <RemoveBookMarkAlertPosition>
+        <BookMarkAlert
+          submitText="즐겨찾기에 추가 됨"
+          deleteSubmitText="즐겨찾기에서 제거 됨"
+          alertState={isAlertState}
+        />
+      </RemoveBookMarkAlertPosition>
     </>
   );
 };
@@ -122,4 +132,11 @@ const SearchSvg = styled(AiOutlineSearch)`
   width: 18px;
   height: 18px;
   color: #fff;
+`;
+
+const RemoveBookMarkAlertPosition = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `;

@@ -12,10 +12,15 @@ import { activeMatchBookMarkList } from "../../Business/AllOfficeList/activeMatc
 
 export const AllOfficeList = ({ data }: any): JSX.Element => {
   const [BookMarkDataState, setBookMarkDataState] = useState<any>(null);
+  const [PageState, setPageState] = useState<number>(0);
 
-  const BookMarkData = useQuery<BookMarkDataType | null>(["mainBookMarkData"], () => fetchCustomerBookMarkData(0, 10), {
-    enabled: !!data,
-  });
+  const BookMarkData = useQuery<BookMarkDataType | null>(
+    ["mainBookMarkData", PageState],
+    () => fetchCustomerBookMarkData(PageState, 10),
+    {
+      enabled: !!data,
+    },
+  );
 
   useEffect(() => {
     if (BookMarkData) {
@@ -69,7 +74,7 @@ export const AllOfficeList = ({ data }: any): JSX.Element => {
       </div>
 
       <BackgroundCover width="w-1/3" margin="mx-auto mt-10" padding="p-4">
-        {data && <Pagination itemsPerPage={10} totalItems={data.totalElements} />}
+        {data && <Pagination itemsPerPage={10} totalItems={data.totalElements} setPageState={setPageState} />}
       </BackgroundCover>
     </>
   );

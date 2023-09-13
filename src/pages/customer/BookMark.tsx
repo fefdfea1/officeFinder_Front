@@ -57,8 +57,9 @@ const defaultValue = {
 
 export const BookMark = () => {
   const [BookMarkData, setBookMarkData] = useState<BookMarkDataType>(defaultValue);
+  const [Page, setPage] = useState<number>(0);
   const { isAlertState, setIsAlertState } = useMyContext();
-  const { data } = useQuery<BookMarkDataType>("BookMark", () => fetchCustomerBookMarkData(0, 10));
+  const { data } = useQuery<BookMarkDataType>(["BookMark", Page], () => fetchCustomerBookMarkData(Page, 10));
 
   useEffect(() => {
     if (data) {
@@ -74,6 +75,7 @@ export const BookMark = () => {
           <AllRemovePosition
             className="absolute"
             onClick={() => {
+              setIsAlertState(true);
               fetchBookMarkAllDelete();
               AllRemoveAlert(setIsAlertState);
             }}
@@ -98,10 +100,16 @@ export const BookMark = () => {
       </BackgroundCover>
       {isAlertState && (
         <RemoveBookMarkAlertPosition>
-          <BookMarkAlert alertState={isAlertState} showText={"즐겨찾기에서 제거 됨"} />
+          <BookMarkAlert
+            alertState={isAlertState}
+            deleteSubmitText={"즐겨찾기에서 제거 됨"}
+            submitText="즐겨찾기에 추가 됨"
+          />
         </RemoveBookMarkAlertPosition>
       )}
-      <div className="mt-6">{data && <Pagination itemsPerPage={10} totalItems={data.totalElements} />}</div>
+      <div className="mt-6">
+        {data && <Pagination itemsPerPage={10} totalItems={data.totalElements} setPageState={setPage} />}
+      </div>
     </div>
   );
 };
