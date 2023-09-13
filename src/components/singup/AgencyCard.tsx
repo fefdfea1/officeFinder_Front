@@ -31,7 +31,6 @@ export const AgencyCard = ({ clickBack }: { clickBack: (step: number, key: strin
       console.log(error);
     },
   });
-  // console.log({ data });
 
   const [signup, setSignup] = useState<AgencyCardProps>({
     businessNumber: "",
@@ -43,7 +42,6 @@ export const AgencyCard = ({ clickBack }: { clickBack: (step: number, key: strin
 
   const handleFormData = (e: React.ChangeEvent<HTMLInputElement>) => {
     let { name, value } = e.target;
-    console.log({ name, value });
     setSignup(prev => {
       return { ...prev, [name]: value };
     });

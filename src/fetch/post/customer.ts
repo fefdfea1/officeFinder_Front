@@ -3,7 +3,7 @@ import { reservationType } from "../../type/customerTypes";
 import { reFetchingType } from "../../pages/MyPage";
 import { formInstance } from "../common/axiosApi";
 
-export const fetchAddBookMark = (officeId: number) => {
+export const fetchAddBookMark = (officeId: string) => {
   try {
     const response = authInstance
       .post("api/bookmarks/submit", {

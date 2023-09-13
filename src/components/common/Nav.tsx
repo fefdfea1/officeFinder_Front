@@ -85,7 +85,6 @@ export const Nav = () => {
                   className="menu menu-sm dropdown-content mt-3 z-[1] p-2 py-3 text-ms shadow bg-base-100 rounded-box w-48"
                 >
                   {customerItems.map((item, index) => {
-                    console.log(customerItems[index]);
                     return (
                       <li>
                         <Link

@@ -7,10 +7,8 @@ import { getAgencyNotiApi, getCustomerNotiApi } from "../fetch/get/main";
 
 export const NotiMessage = () => {
   const userType = window.localStorage.getItem("userType");
-  console.log(userType);
   const { data } = useQuery("getNotiApi", userType === "customer" ? getCustomerNotiApi : getAgencyNotiApi);
 
-  console.log({ data });
   return (
     <>
       <BackgroundCover margin="mt-20">

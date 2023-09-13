@@ -22,7 +22,7 @@ export const Heart = (props: propsType) => {
       }}
     >
       <div onClick={heartActive} className="cursor-pointer">
-        <HeartFillStyle className={`relative ${props.fillState ? props.fillState : null}`}>
+        <HeartFillStyle className={`relative ${props.fillState ? props.fillState : null} heart`}>
           <HeartStyle className="heart-2 absolute"></HeartStyle>
           <FillUpHeart className="w-full h-full bg-primary absolute fillUp"></FillUpHeart>
         </HeartFillStyle>
