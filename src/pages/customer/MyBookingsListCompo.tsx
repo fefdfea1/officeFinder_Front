@@ -7,6 +7,7 @@ import { useSetStatusText } from "./MyBookingsSetStatusText";
 type propsType = {
   type?: string;
   item: MyBookingContentType;
+  officeNum: number;
 };
 
 export const MyBookingsListCompo = (props: propsType) => {
@@ -15,10 +16,14 @@ export const MyBookingsListCompo = (props: propsType) => {
   useSetStatusText(statePTag, props.item.leaseStatus);
   return (
     <>
-      <div className="flex px-10 sm:px-2 sm:flex-col lg:flex-row mb-8" data-officeNum="1">
+      <div className="flex px-10 sm:px-2 sm:flex-col lg:flex-row mb-8" data-officenum={props.officeNum}>
         <figure className="overflow-hidden rounded-lg h-72 relative sm: mr-0 lg:w-2/5 lg:mr-8">
           <img
-            src={props.item.officeImagePath !== null ? props.item.officeImagePath : "/officeImg/noimage.png"}
+            src={
+              props.item.officeImagePath !== "None" && props.item.officeImagePath !== null
+                ? props.item.officeImagePath[0]
+                : "/officeImg/noimage.png"
+            }
             alt="오피스 이미지"
             className="w-full h-full block"
           />

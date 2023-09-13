@@ -7,9 +7,9 @@ import { getCustomerApi, getAgencyApi } from "../../fetch/get/main";
 import { useQuery } from "react-query";
 import { cookies } from "../../fetch/common/axiosApi";
 
+
 export const Nav = () => {
   const navigate = useNavigate();
-
   const clickLogo = () => {
     navigate("/");
   };
@@ -50,9 +50,6 @@ export const Nav = () => {
   const { data } = useQuery("getUsertypeApi", userType === "customer" ? getCustomerApi : getAgencyApi, {
     enabled: Boolean(userType),
   });
-
-  console.log({ data });
-
   return (
     <>
       <div className="navbar bg-base-100 border-solid border-b-2 border-gray-200 p-5 sm:p-2 md:p-3 lg:p-5">

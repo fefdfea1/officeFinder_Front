@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { changeOptionName } from "../../Business/Booking/BookingOptionIcon";
 import { ObjectType } from "../../Business/Booking/BookingOptionIcon";
+import { moneyExp } from "../../Business/moneyExp/moneyExp";
 
 type PropsOptionType = {
   [key: string]: boolean;
@@ -36,13 +37,13 @@ export const OfficeOptions = (props: propsType) => {
         <div className="border-b border-solid border-accent pb-4 mb-4 rounded-sm">
           <div className="grid grid-rows-2 grid-cols-2 gap-y-3 text-base sm:w-11/12 lg:w-4/6">
             {maxPeopleArray.map((_, index) => {
-              return <span key={index}>{`${index + 1}인실 월 ${price * (index + 1)}포인트`}</span>;
+              return <span key={index}>{`${index + 1}인실 월 ${moneyExp(price * (index + 1))}포인트`}</span>;
             })}
           </div>
         </div>
         <h3 className="text-lg text-primary mb-4">Options</h3>
         <div className={`${props.needReviewCount && "border-b border-solid border-accent pb-4 mb-4"}`}>
-          <div className="w-3/6 text-base">
+          <div className="w-full text-base grid grid-cols-3 ">
             {/* p태그로 서버에서 받아오는 옵션을 반복문으로 넣어야함 */}
             {optionData.length >= 1 &&
               optionData.map((item, index) => {

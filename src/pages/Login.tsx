@@ -7,12 +7,12 @@ import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { loginAgentApi, loginCustomerApi } from "../fetch/post/main";
 import { cookies } from "../fetch/common/axiosApi";
+import { fetchSSE } from "../fetch/get/sse";
 
 interface LoginProps {
   email: string;
   password: string;
 }
-
 export const Login = () => {
   const navigate = useNavigate();
   const clickA = () => {
@@ -23,7 +23,6 @@ export const Login = () => {
     email: "",
     password: "",
   });
-
   const handleFormData = (e: React.ChangeEvent<HTMLInputElement>) => {
     let { name, value } = e.target;
     console.log({ name, value });
@@ -41,6 +40,7 @@ export const Login = () => {
     return passwordRegex.test(password);
   };
 
+
   const [ischecked, setChecked] = useState(false);
 
   const postLogin = useMutation("login", ischecked ? loginAgentApi : loginCustomerApi, {
@@ -49,7 +49,8 @@ export const Login = () => {
       window.localStorage.setItem("userType", userType);
       const token = res?.data?.token;
       cookies.set("Authorization", token, { maxAge: 3600 });
-      console.log(userType);
+      fetchSSE();
+
       alert("환영합니다:)");
       navigate("/");
       console.log(res);
@@ -59,6 +60,7 @@ export const Login = () => {
       console.log(error);
     },
   });
+
 
   const clickCheckbox = () => {
     setChecked(prev => !prev);
@@ -119,7 +121,6 @@ export const Login = () => {
             <FcGoogle className="w-5 h-5" />
             <p>구글 계정으로 로그인하기</p>
           </Button>
-
           <div className="mx-auto text-center">
             <a onClick={clickA} className="text-sm mx-auto underline underline-offset-1 hover:cursor-pointer">
               아직 회원이 아니신가요? 회원가입하기

@@ -3,8 +3,8 @@ import { authInstance } from "../common/axiosApi";
 
 // 지금은 모두 같지만 추후 url을 변경해야합니다.
 
-export const fetchBookMarkData = async (page: number, size: number) => {
-  const response = await authInstance
+export const fetchCustomerBookMarkData = (page: number, size: number) => {
+  const response = authInstance
     .get("api/bookmarks", {
       params: {
         page,
@@ -35,5 +35,10 @@ export const fetchBookingData = (officeid: number) => {
 
 export const fetchAddOfficeReview = (officeid: number) => {
   const response = authInstance.get(`api/customers/info/leases/${officeid}`).then(res => res.data);
+  return response;
+};
+
+export const fetchCustomerMyPageData = () => {
+  const response = authInstance.get("api/customers/info").then(res => res.data);
   return response;
 };

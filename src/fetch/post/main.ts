@@ -35,6 +35,7 @@ export const loginCustomerApi = async (userInfo: any) => {
     throw new Error(error.message);
   }
 };
+
 export const loginAgentApi = async (userInfo: any) => {
   try {
     const { data } = await baseInstance.post(`api/agents/login`, userInfo);
