@@ -8,6 +8,7 @@ import { FcGoogle } from "react-icons/fc";
 import { loginAgentApi, loginCustomerApi } from "../fetch/post/main";
 import { cookies } from "../fetch/common/axiosApi";
 import { fetchSSE } from "../fetch/get/sse";
+
 interface LoginProps {
   email: string;
   password: string;
@@ -17,6 +18,7 @@ export const Login = () => {
   const clickA = () => {
     navigate("/Join");
   };
+
   const [login, setLogin] = useState<LoginProps>({
     email: "",
     password: "",
@@ -28,6 +30,7 @@ export const Login = () => {
       return { ...prev, [name]: value };
     });
   };
+
   const validateEmail = (email: string) => {
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     return emailPattern.test(email);
@@ -36,7 +39,10 @@ export const Login = () => {
     const passwordRegex = /^\S{10,20}$/;
     return passwordRegex.test(password);
   };
+
+
   const [ischecked, setChecked] = useState(false);
+
   const postLogin = useMutation("login", ischecked ? loginAgentApi : loginCustomerApi, {
     onSuccess: res => {
       const userType = res?.data?.userType;
@@ -44,6 +50,7 @@ export const Login = () => {
       const token = res?.data?.token;
       cookies.set("Authorization", token, { maxAge: 3600 });
       fetchSSE();
+
       alert("환영합니다:)");
       navigate("/");
       console.log(res);
@@ -53,16 +60,19 @@ export const Login = () => {
       console.log(error);
     },
   });
+
+
   const clickCheckbox = () => {
     setChecked(prev => !prev);
   };
-  console.log(ischecked);
+
   const clickLoginButton = () => {
     postLogin.mutate({
       email: login?.email,
       password: login?.password,
     });
   };
+
   return (
     <>
       <div className="shadow-md rounded-xl p-8 mx-auto mt-20 flex flex-col items-center justify-center md:w-[400px] sm:w-[340px]">

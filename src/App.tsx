@@ -20,8 +20,8 @@ export const App = () => {
         <MyProvider>
           <QueryClientProvider client={queryClient}>
             <Nav />
-            <Chat />
             <section id="container">
+              <Chat />
               <SseAlert />
               <Router />
             </section>
