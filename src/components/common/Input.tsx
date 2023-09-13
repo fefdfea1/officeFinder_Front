@@ -7,7 +7,7 @@ interface InputProps {
   type?: string;
   value?: string;
   name?: string;
-
+  defaultValue?: string;
   onInputChange?: any;
 }
 
@@ -21,6 +21,7 @@ export const Input = (props: InputProps) => {
     warning = "",
     type = "text",
     value,
+    defaultValue,
     name = "",
   } = props;
 
@@ -29,6 +30,7 @@ export const Input = (props: InputProps) => {
       <div className="flex flex-col px-4">
         <label className={`text-base pl-2 mt-4 ${inputLabelPosition}`}>{inputLabel}</label>
         <input
+          defaultValue={defaultValue}
           value={value}
           name={name}
           type={type}

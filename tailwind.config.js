@@ -18,11 +18,13 @@ module.exports = {
       "2xl": "1.563rem",
       "3xl": "1.953rem",
       "4xl": "2.441rem",
+
     },
     extend: {
       maxHeight: {
         "128": "13rem",
       },
+
     },
   },
   plugins: [require("daisyui")],
@@ -38,7 +40,7 @@ module.exports = {
           info: "#adadad",
           success: "#36d399",
           warning: "#fbbd23",
-          error: "#f87272",
+          error: "#ff0000",
         },
       },
     ],
