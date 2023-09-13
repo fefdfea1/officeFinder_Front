@@ -6,7 +6,8 @@ import { MessagesListData } from "../../type/agentTypes";
 import { ChatTimeFormating } from "../../Business/Agent/TimeFormating";
 import SockJS from "sockjs-client";
 import * as Stomp from "stompjs";
-import { token } from "../../fetch/common/axiosApi";
+import { cookies } from "../../fetch/common/axiosApi";
+
 type ChatProps = {
     roomId: string;
     userName: string;
@@ -21,6 +22,7 @@ export const ShowChat = (props: ChatProps) => {
             refetchInterval: 30000,
         }
     );
+    const token = cookies.get("Authorization")
     const [inputText, setInputText] = useState("");
     const [messages, setMessages] = useState<MessagesListData[]>([]);
     const chatContainerRef = useRef<HTMLDivElement>(null);
