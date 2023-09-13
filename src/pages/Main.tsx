@@ -57,8 +57,16 @@ export const Main = () => {
   console.log(filterObject);
   console.log(isClicked);
 
+
+  const clickFilter = (filters: any) => {
+    setFilterObject(filters);
+  };
+  const clickSearch = () => {
+    setCheckfetch(prev => !prev);
+  };
   return (
     <>
+
       <div className="mx-auto mt-4 w-fit">
         {isClicked ? (
           <Search
@@ -69,6 +77,7 @@ export const Main = () => {
             handleSelectPeople={handleSelectPeople}
             selectPeople={selectPeople}
           />
+
         ) : (
           <SearchBoxContainer className="p-3 shadow-md">
             <div className="flex justify-center">
@@ -93,37 +102,29 @@ export const Main = () => {
     </>
   );
 };
-
 const SearchBoxContainer = styled.form`
   display: inline-block;
   background-color: #fff;
   border-radius: 20px;
 `;
-
 const ContourBox = styled.div`
   position: relative;
   height: 100%;
-
   &placeholder {
     color: #ccc;
   }
-
   &:nth-of-type(1)::after {
     right: -4%;
   }
-
   &:nth-of-type(2)::after {
     right: 1%;
   }
-
   &:nth-of-type(3)::after {
     display: none;
   }
-
   &:nth-of-type(4)::after {
     display: none;
   }
-
   ::after {
     content: "";
     position: absolute;
@@ -135,7 +136,6 @@ const ContourBox = styled.div`
     background-color: #dde1eb;
   }
 `;
-
 const SearchSvg = styled(AiOutlineSearch)`
   width: 18px;
   height: 18px;

@@ -10,6 +10,7 @@ export const MaxCapacityDropDown = (props: {
   selectValue?: selectValueType;
   handleSelectPeople: any;
   selectPeople: any;
+
 }): JSX.Element => {
   // width로 넓이를 지정할 수 있습니다. ex) w-52, w-full
   const [selectedItem, setSelectedItem] = useState("");

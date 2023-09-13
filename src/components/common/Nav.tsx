@@ -1,10 +1,9 @@
-import { VscCircleFilled } from "react-icons/vsc";
-import { PiBellRingingBold } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
 import { Button } from "./Button";
 // import { useMutation, useQuery } from "react-query";
 import { getCustomerApi, getAgencyApi } from "../../fetch/get/main";
 import { useQuery } from "react-query";
+import { NavRingCompo } from "./NavRingCompo";
 import { cookies } from "../../fetch/common/axiosApi";
 
 
@@ -46,7 +45,7 @@ export const Nav = () => {
   };
 
   const userType = window.localStorage.getItem("userType");
-  console.log(userType);
+
   const { data } = useQuery("getUsertypeApi", userType === "customer" ? getCustomerApi : getAgencyApi, {
     enabled: Boolean(userType),
   });
@@ -137,33 +136,7 @@ export const Nav = () => {
                 </ul>
               )}
             </div>
-            <div className="dropdown dropdown-end mx-auto z-20">
-              <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                <div className="rounded-full">
-                  <PiBellRingingBold className="w-7 h-7" />
-                  <VscCircleFilled className="absolute text-primary top-[0] right-[0] text-xl" />
-                </div>
-              </label>
-              <ul
-                tabIndex={0}
-                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 py-3 text-ms shadow bg-base-100 rounded-box w-48"
-              >
-                <li className="p-0 text-left">
-                  <a>3일 후 예약한 오피스의 이용 기간이 만료됩니다.</a>
-                </li>
-                <li>
-                  <a>결제가 완료되었습니다.</a>
-                </li>
-                <li>
-                  <a>예약이 거절되었습니다. </a>
-                </li>
-                <div className="w-full">
-                  <Button style={"btn btn-outline btn-primary w-full text-base"} clickHandler={clickMoreButton}>
-                    <p>더보기+</p>
-                  </Button>
-                </div>
-              </ul>
-            </div>
+            <NavRingCompo clickMoreButton={clickMoreButton} />
           </div>
         ) : (
           <Button style={undefined} onClick={clickLogin}>

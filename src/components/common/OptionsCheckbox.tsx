@@ -35,7 +35,7 @@ export const OptionsCheckbox: React.FC<OptionsCheckboxProps> = ({ onOptionChange
       ...options,
       [optionInfo.key]: false,
     }),
-    {} as officeOptions // 초기 값은 빈 officeOptions 객체로 설정
+    {} as officeOptions, // 초기 값은 빈 officeOptions 객체로 설정
   );
 
   const [selectedOptions, setSelectedOptions] = React.useState<{ [key: string]: boolean }>(initialOptions);

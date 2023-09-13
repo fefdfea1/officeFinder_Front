@@ -7,7 +7,9 @@ import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { loginAgentApi, loginCustomerApi } from "../fetch/post/main";
 import { cookies } from "../fetch/common/axiosApi";
-import { fetchSSE } from "../fetch/get/sse";
+
+import { usefetchSSE } from "../fetch/get/sse";
+import { useMyContext } from "../contexts/MyContext";
 
 interface LoginProps {
   email: string;
@@ -25,7 +27,6 @@ export const Login = () => {
   });
   const handleFormData = (e: React.ChangeEvent<HTMLInputElement>) => {
     let { name, value } = e.target;
-    console.log({ name, value });
     setLogin(prev => {
       return { ...prev, [name]: value };
     });
@@ -42,18 +43,19 @@ export const Login = () => {
 
 
   const [ischecked, setChecked] = useState(false);
+  const { setAlamData, setSseAlertState, setSseText } = useMyContext();
+
 
   const postLogin = useMutation("login", ischecked ? loginAgentApi : loginCustomerApi, {
     onSuccess: res => {
       const userType = res?.data?.userType;
       window.localStorage.setItem("userType", userType);
       const token = res?.data?.token;
-      cookies.set("Authorization", token, { maxAge: 3600 });
-      fetchSSE();
+      cookies.set("Authorization", token, { maxAge: 3600  });
+      usefetchSSE(setAlamData, setSseAlertState, setSseText);
 
       alert("환영합니다:)");
       navigate("/");
-      console.log(res);
     },
     onError: (error: any) => {
       alert("이메일이나 비밀번호를 다시 확인해주세요.");

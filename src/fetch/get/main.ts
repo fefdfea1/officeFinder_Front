@@ -39,9 +39,12 @@ export const getCustomerNotiApi = async () => {
     throw new Error(error.message);
   }
 };
+
+
 export const getSearchApi = async (params: any = {}) => {
   let filter = objToUrl(params);
-  console.log(filter);
+
+
   try {
     const { data } = await authInstance.get(`api/offices?${filter}`);
     return data;
@@ -56,9 +59,11 @@ export const objToUrl = (obj: any) => {
   for (const key of Object.keys(obj)) {
     let value = obj[key];
     if (!value) continue;
+
     // if (typeof value === "string" || typeof value === "object") {
     //   value = JSON.stringify(obj[key]);
     // }
+
     const res = `${key}=${value}`;
     params.push(res);
   }
