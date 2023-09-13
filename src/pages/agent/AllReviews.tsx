@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
@@ -24,6 +25,7 @@ export const AllReviews = () => {
 
   const handleOfficeChange = (office: string, id: number) => {
     navigate(`/AllReviews/${id}/${office}`);
+
     setOfficeName(office);
     setOfficeId(id)
   };
@@ -46,8 +48,10 @@ export const AllReviews = () => {
               <MyOfficeListDropDown forReview={true} officeName={officeName} onOfficeChange={handleOfficeChange} />
               <hr className="border-primary group-hover:border-transparent" />
             </div>
+
             <Link to={`/SalesAnalysis/${officeId}/${officeName}`}>
               <Button style="btn btn-primary btn-outline  w-[86px] md:w-40"><p>매출보기</p></Button>
+
             </Link>
           </div>
         </div>

@@ -1,6 +1,8 @@
 import styled from "@emotion/styled";
 import { heartActive } from "./HeartActive";
-
+import { toggleBookMarkRequest } from "../../Business/BookMark/BookMarkToggleRequest";
+import { alertRemoveTimer } from "../../Business/BookMark/BookMarkTimer";
+import { useMyContext } from "../../contexts/MyContext";
 
 //BookMark에는 기본적으로 active상태이기 때문에 추가
 
@@ -9,15 +11,23 @@ type propsType = {
 };
 
 export const Heart = (props: propsType) => {
+  const { setIsAlertState } = useMyContext();
   return (
-    <div onClick={heartActive} className="cursor-pointer">
-
-      <HeartFillStyle className={`relative ${props.fillState ? props.fillState : null}`}>
-
-        <HeartStyle className="heart-2 absolute"></HeartStyle>
-        <FillUpHeart className="w-full h-full bg-primary absolute fillUp"></FillUpHeart>
-      </HeartFillStyle>
-    </div>
+    <button
+      className="absolute right-2 top-2"
+      type="button"
+      onClick={event => {
+        toggleBookMarkRequest(event);
+        alertRemoveTimer(setIsAlertState);
+      }}
+    >
+      <div onClick={heartActive} className="cursor-pointer">
+        <HeartFillStyle className={`relative ${props.fillState ? props.fillState : null}`}>
+          <HeartStyle className="heart-2 absolute"></HeartStyle>
+          <FillUpHeart className="w-full h-full bg-primary absolute fillUp"></FillUpHeart>
+        </HeartFillStyle>
+      </div>
+    </button>
   );
 };
 

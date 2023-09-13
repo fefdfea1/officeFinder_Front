@@ -1,23 +1,23 @@
-import { useState } from 'react';
-import { MdContentCopy } from 'react-icons/md';
+import { useState } from "react";
+import { MdContentCopy } from "react-icons/md";
 
 const copyToClipboard = (text: string) => {
   navigator.clipboard
     .writeText(text)
     .then(() => {
-      console.log('Text copied to clipboard:', text);
+      console.log("Text copied to clipboard:", text);
     })
     .catch(error => {
-      console.error('Error copying text to clipboard:', error);
+      console.error("Error copying text to clipboard:", error);
     });
 };
 
-type OfficenameProps = {
+type OfficeNameProps = {
   name: string;
   address: string;
 };
 
-export const OfficeName = ({ name, address }: OfficenameProps) => {
+export const OfficeName = ({ name, address }: OfficeNameProps) => {
   const [copied, setCopied] = useState(false);
 
   const handleCopyClick = (text: string) => {

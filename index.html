@@ -5,6 +5,7 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
     <title>OfficeFinder</title>
   </head>
   <body>
@@ -15,19 +16,19 @@
       src="//dapi.kakao.com/v2/maps/sdk.js?appkey=<%= VITE_KAKO_MAP_API %>&libraries=services"
     ></script>
     <script>
-      if ('serviceWorker' in navigator) {
+      if ("serviceWorker" in navigator) {
         // Register a service worker hosted at the root of the
         // site using the default scope.
         navigator.serviceWorker
-          .register('/sw.js')
+          .register("/sw.js")
           .then(registration => {
-            console.log('Service worker registration succeeded:', registration);
+            console.log("Service worker registration succeeded:", registration);
           })
           .catch(err => {
-            console.log('Service worker registration failed:', err);
+            console.log("Service worker registration failed:", err);
           });
       } else {
-        console.log('Service workers are not supported.');
+        console.log("Service workers are not supported.");
       }
     </script>
   </body>

@@ -9,6 +9,7 @@ export const setEditClass = (nameInputDom: React.RefObject<HTMLInputElement>) =>
 export const mypageBlueEventHandler = (nameInputDom: React.RefObject<HTMLInputElement>) => {
   if (nameInputDom.current) {
     nameInputDom.current.readOnly = true;
+    nameInputDom.current.value = nameInputDom.current.defaultValue;
   }
 };
 

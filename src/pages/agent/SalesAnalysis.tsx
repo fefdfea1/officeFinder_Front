@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { BackgroundCover } from '../../components/common/BackgroundCover';
@@ -47,16 +48,19 @@ export const SalesAnalysis = () => {
               <MyOfficeListDropDown forReview={false} officeName={officeName} onOfficeChange={handleOfficeChange} />
               <hr className="border-primary group-hover:border-transparent" />
             </div>
+
             <Link to={`/AllReviews/${officeId}/${officeName}`}>
               {officeName === '전체' ? null : <Button style="btn btn-primary btn-outline w-[90px] md:w-40">
                 <p>{officeName} 리뷰</p>
               </Button>}
+
             </Link>
           </div>
         </div>
       </div>
       <BackgroundCover>
         <Title>{officeName} 매출 상세</Title>
+
         <div className="flex flex-col ">
           {officeName !== '전체' && detailData && (
             <>
@@ -73,6 +77,7 @@ export const SalesAnalysis = () => {
           )}
           <SalesCharts officeId={officeId} />
           {officeName !== '전체' && <ReservationAttendeesList officeId={officeId} />}
+
         </div>
       </BackgroundCover>
     </>

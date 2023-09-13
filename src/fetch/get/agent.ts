@@ -113,4 +113,4 @@ export const fetchOriginOfficeData = async (officeId: number) => {
   }
 };
 
-export const fetchMyPageData = () => {};
+
