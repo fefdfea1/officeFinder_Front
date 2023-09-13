@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { useState, useRef, useEffect, ChangeEvent, KeyboardEvent } from "react";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import { useReadMessage } from "../../fetch/post/agent"
 import { fetchChatRoomData } from "../../fetch/get/agent";
 import { MessagesListData } from "../../type/agentTypes";
@@ -24,6 +24,7 @@ export const ShowChat = (props: ChatProps) => {
         }
     );
     const token = cookies.get("Authorization")
+    const queryClient = useQueryClient()
     const [inputText, setInputText] = useState("");
     const [messages, setMessages] = useState<MessagesListData[]>([]);
     const chatContainerRef = useRef<HTMLDivElement>(null);
@@ -65,7 +66,8 @@ export const ShowChat = (props: ChatProps) => {
 
         return () => {
             stompClient.current.disconnect(
-                readMessage(props.roomId)
+                readMessage(props.roomId),
+                queryClient.invalidateQueries("chatList"),
             );
         };
     }, [props.roomId]);
