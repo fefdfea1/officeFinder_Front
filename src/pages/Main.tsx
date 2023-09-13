@@ -5,9 +5,11 @@ import { useEffect, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { useQuery } from "react-query";
 import { getSearchApi } from "../fetch/get/main";
-export const Main = () => {
-  const [isClicked, setIsClicked] = useState(false);
+import { cookies } from "../fetch/common/axiosApi"; // Import cookies
 
+export const Main = () => {
+  const [isLogin, setIsLogin] = useState(false)
+  const [isClicked, setIsClicked] = useState(false);
   const [filterObject, setFilterObject] = useState({});
   const [filterAddress, setFilterAddress] = useState({
     legion: "",
@@ -19,21 +21,27 @@ export const Main = () => {
   });
 
   const [checkfetch, setCheckfetch] = useState(true);
+  const token = cookies.get("Authorization");
   const { data } = useQuery(["getSearchApi", checkfetch], () =>
-    getSearchApi({ ...filterObject, ...filterAddress, ...selectPeople }),
+    getSearchApi({ ...filterObject, ...filterAddress, ...selectPeople }), {
+    enabled: isLogin
+  }
   );
-
   useEffect(() => {
-    console.log(selectPeople);
-  }, [selectPeople]);
+    setIsLogin(!!token);
+  }, [token]);
+
+
 
   const clickFilter = (filters: any) => {
     setFilterObject(filters);
   };
+
   const clickSearch = () => {
-    setCheckfetch(prev => !prev);
+    setCheckfetch((prev) => !prev);
     setIsClicked(false);
   };
+
   const clickButton = (e: any) => {
     e.preventDefault();
     setIsClicked(true);
@@ -41,10 +49,11 @@ export const Main = () => {
 
   const handleChangeFilterAddress = (e: any) => {
     let { name, value } = e.target;
-    setFilterAddress(prev => {
+    setFilterAddress((prev) => {
       return { ...prev, [name]: value };
     });
   };
+
   const handleSelectPeople = (number: any) => {
     console.log(number);
     setSelectPeople({

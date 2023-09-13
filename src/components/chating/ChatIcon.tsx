@@ -20,6 +20,7 @@ export const ChatIcon = ({ onIsOpenChange }: ChatIconProps) => {
     const token = cookies.get("Authorization");
     const { data: newData } = useQuery<IsNew>("newMessage", fetchNewMessageData, {
         retry: 1,
+        enabled: isLogin
     });
 
     useEffect(() => {
