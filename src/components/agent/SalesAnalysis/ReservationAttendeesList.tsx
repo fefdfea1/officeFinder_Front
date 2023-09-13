@@ -60,7 +60,7 @@ export const ReservationAttendeesList = (props: Id) => {
                                         <div className="text-sm w-32">{TimeFormating(request.requestDateTime)}</div>
                                     </th>
                                     <td>
-                                        <ProfileCircle imgUrl="None" useName={request.customerName} />
+                                        <div className="text-base font bold">{request.customerName}</div>
                                     </td>
                                     <td className="flex flex-col items-center">
                                         <div className="text-sm w-36"> {request.startDate} ~ </div>

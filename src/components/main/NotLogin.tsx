@@ -7,8 +7,8 @@ export const NotLogin = () => {
 
     return (
         <>
-            <BackgroundImageContainer className="hero ">
-                <div className="hero-overlay bg-opacity-60 "></div>
+            <BackgroundImageContainer className="hero overflow-hidden">
+                <div className="hero-overlay bg-opacity-60"></div>
                 <div className="hero-content text-center text-neutral-content">
                     <div className="max-w-2/3">
                         <h1 className="mb-5 text-[32px] font-bold hover:text-base-100">로그인해서 모든 서비스를 시작해보세요.</h1>
