@@ -1,26 +1,30 @@
 import { AiFillStar } from "react-icons/ai";
-import { BackgroundCover } from "./BackgroundCover";
-import { Heart } from "./Heart";
-import { mainClickEventHandler } from "../../Business/Main/targetLogic";
-
+import { Pagination } from "./Pagination";
 import { Link } from "react-router-dom";
-export const AllOfficeList = ({ data }: any): JSX.Element => {
+import { OfficeData, OfficeResponse } from "../../type/mainTypes";
+import { Heart } from "./Heart";
+
+type OfficeListProps = {
+  data: OfficeResponse
+}
+
+export const AllOfficeList = (props: OfficeListProps): JSX.Element => {
+
   return (
     <>
       <div className="grid justify-center sm:grid-cols-1 sm:gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 min-w-min">
-        {data?.content?.map((data: any) => {
+        {props.data.content?.map((data: OfficeData) => {
           return (
             <Link
               to={`Booking/${data?.id}`}
               key={data?.id}
               className="mx-auto my-3 relative"
-              onClick={e => mainClickEventHandler(e)}
               data-officenum={data.id}
             >
               {data?.imagePath === "None" ? (
                 <img className="rounded-xl" src={`officeImg/noimage.png`} />
               ) : (
-                <img className="rounded-xl object-cover h-48 w-72" alt="{data?.name}사진" src={data?.imagePath[0]} />
+                <img className="rounded-xl object-cover h-48 w-72" alt={`${data?.name}사진`} src={data?.imagePath[0]} />
               )}
               <Heart />
 
@@ -42,9 +46,8 @@ export const AllOfficeList = ({ data }: any): JSX.Element => {
         })}
       </div>
 
-      <BackgroundCover width="w-1/3" margin="mx-auto mt-10" padding="p-4">
-        {/* <Pagination itemsPerPage={10} totalItems={data.totalPages} /> */}
-      </BackgroundCover>
+      <Pagination itemsPerPage={10} totalItems={props.data.totalPages} />
+
     </>
   );
 };

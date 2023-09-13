@@ -75,7 +75,7 @@ export const Login = () => {
 
   return (
     <>
-      <div className="shadow-md rounded-xl p-8 mx-auto mt-20 flex flex-col items-center justify-center md:w-[400px] sm:w-[340px]">
+      <div className="shadow-md rounded-xl p-8 mx-auto my-20 flex flex-col items-center justify-center md:w-[400px] sm:w-[340px]">
         <h3 className="font-black">로그인</h3>
         <div className="pt-6 w-full flex flex-col">
           <div className="pl-6">
@@ -107,12 +107,12 @@ export const Login = () => {
           <Button
             clickHandler={() => clickLoginButton()}
             style={"btn btn-outline btn-primary m-2 text-base w-full"}
-            // disabled={
-            //   !login.email.trim() ||
-            //   !login.password.trim() ||
-            //   !validateEmail(login.email) ||
-            //   !validatePassword(login.password)
-            // }
+          // disabled={
+          //   !login.email.trim() ||
+          //   !login.password.trim() ||
+          //   !validateEmail(login.email) ||
+          //   !validatePassword(login.password)
+          // }
           >
             <p>로그인</p>
           </Button>
