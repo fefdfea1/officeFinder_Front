@@ -1,27 +1,37 @@
-import { useState, ChangeEvent } from 'react';
+import { useState, ChangeEvent, useEffect } from 'react';
 import { MdOutlineAddPhotoAlternate, MdCancel } from 'react-icons/md';
 
-export const AddOfficePhoto = () => {
-    const [images, setImages] = useState<string[]>([]);
+type AddOfficePhotoProps = {
+    onImgChange: (images: Blob[]) => void;
+};
+
+export const AddOfficePhoto = ({ onImgChange }: AddOfficePhotoProps) => {
+    const [images, setImages] = useState<string[]>([])
+    const [files, setFiles] = useState<Blob[]>([]);
 
     const handleImageAdd = (event: ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
         if (file) {
             if (images.length < 5) {
-                setImages([...images, URL.createObjectURL(file)]);
+                setImages(prevImages => [...prevImages, URL.createObjectURL(file)]);
+                setFiles(prevFiles => [...prevFiles, file]);
             } else {
                 alert('최대 5개의 이미지만 추가할 수 있습니다.');
             }
         }
     };
 
+
     const handleImageRemove = (index: number) => {
-        setImages([
-            ...images.slice(0, index),
-            ...images.slice(index + 1, images.length),
-        ])
-        console.log(index, images)
+        setImages(prevImages => [
+            ...prevImages.slice(0, index),
+            ...prevImages.slice(index + 1, prevImages.length),
+        ]);
     };
+
+    useEffect(() => {
+        onImgChange(files)
+    }, [files])
 
     return (
         <>
@@ -36,14 +46,14 @@ export const AddOfficePhoto = () => {
                         type="file"
                         id="photo"
                         className="hidden"
-                        accept="image/*"
+                        accept="image/png, image/jpg"
                         onChange={handleImageAdd}
                     />
                 </div>
                 {images.map((image, index) => (
                     <div key={index} className="w-16 h-16 bg-secondary rounded-lg relative">
                         <button
-                            className="absolute text-primary left-[67px] top-[-6px]"
+                            className="absolute text-primary left-[57px] top-[-6px]"
                             onClick={() => handleImageRemove(index)}
                         >
                             <MdCancel />

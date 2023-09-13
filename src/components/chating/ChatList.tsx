@@ -51,7 +51,7 @@ export const ChatList = ({ onIsOpenChange }: ChatingProps) => {
 
     return (
         <div className="relative z-20 ">
-            <div className="indicator md:h-[600px] h-full min-h-[350px] fixed bottom-0 right-0 md:bottom-2 md:right-2 ">
+            <div className="indicator md:h-[520px] h-full min-h-[350px] fixed bottom-0 right-0 md:bottom-2 md:right-2 ">
                 <BackgroundCover width="h-[35px] md:w-[320px] min-h-full relative w-screen" margin="m-0 p-0" padding={`${isChatRoom ? 'bg-accent' : 'bg-base-100'}`}>
                     <div className="flex flex-col items-center border-b border-accent border-solid shadow-sm ">
                         {isChatRoom ? (

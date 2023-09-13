@@ -19,7 +19,7 @@ export const OptionsCheckbox: React.FC<OptionsCheckboxProps> = ({ onOptionChange
     { name: "도어락", key: "haveDoorLock" },
     { name: "팩스", key: "faxServiceAvailable" },
     { name: "난방기", key: "haveHeater" },
-    { name: "주차", key: "haveParking" },
+    { name: "주차", key: "haveParkArea" },
     { name: "공용 라운지", key: "havePublicLounge" },
     { name: "공용 주방", key: "havePublicKitchen" },
     { name: "개인 락커", key: "havePrivateLocker" },

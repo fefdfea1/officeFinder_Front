@@ -4,6 +4,8 @@ import { Button } from "./Button";
 import { getCustomerApi, getAgencyApi } from "../../fetch/get/main";
 import { useQuery } from "react-query";
 import { NavRingCompo } from "./NavRingCompo";
+import { cookies } from "../../fetch/common/axiosApi";
+
 
 export const Nav = () => {
   const navigate = useNavigate();
@@ -34,16 +36,19 @@ export const Nav = () => {
   const clickSales = () => {
     navigate("/SalesAnalysis");
   };
+
   const clickLogout = () => {
-    window.localStorage.clear();
     navigate("/");
+    cookies.remove("Authorization", { path: "/" });
+    window.localStorage.clear();
+    // expires 24시간&로그아웃 newdate
   };
+
   const userType = window.localStorage.getItem("userType");
 
   const { data } = useQuery("getUsertypeApi", userType === "customer" ? getCustomerApi : getAgencyApi, {
     enabled: Boolean(userType),
   });
-
   return (
     <>
       <div className="navbar bg-base-100 border-solid border-b-2 border-gray-200 p-5 sm:p-2 md:p-3 lg:p-5">

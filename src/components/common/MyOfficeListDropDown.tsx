@@ -1,43 +1,59 @@
 import React from 'react';
 import { useState } from 'react';
+import { useQuery } from 'react-query';
 import { RiArrowDropDownLine } from 'react-icons/ri';
+import { fetchMyOfficesNameData } from "../../fetch/get/agent"
 
 type MyOfficeListDropDownProps = {
-  onOfficeChange: (office: string) => void;
+  onOfficeChange: (office: string, id: number) => void;
+  officeName: string;
+  forReview: boolean;
 };
 
-export const MyOfficeListDropDown: React.FC<MyOfficeListDropDownProps> = ({onOfficeChange }) => {
-  const [selectedItem, setSelectedItem] = useState('전체');
+type Item = {
+  id: number;
+  officeName: string;
+}
+
+export const MyOfficeListDropDown: React.FC<MyOfficeListDropDownProps> = ({ onOfficeChange, officeName, forReview }) => {
+  const [selectedItem, setSelectedItem] = useState<Item>({ id: -1, officeName: officeName });
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleOfficeNameChange = (office: string) => {
-    onOfficeChange(office);
-    setSelectedItem(office);
+  const { data: myOfficeNames } = useQuery('MyOfficesName', fetchMyOfficesNameData, {
+
+  });
+  let officeList = myOfficeNames?.data || ["오피스를 추가하세요"];
+
+  if (forReview && officeList.length > 1) {
+    officeList = officeList.slice(1);
+  }
+
+  const handleOfficeNameChange = (officeName: string, id: number) => {
+    setSelectedItem({ ...selectedItem, id, officeName });
+    onOfficeChange(officeName, id);
     setIsOpen(false);
   };
-
-  const officeList = ["전체", "오피스A 1인실", "오피스A 3인실", "오피스A 6인실"];
-
   const toggleDropDown = () => {
     setIsOpen(!isOpen);
   };
 
   return (
-    <div className="form-control lg:w-52  md:w-40 w-32">
+    <div className="form-control lg:w-52 md:w-40 w-32">
       <div className="dropdown">
         <label tabIndex={0} className="group btn btn-primary btn-outline justify-between w-full hover:" onClick={toggleDropDown}>
-          <span className="text-base group-hover:text-white">{selectedItem}</span>
+          <span className="text-base group-hover:text-white">{selectedItem.officeName}</span>
           <RiArrowDropDownLine className="text-2xl" />
         </label>
         <ul tabIndex={0} className={`dropdown-content w-full z-[1] menu p-2 shadow bg-base-100 rounded-box ${isOpen ? '' : 'hidden'}`}>
-          {officeList.map((office, index) => (
-            <li key={index}>
-              <a onClick={() => handleOfficeNameChange(office)}>
-                {office}
+          {officeList.map(({ id, officeName }: { id: number, officeName: string }) => (
+            <li key={id}>
+              <a onClick={() => handleOfficeNameChange(officeName, id)}>
+                {officeName}
               </a>
             </li>
           ))}
         </ul>
+
       </div>
     </div>
   );
