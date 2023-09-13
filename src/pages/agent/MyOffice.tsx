@@ -4,7 +4,7 @@ import { BackgroundCover } from "../../components/common/BackgroundCover";
 import { Button } from "../../components/common/Button";
 import { Title } from "../../components/common/Title";
 
-import { OfficeName } from "../../components/booking/Officename";
+import { OfficeName } from "../../components/booking/OfficeName";
 import { RecentReviews } from "../../components/agent/RecentReviews"
 import type { MyOfficeResponse, OfficeData } from "../../type/agentTypes";
 import { fetchMyOfficeData } from "../../fetch/get/agent";
