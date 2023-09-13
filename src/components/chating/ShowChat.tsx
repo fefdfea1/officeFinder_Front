@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { useState, useRef, useEffect, ChangeEvent, KeyboardEvent } from "react";
 import { useQuery } from "react-query";
+import { useReadMessage } from "../../fetch/post/agent"
 import { fetchChatRoomData } from "../../fetch/get/agent";
 import { MessagesListData } from "../../type/agentTypes";
 import { ChatTimeFormating } from "../../Business/Agent/TimeFormating";
@@ -27,6 +28,7 @@ export const ShowChat = (props: ChatProps) => {
     const [messages, setMessages] = useState<MessagesListData[]>([]);
     const chatContainerRef = useRef<HTMLDivElement>(null);
     const stompClient = useRef<any>(null);
+    const readMessage = useReadMessage()
 
     console.log(messagesList);
 
@@ -62,7 +64,9 @@ export const ShowChat = (props: ChatProps) => {
         }
 
         return () => {
-            stompClient.current.disconnect(() => { });
+            stompClient.current.disconnect(
+                readMessage(props.roomId)
+            );
         };
     }, [props.roomId]);
 

@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react"
 import { useQuery, useQueryClient } from "react-query";
 import { fetchChatListData } from "../../fetch/get/agent";
-import { useReadMessage } from "../../fetch/post/agent"
 import { FaChevronLeft, FaTimes } from "react-icons/fa";
 import { BackgroundCover } from "../common/BackgroundCover";
 import { ProfileCircle } from "../common/ProfileCircle";
@@ -23,10 +22,7 @@ export const ChatList = ({ onIsOpenChange }: ChatingProps) => {
     const [roomName, setRoomName] = useState("")
     const { data: chatData, status } = useQuery<ChatList>("chatList", fetchChatListData, {
         retry: 1,
-        refetchOnWindowFocus: false,
-
     });
-    const readMessage = useReadMessage()
     useEffect(() => {
         if (!isChatRoom) {
             queryClient.invalidateQueries("chatList");
@@ -36,21 +32,13 @@ export const ChatList = ({ onIsOpenChange }: ChatingProps) => {
     const handleChatClose = () => {
         onIsOpenChange(false);
         setIsChatRoom(false);
-        onIsOpenChange(false);
     };
 
     const handleGoToList = () => {
-        readMessage(roomId)
         setIsChatRoom(false)
 
     };
 
-    const handleReadMessage = async () => {
-        readMessage(roomId)
-        setIsChatRoom(false)
-        onIsOpenChange(false);
-
-    }
 
     const renderContent = () => {
         if (status === "success") {
@@ -73,11 +61,11 @@ export const ChatList = ({ onIsOpenChange }: ChatingProps) => {
                             >
                                 <div className="flex w-full relative">
                                     <ProfileCircle useName={data.userName} imgUrl={data.profileImageUrl} />
-                                    <Span className="text-sm absolute">{data.lastMessage ? data.lastMessage : ""}</Span>
+                                    <Span className="text-sm absolute left-24 top-1">{data.lastMessage ? data.lastMessage : ""}</Span>
 
                                 </div>
                                 <div className="flex flex-col justify-between h-full">
-                                    {data.newMessage ?? <span className="text-primary text-sm font-bold text-left">N</span>}
+                                    {data.newMessage ? <span className="text-primary text-sm font-bold text-left">N</span> : null}
                                     <div className="text-sm text-info w-11 text-left overflow-x-hidden">{TimeFormating(data.lastMessageTime)}</div>
                                 </div>
                             </button>
@@ -99,11 +87,9 @@ export const ChatList = ({ onIsOpenChange }: ChatingProps) => {
                                 <FaChevronLeft />
                             </button>
                         ) : null}
-                        {isChatRoom ? (<button onClick={handleReadMessage} className="btn btn-ghost btn-sm p-2 px-3 hover:bg-transparent hover:text-secondary absolute right-0 top-0">
+                        <button onClick={handleChatClose} className="btn btn-ghost btn-sm p-2 px-3 hover:bg-transparent hover:text-secondary absolute right-0 top-0">
                             <FaTimes />
-                        </button>) : (<button onClick={handleChatClose} className="btn btn-ghost btn-sm p-2 px-3 hover:bg-transparent hover:text-secondary absolute right-0 top-0">
-                            <FaTimes />
-                        </button>)}
+                        </button>
                         <div className="font-bold text-base p-2">{isChatRoom ? `${roomName} | ${userName}` : "채팅목록"}</div>
                     </div>
                     {renderContent()}
