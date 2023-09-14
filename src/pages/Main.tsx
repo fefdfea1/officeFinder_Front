@@ -9,9 +9,8 @@ import { cookies } from "../fetch/common/axiosApi"; // Import cookies
 import type { OfficeResponse } from "../type/mainTypes";
 import { NotLogin } from "../components/main/NotLogin";
 
-
 export const Main = () => {
-  const [isLogin, setIsLogin] = useState(false)
+  const [isLogin, setIsLogin] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
   const [filterObject, setFilterObject] = useState({});
   const [filterAddress, setFilterAddress] = useState({
@@ -25,26 +24,30 @@ export const Main = () => {
 
   const [checkfetch, setCheckfetch] = useState(true);
   const token = cookies.get("Authorization");
-  const { data } = useQuery<OfficeResponse>(["getSearchApi", checkfetch], () =>
-    getSearchApi({ ...filterObject, ...filterAddress, ...selectPeople }), {
-    enabled: isLogin
-  }
+  const { data } = useQuery<OfficeResponse>(
+    ["getSearchApi", checkfetch],
+    () => getSearchApi({ ...filterObject, ...filterAddress, ...selectPeople }),
+    {
+      enabled: isLogin,
+    },
   );
   useEffect(() => {
     setIsLogin(!!token);
-  }, [token]);
+  }, []);
 
   if (!isLogin) {
-    return (<>
-      <NotLogin />
-    </>)
+    return (
+      <>
+        <NotLogin />
+      </>
+    );
   }
   const clickFilter = (filters: any) => {
     setFilterObject(filters);
   };
 
   const clickSearch = () => {
-    setCheckfetch((prev) => !prev);
+    setCheckfetch(prev => !prev);
     setIsClicked(false);
   };
 
@@ -55,7 +58,7 @@ export const Main = () => {
 
   const handleChangeFilterAddress = (e: any) => {
     let { name, value } = e.target;
-    setFilterAddress((prev) => {
+    setFilterAddress(prev => {
       return { ...prev, [name]: value };
     });
   };
@@ -101,13 +104,11 @@ export const Main = () => {
           </div>
           <div className="p-4 mt-5">
             <AllOfficeList data={data} />
-          </div></>
-      ) : (
-        <NotLogin />
-      )}
+          </div>
+        </>
+      ) : null}
     </>
   );
-
 };
 const SearchBoxContainer = styled.form`
   display: inline-block;

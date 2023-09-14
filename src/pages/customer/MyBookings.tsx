@@ -7,12 +7,16 @@ import { useState, useEffect } from "react";
 import { BookMarkAlert } from "./BookMarkAlert";
 import { useMyContext } from "../../contexts/MyContext";
 import styled from "@emotion/styled";
+import { BookMarkDataType } from "./BookMark";
+import { activeMatchBookMarkList } from "../../Business/AllOfficeList/activeMatchBookMark";
+import { fetchCustomerBookMarkData } from "../../fetch/get/customer";
 
 export type MyBookingContentType = {
   endDate: string;
   leaseId: number;
   leaseStatus: string;
   location: string;
+  officeId: number;
   name: string;
   paymentDate: string;
   reviewed: boolean;
@@ -38,14 +42,24 @@ export type MyBookingsDataType = {
 };
 
 export const MyBookings = () => {
-  const [MyBookingsData, setMyBookingsData] = useState<MyBookingsDataType | null>(null);
   const { data } = useQuery(["fetchBookingData"], fetchMyBookingsData);
+  const BookMarkDataState = useQuery<BookMarkDataType>("MyBookingsBookMarkDataState", () =>
+    fetchCustomerBookMarkData(0, 10),
+  );
+  const [BookMarkData, setBookMarkData] = useState<BookMarkDataType | unknown>(null);
+  const [MyBookingsData, setMyBookingsData] = useState<MyBookingsDataType | null>(null);
   const { isAlertState } = useMyContext();
   useEffect(() => {
     if (data) {
       setMyBookingsData(data);
     }
   }, [data]);
+
+  useEffect(() => {
+    if (BookMarkDataState) {
+      setBookMarkData(BookMarkDataState.data);
+    }
+  }, [BookMarkDataState]);
 
   return (
     <div className="w-11/12 mx-auto relative">
@@ -56,16 +70,32 @@ export const MyBookings = () => {
           <div className="mt-8"></div>
           {MyBookingsData &&
             MyBookingsData.content.map((item, index) => {
+              const match: boolean = activeMatchBookMarkList(item, BookMarkData, "MyBookings");
               if (item.leaseStatus !== "EXPIRED")
-                return <MyBookingsListCompo item={item} type="MyBooking" key={index} officeNum={item.leaseId} />;
+                return (
+                  <MyBookingsListCompo
+                    item={item}
+                    type="MyBooking"
+                    key={index}
+                    officeNum={item.leaseId}
+                    mathId={match}
+                  />
+                );
             })}
           <Title>지난 예약</Title>
           <div className="mt-8">
             {MyBookingsData &&
               MyBookingsData.content.map((item, index) => {
+                const match = activeMatchBookMarkList(item, BookMarkData, "MyBookings");
                 if (item.leaseStatus === "EXPIRED")
                   return (
-                    <MyBookingsListCompo item={item} type="last_reservation" key={index} officeNum={item.leaseId} />
+                    <MyBookingsListCompo
+                      item={item}
+                      type="last_reservation"
+                      key={index}
+                      officeNum={item.leaseId}
+                      mathId={match}
+                    />
                   );
               })}
           </div>

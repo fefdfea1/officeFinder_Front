@@ -74,10 +74,13 @@ export const fetchAddPoint = (chargePoint: string, refetch: reFetchingType) => {
   return response;
 };
 
-export const fetchEditProfile = (formData: FormData) => {
-  formInstance.post("https://www.officefinder.site/api/customers/info/profileImage", {
-    value: formData,
-  });
+export const fetchEditProfile = async (formData: FormData) => {
+  try {
+    const response = await formInstance.post("api/customers/info/profileImage", formData);
+    console.log(response);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const fetchAddReview = (leaseId: number, desc: string, rate: number) => {

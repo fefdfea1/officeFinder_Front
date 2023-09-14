@@ -1,3 +1,4 @@
+import { reFetchingType } from "../../pages/MyPage";
 import { authInstance } from "../common/axiosApi";
 
 //임대요청 수락
@@ -22,4 +23,19 @@ export const fetchRejectData = async (leaseId: number) => {
     alert("거절이 완료되지 않았습니다.");
     throw error;
   }
+};
+
+export const fetchAgentEditName = (event: React.FormEvent<HTMLFormElement>, refetch: reFetchingType) => {
+  event.preventDefault();
+  const target = event.target as HTMLFormElement;
+  const input = target.children[0] as unknown as HTMLInputElement;
+  const response = authInstance
+    .put("api/agents/info/username", {
+      newName: input.value,
+    })
+    .then(res => {
+      refetch();
+      return res.data;
+    });
+  return response;
 };

@@ -1,3 +1,4 @@
+import { fetchAgentEditProfile } from "../../fetch/post/agent";
 import { fetchEditProfile } from "../../fetch/post/customer";
 
 const extensionCheck = (extension: string) => {
@@ -31,6 +32,7 @@ const previewImg = (fileBlob: FileList, imageDom: React.RefObject<HTMLImageEleme
 export const changeProfile = (
   event: React.ChangeEvent<HTMLInputElement>,
   imageDom: React.RefObject<HTMLImageElement>,
+  ownerState: boolean,
 ) => {
   let formData = new FormData();
   const target = event.target as HTMLInputElement;
@@ -41,9 +43,14 @@ export const changeProfile = (
     if (fileExtension) {
       if (extensionCheck(fileExtension)) {
         if (sizeCheck(fileSize)) {
-          formData.append("profile", targetFiles[0]);
+          formData.append("value", targetFiles[0] as unknown as Blob);
           previewImg(targetFiles, imageDom);
-          fetchEditProfile(formData);
+          console.log(targetFiles);
+          if (ownerState === true) {
+            fetchAgentEditProfile(formData);
+          } else {
+            fetchEditProfile(formData);
+          }
         }
       }
     }

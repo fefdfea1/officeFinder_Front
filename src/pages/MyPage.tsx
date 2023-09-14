@@ -13,6 +13,7 @@ import { fetchAgentMyPageData } from "../fetch/get/agent";
 import { fetchCustomerMyPageData } from "../fetch/get/customer";
 import { fetchRemoveUserProfile } from "../fetch/delete/customer";
 import { fetchChangeName } from "../fetch/put/customer";
+import { fetchAgentEditName } from "../fetch/put/agent";
 import styled from "@emotion/styled";
 
 export type reFetchingType = <TPageData>(
@@ -85,7 +86,7 @@ export const MyPage = () => {
       setUserData(data);
     }
   }, [data]);
-  console.log(data)
+  console.log(data);
   useEffect(() => {
     if (fetchUserData) {
       setOwnerState(fetchUserData.data.roles[0] !== "ROLE_CUSTOMER" ? true : false);
@@ -107,7 +108,11 @@ export const MyPage = () => {
             </ShowMyOfficeButotn>
           )}
         </div>
-        <div className={`flex justify-between items-center ${fetchUserData?.data.histories ? 'border-b border-solid border-accent' : ''} mb-8 px-8 pb-8 sm:flex-col lg:flex-row lg:gap-x-9`}>
+        <div
+          className={`flex justify-between items-center ${
+            fetchUserData?.data.histories ? "border-b border-solid border-accent" : ""
+          } mb-8 px-8 pb-8 sm:flex-col lg:flex-row lg:gap-x-9`}
+        >
           <div className=" sm:w-full lg:w-full">
             <figure className="w-full h-96 overflow-hidden rounded-lg mb-4">
               <img
@@ -129,9 +134,7 @@ export const MyPage = () => {
                 accept="image/jpeg, image/png"
                 name="profile"
                 readOnly
-                onChange={event => {
-                  changeProfile(event, imageDom);
-                }}
+                onChange={event => changeProfile(event, imageDom, OwnerState)}
               />
               <ProfilePseudoElements htmlFor="EditProfile" className="cursor-pointer">
                 프로필 등록
@@ -155,7 +158,14 @@ export const MyPage = () => {
             </div>
             <div className="mb-6 pb-4 border-b border-solid border-accent relative leading-loose">
               <h3 className="font-black text-lg pl-4">닉네임</h3>
-              <form action="#" method="put" onSubmit={event => fetchChangeName(event, refetch)}>
+              <form
+                action="#"
+                method="post"
+                onSubmit={event =>
+                  OwnerState === true ? fetchAgentEditName(event, refetch) : fetchChangeName(event, refetch)
+                }
+                encType="multipart/form-data"
+              >
                 {/* defaultValue값에 false일때 값을 주게 되면 해당 값으로 고정 되어버려 넣지 않음 */}
                 {fetchUserData ? (
                   <input
@@ -191,54 +201,58 @@ export const MyPage = () => {
                 type="point"
               />
             </div>
-            {fetchUserData?.data.histories && <div className="flex justify-between gap-x-9">
-              <button
-                ref={cacheChargeButtonDom}
-                className={`btn btn-primary grow charge ${cacheChargeModalState && "active"}`}
-                onClick={() => {
-                  cacheChargeModalStateFn(
-                    cacheChargeModalState,
-                    pullCacheModalState,
-                    setcacheChargeModalState,
-                    setpullCacheModalState,
-                  );
-                }}
-              >
-                충전
-              </button>
-            </div>}
+            {fetchUserData?.data.histories && (
+              <div className="flex justify-between gap-x-9">
+                <button
+                  ref={cacheChargeButtonDom}
+                  className={`btn btn-primary grow charge ${cacheChargeModalState && "active"}`}
+                  onClick={() => {
+                    cacheChargeModalStateFn(
+                      cacheChargeModalState,
+                      pullCacheModalState,
+                      setcacheChargeModalState,
+                      setpullCacheModalState,
+                    );
+                  }}
+                >
+                  충전
+                </button>
+              </div>
+            )}
           </div>
         </div>
-        {fetchUserData?.data.histories && <div className="pr-10 pl-20 font-bold relative ">
-          <div className="flex justify-end mt-5 sm:justify-center sm:w-full lg:justify-end">
-            <ChargeList>
-              <h4 className="mb-4">충전 내역</h4>
-              <table className=" text-left border-separate border-spacing-y-1.5 sm:whitespace-nowrap sm:border-spacing-y-4 sm:w-full">
-                <thead className="font-black text-lg">
-                  <tr>
-                    <th className="pr-40 sm:pr-0">날짜</th>
-                    <th>충전 금액</th>
-                  </tr>
-                </thead>
-                <tbody className="font-thin text-base">
-                  {fetchUserData?.data.histories &&
-                    fetchUserData.data.histories.map((item, index) => {
-                      const formatDate = item.createdAt.slice(0, 10);
-                      return (
-                        <tr key={index}>
-                          <td>{formatDate}</td>
-                          <td>
-                            {item.chargeAmount}
-                            <span>원</span>
-                          </td>
-                        </tr>
-                      );
-                    })}
-                </tbody>
-              </table>
-            </ChargeList>
+        {fetchUserData?.data.histories && (
+          <div className="pr-10 pl-20 font-bold relative ">
+            <div className="flex justify-end mt-5 sm:justify-center sm:w-full lg:justify-end">
+              <ChargeList>
+                <h4 className="mb-4">충전 내역</h4>
+                <table className=" text-left border-separate border-spacing-y-1.5 sm:whitespace-nowrap sm:border-spacing-y-4 sm:w-full">
+                  <thead className="font-black text-lg">
+                    <tr>
+                      <th className="pr-40 sm:pr-0">날짜</th>
+                      <th>충전 금액</th>
+                    </tr>
+                  </thead>
+                  <tbody className="font-thin text-base">
+                    {fetchUserData?.data.histories &&
+                      fetchUserData.data.histories.map((item, index) => {
+                        const formatDate = item.createdAt.slice(0, 10);
+                        return (
+                          <tr key={index}>
+                            <td>{formatDate}</td>
+                            <td>
+                              {item.chargeAmount}
+                              <span>원</span>
+                            </td>
+                          </tr>
+                        );
+                      })}
+                  </tbody>
+                </table>
+              </ChargeList>
+            </div>
           </div>
-        </div>}
+        )}
       </BackgroundCover>
       {/* absolute를 이용하여 자유롭게 위치를 조정 할 수 있도록 제작 */}
       {/* api 명세가 정해지면 테스트  */}

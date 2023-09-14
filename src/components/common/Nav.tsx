@@ -21,9 +21,6 @@ export const Nav = () => {
   const clickMoreButton = () => {
     navigate("/Noti");
   };
-  const clickMyPage = () => {
-    navigate("/MyPage");
-  };
 
   const clickLogout = () => {
     cookies.remove("Authorization", { path: "/" });
@@ -56,7 +53,6 @@ export const Nav = () => {
               <div className="indicator">
                 <span className="mt-1 p-3 text-sm font-bold w-13 md:inline sm:hidden">{data?.point}원</span>
               </div>
-
             </div>
             <div className="dropdown dropdown-end z-20">
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
@@ -78,7 +74,7 @@ export const Nav = () => {
                       <li key={index}>
                         <Link
                           to={`${customerUrl[index] !== undefined ? customerUrl[index] : "/"}`}
-                          onClick={customerUrl[index] === undefined ? clickLogout : () => { }}
+                          onClick={customerUrl[index] === undefined ? clickLogout : () => {}}
                         >
                           {item}
                         </Link>
@@ -96,7 +92,7 @@ export const Nav = () => {
                       <li key={index}>
                         <Link
                           to={`${agentUrl[index] !== undefined ? agentUrl[index] : "/"}`}
-                          onClick={agentUrl[index] === undefined ? clickLogout : () => { }}
+                          onClick={agentUrl[index] === undefined ? clickLogout : () => {}}
                         >
                           {item}
                         </Link>
