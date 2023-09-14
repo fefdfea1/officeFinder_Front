@@ -34,6 +34,7 @@ export const ChatIcon = ({ onIsOpenChange }: ChatIconProps) => {
     if (!isLogin) {
         return null;
     }
+    console.log(newData?.data)
     return (
         <div className="relative z-10">
             <div className="indicator fixed bottom-10 right-10">

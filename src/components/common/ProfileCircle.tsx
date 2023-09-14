@@ -10,7 +10,7 @@ export const ProfileCircle = (props: propsType) => {
         <div className="rounded-full align-middle">
           {props.imgUrl === "None" ? (
             <img
-              src={`public/officeImg/noProfile.png`}
+              src="/public/officeImg/noProfile.png"
               alt="사용자 프로필"
               className="block"
             />
@@ -22,7 +22,7 @@ export const ProfileCircle = (props: propsType) => {
             />)}
         </div>
         <div className="ml-2">
-          <p className="font-bold text-base text-black">{props.useName}</p>
+          <p className="font-bold text-base w-full text-black">{props.useName}</p>
         </div>
       </div>
     </>
