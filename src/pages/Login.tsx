@@ -57,6 +57,7 @@ export const Login = () => {
       alert("환영합니다:)");
     },
     onError: (error: any) => {
+      console.log(error);
       alert("이메일이나 비밀번호를 다시 확인해주세요.");
     },
   });
