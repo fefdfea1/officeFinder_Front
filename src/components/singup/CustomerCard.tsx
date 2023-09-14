@@ -119,22 +119,11 @@ export const CustomerCard = ({ clickBack }: { clickBack: (step: number, key: str
           {/* <AiOutlineEyeInvisible className="absolute left-10 text-xl mx-4" /> */}
           <Button
             clickHandler={() => clickSignupButton()}
-            style={"btn btn-outline btn-primary m-2 text-base w-full"}
-            // disabled={
-            //   !validateName(signup.name) ||
-            //   !validateEmail(signup.email) ||
-            //   !validatePassword(signup.password) ||
-            //   signup.password !== signup.passwordConfirm
-            // }
+            style={"btn btn-primary m-2 text-base w-full"}
           >
             <p>회원가입</p>
           </Button>
-
           <hr />
-          <Button style={"btn btn-outline btn-info m-2 text-base w-full"}>
-            <FcGoogle className="w-5 h-5" />
-            <p>구글 계정으로 가입하기</p>
-          </Button>
           <Button clickHandler={() => clickBack(0, "")} style={"btn btn-outline btn-primary m-2 text-base w-full"}>
             <p>가입 유형 선택하기</p>
             <BsArrowCounterclockwise className="w-4 h-4" />

@@ -108,8 +108,6 @@ export const AgencyCard = ({ clickBack }: { clickBack: (step: number, key: strin
             name={"password"}
             onInputChange={handleFormData}
           />
-          {/* <EyeIcon /> */}
-
           <Input
             value={signup.passwordConfirm}
             name={"passwordConfirm"}
@@ -143,15 +141,10 @@ export const AgencyCard = ({ clickBack }: { clickBack: (step: number, key: strin
 
           <Button
             clickHandler={() => clickSignupButton()}
-            style={"btn btn-outline btn-primary m-2 text-base w-full"}
+            style={"btn btn-primary m-2 text-base w-full"}
 
           >
             <p>회원가입</p>
-          </Button>
-          <hr />
-          <Button style={"btn btn-outline btn-info m-2 text-base w-full"}>
-            <FcGoogle className="w-5 h-5" />
-            <p>구글 계정으로 가입하기</p>
           </Button>
           <Button clickHandler={() => clickBack(0, "")} style={"btn btn-outline btn-primary m-2 text-base w-full"}>
             <p>가입 유형 선택하기</p>
