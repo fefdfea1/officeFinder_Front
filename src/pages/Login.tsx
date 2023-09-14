@@ -17,7 +17,7 @@ interface LoginProps {
 }
 export const Login = () => {
   const navigate = useNavigate();
-  const clickA = () => {
+  const handleGoToJoin = () => {
     navigate("/Join");
   };
 
@@ -47,7 +47,7 @@ export const Login = () => {
 
   const postLogin = useMutation("login", ischecked ? loginAgentApi : loginCustomerApi, {
     onSuccess: res => {
-      navigate("/");
+      ischecked ? navigate("/MyPage") : navigate("/");
       location.reload();
       const userType = res?.data?.userType;
       window.localStorage.setItem("userType", userType);
@@ -122,7 +122,7 @@ export const Login = () => {
             <p>구글 계정으로 로그인하기</p>
           </Button>
           <div className="mx-auto text-center">
-            <a onClick={clickA} className="text-sm mx-auto underline underline-offset-1 hover:cursor-pointer">
+            <a onClick={handleGoToJoin} className="text-sm mx-auto underline underline-offset-1 hover:cursor-pointer">
               아직 회원이 아니신가요? 회원가입하기
             </a>
           </div>

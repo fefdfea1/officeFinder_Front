@@ -27,7 +27,7 @@ type fetchDataType = {
     name: string;
     point: number;
     roles: string[];
-    histories: {
+    histories?: {
       chargeAmount: number;
       createdAt: string;
     }[];
@@ -60,7 +60,6 @@ export const MyPage = () => {
     //클린업 함수를 위해 해당 부분에 작성
     const windowEventHandler = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
-
       if (!target.classList.contains("charge")) {
         if (target.closest(".Modal") === null) {
           if (
@@ -86,7 +85,7 @@ export const MyPage = () => {
       setUserData(data);
     }
   }, [data]);
-
+  console.log(data)
   useEffect(() => {
     if (fetchUserData) {
       setOwnerState(fetchUserData.data.roles[0] !== "ROLE_CUSTOMER" ? true : false);
@@ -108,17 +107,17 @@ export const MyPage = () => {
             </ShowMyOfficeButotn>
           )}
         </div>
-        <div className="flex justify-between items-center border-b border-solid border-accent mb-8 px-8 pb-8 sm:flex-col lg:flex-row lg:gap-x-9">
+        <div className={`flex justify-between items-center ${fetchUserData?.data.histories ? 'border-b border-solid border-accent' : ''} mb-8 px-8 pb-8 sm:flex-col lg:flex-row lg:gap-x-9`}>
           <div className=" sm:w-full lg:w-full">
             <figure className="w-full h-96 overflow-hidden rounded-lg mb-4">
               <img
                 src={
                   fetchUserData && fetchUserData.data.profileImagePath !== "None"
                     ? fetchUserData.data.profileImagePath
-                    : "/officeImg/noimage.png"
+                    : "public/officeImg/noimage.png"
                 }
                 alt="프로필 이미지"
-                className="w-full h-full"
+                className="w-full h-full object-cover"
                 ref={imageDom}
               />
             </figure>
@@ -192,7 +191,7 @@ export const MyPage = () => {
                 type="point"
               />
             </div>
-            <div className="flex justify-between gap-x-9">
+            {fetchUserData?.data.histories && <div className="flex justify-between gap-x-9">
               <button
                 ref={cacheChargeButtonDom}
                 className={`btn btn-primary grow charge ${cacheChargeModalState && "active"}`}
@@ -207,10 +206,10 @@ export const MyPage = () => {
               >
                 충전
               </button>
-            </div>
+            </div>}
           </div>
         </div>
-        <div className="pr-10 pl-20 font-bold relative ">
+        {fetchUserData?.data.histories && <div className="pr-10 pl-20 font-bold relative ">
           <div className="flex justify-end mt-5 sm:justify-center sm:w-full lg:justify-end">
             <ChargeList>
               <h4 className="mb-4">충전 내역</h4>
@@ -222,7 +221,7 @@ export const MyPage = () => {
                   </tr>
                 </thead>
                 <tbody className="font-thin text-base">
-                  {fetchUserData &&
+                  {fetchUserData?.data.histories &&
                     fetchUserData.data.histories.map((item, index) => {
                       const formatDate = item.createdAt.slice(0, 10);
                       return (
@@ -239,7 +238,7 @@ export const MyPage = () => {
               </table>
             </ChargeList>
           </div>
-        </div>
+        </div>}
       </BackgroundCover>
       {/* absolute를 이용하여 자유롭게 위치를 조정 할 수 있도록 제작 */}
       {/* api 명세가 정해지면 테스트  */}
