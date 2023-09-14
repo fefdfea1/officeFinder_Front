@@ -45,9 +45,8 @@ export const MyBookingsListCompo = (props: propsType) => {
             )}
           </div>
           <div
-            className={`p-2 text-sm ${
-              props.type === "last_reservation" && "flex justify-between items-center sm:flex-col sm:items-start"
-            }`}
+            className={`p-2 text-sm ${props.type === "last_reservation" && "flex justify-between items-center sm:flex-col sm:items-start"
+              }`}
           >
             <div className="mb-4">
               <p className="font-black text-lg">현재 상태</p>
@@ -71,7 +70,7 @@ export const MyBookingsListCompo = (props: propsType) => {
         <input
           type="text"
           placeholder="리뷰를 작성해주세요"
-          className="input block ml-auto input-bordered sm:w-full sm:mt-4 sm:ml-0 xl:mt-0 xl:w-7/12 xl:ml-auto"
+          className="input block ml-auto input-bordered mb-8 sm:w-full sm:mt-4 sm:ml-0 xl:mt-0 xl:w-7/12 xl:ml-auto"
         />
       ) : null}
     </>
