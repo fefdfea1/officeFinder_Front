@@ -18,7 +18,7 @@ export const RecentReviews = (props: reviews) => {
 
     const reviews = reviewsData?.data || [];
     const reviewAmount = reviewsData?.reviewAmount || "0";
-
+    console.log(reviews)
     return (
         <div className="reviews">
             <div className={`w-full shadow-md rounded-xl h-full ${reviews.length === 0 ? "p-8" : "p-4"}`}>
@@ -29,7 +29,7 @@ export const RecentReviews = (props: reviews) => {
                     <div>
                         {reviews.map((review: Reviews, index: number) => (
                             <div key={index} className="flex text-sm pb-4">
-                                <ProfileCircle />
+                                <ProfileCircle imgUrl={review.customerImagePath} useName={review.customerName} />
                                 <div>{review.description}</div>
                             </div>
                         ))}

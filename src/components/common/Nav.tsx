@@ -6,7 +6,7 @@ import { NavRingCompo } from "./NavRingCompo";
 import { cookies } from "../../fetch/common/axiosApi";
 
 const customerUrl = ["/MyPage", "/BookMark", "/MyBookings"];
-const agentUrl = ["/MyPage", "MyOffice", "SalesAnalysis"];
+const agentUrl = ["/MyPage", "MyOffice", "SalesAnalysis/-1/전체"];
 const customerItems = ["프로필", "즐겨찾기", "예약내역", "로그아웃"];
 const agentItems = ["프로필", "나의 오피스", "매출 보기", "로그아웃"];
 

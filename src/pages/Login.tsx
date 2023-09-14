@@ -4,7 +4,6 @@ import { Button } from "../components/common/Button";
 import { useMutation } from "react-query";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { FcGoogle } from "react-icons/fc";
 import { loginAgentApi, loginCustomerApi } from "../fetch/post/main";
 import { cookies } from "../fetch/common/axiosApi";
 
@@ -103,23 +102,11 @@ export const Login = () => {
             warning={login.password.trim() ? (validatePassword(login.password) ? "" : "10~20자리로 입력해주세요") : ""}
             onInputChange={handleFormData}
           />
-          {/* <AiOutlineEyeInvisible className="absolute left-10 text-xl mx-4" /> */}
           <Button
             clickHandler={() => clickLoginButton()}
             style={"btn btn-outline btn-primary m-2 text-base w-full"}
-          // disabled={
-          //   !login.email.trim() ||
-          //   !login.password.trim() ||
-          //   !validateEmail(login.email) ||
-          //   !validatePassword(login.password)
-          // }
           >
             <p>로그인</p>
-          </Button>
-          <hr />
-          <Button style={"btn btn-outline btn-info m-2 text-base w-full"}>
-            <FcGoogle className="w-5 h-5" />
-            <p>구글 계정으로 로그인하기</p>
           </Button>
           <div className="mx-auto text-center">
             <a onClick={handleGoToJoin} className="text-sm mx-auto underline underline-offset-1 hover:cursor-pointer">
