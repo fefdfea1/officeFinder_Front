@@ -16,6 +16,7 @@ export const AllReviews = () => {
   const [officeName, setOfficeName] = useState<string>("전체");
   const [officeId, setOfficeId] = useState<number>(Number(paramsId));
   const [page, setPageState] = useState<number>(0);
+  console.log(page);
 
   useEffect(() => {
     const parsedId = Number(paramsId);
