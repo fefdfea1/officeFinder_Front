@@ -222,19 +222,21 @@ export const MyPage = () => {
                   </tr>
                 </thead>
                 <tbody className="font-thin text-base">
-                  {fetchUserData &&
-                    fetchUserData.data.histories.map((item, index) => {
-                      const formatDate = item.createdAt.slice(0, 10);
-                      return (
-                        <tr key={index}>
-                          <td>{formatDate}</td>
-                          <td>
-                            {item.chargeAmount}
-                            <span>원</span>
-                          </td>
-                        </tr>
-                      );
-                    })}
+                  {fetchUserData && OwnerState === true
+                    ? fetchUserData.data.histories.map(item => {
+                        console.log(item);
+                        const formatDate = item.createdAt.slice(0, 10);
+                        return (
+                          <tr key={item.createdAt}>
+                            <td>{formatDate}</td>
+                            <td>
+                              {item.chargeAmount}
+                              <span>원</span>
+                            </td>
+                          </tr>
+                        );
+                      })
+                    : null}
                 </tbody>
               </table>
             </ChargeList>
