@@ -1,5 +1,4 @@
 import { useQuery } from "react-query";
-import { ProfileCircle } from "../../common/ProfileCircle";
 import { DoubleCheckModal } from "../SalesAnalysis/DoubleCheckModal";
 import { fetchRequestListData } from "../../../fetch/get/agent";
 import { TimeFormating } from "../../../Business/Agent/TimeFormating";
@@ -59,7 +58,7 @@ export const ReservationAttendeesList = (props: Id) => {
                                         <div className="text-sm w-32">{TimeFormating(request.requestDateTime)}</div>
                                     </th>
                                     <td>
-                                        <ProfileCircle imgUrl="None" useName={request.customerName} />
+                                        <p className="text-base font-bold">{request.customerName}</p>
                                     </td>
                                     <td className="flex flex-col items-center">
                                         <div className="text-sm w-36"> {request.startDate} ~ </div>

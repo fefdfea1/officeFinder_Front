@@ -17,6 +17,7 @@ interface AgencyCardProps {
   businessNumber: string;
 }
 
+
 export const AgencyCard = ({ clickBack }: { clickBack: (step: number, key: string) => void }) => {
   // const { data } = useQuery("data", getAgencyApi);
   const navigate = useNavigate();
@@ -51,7 +52,7 @@ export const AgencyCard = ({ clickBack }: { clickBack: (step: number, key: strin
     postSignup.mutate({
       businessNumber: signup?.businessNumber,
       email: signup?.email,
-      name: signup?.email,
+      name: signup?.name,
       password: signup?.password,
     });
   };
@@ -143,13 +144,7 @@ export const AgencyCard = ({ clickBack }: { clickBack: (step: number, key: strin
           <Button
             clickHandler={() => clickSignupButton()}
             style={"btn btn-outline btn-primary m-2 text-base w-full"}
-            // disabled={
-            //   !validateName(signup.name) ||
-            //   !validateEmail(signup.email) ||
-            //   !validatePassword(signup.password) ||
-            //   signup.password !== signup.passwordConfirm ||
-            //   !validateBusinessNumber(signup.businessNumber)
-            // }
+
           >
             <p>회원가입</p>
           </Button>

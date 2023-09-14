@@ -1,7 +1,7 @@
 import type { AxiosResponse } from "axios";
 import { useMutation } from "react-query";
 import { authInstance } from "../common/axiosApi";
-
+import { formInstance } from "../common/axiosApi";
 // 오피스 등록
 const config = {
   headers: { "Content-Type": "multipart/form-data" },
@@ -32,4 +32,8 @@ export const useReadMessage = () => {
   };
 
   return readMessage;
+};
+
+export const fetchAgentEditProfile = (formData: FormData) => {
+  formInstance.post("api/agents/info/profileImage", formData);
 };

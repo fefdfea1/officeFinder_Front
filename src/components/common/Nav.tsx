@@ -1,6 +1,5 @@
-import { useNavigate } from "react-router-dom";
 import { Button } from "./Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getCustomerApi, getAgencyApi } from "../../fetch/get/main";
 import { useQuery } from "react-query";
 import { NavRingCompo } from "./NavRingCompo";
@@ -21,9 +20,6 @@ export const Nav = () => {
   };
   const clickMoreButton = () => {
     navigate("/Noti");
-  };
-  const clickMyPage = () => {
-    navigate("/MyPage");
   };
 
   const clickLogout = () => {
@@ -54,19 +50,8 @@ export const Nav = () => {
               <span className="text-sm font-bold md:inline sm:hidden">{data?.name}</span>
             </div>
             <div className="dropdown dropdown-end z-20">
-              <label tabIndex={0} className="btn bg-white border-none">
-                <div className="indicator">
-                  <span className="mt-1 text-sm w-13 md:inline sm:hidden">{data?.point}원</span>
-                </div>
-              </label>
-              <div tabIndex={0} className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow">
-                <div className="card-body">
-                  <div className="card-actions ">
-                    <button className="btn btn-primary btn-block" onClick={clickMyPage}>
-                      충전하기
-                    </button>
-                  </div>
-                </div>
+              <div className="indicator">
+                <span className="mt-1 p-3 text-sm font-bold w-13 md:inline sm:hidden">{data?.point}원</span>
               </div>
             </div>
             <div className="dropdown dropdown-end z-20">

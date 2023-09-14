@@ -23,3 +23,18 @@ export const fetchRejectData = async (leaseId: number) => {
     throw error;
   }
 };
+
+export const fetchAgentEditName = (event: React.FormEvent<HTMLFormElement>, refetch: reFetchingType) => {
+  event.preventDefault();
+  const target = event.target as HTMLFormElement;
+  const input = target.children[0] as unknown as HTMLInputElement;
+  const response = authInstance
+    .put("api/agents/info/username", {
+      newName: input.value,
+    })
+    .then(res => {
+      refetch();
+      return res.data;
+    });
+  return response;
+};

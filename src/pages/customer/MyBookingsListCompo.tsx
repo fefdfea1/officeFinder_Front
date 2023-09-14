@@ -3,20 +3,22 @@ import { Heart } from "../../components/common/Heart";
 import { useState, useRef } from "react";
 import { MyBookingContentType } from "./MyBookings";
 import { useSetStatusText } from "./MyBookingsSetStatusText";
+import { Link } from "react-router-dom";
 
 type propsType = {
   type?: string;
   item: MyBookingContentType;
   officeNum: number;
+  mathId: boolean;
 };
 
 export const MyBookingsListCompo = (props: propsType) => {
-  const [writeReviewState, setReviewState] = useState<boolean>(false);
   const statePTag = useRef<HTMLParagraphElement>(null);
   useSetStatusText(statePTag, props.item.leaseStatus);
+
   return (
     <>
-      <div className="flex px-10 sm:px-2 sm:flex-col lg:flex-row mb-8" data-officenum={props.officeNum}>
+      <div className="flex px-10 sm:px-2 sm:flex-col lg:flex-row mb-8" data-officenum={props.item.officeId}>
         <figure className="overflow-hidden rounded-lg h-72 relative sm: mr-0 lg:w-2/5 lg:mr-8">
           <img
             src={
@@ -27,9 +29,7 @@ export const MyBookingsListCompo = (props: propsType) => {
             alt="오피스 이미지"
             className="w-full h-full block"
           />
-          <div className="absolute right-2 top-2">
-            <Heart />
-          </div>
+          <div className="absolute right-2 top-2">{props.mathId ? <Heart fillState="active" /> : <Heart />}</div>
         </figure>
         <div className="flex flex-col justify-center sm:w-full lg:w-6/12 ">
           <div className=" sm:mb-0">
@@ -55,25 +55,16 @@ export const MyBookingsListCompo = (props: propsType) => {
             </div>
             <p className="text-base mb-1">{`결제일: ${props.item.paymentDate}`}</p>
             {props.type === "last_reservation" && (
-              <button
+              <Link
                 className="btn btn-primary sm:mt-4 sm:w-full lg:w-5/12 xl:w-4/12"
-                onClick={() => {
-                  setReviewState(!writeReviewState);
-                }}
+                to={`/AddOfficeReviews/${props.item.leaseId}`}
               >
                 리뷰작성하기
-              </button>
+              </Link>
             )}
           </div>
         </div>
       </div>
-      {props.type === "last_reservation" && writeReviewState ? (
-        <input
-          type="text"
-          placeholder="리뷰를 작성해주세요"
-          className="input block ml-auto input-bordered sm:w-full sm:mt-4 sm:ml-0 xl:mt-0 xl:w-7/12 xl:ml-auto"
-        />
-      ) : null}
     </>
   );
 };
