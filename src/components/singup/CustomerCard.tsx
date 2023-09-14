@@ -4,7 +4,6 @@ import { Input } from "../common/Input";
 import { useMutation } from "react-query";
 // import { getCustomerApi } from "../../fetch/get/main";
 import { signupCustomerApi } from "../../fetch/post/main";
-import { FcGoogle } from "react-icons/fc";
 import { BsArrowCounterclockwise } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 // import { AiOutlineEyeInvisible } from "react-icons/ai";

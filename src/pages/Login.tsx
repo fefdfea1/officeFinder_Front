@@ -4,7 +4,6 @@ import { Button } from "../components/common/Button";
 import { useMutation } from "react-query";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { FcGoogle } from "react-icons/fc";
 import { loginAgentApi, loginCustomerApi } from "../fetch/post/main";
 import { cookies } from "../fetch/common/axiosApi";
 
