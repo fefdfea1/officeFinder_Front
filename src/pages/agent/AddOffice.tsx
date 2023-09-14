@@ -9,13 +9,11 @@ import { AddOfficeAddress } from "../../components/agent/addOffice/AddOfficeAddr
 import { useAddOfficeHandel } from "../../components/agent/addOffice/HandelAddOffice";
 import { NumberToKoreanConverter } from "../../Business/Agent/NumberToKorean";
 
-import { usePost, useUpdate } from "../../fetch/post/agent"
-
+import { usePost, useUpdate } from "../../fetch/post/agent";
 
 export const AddOffice = () => {
   const navigate = useNavigate();
   const paramsId = useParams();
-  console.log(paramsId.paramsId);
   const {
     name,
     handleOfficeName,
@@ -50,8 +48,7 @@ export const AddOffice = () => {
       officeOption: selectedOptions,
     };
 
-    const formData = new FormData()
-
+    const formData = new FormData();
 
     const blob = new Blob([JSON.stringify(updatedData)], {
       type: "application/json",
@@ -59,28 +56,26 @@ export const AddOffice = () => {
     formData.append("request", blob);
 
     if (images.length !== 0) {
-
-      images.forEach((image) => {
+      images.forEach(image => {
         formData.append("multipartFileList", image);
       });
     }
     if (paramsId.paramsId !== undefined) {
       UpdateMutate(formData, {
         onSuccess: () => {
-          alert("수정이 완료되었습니다!")
+          alert("수정이 완료되었습니다!");
           navigate("/MyOffice");
         },
       });
     } else {
       PostMutate(formData, {
         onSuccess: () => {
-          alert("등록이 완료되었습니다!")
+          alert("등록이 완료되었습니다!");
           navigate("/MyOffice");
         },
       });
     }
-  }
-
+  };
 
   return (
     <>
@@ -94,8 +89,7 @@ export const AddOffice = () => {
         </div>
       </div>
       <BackgroundCover>
-
-        {(paramsId.paramsId === undefined) ? <Title>오피스 등록하기</Title> : <Title>오피스 수정하기</Title>}
+        {paramsId.paramsId === undefined ? <Title>오피스 등록하기</Title> : <Title>오피스 수정하기</Title>}
 
         <form className="flex flex-col items-center py-8 gap-6" onSubmit={handleSubmit}>
           <Input
@@ -130,7 +124,6 @@ export const AddOffice = () => {
                 onInputChange={handleCountRoomsChange}
               />
               <div className="flex flex-col items-center">
-
                 <Input
                   type="text"
                   onInputChange={handlePriceChange}

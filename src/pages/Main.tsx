@@ -64,7 +64,6 @@ export const Main = () => {
   };
 
   const handleSelectPeople = (number: any) => {
-    console.log(number);
     setSelectPeople({
       maxCapacity: number,
     });

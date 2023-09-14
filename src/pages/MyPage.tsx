@@ -86,7 +86,6 @@ export const MyPage = () => {
       setUserData(data);
     }
   }, [data]);
-  console.log(data);
   useEffect(() => {
     if (fetchUserData) {
       setOwnerState(fetchUserData.data.roles[0] !== "ROLE_CUSTOMER" ? true : false);
