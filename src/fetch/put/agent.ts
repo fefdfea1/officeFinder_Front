@@ -1,3 +1,4 @@
+import { reFetchingType } from "../../pages/MyPage";
 import { authInstance } from "../common/axiosApi";
 
 //임대요청 수락

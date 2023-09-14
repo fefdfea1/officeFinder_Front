@@ -1,6 +1,6 @@
 import { OfficeName } from "../../components/booking/OfficeName";
 import { Heart } from "../../components/common/Heart";
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import { MyBookingContentType } from "./MyBookings";
 import { useSetStatusText } from "./MyBookingsSetStatusText";
 import { Link } from "react-router-dom";
