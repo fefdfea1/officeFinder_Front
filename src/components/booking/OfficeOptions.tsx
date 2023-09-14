@@ -28,7 +28,7 @@ export const OfficeOptions = (props: propsType) => {
       const changeArr = changeOptionName(keys);
       setOptionData(changeArr);
     }
-  }, []);
+  }, [props.OptionData]);
 
   return (
     <>

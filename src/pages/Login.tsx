@@ -58,7 +58,6 @@ export const Login = () => {
     },
     onError: (error: any) => {
       alert("이메일이나 비밀번호를 다시 확인해주세요.");
-      console.log(error);
     },
   });
 
@@ -107,12 +106,12 @@ export const Login = () => {
           <Button
             clickHandler={() => clickLoginButton()}
             style={"btn btn-outline btn-primary m-2 text-base w-full"}
-          // disabled={
-          //   !login.email.trim() ||
-          //   !login.password.trim() ||
-          //   !validateEmail(login.email) ||
-          //   !validatePassword(login.password)
-          // }
+            // disabled={
+            //   !login.email.trim() ||
+            //   !login.password.trim() ||
+            //   !validateEmail(login.email) ||
+            //   !validatePassword(login.password)
+            // }
           >
             <p>로그인</p>
           </Button>
