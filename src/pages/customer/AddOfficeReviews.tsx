@@ -5,6 +5,7 @@ import { fetchAddOfficeReview } from "../../fetch/get/customer";
 import { useLocation } from "react-router-dom";
 import { submitHandler } from "../../Business/AddOfficeReviews/AddOfficeReviewsReturnImgSrc";
 import { useQuery } from "react-query";
+import { WrongApproachAlertCompo } from "../../components/common/wrongApproachAlertCompo";
 
 export type OfficeReviewsType = {
   leaseId: number;
@@ -35,8 +36,12 @@ export const AddOfficeReviews = () => {
   }, [data]);
 
   return (
-    <div className="pt-20 sm:px-6">
-      {officeData ? <OfficeProfile officeData={officeData} /> : null}
+    <div className="pt-20 sm:px-6 relative">
+      {officeData ? (
+        <OfficeProfile officeData={officeData} />
+      ) : (
+        <WrongApproachAlertCompo textString={`잘못된 접근입니다`} />
+      )}
       {officeData ? (
         <form
           name="myform"

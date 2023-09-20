@@ -48,12 +48,10 @@ export const OfficeOptions = (props: propsType) => {
             {optionData.length >= 1 &&
               optionData.map((item, index) => {
                 return (
-                  <>
-                    <p key={index} className="flex items-center text-base mb-1">
-                      <span className="mr-1">{item.Icon}</span>
-                      <span>{item.name}</span>
-                    </p>
-                  </>
+                  <p key={index} className="flex items-center text-base mb-1">
+                    <span className="mr-1">{item.Icon}</span>
+                    <span>{item.name}</span>
+                  </p>
                 );
               })}
           </div>

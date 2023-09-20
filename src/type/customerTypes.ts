@@ -11,5 +11,7 @@ export type reservationType = (
   startDate: string,
   usePeopleCount: number,
   month: number,
-  setReservationComplete: React.Dispatch<React.SetStateAction<boolean>>,
+  setAlertState: React.Dispatch<React.SetStateAction<string>>,
+  setFaildState: React.Dispatch<React.SetStateAction<boolean>>,
+  setLoadingState: React.Dispatch<React.SetStateAction<boolean>>,
 ) => Promise<returnReservationType> | undefined;

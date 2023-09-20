@@ -2,6 +2,7 @@ import { authInstance } from "../common/axiosApi";
 import { reservationType } from "../../type/customerTypes";
 import { reFetchingType } from "../../pages/MyPage";
 import { formInstance } from "../common/axiosApi";
+import { alertRemoveTimer } from "../../Business/BookMark/BookMarkTimer";
 
 export const fetchAddBookMark = (officeId: string) => {
   try {
@@ -34,30 +35,41 @@ export const fetchReservation: reservationType = (
   startDate,
   usePeopleCount,
   month,
-  setReservationComplete,
+  setAlertText,
+  setFaildState,
+  setLoadingState,
 ) => {
   try {
     if (startDate === "") {
-      alert("예약 날짜를 선택해주세요");
-      return;
+      throw new Error("예약 날짜를 선택하지 않았습니다");
     } else if (month === 0) {
-      alert("몇 개월 사용할지 알려주세요");
-      return;
+      throw new Error("이용하실 기간을 선택하지 않았습니다");
     } else if (usePeopleCount === 0) {
-      alert("사용할 인원을 선택해주세요");
-      return;
+      throw new Error("사용할 인원을 선택하지 않았습니다");
     }
-    setReservationComplete(true);
+    setLoadingState(true);
     const response = authInstance
       .post(`api/offices/${officeId}`, {
         customerCount: usePeopleCount,
         months: month,
         startDate,
       })
-      .then(res => res.data);
+      .then(res => {
+        setLoadingState(false);
+        return res.data;
+      });
+
     return response;
   } catch (error) {
-    console.log(error);
+    if (error instanceof Error) {
+      setLoadingState(false);
+      setFaildState(false);
+      setAlertText(error.message);
+      alertRemoveTimer(setFaildState, 2000);
+      throw new Error(error.message);
+    } else {
+      throw new Error(String(error));
+    }
   }
 };
 
@@ -77,7 +89,7 @@ export const fetchAddPoint = (chargePoint: string, refetch: reFetchingType) => {
 export const fetchEditProfile = async (formData: FormData) => {
   try {
     const response = await formInstance.post("api/customers/info/profileImage", formData);
-    console.log(response);
+    return response;
   } catch (error) {
     console.log(error);
   }
