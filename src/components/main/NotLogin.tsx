@@ -7,7 +7,7 @@ export const NotLogin = () => {
 
     return (
         <>
-            <BackgroundImageContainer className="hero overflow-hidden max-w-none">
+            <BackgroundImageContainer className="hero">
                 <div className="hero-overlay bg-opacity-60"></div>
                 <div className="hero-content text-center text-neutral-content">
                     <div className="max-w-2/3">
