@@ -20,3 +20,14 @@ export const ChatTimeFormating = (props: string) => {
   const formatter = date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
   return formatter;
 };
+
+export const DateFormating = (props: string) => {
+  const date = new Date(props);
+  const formatter = date.toLocaleDateString('ko-KR', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+  return formatter;
+};
+

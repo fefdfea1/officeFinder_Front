@@ -7,9 +7,9 @@ export const Reviews = (props: ReviewData) => {
   console.log(props)
   return (
     <>
-      <h3 className="p-4 text-primary text-base font-bold">Reviews</h3>
+
       {/* 리뷰 영역 */}
-      <div className="border-b border-solid border-accent p-3">
+      <div className="border-b border-solid border-accent p-3" key={props.index}>
         <div className="relative">
           <ProfileCircle imgUrl={props.customerImagePath} useName={props.customerName} />
           <div className="text-base absolute top-6 left-12 flex">

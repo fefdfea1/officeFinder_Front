@@ -30,11 +30,7 @@ export const AllReviews = () => {
     setOfficeName(office);
     setOfficeId(id);
   };
-  const {
-    data: reviews,
-    isError,
-    error,
-  }: { data: any; isLoading: boolean; isError: boolean; error: any } = useQuery(
+  const { data: reviews, isLoading }: { data: any; isLoading: boolean } = useQuery(
     ["reviews", officeId],
     () => fetchReviewsData(officeId),
     {
@@ -43,7 +39,7 @@ export const AllReviews = () => {
     },
   );
   const reviewsData = reviews?.content;
-
+  console.log(reviewsData)
   return (
     <>
       <div className="flex justify-end relative">
@@ -66,31 +62,33 @@ export const AllReviews = () => {
         <Title>{officeName} 리뷰</Title>
         {/* 본문 */}
         {reviews ? (
-          <div className="flex flex-col gap-4">
-            {reviewsData.map((review: ReviewData, index: number) => (
-              <BackgroundCover key={index} margin="m-0" padding="lg:p-8 md:p-4 p-2">
-                <Reviews
-                  customerName={review.customerName}
-                  customerImagePath={review.customerImagePath}
-                  description={review.description}
-                  createdAt={review.createdAt}
-                  rate={review.rate}
-                />
-              </BackgroundCover>
-            ))}
-            <div className="flex justify-center mt-4">
-              <Pagination itemsPerPage={10} totalItems={reviews.totalPage} setPageState={setPageState} />
+          <BackgroundCover margin="m-0" padding="lg:p-8 md:p-4 p-2">
+            <h3 className="p-4 text-primary text-base font-bold">Reviews</h3>
+            <div className="flex flex-col gap-4">
+              {reviewsData.length > 0 ? (
+                reviewsData.map((review: ReviewData, index: number) => (
+                  <Reviews
+                    index={index}
+                    customerName={review.customerName}
+                    customerImagePath={review.customerImagePath}
+                    description={review.description}
+                    createdAt={review.createdAt}
+                    rate={review.rate}
+                  />
+
+                ))
+              ) : (
+                <p className="text-center font-bold p-8">아직 작성된 리뷰가 없습니다.</p>
+              )}
+              <div className="flex justify-center mt-4">
+                <Pagination itemsPerPage={10} totalItems={reviews.totalPage} setPageState={setPageState} />
+              </div>
             </div>
-          </div>
-        ) : isError ? (
-          error.response && error.response.status === 400 ? (
-            <p className="text-center p-8"> 아직 작성된 리뷰가 없습니다</p>
-          ) : (
-            <p>{error.message}</p>
-          )
-        ) : (
-          <p>Loading...</p>
-        )}
+          </BackgroundCover>
+        ) : isLoading ? (
+          <p>Loading...</p>) : <p className="text-center font-bold pt-8">아직 작성된 리뷰가 없습니다.</p>
+        }
+
         {/* 본문 끝 */}
       </BackgroundCover>
     </>

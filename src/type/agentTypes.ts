@@ -118,4 +118,5 @@ export type ReviewData = {
   customerName: string;
   description: string;
   rate: number;
+  index: number;
 };
