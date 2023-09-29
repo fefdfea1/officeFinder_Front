@@ -7,7 +7,7 @@ export const NotLogin = () => {
 
     return (
         <>
-            <BackgroundImageContainer className="hero overflow-hidden">
+            <BackgroundImageContainer className="hero">
                 <div className="hero-overlay bg-opacity-60"></div>
                 <div className="hero-content text-center text-neutral-content">
                     <div className="max-w-2/3">
@@ -37,10 +37,15 @@ export const NotLogin = () => {
 }
 
 const BackgroundImageContainer = styled.div`
-  background-image: url("public/officeImg/basicImage.jpg");
+  background-image: url("officeImg/basicImage.jpg");
   background-size: cover;
   background-repeat: no-repeat;
-  width: 100vw;
+  width : 100%;
   height: 100vh;
   overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 `;

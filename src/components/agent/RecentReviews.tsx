@@ -2,6 +2,7 @@ import { useQuery } from "react-query";
 import { fetchShortReviewsData } from "../../fetch/get/agent";
 import { ProfileCircle } from "../common/ProfileCircle";
 import { ShortReview, Reviews } from "../../type/agentTypes";
+import { DateFormating } from "../../Business/Agent/TimeFormating"
 
 type reviews = {
     officeId: number;
@@ -15,6 +16,7 @@ export const RecentReviews = (props: reviews) => {
             retry: 1,
         }
     );
+    console.log(reviewsData)
 
     const reviews = reviewsData?.data || [];
     const reviewAmount = reviewsData?.reviewAmount || "0";
@@ -28,9 +30,15 @@ export const RecentReviews = (props: reviews) => {
                 ) : (
                     <div>
                         {reviews.map((review: Reviews, index: number) => (
-                            <div key={index} className="flex text-sm pb-4">
-                                <ProfileCircle imgUrl={review.customerImagePath} useName={review.customerName} />
-                                <div>{review.description}</div>
+                            <div
+                                key={index}
+                                className={`relative flex gap-8 text-sm p-4 ${index === 0 && reviews.length > 1 ? 'border-b border-accent border-solid' : null}`}
+                            >
+                                <div className="flex flex-col min-w-[100px]">
+                                    <ProfileCircle imgUrl={review.customerImagePath} useName={review.customerName} />
+                                    <p className="absolute left-16 top-10">{DateFormating(review.createdAt)}</p>
+                                </div>
+                                <div className="text-base">{review.description}</div>
                             </div>
                         ))}
                     </div>

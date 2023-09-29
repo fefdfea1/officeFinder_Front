@@ -45,7 +45,7 @@ export const MyOfficeListDropDown: React.FC<MyOfficeListDropDownProps> = ({ onOf
           <RiArrowDropDownLine className="text-2xl" />
         </label>
         <ul tabIndex={0} className={`dropdown-content w-full z-[1] menu p-2 shadow bg-base-100 rounded-box ${isOpen ? "" : "hidden"}`}>
-          {officeList.map(({ id, officeName }: { id: number, officeName: string }) => (
+          {officeList && officeList.map(({ id, officeName }: { id: number, officeName: string }) => (
             <li key={id}>
               <a onClick={() => handleOfficeNameChange(officeName, id)}>
                 {officeName}
