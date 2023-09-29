@@ -45,7 +45,6 @@ export const changeProfile = (
         if (sizeCheck(fileSize)) {
           formData.append("value", targetFiles[0] as unknown as Blob);
           previewImg(targetFiles, imageDom);
-          console.log(targetFiles);
           if (ownerState === true) {
             fetchAgentEditProfile(formData);
           } else {

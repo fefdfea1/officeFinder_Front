@@ -56,7 +56,7 @@ export const OfficeProfile = (props: propsTpye) => {
           )}
         </div>
         {props.officeData ? (
-          <p className="sm:pl-2 sm:mt-10">2023년 7월 1일 결제완료</p>
+          <p className="sm:pl-2 sm:mt-10">{props.officeData.paymentDate}</p>
         ) : (
           <p className="sm:pl-2 sm:mt-10">찾을 수 없음</p>
         )}
