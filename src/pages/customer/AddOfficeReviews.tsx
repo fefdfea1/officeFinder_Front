@@ -40,7 +40,9 @@ export const AddOfficeReviews = () => {
       {officeData ? (
         <OfficeProfile officeData={officeData} />
       ) : (
-        <WrongApproachAlertCompo textString={`잘못된 접근입니다`} top="80%" />
+
+        <WrongApproachAlertCompo textString={`잘못된 접근입니다`} top='80%'/>
+
       )}
       {officeData ? (
         <form
