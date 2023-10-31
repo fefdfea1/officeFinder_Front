@@ -54,7 +54,7 @@
          <li>vite-plugin-html: vite 환경 index.html에서 환경변수를 사용하기 위한 라이브러리</li>
          <li>eslint: 코딩컨벤션을 일정하게 맞추기 위한 라이브러리</li>
          <li>prettier: 텍스트 작성의 통일성을 위한 라이브러리</li>
-         <li>typescript: </li>
+         <li>typescript: 추후 생길 수 있는 타입에 관한 오류를 개발단계에서 방지 할 수 있는 라이브러리</li>
       </ul>
    </details>
 
