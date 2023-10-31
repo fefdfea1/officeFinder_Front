@@ -72,9 +72,8 @@
 
 - Node.js 18.16.0
 
-`   $ git clone https://github.com/fefdfea1/officeFinder_Front.git`
-
 <code>
+   $ git clone https://github.com/fefdfea1/officeFinder_Front.git`<br>
    $ cd officeFinder_Front<br>
    $ yarn add<br>
    $ npm run dev
