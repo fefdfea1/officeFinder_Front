@@ -8,6 +8,7 @@
    </div>
    <div align="center"><a href="https://www.notion.so/Pre-5cd11aff61c84b579a53126522e2a6d4" style="font-weight:bold;">Documentation</a>
    </div>
+   <br>
    <p align="center">:point_up_2: OfficeFinder 기획 블로그로 이동 
    </p>
 
