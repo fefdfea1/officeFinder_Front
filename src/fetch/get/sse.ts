@@ -31,7 +31,7 @@ export const usefetchSSE = (
               withCredentials: true,
             });
 
-            eventSource.onopen = async (_: any) => {
+            eventSource.onopen = async () => {
               console.log("open");
             };
 
