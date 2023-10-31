@@ -26,6 +26,10 @@ export const AddOfficePhoto = ({ onImgChange }: AddOfficePhotoProps) => {
             ...prevImages.slice(0, index),
             ...prevImages.slice(index + 1, prevImages.length),
         ]);
+        setFiles(prevFiles => [
+            ...prevFiles.slice(0, index),
+            ...prevFiles.slice(index + 1, prevFiles.length),
+        ]);
     };
 
     useEffect(() => {
